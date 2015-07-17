@@ -1,0 +1,16 @@
+#drafting-table {
+	margin: auto;
+    border:3px solid #1E697B;
+    padding: 10px;
+    margin-left: 20px;
+}
+#measurement-table {
+	margin-left:50%;
+	font-family: "Raleway";
+
+}
+#header {
+	background-color: #D2D8A9;
+	margin-bottom: 20px;
+	font-family: "Raleway";
+}
