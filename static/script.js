@@ -1,27 +1,38 @@
 $( document ).ready(function() {
+	
+// establish drafting table and pen
 var draftingTable = document.getElementById("drafting-table");
-var context = draftingTable.getContext("2d");
+var gridPen = draftingTable.getContext("2d");
 
+// y axis grid lines
 for (var y = 0.5; y < 461; y += 20) {
-	context.beginPath();
-	context.moveTo(0, y);
-	context.lineTo(601, y);
-	context.strokeStyle = "#FFDEDB";
-	context.stroke();
+	gridPen.beginPath();
+	gridPen.moveTo(0, y);
+	gridPen.lineTo(601, y);
+	gridPen.strokeStyle = "#FFDEDB";
+	gridPen.stroke();
 	};
 
+// x axis grid lines
 for (var x = 0.5; x < 601; x += 20) {
-	context.beginPath();
-	context.strokeStyle = "#FFDEDB";
-	context.moveTo(x, 0);
-	context.lineTo(x, 601);
-	context.stroke();
+	gridPen.beginPath();
+	gridPen.strokeStyle = "#FFDEDB";
+	gridPen.moveTo(x, 0);
+	gridPen.lineTo(x, 601);
+	gridPen.stroke();
 	};
+
+// right angle equations to find rise or run
+var pythagoreanCAndA = function(c, a) {
+	sideB = Math.sqrt((Math.pow(c, y = 2)) - (Math.pow(a, y = 2)));
+	return sideB
+};
 
 // basic measurements
 var bust = 36.00;
 var waist = 26.00;
 var abdomen = 34.25;
+
 // advanced measurements
 var fullLength = 18.13;
 var centerFront = 15.00;
@@ -39,13 +50,14 @@ var dartPlacement = 3.25;
 var backNeck = 3.00;
 var backAcrossShoulder = 7.50;
 var acrossBack = 7.00;
-var frontShoulderSlopeRise = Math.sqrt((Math.pow((frontShoulderSlope + 0.125), y = 2)) - (Math.pow(frontAcrossShoulder, y = 2)));
-var shoulderLengthRun = Math.sqrt((Math.pow((shoulderLength), y = 2)) - (Math.pow((fullLength - frontShoulderSlopeRise), y = 2)));
-var strapRise = Math.sqrt((Math.pow((strap + 0.375), y=2)) - (Math.pow(((bustArc +0.25)- shoulderLengthRun), y=2)));
-console.log(strapRise)
+
+// calculating rises and runs for right angle formulas
+var frontShoulderSlopeRise = pythagoreanCAndA((frontShoulderSlope + 0.125), frontAcrossShoulder);
+var shoulderLengthRun = pythagoreanCAndA(shoulderLength,(fullLength - frontShoulderSlopeRise));
+var strapRise = pythagoreanCAndA((strap + 0.375), ((bustArc +0.25)- shoulderLengthRun));
 
 
-//set up pen
+// set up pen and set colors
 var pen = draftingTable.getContext("2d");
 pen.fillStyle="#83AF9B";
 pen.strokeStyle = "#EA8C86";
@@ -73,12 +85,7 @@ pen.lineTo(((frontAcrossShoulder - shoulderLengthRun) * 20), 0) // g to i
 pen.lineTo((bustArc + 0.25) *20, strapRise *20) //i to j
 
 
-
-
-	
-
-
-//aply stroke to lines
+// apply stroke to lines
 pen.stroke();
 
 
