@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 import os
 
-app=Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def home_page():
@@ -12,7 +12,6 @@ def home_page():
 @app.route('/measure')
 def measure_page():
 	return render_template("canvas.html")
-
 
 
 

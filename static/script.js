@@ -28,6 +28,7 @@ var pythagoreanCAndA = function(c, a) {
 	return sideB
 };
 
+
 // basic measurements
 var bust = 36.00;
 var waist = 26.00;
@@ -50,12 +51,14 @@ var dartPlacement = 3.25;
 var backNeck = 3.00;
 var backAcrossShoulder = 7.50;
 var acrossBack = 7.00;
+var sideLength = 8.5
 
 // calculating rises and runs for right angle formulas
 var frontShoulderSlopeRise = pythagoreanCAndA((frontShoulderSlope + 0.125), frontAcrossShoulder);
 var shoulderLengthRun = pythagoreanCAndA(shoulderLength,(fullLength - frontShoulderSlopeRise));
 var strapRise = pythagoreanCAndA((strap + 0.375), ((bustArc +0.25)- shoulderLengthRun));
-
+var sideLengthRise = pythagoreanCAndA(sideLength, 1.25)
+console.log(sideLengthRise)
 
 // set up pen and set colors
 var pen = draftingTable.getContext("2d");
@@ -65,25 +68,26 @@ pen.strokeStyle = "#EA8C86";
 // draw lines and dots
 pen.beginPath()
 pen.moveTo(0, 0);
-pen.fillRect(0,0, 3, 3); //a
-pen.lineTo(0, (fullLength * 20)); //a to b
-pen.fillRect(0, (fullLength * 20), 3, 3); //b
-pen.moveTo(0, (((fullLength - centerFront) -0.375)*20)); //move to neckline
-pen.lineTo(80, (((fullLength - centerFront) -0.375)*20)); //d squared off
+pen.fillRect(0,0, 3, 3); // a
+pen.lineTo(0, (fullLength * 20)); // a to b
+pen.fillRect(0, (fullLength * 20), 3, 3); // b
+pen.moveTo(0, (((fullLength - centerFront) -0.375)*20)); // move to neckline
+pen.lineTo(80, (((fullLength - centerFront) -0.375)*20)); // d squared off
 pen.moveTo(0, 0);
-pen.lineTo((frontAcrossShoulder * 20), 0); //a to c
-pen.lineTo((frontAcrossShoulder * 20), 100); //square off c
+pen.lineTo((frontAcrossShoulder * 20), 0); // a to c
+pen.lineTo((frontAcrossShoulder * 20), 100); // square off c
 pen.moveTo(0, (fullLength * 20)); 
-pen.lineTo(((bustArc + 0.25)* 20), (fullLength * 20)); //b to e
-pen.lineTo(((bustArc + 0.25)* 20), 60) //square up from e
+pen.lineTo(((bustArc + 0.25)* 20), (fullLength * 20)); // b to e
+pen.lineTo(((bustArc + 0.25)* 20), 60) // square up from e
 pen.moveTo((dartPlacement *20), (fullLength * 20)); 
 pen.fillRect((dartPlacement *20), (fullLength * 20), 3, 3); 
 pen.moveTo(0, (fullLength * 20)); 
-pen.lineTo((frontAcrossShoulder * 20), ((fullLength - frontShoulderSlopeRise) *20)) //b to g
-pen.fillRect((frontAcrossShoulder * 20), ((fullLength - frontShoulderSlopeRise) *20), 3, 3); //g
+pen.lineTo((frontAcrossShoulder * 20), ((fullLength - frontShoulderSlopeRise) *20)) // b to g
+pen.fillRect((frontAcrossShoulder * 20), ((fullLength - frontShoulderSlopeRise) *20), 3, 3); // g
 pen.lineTo(((frontAcrossShoulder - shoulderLengthRun) * 20), 0) // g to i
-pen.lineTo((bustArc + 0.25) *20, strapRise *20) //i to j
-
+pen.lineTo( ((bustArc + 0.25) *20), (strapRise *20)) // i to j
+pen.lineTo(((bustArc + 1.25) *20), ((strapRise *20) +(sideLengthRise * 20)) )// j to k
+pen.lineTo((dartPlacement *20), (fullLength * 20))// line to f
 
 // apply stroke to lines
 pen.stroke();
