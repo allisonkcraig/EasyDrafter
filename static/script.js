@@ -9,14 +9,14 @@ for (var y = 0.5; y < 461; y += 20) {
 	gridPen.beginPath();
 	gridPen.moveTo(0, y);
 	gridPen.lineTo(601, y);
-	gridPen.strokeStyle = "#FFDEDB";
+	gridPen.strokeStyle = "#E8E8EE";
 	gridPen.stroke();
 	};
 
 // x axis grid lines
 for (var x = 0.5; x < 601; x += 20) {
 	gridPen.beginPath();
-	gridPen.strokeStyle = "#FFDEDB";
+	gridPen.strokeStyle = "#E8E8EE";
 	gridPen.moveTo(x, 0);
 	gridPen.lineTo(x, 601);
 	gridPen.stroke();
