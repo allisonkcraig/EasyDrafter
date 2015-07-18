@@ -89,6 +89,7 @@ pen.lineTo( ((bustArc + 0.25) *20), (strapRise *20)) // i to j
 pen.lineTo(((bustArc + 1.25) *20), ((strapRise *20) +(sideLengthRise * 20)) )// j to k
 pen.lineTo((dartPlacement *20), (fullLength * 20))// line to f
 
+
 // apply stroke to lines
 pen.stroke();
 

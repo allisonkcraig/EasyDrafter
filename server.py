@@ -11,8 +11,13 @@ def home_page():
 
 @app.route('/measure')
 def measure_page():
-	return render_template("canvas.html")
-
+	choice = request.args.get('play')
+	if choice == 'easy':
+		print "******************* choice 1"
+		return render_template("canvas.html")
+	else:
+		print "CHoice 2"
+		return render_template("canvas.html")
 
 
 if __name__ == "__main__":
