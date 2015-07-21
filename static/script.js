@@ -89,6 +89,9 @@ pen.lineTo( ((bustArc + 0.25) *20), (strapRise *20)) // i to j
 pen.lineTo(((bustArc + 1.25) *20), ((strapRise *20) +(sideLengthRise * 20)) )// j to k
 pen.lineTo((dartPlacement *20), (fullLength * 20))// line to f
 
+// armhole curve needs to be calibrated
+pen.moveTo((frontAcrossShoulder * 20), ((fullLength - frontShoulderSlopeRise) *20));
+pen.quadraticCurveTo(130,(strapRise *20),((bustArc + 0.25) *20), (strapRise *20)); // needs to be calibrated
 
 // apply stroke to lines
 pen.stroke();
