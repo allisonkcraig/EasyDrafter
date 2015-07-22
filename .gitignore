@@ -1,3 +1,4 @@
 .DS_Store
 canvasenv
 secrets.sh
+*secrets.*
