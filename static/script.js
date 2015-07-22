@@ -71,22 +71,27 @@ pen.moveTo(0, 0);
 pen.fillRect(0,0, 3, 3); // a
 pen.lineTo(0, (fullLength * 20)); // a to b
 pen.fillRect(0, (fullLength * 20), 3, 3); // b
+
 pen.moveTo(0, (((fullLength - centerFront) -0.375)*20)); // move to neckline
 pen.lineTo(80, (((fullLength - centerFront) -0.375)*20)); // d squared off
+
 pen.moveTo(0, 0);
 pen.lineTo((frontAcrossShoulder * 20), 0); // a to c
 pen.lineTo((frontAcrossShoulder * 20), 100); // square off c
+
 pen.moveTo(0, (fullLength * 20)); 
 pen.lineTo(((bustArc + 0.25)* 20), (fullLength * 20)); // b to e
 pen.lineTo(((bustArc + 0.25)* 20), 60) // square up from e
+
 pen.moveTo((dartPlacement *20), (fullLength * 20)); 
 pen.fillRect((dartPlacement *20), (fullLength * 20), 3, 3); 
+
 pen.moveTo(0, (fullLength * 20)); 
 pen.lineTo((frontAcrossShoulder * 20), ((fullLength - frontShoulderSlopeRise) *20)) // b to g
 pen.fillRect((frontAcrossShoulder * 20), ((fullLength - frontShoulderSlopeRise) *20), 3, 3); // g
 pen.lineTo(((frontAcrossShoulder - shoulderLengthRun) * 20), 0) // g to i
 pen.lineTo( ((bustArc + 0.25) *20), (strapRise *20)) // i to j
-pen.lineTo(((bustArc + 1.25) *20), ((strapRise *20) +(sideLengthRise * 20)) )// j to k
+pen.lineTo(((bustArc + 1.25) *20), ((strapRise *20) + (sideLengthRise * 20)) )// j to k
 pen.lineTo((dartPlacement *20), (fullLength * 20))// line to f
 
 // armhole curve needs to be calibrated
@@ -98,3 +103,5 @@ pen.stroke();
 
 
 });
+
+
