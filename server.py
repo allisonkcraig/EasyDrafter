@@ -13,10 +13,8 @@ def home_page():
 def measure_page():
 	choice = request.args.get('play')
 	if choice == 'easy':
-		print "******************* choice 1"
 		return render_template("canvas.html")
 	else:
-		print "CHoice 2"
 		return render_template("canvas.html")
 
 
