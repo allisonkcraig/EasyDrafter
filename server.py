@@ -17,6 +17,11 @@ def measure_page():
 	else:
 		return render_template("canvas.html")
 
+@app.route('/pattern')
+def patter_page():
+	
+	return render_template("canvas.html")
+
 
 if __name__ == "__main__":
 	port = int(os.environ.get("PORT", 5000))
