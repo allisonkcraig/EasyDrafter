@@ -127,6 +127,23 @@ pen.quadraticCurveTo(130,(strapRise *20),document.scaledBustArc, (strapRise *20)
 pen.stroke();
 
 
+
+// create an image from the canvas
+
+var blockURL = draftingTable.toDataURL();
+
+debugger
+console.log(blockURL)
+
+// DECIDE HOW TO USE URL OBJECT TO EITHER SAVE OR VIEW IMAGE
+
+// var output = blockURL.replace(/^data:image\/(png|jpg);base64,/, "");
+// console.log(output)
+// $('#thing').attr('action', 'output');
+
+
+// document.getElementById('canvasImg').src = blockURL;
+
 });
 
 

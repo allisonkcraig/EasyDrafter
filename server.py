@@ -1,13 +1,15 @@
 from flask import Flask, request, render_template, redirect, flash, session
 import os
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
-import secrets #check that this is correct
+
 import model
+
 
 app = Flask(__name__)
 
-app.secret_key = secrets.secret_key #check that this is correct
+app.secret_key = os.environ['SECRET_KEY'] 
+#much source secrets.sh each time you enter virtual env, will go away after each session
 
 app.jinja_env.undefined = jinja2.StrictUndefined
 
@@ -19,16 +21,21 @@ def home_page():
 
 @app.route('/measure')
 def measure_page():
-	choice = request.args.get('play')
-	if choice == 'easy':
-		return render_template("canvas.html")
-	else:
-		return render_template("canvas.html")
+    """Allow input of measurements for pattern draft"""
 
-@app.route('/pattern')
-def patter_page():
-	
+    return render_template("measure.html")
+
+@app.route('/pattern', methods=["POST"])
+def pattern_page():
+	"""Save measurement chart and image of pattern to db"""
+
 	return render_template("canvas.html")
+
+@app.route('/print')
+def print_pattern():
+    """Query image of pattern and scale up to print via AJAX"""
+
+    return render_template("print.html")
 
 
 @app.route("/login", methods=["GET"])
@@ -41,25 +48,23 @@ def show_login():
 @app.route("/login", methods=["POST"])
 def process_login():
     """Log user into site.
-    Find the user's login credentials located in the 'request.form'
-    dictionary, look up the user, and store them in the session.
+    Find the user's login credentials look up the user, and store them in the session.
     """
-
     email_input = request.form.get("email")
     pword_input = request.form.get("password")
+    user = model.User.user_auth(email_input)
 
-    customer = model.User.get_by_email(email_input)
-    if customer is None:
+    if user is None:
         flash("No such email")
         return redirect("/login")
     else:
-        if pword_input != customer.pword:
+        if pword_input != user.pword:
             flash("Incorrect password")
             return redirect("/login")
         else:
             flash("Login successful!!")
             session['logged_in_customer_email'] = email_input
-            return redirect("/")
+    return render_template("profile.html")
 
 
 @app.route("/logout")

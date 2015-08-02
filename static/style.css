@@ -7,18 +7,19 @@
 
 
 #measurement-table {
-	margin-left: 50%;
 	font-family: "Raleway";
 }
 
 #header {
-    background-image: url("static/roughcloth.png");
+    background-image: url("static/img/roughcloth.png");
 	text-shadow: 2px 2px #EA8C86;
 	color: #7D1141;
 	height: 80px;
 	margin-bottom: 15px;
 	font-family: 'Pacifico', cursive;
 	font-size: 100px;
+	text-decoration: none;
+	
 }
 
 #splash-header {
@@ -45,7 +46,7 @@
 }
 
 body {
-	background-image: url("static/roughcloth.png")
+	background-image: url("static/img/roughcloth.png");
 }
 
 footer {
@@ -62,4 +63,12 @@ footer {
 	text-decoration: none;
 	color: black;
 	float: right;
+}
+
+#bustform {
+	position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 80%;
+
 }

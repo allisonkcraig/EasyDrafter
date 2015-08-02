@@ -20,16 +20,16 @@ class User(db.Model):
     fname = db.Column(db.String(15), nullable=False)
 
     @classmethod
-    def user_auth(cls, email, password):
-        """Get ID of User whoes email and password is given in the arguments"""
-        current_user_id = db.session.query(cls.user_id, cls.email).filter(cls.email==email, cls.password==password).first()
+    def user_auth(cls, email_input):
+        """Get info of User whose email is given in the arguments"""
+        current_user_id = db.session.query.filter(cls.email==email_input).first()
         return current_user_id
 
 
 
     def user_details(self, user_id):
         """Get user details to load onto profile page"""
-        current_user_info = db.session.query.filter(User.user_id = user_id).first()
+        current_user_info = db.session.query.filter(User.user_id==user_id).first()
         return current_user_info
 
 
@@ -46,6 +46,7 @@ class Measurement_Chart(db.Model):
 
     chart_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     nickname = db.Column(db.Integer, nullable=False)
+    pattern_url = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.String(100), nullable=False)
     bust = db.Column(db.Integer, nullable=False)
     waist = db.Column(db.Integer, nullable=False)
@@ -53,12 +54,12 @@ class Measurement_Chart(db.Model):
 
     # Define relationship to user
     user = db.relationship("User",
-                           backref=db.backref("Measurement_Charts", order_by=rating_id))
+                           backref=db.backref("Measurement_Charts"))
 
-    def __repr__(self):
-        """Provide helpful representation when printed."""
+    # def __repr__(self):
+    #     """Provide helpful representation when printed."""
 
-        return "<Chart Id= %s Release Date= user_id>" % (self.chart_id, self.released_at)
+    #     return "<Chart Id= %s Release Date= user_id>" % (self.chart_id, self.released_at)
 
     # TODO EXPLAND THIS FUNCTION TO ADD MORE MEASUREMENTS
     @classmethod
