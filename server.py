@@ -67,6 +67,15 @@ def process_login():
     return render_template("profile.html")
 
 
+@app.route('/user-profile')
+def user_profile_page(id_user):
+    """Display user information and saved blocks"""
+    user_id = id_user
+    user = User.query.filter(User.user_id == user_id).one()
+
+    return render_template("user-detail.html", user=user)
+
+
 @app.route("/logout")
 def process_logout():
     del session['user_id']

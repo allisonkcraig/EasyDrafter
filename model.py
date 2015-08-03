@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
 # object, where we do most of our interactions (like committing, etc.)
 
+
 db = SQLAlchemy()
 
 
@@ -15,8 +16,8 @@ class User(db.Model):
     __tablename__ = "Users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String(64), nullable=True)
-    password = db.Column(db.String(64), nullable=True)
+    email = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(64), nullable=False)
     fname = db.Column(db.String(15), nullable=False)
 
     @classmethod
@@ -51,6 +52,22 @@ class Measurement_Chart(db.Model):
     bust = db.Column(db.Integer, nullable=False)
     waist = db.Column(db.Integer, nullable=False)
     cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+    # cflength = db.Column(db.Integer, nullable=False)
+
 
     # Define relationship to user
     user = db.relationship("User",
@@ -61,6 +78,7 @@ class Measurement_Chart(db.Model):
 
     #     return "<Chart Id= %s Release Date= user_id>" % (self.chart_id, self.released_at)
 
+
     # TODO EXPLAND THIS FUNCTION TO ADD MORE MEASUREMENTS
     @classmethod
     def add_chart_to_db(cls, nickname, user_id, bust, waist, cflength):
@@ -68,34 +86,6 @@ class Measurement_Chart(db.Model):
         db.session.add(chart_to_add)
 
 
-# class Rating(db.Model):
-#     """User Ratings of ratings website."""
-    
-#     __tablename__ = "Ratings"
-
-#     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     movie_id = db.Column(db.Integer, db.ForeignKey('Movies.movie_id'))
-#     user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
-#     score = db.Column(db.Integer, nullable=False)
-
-#      # Define relationship to user
-#     user = db.relationship("User",
-#                            backref=db.backref("Ratings", order_by=rating_id))
-
-#     # Define relationship to movie
-#     movie = db.relationship("Movie",
-#                             backref=db.backref("Ratings", order_by=rating_id))
-
-
-#     def __repr__(self):
-#         """Provide helpful representation when printed."""
-
-#         return "<Movie ID= %s User ID= %s Score= %s>" % (self.movie_id, self.user_id, self.score)
-
-    # @classmethod
-    # def add_rating_to_db(cls, score, user_id, movie_id):
-    #     score_to_add = cls(movie_id, user_id, score)
-    #     db.session.add(score_to_add)
 
 
 # Helper functions
@@ -104,7 +94,7 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our SQLite database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ratings.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///drafter.db'
     db.app = app
     db.init_app(app)
 
