@@ -10,14 +10,14 @@
 	font-family: "Raleway";
 }
 
-#header {
+.header {
     background-image: url("static/img/roughcloth.png");
 	text-shadow: 2px 2px #EA8C86;
 	color: #7D1141;
 	height: 80px;
 	margin-bottom: 15px;
 	font-family: 'Pacifico', cursive;
-	font-size: 100px;
+	font-size: 30px;
 	text-decoration: none;
 	
 }

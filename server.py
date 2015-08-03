@@ -59,17 +59,19 @@ def process_login():
 
     print "after line"
     if customer:
-        flash("No such email")
-        return redirect("/login")
-    else:
-        if pword_input != user.password:
+        if pword_input != customer.password:
             flash("Incorrect password")
             return redirect("/login")
         else:
             flash("Login successful!!")
             session['logged_in_customer_email'] = email_input
+            return render_template("profile.html", user=customer)
+        
+    else:
+        iflash("No such email")
+        return redirect("/login")
 
-    return render_template("profile.html")
+
 
 
 @app.route('/profile')

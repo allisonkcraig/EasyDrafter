@@ -13,11 +13,19 @@
 </head>
 <body>
 	<nav class="navbar navbar-default">
-		<div class="container-fluid" id="header">
-			<h1><a href="/">Pattern Pro</a></h1>
+		<div class="container-fluid" class="header">
+			<a class="navbar-brand" ref="/">Pattern Pro</a>
+			<ul class="nav navbar-nav">	
+				<li><a href="/measure">Draft New Block</a></li>	
+			{% if session['logged_in_customer_email'] is defined %}
+                  <li><a href="/logout" id="logout">Log Out</a></li> 
+            {% else %}    
+                  <li><a href="/login">Log In</a></li>
+                {% endif %}
+             </ul>
 		</div>
 	</nav>
-	
+
 	{% with messages = get_flashed_messages() %}
       {% for message in messages %}
           <div class="alert alert-warning">{{ message }}</div>
