@@ -16,7 +16,7 @@ class User(db.Model):
     __tablename__ = "Users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String(64), nullable=False)
+    email = db.Column(db.String(64), unique=True, nullable=False)
     password = db.Column(db.String(64), nullable=False)
     fname = db.Column(db.String(15), nullable=False)
 
@@ -27,19 +27,6 @@ class User(db.Model):
     #      = db.session.query.filter(cls.email==email).first()
 
 
-    @classmethod
-    def user_details(cls, email):
-        """Get user current user details to authenticate or to load on current user profile"""
-        current_user_info = cls.query.filter(cls.email==email).first()
-
-        return current_user_info
-
-        if not current_user_info:
-            customer = None
-        else: 
-            customer = cls(*user_from_db)
-
-        return customer
 
 
     def __repr__(self):

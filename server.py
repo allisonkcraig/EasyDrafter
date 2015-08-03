@@ -5,6 +5,8 @@ import jinja2
 
 import model
 
+from model import User, connect_to_db, db
+
 
 app = Flask(__name__)
 
@@ -52,21 +54,21 @@ def process_login():
     """
     email_input = request.form.get("email")
     pword_input = request.form.get("password")
+    print "before line"
+    customer = User.query.filter_by(email = email_input).first()
 
-    customer = model.User.user_details(email_input)
-
-
-    if user is None:
+    print "after line"
+    if customer:
         flash("No such email")
         return redirect("/login")
     else:
-        if pword_input != user.pword:
+        if pword_input != user.password:
             flash("Incorrect password")
             return redirect("/login")
         else:
             flash("Login successful!!")
             session['logged_in_customer_email'] = email_input
-            
+
     return render_template("profile.html")
 
 
@@ -88,5 +90,6 @@ def process_logout():
 
 
 if __name__ == "__main__":
-	port = int(os.environ.get("PORT", 5000))
-	app.run(debug=True, port=port)
+    port = int(os.environ.get("PORT", 5000))
+    connect_to_db(app)
+    app.run(debug=True, port=port)

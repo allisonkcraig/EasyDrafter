@@ -17,6 +17,13 @@
 			<h1><a href="/">Pattern Pro</a></h1>
 		</div>
 	</nav>
+	
+	{% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+          <div class="alert alert-warning">{{ message }}</div>
+      {% endfor %}
+  {% endwith %}
+
 	{% block content %}{% endblock %}
 	<footer><a href="https://github.com/allisonkcraig" id="footer-a">app by Allison Craig</a></footer>
 </body>
