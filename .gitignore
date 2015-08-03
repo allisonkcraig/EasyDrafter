@@ -2,3 +2,4 @@
 canvasenv
 secrets.sh
 *secrets.*
+*.pyc
