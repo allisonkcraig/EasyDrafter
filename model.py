@@ -20,18 +20,26 @@ class User(db.Model):
     password = db.Column(db.String(64), nullable=False)
     fname = db.Column(db.String(15), nullable=False)
 
+
+    # @classmethod
+    # def get_by_email(cls, email):
+    #     """Query for a specific melon in the database by the primary key"""
+    #      = db.session.query.filter(cls.email==email).first()
+
+
     @classmethod
-    def user_auth(cls, email_input):
-        """Get info of User whose email is given in the arguments"""
-        current_user_id = db.session.query.filter(cls.email==email_input).first()
-        return current_user_id
+    def user_details(cls, email):
+        """Get user current user details to authenticate or to load on current user profile"""
+        current_user_info = cls.query.filter(cls.email==email).first()
 
-
-
-    def user_details(self, user_id):
-        """Get user details to load onto profile page"""
-        current_user_info = db.session.query.filter(User.user_id==user_id).first()
         return current_user_info
+
+        if not current_user_info:
+            customer = None
+        else: 
+            customer = cls(*user_from_db)
+
+        return customer
 
 
     def __repr__(self):
@@ -41,14 +49,14 @@ class User(db.Model):
 
 
 class Measurement_Chart(db.Model):
-    """Movie Table of ratings website."""
+    """Measurement Charts for specific users."""
     
     __tablename__ = "Measurement_Charts"
 
     chart_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     nickname = db.Column(db.Integer, nullable=False)
     pattern_url = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.String(100), db.ForeignKey('Users.user_id'))
     bust = db.Column(db.Integer, nullable=False)
     waist = db.Column(db.Integer, nullable=False)
     cflength = db.Column(db.Integer, nullable=False)

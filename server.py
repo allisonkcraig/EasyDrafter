@@ -52,7 +52,9 @@ def process_login():
     """
     email_input = request.form.get("email")
     pword_input = request.form.get("password")
-    user = model.User.user_auth(email_input)
+
+    customer = model.User.user_details(email_input)
+
 
     if user is None:
         flash("No such email")
@@ -64,21 +66,23 @@ def process_login():
         else:
             flash("Login successful!!")
             session['logged_in_customer_email'] = email_input
+            
     return render_template("profile.html")
 
 
-@app.route('/user-profile')
+@app.route('/profile')
 def user_profile_page(id_user):
     """Display user information and saved blocks"""
+
     user_id = id_user
     user = User.query.filter(User.user_id == user_id).one()
 
-    return render_template("user-detail.html", user=user)
+    return render_template("profile.html", user=user)
 
 
 @app.route("/logout")
 def process_logout():
-    del session['user_id']
+    del session['logged_in_customer_email']
     flash("You have been logged out")
     return redirect("/")
 
