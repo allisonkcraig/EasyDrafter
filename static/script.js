@@ -24,7 +24,7 @@ for (var x = 0.5; x < 601; x += 20) {
 
 // right angle equations to find rise or run
 var pythagoreanCAndA = function(c, a) {
-	sideB = Math.sqrt((Math.pow(c, y = 2)) - (Math.pow(a, y = 2)));
+	var sideB = Math.sqrt((Math.pow(c, y = 2)) - (Math.pow(a, y = 2)));
 	return sideB
 };
 
@@ -32,7 +32,14 @@ var pythagoreanCAndA = function(c, a) {
 document.locatePointH = function(bustDepth, frontAcrossShoulder, frontShoulderSlopeRise) {
 	var x = bustDepth * frontAcrossShoulder;
 	return x / frontShoulderSlopeRise;
-}
+};
+
+//function to find a fraction of a distance
+document.fracOfDistance = function(longY, shortY, fracDenom) {
+	var num = longY - shortY;
+	distanceFromShortY = num / fracDenom;
+	return distanceFromShortY;
+};
 
 // basic measurements
 var bust = 36.00;
@@ -89,13 +96,14 @@ document.scaledBustArc = (bustArc + 0.25) * document.scale;
 document.scaledDartPlacement = dartPlacement * document.scale;
 document.scaledPointHX = pointHX * document.scale;
 document.scaledPointHY = pointHY * document.scale;
-document.scaledOffset = (fullLength - frontShoulderSlopeRise) *20;
+document.scaledOffset = (fullLength - frontShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
+
 
 pen.lineTo(0, (document.scaledFullLength)); // a to b
 pen.fillRect(0, (document.scaledFullLength), 3, 3); // b
 
-pen.moveTo(0, (((fullLength - centerFront) -0.375)*20)); // move to neckline
-pen.lineTo(80, (((fullLength - centerFront) -0.375)*20)); // d squared off
+pen.moveTo(0, (((fullLength - centerFront) -0.375)*document.scale)); // move to neckline
+pen.lineTo(80, (((fullLength - centerFront) -0.375)*document.scale)); // d squared off
 
 pen.moveTo(0, 0);
 pen.lineTo((document.scaledFrontAcrossShoulder), 0); // a to c
@@ -106,13 +114,34 @@ pen.lineTo(document.scaledBustArc, (document.scaledFullLength)); // b to e
 pen.lineTo(document.scaledBustArc, 60) // square up from e
 
 pen.moveTo(document.scaledDartPlacement, (document.scaledFullLength)); 
-pen.fillRect(document.scaledDartPlacement, (document.scaledFullLength), 3, 3); 
+pen.fillRect(document.scaledDartPlacement, document.scaledFullLength, 3, 3); 
 
-pen.moveTo(0, (document.scaledFullLength)); 
-pen.lineTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)) // b to g
-pen.fillRect((document.scaledFrontAcrossShoulder), (document.scaledOffset), 3, 3); // g
+pen.moveTo(0, document.scaledFullLength); 
+pen.lineTo(document.scaledFrontAcrossShoulder, document.scaledOffset) // b to g
+pen.fillRect(document.scaledFrontAcrossShoulder, document.scaledOffset, 3, 3); // g
 
-pen.fillRect(document.scaledPointHX, document.scaledOffset + document.scaledPointHY, 3, 3);
+pen.fillRect(document.scaledPointHX, (document.scaledOffset + document.scaledPointHY), 3, 3); //calculate point h
+
+
+pen.moveTo(0, (document.scaledOffset + document.scaledPointHY)) // point L
+
+//BUSt POINT **************************************************************
+pen.lineTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY)); // to point M (bust point)
+
+
+//DART LEGS ***************************************************************
+pen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
+pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
+
+pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
+
+
+pen.fillRect(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); // n
+pen.moveTo(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5);
+pen.lineTo((acrossChest + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); //to point O
+
+
+pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)) // b to g
 
 pen.lineTo(((frontAcrossShoulder - shoulderLengthRun) * 20), 0); // g to i
 pen.lineTo( document.scaledBustArc, (strapRise *20)) // i to j
