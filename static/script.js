@@ -59,8 +59,6 @@ var bustArc = 9.75;
 var bustSpan = 3.75;
 var waistArc = 6.86;
 var dartPlacement = 3.25;
-var backNeck = 3.00;
-var backAcrossShoulder = 7.50;
 var acrossBack = 7.00;
 var sideLength = 8.5
 
@@ -78,17 +76,16 @@ var pointHY = locatePointOnC(bustDepth, frontShoulderSlopeRise, frontShoulderSlo
 
 //Calculate distance and rise and run of second dart leg
 var waistRemaining = waistArc - dartPlacement // find the remaining waist needed
-console.log(waistRemaining)
 var dartLegRise = fullLength - (strapRise  + sideLengthRise)
 var dartLegRun = (bustArc + 1.25 + 0.25) - dartPlacement
 var dartLegC = pythagoreanAAndB(dartLegRun, dartLegRise) // length of f to k
-console.log(dartLegC)
+// console.log(dartLegC)
 
 var dartY = fullLength - locatePointOnC(waistRemaining, dartLegRise, dartLegC)
 var dartX = (bustArc + 1.25) - locatePointOnC(waistRemaining, dartLegRun, dartLegC)
 
-console.log(dartX)
-console.log(dartY)
+// console.log(dartX)
+// console.log(dartY)
 
 
 // set up pen and set colors for temporary lines
@@ -150,9 +147,8 @@ pen.lineTo((bustSpan * document.scale), (document.scaledOffset + document.scaled
 //DART LEGS ***************************************************************
 pen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
 pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
-
+//second dart
 pen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
-
 pen.lineTo(dartX * document.scale, dartY * document.scale);// line to second dart leg
 
 
@@ -160,10 +156,11 @@ pen.fillRect(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 *
 pen.moveTo(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset);
 pen.lineTo((acrossChest + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); //to point O
 
-
+//SHOULDER ***************************************************************
 pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)) // b to g
-
 pen.lineTo(((frontAcrossShoulder - shoulderLengthRun) * document.scale), 0); // g to i
+
+
 pen.lineTo( document.scaledBustArc, (strapRise * document.scale)) // i to j
 pen.lineTo(((bustArc + 1.5)* document.scale), ((strapRise * document.scale) + (sideLengthRise * document.scale)) )// j to k
 pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
@@ -177,11 +174,44 @@ pen.stroke();
 
 
 
+
+// CREATE FINAL DRAFT ***************************************************
+var penFinalFront = draftingTable.getContext("2d");
+penFinalFront.fillStyle= "black";
+penFinalFront.strokeStyle = "black";
+
+
+// draw lines and dots
+penFinalFront.beginPath();
+penFinalFront.moveTo(0, 0);
+penFinalFront.fillRect(0,0, 3, 3); // a
+
+//DART LEGS ***************************************************************
+penFinalFront.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
+penFinalFront.lineTo(document.scaledDartPlacement, (document.scaledFullLength)); // line to f
+
+penFinalFront.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
+penFinalFront.lineTo(dartX * document.scale, dartY * document.scale);// line to second dart leg
+
+//WAIST SIDE OF DART ******************************************************
+penFinalFront.lineTo(((bustArc + 1.5)* document.scale), ((strapRise * document.scale) + (sideLengthRise * document.scale)) )
+
+//SIDE SEAM ******************************************************
+penFinalFront.lineTo( document.scaledBustArc, (strapRise * document.scale)) // i to j
+
+//SHOULDER ***************************************************************
+penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)); // b to g
+
+penFinalFront.lineTo(((frontAcrossShoulder - shoulderLengthRun) * document.scale), 0); // g to i
+
+
+// apply stroke to lines
+penFinalFront.stroke();
+
 // create an image from the canvas
 
 var blockURL = draftingTable.toDataURL();
 
-debugger
 console.log(blockURL)
 
 // DECIDE HOW TO USE URL OBJECT TO EITHER SAVE OR VIEW IMAGE
