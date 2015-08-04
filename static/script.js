@@ -47,7 +47,7 @@ var waist = 26.00;
 var abdomen = 34.25;
 
 // advanced measurements
-var fullLength = 18.13;
+var fullLength = 17.75;
 var centerFront = 15.00;
 var frontShoulderSlope = 17.25;
 var strap = 10.00;
