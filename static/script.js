@@ -29,17 +29,11 @@ var pythagoreanCAndA = function(c, a) {
 };
 
 //function to find point h
-document.locatePointH = function(bustDepth, frontAcrossShoulder, frontShoulderSlopeRise) {
+var locatePointOnC = function(bustDepth, frontAcrossShoulder, frontShoulderSlopeRise) {
 	var x = bustDepth * frontAcrossShoulder;
 	return x / frontShoulderSlopeRise;
 };
 
-//function to find a fraction of a distance
-document.fracOfDistance = function(longY, shortY, fracDenom) {
-	var num = longY - shortY;
-	distanceFromShortY = num / fracDenom;
-	return distanceFromShortY;
-};
 
 // basic measurements
 var bust = 36.00;
@@ -70,18 +64,27 @@ var frontShoulderSlopeRise = pythagoreanCAndA((frontShoulderSlope + 0.125), fron
 var shoulderLengthRun = pythagoreanCAndA(shoulderLength,(fullLength - frontShoulderSlopeRise));
 var strapRise = pythagoreanCAndA((strap + 0.375), ((bustArc +0.25)- shoulderLengthRun));
 var sideLengthRise = pythagoreanCAndA(sideLength, 1.25)
-//console.log(sideLengthRise)
 
 //calling functions for calulating point H
-var pointHX = document.locatePointH(bustDepth, frontAcrossShoulder, frontShoulderSlope);
-var pointHY = document.locatePointH(bustDepth, frontShoulderSlopeRise, frontShoulderSlope);
-console.log(pointHX);
-console.log(pointHY);
+var pointHX = locatePointOnC(bustDepth, frontAcrossShoulder, frontShoulderSlope);
+var pointHY = locatePointOnC(bustDepth, frontShoulderSlopeRise, frontShoulderSlope);
+// console.log(pointHX);
+// console.log(pointHY);
 
-// set up pen and set colors
+//Calculate distance and rise and run of second dart leg
+var waistRemaining = waistArc - dartPlacement
+console.log(waistRemaining)
+
+
+
+// set up pen and set colors for temporary lines
 var pen = draftingTable.getContext("2d");
 pen.fillStyle="#83AF9B";
 pen.strokeStyle = "#EA8C86";
+
+var permPen = draftingTable.getContext("2d");
+permPen.fillStyle='black';
+permPen.strokeStyle = 'black';
 
 // draw lines and dots
 pen.beginPath()
@@ -98,7 +101,7 @@ document.scaledPointHX = pointHX * document.scale;
 document.scaledPointHY = pointHY * document.scale;
 document.scaledOffset = (fullLength - frontShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
 
-
+//FULL LENGTH ************************************************************
 pen.lineTo(0, (document.scaledFullLength)); // a to b
 pen.fillRect(0, (document.scaledFullLength), 3, 3); // b
 
@@ -125,19 +128,21 @@ pen.fillRect(document.scaledPointHX, (document.scaledOffset + document.scaledPoi
 
 pen.moveTo(0, (document.scaledOffset + document.scaledPointHY)) // point L
 
-//BUSt POINT **************************************************************
-pen.lineTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY)); // to point M (bust point)
+//BUST POINT **************************************************************
+permPen.lineTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY)); // to point M (bust point)
 
 
 //DART LEGS ***************************************************************
-pen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
-pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
+permPen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
+permPen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
 
-pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
+permPen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
+
+permPen.lineTo(((bustArc + 1.25)* document.scale), (document.scaledFullLength))// line to f
 
 
-pen.fillRect(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); // n
-pen.moveTo(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5);
+pen.fillRect(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 3, 3); // n
+pen.moveTo(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset);
 pen.lineTo((acrossChest + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); //to point O
 
 
