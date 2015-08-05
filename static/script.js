@@ -181,27 +181,35 @@ penFinalFront.fillStyle= "black";
 penFinalFront.strokeStyle = "black";
 
 
-// draw lines and dots
+// instantiate lines and dots
 penFinalFront.beginPath();
 penFinalFront.moveTo(0, 0);
 penFinalFront.fillRect(0,0, 3, 3); // a
 
+
+// CENTERFRONT 
+penFinalFront.moveTo(0, (document.scaledFullLength), 3, 3); // b
+penFinalFront.lineTo(+0.5, (((fullLength - centerFront) -0.375)*document.scale)); // move to neckline, ofset half a pixel so it shows on the canvas better
+
+
 //DART LEGS ***************************************************************
 penFinalFront.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
 penFinalFront.lineTo(document.scaledDartPlacement, (document.scaledFullLength)); // line to f
-
+penFinalFront.lineTo(0, (document.scaledFullLength))
 penFinalFront.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
 penFinalFront.lineTo(dartX * document.scale, dartY * document.scale);// line to second dart leg
+
 
 //WAIST SIDE OF DART ******************************************************
 penFinalFront.lineTo(((bustArc + 1.5)* document.scale), ((strapRise * document.scale) + (sideLengthRise * document.scale)) )
 
+
 //SIDE SEAM ******************************************************
 penFinalFront.lineTo( document.scaledBustArc, (strapRise * document.scale)) // i to j
 
+
 //SHOULDER ***************************************************************
 penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)); // b to g
-
 penFinalFront.lineTo(((frontAcrossShoulder - shoulderLengthRun) * document.scale), 0); // g to i
 
 
@@ -211,6 +219,9 @@ penFinalFront.stroke();
 // create an image from the canvas
 
 var blockURL = draftingTable.toDataURL();
+
+var image = $('<img>').attr('src', blockURL);
+$('body').append(image);
 
 console.log(blockURL)
 
