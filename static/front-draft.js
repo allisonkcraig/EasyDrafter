@@ -165,10 +165,14 @@ pen.lineTo( document.scaledBustArc, (strapRise * document.scale)) // i to j
 pen.lineTo(((bustArc + 1.5)* document.scale), ((strapRise * document.scale) + (sideLengthRise * document.scale)) )// j to k
 pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
 
-// armhole curve needs to be calibrated
-pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
-pen.quadraticCurveTo(130,(strapRise * document.scale),document.scaledBustArc, (strapRise * document.scale)); // needs to be calibrated
 
+// ARMHOLE ***************************************************************
+var controlx = (acrossChest * 0.725) * document.scale;
+var controly = (strapRise / 0.886) * document.scale;
+
+pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
+pen.quadraticCurveTo(controlx ,controly ,document.scaledBustArc, (strapRise * document.scale)); // needs to be calibrated
+console.log('StrapRise:', strapRise)
 // apply stroke to lines
 pen.stroke();
 

@@ -210,10 +210,13 @@ penBack.fillRect(scaledBackNeck, 0, 3, 3) // point f
 
 
 // // armhole curve needs to be calibrated
+// var startx = document.scaledBackAcrossShoulder;
+// var endy = backAcrossShoulder * document.scale;
 // penBack.moveTo((document.scaledBackAcrossShoulder), (document.scaledOffset));
-// penBack.quadraticCurveTo(130, backAcrossShoulder * document.scale ,document.scaledBackArc, (backAcrossShoulder * document.scale)); // needs to be calibrated
-penBack.moveTo(0, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset);
-penBack.lineTo((acrossBack + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); // across back - to armhole
+
+// penBack.quadraticCurveTo(startx, endy * document.scale ,document.scaledBackArc, (backAcrossShoulder * document.scale)); // needs to be calibrated
+// penBack.moveTo(0, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset);
+// penBack.lineTo((acrossBack + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset); // across back - to armhole
 
 
 // SHOULDER SEAM ***************************************************
@@ -251,6 +254,16 @@ penBack.lineTo(offsetShoulderDartApexX, offsetShoulderDartApexY);
 penBack.lineTo(shoulderDartLeg2XScaled + scaledBackNeck, shoulderDartLeg2YScaled);
 penBack.lineTo(pointHXScaled, pointHYScaled)
 
+
+// ARMHOLE ***************************************************************
+var controlx = (acrossChest * 0.725) * document.scale;
+var controly = (strapRise / 0.886) * document.scale;
+
+pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
+pen.quadraticCurveTo(controlx ,controly ,document.scaledBustArc, (strapRise * document.scale)); // needs to be calibrated
+console.log('StrapRise:', strapRise)
+// apply stroke to lines
+pen.stroke();
 
 // WAIST DART LEGS ***************************************************************
 penFinalBack.moveTo(0, document.scaledfullLengthBack);
