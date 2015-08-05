@@ -11,15 +11,24 @@
 }
 
 .header {
-    background-image: url("static/img/roughcloth.png");
-	text-shadow: 2px 2px #EA8C86;
-	color: #7D1141;
 	height: 80px;
 	margin-bottom: 15px;
+	font-size: 30px;
+	
+}
+
+.heading-titles {
+	font-family: 'Pacifico', cursive;
+	color: #EA8C86;
+	margin-bottom: 1em;
+}
+
+#corner-logo{
 	font-family: 'Pacifico', cursive;
 	font-size: 30px;
 	text-decoration: none;
-	
+	text-shadow: 2px 2px #EA8C86;
+	color: #7D1141;
 }
 
 #splash-header {
@@ -37,6 +46,7 @@
 	margin-top: 8em;
 	font-family: "Raleway";
 }
+
 
 #beta {
 	color: #EA8C86;

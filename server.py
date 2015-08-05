@@ -75,11 +75,11 @@ def process_login():
 
 
 @app.route('/profile')
-def user_profile_page(id_user):
+def user_profile_page():
     """Display user information and saved blocks"""
 
-    user_id = id_user
-    user = User.query.filter(User.user_id == user_id).one()
+    user_email = session['logged_in_customer_email']
+    user = User.query.filter(User.email == user_email).one()
 
     return render_template("profile.html", user=user)
 

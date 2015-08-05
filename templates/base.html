@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Pattern Pro</title>
-	<link rel='stylesheet' href='static/style.css'>
 	<link href='http://fonts.googleapis.com/css?family=Lobster|Raleway' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -11,15 +10,17 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src='static/script.js'></script>
 	<script src='static/back-draft.js'></script>
+	<link rel='stylesheet' href='static/style.css'>
 </head>
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid" class="header">
-			<a class="navbar-brand" ref="/">Pattern Pro</a>
+			<a class="navbar-brand" id="corner-logo" href="/">Pattern Pro</a>
 			<ul class="nav navbar-nav">	
 				<li><a href="/measure">Draft New Block</a></li>	
 			{% if session['logged_in_customer_email'] is defined %}
                   <li><a href="/logout" id="logout">Log Out</a></li> 
+                  <li><a href="/profile" id="profile">Profile</a></li> 
             {% else %}    
                   <li><a href="/login">Log In</a></li>
                 {% endif %}

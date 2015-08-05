@@ -107,9 +107,14 @@ console.log(pointHYScaled);
 shoulderDartXScaled = locatePointOnC(((backShoulderLength / 2) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
 shoulderDartYScaled = locatePointOnC(((backShoulderLength / 2) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
 
-//Calculate shoulder dart
-shoulderDartRise = 
-shoulderDartRun = 
+//Calculate shoulder dart using x,y coordinates of bottom dart apex and shoulder dart starting point
+shoulderDartRise = shoulderDartYScaled - (document.scaledfullLengthBack - (sideLength * document.scale));
+console.log(shoulderDartRise/20)
+shoulderDartRun = shoulderDartXScaled - ((dartPlacement + (backDartIntake / 2))  * document.scale);
+console.log(shoulderDartRun/20)
+
+lengthOfDartAligmentLine = pythagoreanAAndB(shoulderDartRise,shoulderDartRun);
+console.log(lengthOfDartAligmentLine/20)
 
 
 // set up pen and set colors for temporary lines
@@ -151,14 +156,6 @@ penBack.lineTo(document.scaledBackAcrossShoulder, document.scaledOffset) // b to
 penBack.fillRect(document.scaledBackAcrossShoulder, document.scaledOffset, 3, 3); // g
 
 
-// BOTTOM DART LEGS ***************************************************************
-// penBack.moveTo(0, document.scaledfullLengthBack);
-// penBack.lineTo(dartPlacement * document.scale, document.scaledfullLengthBack + 0.125); // line to i
-// penBack.fillRect(dartPlacement  * document.scale, document.scaledfullLengthBack + 0.125, 3, 3); // point i
-// penBack.fillRect((dartPlacement + backDartIntake)  * document.scale, document.scaledfullLengthBack + (0.125 * document.scale), 3, 3); // point k
-// penBack.fillRect((dartPlacement + (backDartIntake / 2))  * document.scale, document.scaledfullLengthBack, 3, 3); // point l - mid point of back dart
-// penBack.lineTo((dartPlacement + (backDartIntake / 2))  * document.scale, (document.scaledfullLengthBack - (sideLength * document.scale))); // point 0
-
 // SHOULDER DART ***************************************************************
 shoulderDartXScaled
 penBack.fillRect(shoulderDartXScaled + scaledBackNeck , shoulderDartYScaled, 3, 3); // center of shoulder dart
@@ -178,8 +175,6 @@ penBack.lineTo((acrossBack + 0.25) * document.scale, (((document.scaledPointHY)-
 
 //SHOULDER ***************************************************************
 penBack.fillRect(scaledBackNeck, 0, 3, 3) // point f
-// penBack.lineTo(pointHXScaled,pointHYScaled)
-
 
 
 // // armhole curve needs to be calibrated
