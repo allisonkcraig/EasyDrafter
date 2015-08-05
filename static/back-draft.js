@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document).ready(function() {
 	
 // establish drafting table and pen
 var draftingTable = document.getElementById("drafting-table-back");
@@ -26,33 +26,50 @@ for (var x = 0.5; x < 601; x += 20) {
 
 
 // right angle equations to find rise or run
-var pythagoreanCAndA = function(c, a) {
+document.pythagoreanCAndA = function(c, a) {
 	var sideB = Math.sqrt((Math.pow(c, y = 2)) - (Math.pow(a, y = 2)));
 	return sideB
 };
 
 
-var pythagoreanAAndB = function(a, b) {
+document.pythagoreanAAndB = function(a, b) {
 	var sideC = Math.sqrt((Math.pow(a, y = 2)) + (Math.pow(b, y = 2)));
 	return sideC
 };
 
 
 //find the coordinates for a point on side c of a right trainagle with the sides of a proportionatly bigger trinagle
-var locatePointOnC = function(distanceOnC, fullSideX, fullSideC) {
+document.locatePointOnC = function(distanceOnC, fullSideX, fullSideC) {
 	var x = distanceOnC * fullSideX;
 	return x / fullSideC
 };
-// x = locatePointOnC(2.5, 9, 5)
-// console.log('X IS: ')
-// console.log(x)
+
 
 //find a proportionatly bigger traingle from sides of smaller traingle given 
-var findLengthOfBiggerTriangleSide = function(smallSideC, smallSideA, fullSideC) {
+document.findLengthOfBiggerTriangleSide = function(smallSideC, smallSideA, fullSideC) {
 	var x = smallSideA * fullSideC;
 	bigSideA =  x / smallSideC;
 	return bigSideA
 };
+
+//Find point on a straight line with two (x,y) coordinates for each end where point 1 is the side you would like to start at.
+// The first two coordinates you evaluate will be the axis you return (ie, entering x before y will return x, entering y before x will return y)
+document.findAxisForPointOnLine = function(x1, x2, y1, y2, pixelsFromPoint1) {
+	var leg1 = x1 - x2
+	// console.log("LEG 1: ", leg1)
+	var leg2 = y1 - y2
+	// console.log("LEG 2: ", leg2)
+	//rise over run
+	var lenghtOfHypo = document.pythagoreanAAndB(leg1, leg2)
+	// console.log("LENGTH OF HYPO: ", lenghtOfHypo)
+	var x = pixelsFromPoint1 * leg1
+	// console.log("X: ", x)
+	var axisFromOrigin = x / lenghtOfHypo
+	// console.log("axisFromOrigin: ", axisFromOrigin)
+	return axisFromOrigin
+}
+
+var y = document.findAxisForPointOnLine(2,1,2,1,.5)  
 
 // basic measurements
 var bust = 36.00;
@@ -88,33 +105,48 @@ document.scaledDartPlacement = dartPlacement * document.scale;
 var scaledBackNeck =  backNeck * document.scale;
 
 // Find slope offset o fron the top of the axis. -- point g's y axis 
-var backShoulderSlopeRise = pythagoreanCAndA( backShoulderSlope, backAcrossShoulder)
+var backShoulderSlopeRise = document.pythagoreanCAndA( backShoulderSlope, backAcrossShoulder)
 document.scaledOffset = (fullLengthBack - backShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
 
 // calculating rises and runs for right angle formulas of SIDE SEAM
-var sideSeamRiseScaled = pythagoreanCAndA(sideLength, (backArc) - (backDartIntake + waistArcBack)) * document.scale;
+var sideSeamRiseScaled = document.pythagoreanCAndA(sideLength, (backArc) - (backDartIntake + waistArcBack)) * document.scale;
 var offSetSideSeamRiseScaled = (document.scaledfullLengthBack + 0.1875 * document.scale) - sideSeamRiseScaled ;// y axis of point n
 
 //Find shoulder coordinates through right triangle geometry
-var lengthOfFToGScaled = pythagoreanAAndB((document.scaledBackAcrossShoulder - scaledBackNeck), document.scaledOffset);
+var lengthOfFToGScaled = document.pythagoreanAAndB((document.scaledBackAcrossShoulder - scaledBackNeck), document.scaledOffset);
 console.log(lengthOfFToGScaled)
-pointHXScaled = findLengthOfBiggerTriangleSide(lengthOfFToGScaled, (document.scaledBackAcrossShoulder - scaledBackNeck), backShoulderLength * document.scale) + (scaledBackNeck)
-pointHYScaled = findLengthOfBiggerTriangleSide(lengthOfFToGScaled, document.scaledOffset, backShoulderLength * document.scale) 
+pointHXScaled = document.findLengthOfBiggerTriangleSide(lengthOfFToGScaled, (document.scaledBackAcrossShoulder - scaledBackNeck), backShoulderLength * document.scale) + (scaledBackNeck)
+pointHYScaled = document.findLengthOfBiggerTriangleSide(lengthOfFToGScaled, document.scaledOffset, backShoulderLength * document.scale) 
 console.log(pointHXScaled);
 console.log(pointHYScaled);
 
 // Calculate coordinates of shoulder dart along shoulder seam 
-shoulderDartXScaled = locatePointOnC(((backShoulderLength / 2) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
-shoulderDartYScaled = locatePointOnC(((backShoulderLength / 2) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
+shoulderDartXScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
+shoulderDartYScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
+
+//Calculate point for shoulder dart along line
+//Set up function as follows: (axisWanted1, axisWanted2, secondAxis1, secondAxis2, distance to travel)
+shoulderDartApexX = document.findAxisForPointOnLine(shoulderDartXScaled,((dartPlacement + (backDartIntake / 2))  * document.scale), shoulderDartYScaled , (document.scaledfullLengthBack - (sideLength * document.scale)), 3 * document.scale)
+console.log("scaled back neck: ", scaledBackNeck)
+console.log("X: " , shoulderDartApexX)
+// Offset my axis point by the point at which the line starts on my grid at the shoulder
+offsetShoulderDartApexX = (shoulderDartXScaled + scaledBackNeck) + shoulderDartApexX 
+console.log("offset", offsetShoulderDartApexX)
+shoulderDartApexY = Math.abs(document.findAxisForPointOnLine(shoulderDartYScaled , (document.scaledfullLengthBack - (sideLength * document.scale)),shoulderDartXScaled,((dartPlacement + (backDartIntake / 2))  * document.scale), 3 * document.scale))
+// Offset my axis point by the point at which the line starts on my grid at the shoulder
+offsetShoulderDartApexY = shoulderDartYScaled  + shoulderDartApexY 
+console.log("Y: " , shoulderDartApexY)
+
+
 
 //Calculate shoulder dart using x,y coordinates of bottom dart apex and shoulder dart starting point
-shoulderDartRise = shoulderDartYScaled - (document.scaledfullLengthBack - (sideLength * document.scale));
-console.log(shoulderDartRise/20)
-shoulderDartRun = shoulderDartXScaled - ((dartPlacement + (backDartIntake / 2))  * document.scale);
-console.log(shoulderDartRun/20)
+// shoulderDartRise = shoulderDartYScaled - (document.scaledfullLengthBack - (sideLength * document.scale));
+// console.log(shoulderDartRise/20)
+// shoulderDartRun = shoulderDartXScaled - ((dartPlacement + (backDartIntake / 2))  * document.scale);
+// console.log(shoulderDartRun/20)
 
-lengthOfDartAligmentLine = pythagoreanAAndB(shoulderDartRise,shoulderDartRun);
-console.log(lengthOfDartAligmentLine/20)
+// lengthOfDartAligmentLine = pythagoreanAAndB(shoulderDartRise,shoulderDartRun);
+// console.log(lengthOfDartAligmentLine/20)
 
 
 // set up pen and set colors for temporary lines
@@ -145,7 +177,6 @@ penBack.lineTo((document.scaledBackAcrossShoulder), 100); // square off c
 penBack.moveTo(0, (document.scaledfullLengthBack)); 
 penBack.lineTo(document.scaledBackArc, (document.scaledfullLengthBack)); // b to e
 penBack.lineTo(document.scaledBackArc, 60) // square up from e
-
 penBack.moveTo(document.scaledDartPlacement, (document.scaledfullLengthBack)); 
 penBack.fillRect(document.scaledDartPlacement, document.scaledfullLengthBack, 3, 3); // dart placement
 
@@ -161,25 +192,18 @@ shoulderDartXScaled
 penBack.fillRect(shoulderDartXScaled + scaledBackNeck , shoulderDartYScaled, 3, 3); // center of shoulder dart
 penBack.moveTo(shoulderDartXScaled+ scaledBackNeck, shoulderDartYScaled);
 penBack.lineTo((dartPlacement + (backDartIntake / 2))  * document.scale, (document.scaledfullLengthBack - (sideLength * document.scale))); // point 0
+penBack.fillRect(offsetShoulderDartApexX, offsetShoulderDartApexY, 3 , 3) // Point of shoulder dart apex
 
 
-// WAIST ARC *********************************************************************
-penBack.fillRect(((waistArcBack + backDartIntake + 0.24) * document.scale) , (document.scaledfullLengthBack + (0.1875 * document.scale)), 3, 3); // point m - waist arc with dart and ease as well as 3/16 inch added to y
-
-
-// NEEDS NOTE
-penBack.fillRect(0, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset, 3, 3); // n
-penBack.moveTo(0, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset);
-penBack.lineTo((acrossBack + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); //to point O
-
-
-//SHOULDER ***************************************************************
+//SHOULDER AT NECK ***************************************************************
 penBack.fillRect(scaledBackNeck, 0, 3, 3) // point f
 
 
 // // armhole curve needs to be calibrated
 // penBack.moveTo((document.scaledBackAcrossShoulder), (document.scaledOffset));
 // penBack.quadraticCurveTo(130, backAcrossShoulder * document.scale ,document.scaledBackArc, (backAcrossShoulder * document.scale)); // needs to be calibrated
+penBack.moveTo(0, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset);
+penBack.lineTo((acrossBack + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); // across back - to armhole
 
 
 // SHOULDER SEAM ***************************************************
@@ -215,11 +239,14 @@ penFinalBack.lineTo(+0.5, (((fullLengthBack - centerBack) -0.375)*document.scale
 
 
 
-// DART LEGS ***************************************************************
+// WAIST DART LEGS ***************************************************************
 penFinalBack.moveTo(0, document.scaledfullLengthBack);
 penFinalBack.lineTo(dartPlacement * document.scale, document.scaledfullLengthBack + (0.125 * document.scale)); // line to i
 penFinalBack.lineTo((dartPlacement + (backDartIntake / 2))  * document.scale, (document.scaledfullLengthBack - (sideLength * document.scale))); // point 0
 penFinalBack.lineTo((dartPlacement + backDartIntake)  * document.scale, document.scaledfullLengthBack + (0.125 * document.scale)); // point k
+
+// WAIST ARC *********************************************************************
+penFinalBack.moveTo((dartPlacement + backDartIntake)  * document.scale, document.scaledfullLengthBack + (0.125 * document.scale)); // point k
 penFinalBack.lineTo(((waistArcBack + backDartIntake + 0.24) * document.scale) , (document.scaledfullLengthBack + (0.1875 * document.scale))); // point m - waist arc with dart and ease
 
 
