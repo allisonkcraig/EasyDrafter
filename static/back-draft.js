@@ -69,7 +69,6 @@ document.findAxisForPointOnLine = function(x1, x2, y1, y2, pixelsFromPoint1) {
 	return axisFromOrigin
 }
 
-var y = document.findAxisForPointOnLine(2,1,2,1,.5)  
 
 // basic measurements
 var bust = 36.00;
@@ -121,8 +120,14 @@ console.log(pointHXScaled);
 console.log(pointHYScaled);
 
 // Calculate coordinates of shoulder dart along shoulder seam 
-shoulderDartXScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
-shoulderDartYScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
+var shoulderDartXScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
+var shoulderDartYScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
+// Calculate points of shoulder dart along shoulder seam 
+var shoulderDartLeg2XScaled = document.locatePointOnC(((backShoulderLength / 2 + 0.25) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
+var shoulderDartLeg2YScaled  = document.locatePointOnC(((backShoulderLength / 2 ) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
+// Calculate points of shoulder dart along shoulder seam 
+var shoulderDartLeg1XScaled = document.locatePointOnC(((backShoulderLength / 2 - 0.25) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
+var shoulderDartLeg1YScaled  = document.locatePointOnC(((backShoulderLength / 2 - 0.375) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
 
 //Calculate point for shoulder dart along line
 //Set up function as follows: (axisWanted1, axisWanted2, secondAxis1, secondAxis2, distance to travel)
@@ -192,7 +197,12 @@ shoulderDartXScaled
 penBack.fillRect(shoulderDartXScaled + scaledBackNeck , shoulderDartYScaled, 3, 3); // center of shoulder dart
 penBack.moveTo(shoulderDartXScaled+ scaledBackNeck, shoulderDartYScaled);
 penBack.lineTo((dartPlacement + (backDartIntake / 2))  * document.scale, (document.scaledfullLengthBack - (sideLength * document.scale))); // point 0
-penBack.fillRect(offsetShoulderDartApexX, offsetShoulderDartApexY, 3 , 3) // Point of shoulder dart apex
+// penBack.fillRect(offsetShoulderDartApexX, offsetShoulderDartApexY, 3 , 3) // Point of shoulder dart apex
+
+penBack.moveTo(shoulderDartLeg1XScaled + scaledBackNeck, shoulderDartLeg1YScaled)
+
+penBack.lineTo(offsetShoulderDartApexX, offsetShoulderDartApexY);
+penBack.lineTo(shoulderDartLeg2XScaled + scaledBackNeck, shoulderDartLeg2YScaled);
 
 
 //SHOULDER AT NECK ***************************************************************
@@ -234,9 +244,12 @@ penFinalBack.lineTo(+0.5, (((fullLengthBack - centerBack) -0.375)*document.scale
 
 
 // SHOULDER SEAM ***************************************************
-// penFinalBack.moveTo(scaledBackNeck, 0) // point f
-// penFinalBack.lineTo(pointHXScaled, pointHYScaled) // point h
+penBack.moveTo(scaledBackNeck, 0);
+penBack.lineTo(shoulderDartLeg1XScaled + scaledBackNeck, shoulderDartLeg1YScaled);
 
+penBack.lineTo(offsetShoulderDartApexX, offsetShoulderDartApexY);
+penBack.lineTo(shoulderDartLeg2XScaled + scaledBackNeck, shoulderDartLeg2YScaled);
+penBack.lineTo(pointHXScaled, pointHYScaled)
 
 
 // WAIST DART LEGS ***************************************************************
