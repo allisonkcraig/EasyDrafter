@@ -47,6 +47,9 @@
 	font-family: "Raleway";
 }
 
+.navbar {
+	font-family: "Raleway";
+}
 
 #beta {
 	color: #EA8C86;
@@ -94,4 +97,8 @@ footer {
 
 .bottom-button {
 	margin-bottom: 2em;
+}
+
+.raleway {
+	font-family: "Raleway";
 }

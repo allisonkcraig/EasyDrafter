@@ -21,11 +21,11 @@ def home_page():
 
 
 
-@app.route('/measure')
+@app.route('/start')
 def measure_page():
     """Allow input of measurements for pattern draft"""
 
-    return render_template("measure.html")
+    return render_template("basic-measure-page.html")
 
 @app.route('/pattern', methods=["POST"])
 def pattern_page():
