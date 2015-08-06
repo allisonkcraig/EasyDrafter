@@ -1,9 +1,9 @@
 $( document ).ready(function() {
 	
 // establish drafting table and document.pen
-var draftingTable = document.getElementById("drafting-table-front");
+var draftingTableFront = document.getElementById("drafting-table-front");
 
-var gridPenFront = draftingTable.getContext("2d");
+var gridPenFront = draftingTableFront.getContext("2d");
 
 // y axis grid lines
 for (var y = 0.5; y < 461; y += 20) {
@@ -26,7 +26,7 @@ for (var x = 0.5; x < 601; x += 20) {
 
 // START TEMPORARY LINES ////////////////////////////////////////////////////////
 // set up pen and set colors for temporary lines
-document.pen = draftingTable.getContext("2d");
+document.pen = draftingTableFront.getContext("2d");
 document.pen.fillStyle="#83AF9B";
 document.pen.strokeStyle = "#EA8C86";
 
@@ -100,7 +100,7 @@ document.pen.stroke();
 
 
 // START FINAL LINES ////////////////////////////////////////////////////////
-document.penFinalFront = draftingTable.getContext("2d");
+document.penFinalFront = draftingTableFront.getContext("2d");
 document.penFinalFront.fillStyle= "black";
 document.penFinalFront.strokeStyle = "black";
 

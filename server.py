@@ -33,6 +33,18 @@ def pattern_page():
 
 	return render_template("canvas.html")
 
+@app.route('/front-draft')
+def front_draft_page():
+    """Save measurement chart and image of pattern to db"""
+
+    return render_template("front-draft.html")
+
+@app.route('/back-draft')
+def back_draft_page():
+    """Save measurement chart and image of pattern to db"""
+
+    return render_template("back-draft.html")
+
 @app.route('/print')
 def print_pattern():
     """Query image of pattern and scale up to print via AJAX"""

@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	
 // establish drafting table and pen
-document.draftingTable = document.getElementById("drafting-table-back");
-document.gridPenBack = document.draftingTable.getContext("2d");
+document.draftingTableBack = document.getElementById("drafting-table-back");
+document.gridPenBack = document.draftingTableBack.getContext("2d");
 
 
 // y axis grid lines
@@ -27,7 +27,7 @@ for (var x = 0.5; x < 601; x += 20) {
 
 // START TEMPORARY LINES ////////////////////////////////////////////////////////
 // set up pen and set colors for temporary lines
-document.penBack = document.draftingTable.getContext("2d");
+document.penBack = document.draftingTableBack.getContext("2d");
 document.penBack.fillStyle="#83AF9B";
 document.penBack.strokeStyle = "#EA8C86";
 
@@ -84,7 +84,7 @@ document.penBack.stroke();
 
 
 // START FINAL LINES ////////////////////////////////////////////////////////
-document.penFinalBack = document.draftingTable.getContext("2d");
+document.penFinalBack = document.draftingTableBack.getContext("2d");
 document.penFinalBack.fillStyle= "black";
 document.penFinalBack.strokeStyle = "black";
 
@@ -145,7 +145,7 @@ document.penFinalBack.stroke();
 
 // create an image from the canvas
 
-// var blockURLBack = document.draftingTable.toDataURL();
+// var blockURLBack = document.draftingTableBack.toDataURL();
 
 // console.log(blockURLBack)
 });
