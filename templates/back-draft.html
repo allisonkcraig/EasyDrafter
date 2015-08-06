@@ -10,6 +10,19 @@
 	<script src='static/save-block.js'></script>
 {% endblock %}
 
+full-length-back
+center-front
+back-shoulder-slope
+across-back
+back-shoulder-length 
+back-arc 
+waist-arc-back
+dart-placement 
+back-neck 
+back-across-shoulder
+side-length 
+back-dart-intake 
+
 
 {% block content %}
 
@@ -24,78 +37,117 @@
 	<div class="col-md-4 col-md-offset-2">
 	<div id="measurement-table">
 			<center><h3 class="heading-titles instructions">Change Measurements Below in Inches</h3></center>
-			<form  action="/pattern" method="POST" class="form-horizontal">
+			<form  action="/pattern" class="form-horizontal">
 				<div class="row">
 
 					<div class="form-group">
-						<label for="full-length" class="col-sm-5 control-label">Full Length</label>
+						<label for="full-length-back" class="col-sm-5 control-label">Full Length</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="full-length" placeholder='{{ bust_input }}' value='{{ bust_input }}'>
+							<input type="number" class="form-control" name="full-length-back" placeholder="18.00" value="18.00">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="center-front" class="col-sm-5 control-label">Center Front</label>
+						<label for="center-back" class="col-sm-5 control-label">Center Back</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="center-front" placeholder="inches">
+							<input type="number" class="form-control" name="center-back" placeholder="17.25" value="17.25">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="inputWaist" class="col-sm-5 control-label">Full Length</label>
+						<label for="back-shoulder-slope" class="col-sm-5 control-label">ShoulderSlope</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="inputWaist" placeholder="inches">
+							<input type="number" class="form-control" name="back-shoulder-slope" placeholder="17.25" value="17.25">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
+						<label for="across-back" class="col-sm-5 control-label">Across Back</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="shoulder-slope" placeholder="inches">
+							<input type="number" class="form-control" name="across-back" placeholder="7" value="7">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="strap" class="col-sm-5 control-label">Strap</label>
+						<label for="back-shoulder-length" class="col-sm-5 control-label">Back Shoulder Length</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="strap" placeholder="inches">
+							<input type="number" class="form-control" name="back-shoulder-length" placeholder="5.5" value="5.5">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="full-length" class="col-sm-5 control-label">Full Length</label>
+						<label for="back-arc" class="col-sm-5 control-label">Back Arc</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="full-length" placeholder="inches">
+							<input type="number" class="form-control" name="back-arc" placeholder="7.5" value="7.5">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="center-front" class="col-sm-5 control-label">Center Front</label>
+						<label for="waist-arc-back" class="col-sm-5 control-label">Waist Arc Back</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="center-front" placeholder="inches">
+							<input type="number" class="form-control" name="waist-arc-back" placeholder="6.25" value="6.25">
+						</div>
+					</div>
+
+			<!-- 		<div class="form-group">
+						<label for="dart-placement" class="col-sm-5 control-label">Dart Placement</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="dart-placement" placeholder="3.25" value="3.25">
+						</div>
+					</div> -->
+
+					<div class="form-group">
+						<label for="back-neck" class="col-sm-5 control-label">Back Neck</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="back-neck" placeholder="3.25" value="3.25">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="inputWaist" class="col-sm-5 control-label">Full Length</label>
+						<label for="back-across-shoulder" class="col-sm-5 control-label">Back Across Shoulder</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="inputWaist" placeholder="inches">
-						</div>
+							<input type="number" class="form-control" name="back-across-shoulder" placeholder="7.63" value="7.63">
+						</div> 
 					</div>
 
 					<div class="form-group">
-						<label for="shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
+						<label for="back-dart-intake" class="col-sm-5 control-label">Back Dart Intake</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="shoulder-slope" placeholder="inches">
-						</div>
+							<input type="number" class="form-control" name="back-dart-intake" placeholder="1.25" value="1.25">
+						</div> 
 					</div>
 
-					<div class="form-group">
-						<label for="strap" class="col-sm-5 control-label">Strap</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="strap" placeholder="inches">
-						</div>
-					</div>
+					 
+
+    front_shoulder_slope_input = request.args.get("front-shoulder-slope")
+    strap_input = request.args.get("strap")
+    front_across_shoulder_input = request.args.get("front-across-shoulder")
+    across_chest_input = request.args.get("across-chest")
+    bust_depth_input = request.args.get("bust-depth")
+    shoulder_length_input = request.args.get("shoulder-length")
+    bust_arc_input = request.args.get("bust-arc")
+    bust_span_input = request.args.get("bust-span")
+    waist_arc_input = request.args.get("waist-arc")
+    dart_placement_input = request.args.get("dart-placement")
+    side_length_input = request.args.get("side-length")
+
+					<input type="hidden" name="bust" value="{{ bust_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+
+					<input type="hidden" name="full-length" value="{{ full_length_input }}">
+					<input type="hidden" name="center-front" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ center_front_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+					<input type="hidden" name="waist" value="{{ waist_input }}">
+
 
 					<div class="form-group">
 						<div class="col-md-4 col-md-offset-5">
@@ -107,20 +159,4 @@
 		</div>
 	</div>
 </div>
-
-	{{ bust_input }}<br>
-							{{ waist_input }}<br>              
-                            {{full_length_input}}<br>
-                            {{center_front_input}}<br>
-                            {{front_shoulder_slope_input}}<br>
-                            {{strap_input}}<br>
-                            {{front_across_shoulder_input}}<br>
-                            {{across_chest_input}}<br>
-                            {{bust_depth_input}}<br>
-                            {{shoulder_length_input}}<br>
-                            {{bust_arc_input}}<br>
-                            {{bust_span_input}}<br>
-                            {{waist_arc_input}}<br>
-                            {{dart_placement_input}}<br>
-                            {{side_length_input}}<br>
 {% endblock %}

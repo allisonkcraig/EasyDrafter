@@ -68,7 +68,6 @@ document.acrossBack = 7;
 document.shoulderLength = 5;
 document.backShoulderLength = document.shoulderLength + 0.5 // added dart intake for back dart
 document.backArc = 9 + 0.75;
-document.acrossBack = 7.00;
 document.waistArcBack = 6.25;
 document.dartPlacement = 3.25;
 document.backNeck = 3.00 - 0.125;
