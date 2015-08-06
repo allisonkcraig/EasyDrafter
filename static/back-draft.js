@@ -220,7 +220,7 @@ penFinalBack.beginPath()
 penFinalBack.moveTo(0, 0);
 
 
-// CENTERFRONT 
+// CENTERFRONT ***************************************************
 penFinalBack.moveTo(0, (document.scaledFullLength), 3, 3); // b
 penFinalBack.lineTo(+0.5, (((fullLengthBack - centerBack) -0.375)*document.scale)); // move to neckline, ofset half a pixel so it shows on the canvas better
 
@@ -239,18 +239,21 @@ var bArmControlY = ((offSetSideSeamRiseScaled / document.scale) / 0.986) * docum
 penFinalBack.moveTo(pointHXScaled, pointHYScaled); //starting point of curve
 penFinalBack.quadraticCurveTo(bArmControlX ,bArmControlY ,(backArc * document.scale), offSetSideSeamRiseScaled); // needs to be calibrated
 
+
 // NECKLINE ***************************************************************
-var bNeckControlX = scaledBackNeck
-var bNeckControlY = (((fullLengthBack - centerBack) - 0.375)*document.scale)
+var bNeckControlX = scaledBackNeck;
+var bNeckControlY = (((fullLengthBack - centerBack) - 0.375)*document.scale);
 penFinalBack.moveTo(scaledBackNeck, 0); //starting point of curve
 penFinalBack.quadraticCurveTo(bNeckControlX ,bNeckControlY ,(scaledBackNeck / 2), (((fullLengthBack - centerBack) - 0.375)*document.scale)); // needs to be calibrated
-penFinalBack.lineTo(0, (((fullLengthBack - centerBack) - 0.375)*document.scale))
+penFinalBack.lineTo(0, (((fullLengthBack - centerBack) - 0.375)*document.scale));
+
 
 // WAIST DART LEGS ***************************************************************
 penFinalBack.moveTo(0, document.scaledfullLengthBack);
 penFinalBack.lineTo(dartPlacement * document.scale, document.scaledfullLengthBack + (0.125 * document.scale)); // line to i
 penFinalBack.lineTo((dartPlacement + (backDartIntake / 2))  * document.scale, (document.scaledfullLengthBack - (sideLength * document.scale))); // point 0
 penFinalBack.lineTo((dartPlacement + backDartIntake)  * document.scale, document.scaledfullLengthBack + (0.125 * document.scale)); // point k
+
 
 // WAIST ARC *********************************************************************
 penFinalBack.moveTo((dartPlacement + backDartIntake)  * document.scale, document.scaledfullLengthBack + (0.125 * document.scale)); // point k

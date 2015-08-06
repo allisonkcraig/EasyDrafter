@@ -34,7 +34,7 @@ var pythagoreanAAndB = function(a, b) {
 	return sideC
 };
 
-//function to find point h
+// function to find point h
 var locatePointOnC = function(distanceOnC, fullSideX, fullSideC) {
 	var x = distanceOnC * fullSideX;
 	return x / fullSideC;
@@ -69,13 +69,13 @@ var shoulderLengthRun = pythagoreanCAndA(shoulderLength,(fullLength - frontShoul
 var strapRise = pythagoreanCAndA((strap + 0.375), ((bustArc +0.25)- shoulderLengthRun));
 var sideLengthRise = pythagoreanCAndA(sideLength, 1.25)
 
-//calling functions for calulating point H
+// calling functions for calulating point H
 var pointHX = locatePointOnC(bustDepth, frontAcrossShoulder, frontShoulderSlope);
 var pointHY = locatePointOnC(bustDepth, frontShoulderSlopeRise, frontShoulderSlope);
 // console.log(pointHX);
 // console.log(pointHY);
 
-//Calculate distance and rise and run of second dart leg
+// Calculate distance and rise and run of second dart leg
 var waistRemaining = waistArc - dartPlacement // find the remaining waist needed
 var dartLegRise = fullLength - (strapRise  + sideLengthRise)
 var dartLegRun = (bustArc + 1.25 + 0.25) - dartPlacement
@@ -110,7 +110,7 @@ document.scaledPointHX = pointHX * document.scale;
 document.scaledPointHY = pointHY * document.scale;
 document.scaledOffset = (fullLength - frontShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
 
-//FULL LENGTH ***********************************************************
+// FULL LENGTH ***********************************************************
 pen.lineTo(0, (document.scaledFullLength)); // a to b
 pen.fillRect(0, (document.scaledFullLength), 3, 3); // b
 pen.moveTo(0, (((fullLength - centerFront) -0.375)*document.scale)); // move to neckline
@@ -143,14 +143,14 @@ pen.fillRect(document.scaledPointHX, (document.scaledOffset + document.scaledPoi
 pen.moveTo(0, (document.scaledOffset + document.scaledPointHY)) // point L
 
 
-//BUST POINT **************************************************************
+// BUST POINT **************************************************************
 pen.lineTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY)); // to point M (bust point)
 
 
-//DART LEGS ***************************************************************
+// DART LEGS ***************************************************************
 pen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
 pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
-//second dart
+// second dart
 pen.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY))
 pen.lineTo(dartX * document.scale, dartY * document.scale);// line to second dart leg
 
@@ -160,7 +160,7 @@ pen.moveTo(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * d
 pen.lineTo((acrossChest + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); //to point O
 
 
-//SHOULDER ***************************************************************
+// SHOULDER ***************************************************************
 pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)) // b to g
 pen.lineTo(((frontAcrossShoulder - shoulderLengthRun) * document.scale), 0); // g to i
 
@@ -194,7 +194,7 @@ penFinalFront.moveTo(0, (document.scaledFullLength), 3, 3); // b
 penFinalFront.lineTo(+0.5, (((fullLength - centerFront) -0.375)*document.scale)); // move to neckline, ofset half a pixel so it shows on the canvas better
 
 
-//DART LEGS ***************************************************************
+// DART LEGS ***************************************************************
 penFinalFront.moveTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
 penFinalFront.lineTo(document.scaledDartPlacement, (document.scaledFullLength)); // line to f
 penFinalFront.lineTo(0, (document.scaledFullLength))
@@ -202,15 +202,16 @@ penFinalFront.moveTo((bustSpan * document.scale), (document.scaledOffset + docum
 penFinalFront.lineTo(dartX * document.scale, dartY * document.scale);// line to second dart leg
 
 
-//WAIST SIDE OF DART ******************************************************
+
+// WAIST SIDE OF DART ******************************************************
 penFinalFront.lineTo(((bustArc + 1.5)* document.scale), ((strapRise * document.scale) + (sideLengthRise * document.scale)) )
 
 
-//SIDE SEAM ******************************************************
+// SIDE SEAM ******************************************************
 penFinalFront.lineTo( document.scaledBustArc, (strapRise * document.scale)) // i to j
 
 
-//SHOULDER ***************************************************************
+// SHOULDER ***************************************************************
 penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)); // b to g
 penFinalFront.lineTo(((frontAcrossShoulder - shoulderLengthRun) * document.scale), 0); // g to i
 
@@ -221,6 +222,13 @@ var controly = (strapRise / 0.886) * document.scale;
 penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
 penFinalFront.quadraticCurveTo(controlx ,controly ,document.scaledBustArc, (strapRise * document.scale)); // needs to be calibrated
 
+
+// NECKLINE ***************************************************************
+var bNeckControlX = scaledBackNeck;
+var bNeckControlY = (((fullLengthBack - centerBack) - 0.375)*document.scale);
+penFinalBack.moveTo(scaledBackNeck, 0); //starting point of curve
+penFinalBack.quadraticCurveTo(bNeckControlX ,bNeckControlY ,(scaledBackNeck / 2), (((fullLengthBack - centerBack) - 0.375)*document.scale)); // needs to be calibrated
+penFinalBack.lineTo(0, (((fullLengthBack - centerBack) - 0.375)*document.scale));
 
 
 // apply stroke to lines
