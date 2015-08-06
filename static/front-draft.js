@@ -202,7 +202,6 @@ penFinalFront.moveTo((bustSpan * document.scale), (document.scaledOffset + docum
 penFinalFront.lineTo(dartX * document.scale, dartY * document.scale);// line to second dart leg
 
 
-
 // WAIST SIDE OF DART ******************************************************
 penFinalFront.lineTo(((bustArc + 1.5)* document.scale), ((strapRise * document.scale) + (sideLengthRise * document.scale)) )
 
@@ -224,11 +223,11 @@ penFinalFront.quadraticCurveTo(controlx ,controly ,document.scaledBustArc, (stra
 
 
 // NECKLINE ***************************************************************
-var bNeckControlX = scaledBackNeck;
-var bNeckControlY = (((fullLengthBack - centerBack) - 0.375)*document.scale);
-penFinalBack.moveTo(scaledBackNeck, 0); //starting point of curve
-penFinalBack.quadraticCurveTo(bNeckControlX ,bNeckControlY ,(scaledBackNeck / 2), (((fullLengthBack - centerBack) - 0.375)*document.scale)); // needs to be calibrated
-penFinalBack.lineTo(0, (((fullLengthBack - centerBack) - 0.375)*document.scale));
+var fNeckControlX = (frontAcrossShoulder - shoulderLengthRun) * document.scale;
+var fNeckControlY = ((fullLength - centerFront) - 0.375)*document.scale;
+penFinalFront.moveTo((frontAcrossShoulder - shoulderLengthRun) * document.scale, 0); //starting point of curve
+penFinalFront.quadraticCurveTo(fNeckControlX ,fNeckControlY ,0, (((fullLength - centerFront) - 0.375)*document.scale)); // needs to be calibrated
+penFinalFront.lineTo(0, (((fullLength - centerFront) - 0.375)*document.scale));
 
 
 // apply stroke to lines
