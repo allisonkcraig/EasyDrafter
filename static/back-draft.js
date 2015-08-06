@@ -1,33 +1,33 @@
 $(document).ready(function() {
 	
 // establish drafting table and pen
-var draftingTable = document.getElementById("drafting-table-back");
-var gridPenBack = draftingTable.getContext("2d");
+document.draftingTable = document.getElementById("drafting-table-back");
+document.gridPenBack = document.draftingTable.getContext("2d");
 
 
 // y axis grid lines
 for (var y = 0.5; y < 461; y += 20) {
-	gridPenBack.beginPath();
-	gridPenBack.moveTo(0, y);
-	gridPenBack.lineTo(601, y);
-	gridPenBack.strokeStyle = "#E8E8EE";
-	gridPenBack.stroke();
+	document.gridPenBack.beginPath();
+	document.gridPenBack.moveTo(0, y);
+	document.gridPenBack.lineTo(601, y);
+	document.gridPenBack.strokeStyle = "#E8E8EE";
+	document.gridPenBack.stroke();
 	};
 
 
 // x axis grid lines
 for (var x = 0.5; x < 601; x += 20) {
-	gridPenBack.beginPath();
-	gridPenBack.strokeStyle = "#E8E8EE";
-	gridPenBack.moveTo(x, 0);
-	gridPenBack.lineTo(x, 601);
-	gridPenBack.stroke();
+	document.gridPenBack.beginPath();
+	document.gridPenBack.strokeStyle = "#E8E8EE";
+	document.gridPenBack.moveTo(x, 0);
+	document.gridPenBack.lineTo(x, 601);
+	document.gridPenBack.stroke();
 	};
 
 
 // START TEMPORARY LINES ////////////////////////////////////////////////////////
 // set up pen and set colors for temporary lines
-document.penBack = draftingTable.getContext("2d");
+document.penBack = document.draftingTable.getContext("2d");
 document.penBack.fillStyle="#83AF9B";
 document.penBack.strokeStyle = "#EA8C86";
 
@@ -84,7 +84,7 @@ document.penBack.stroke();
 
 
 // START FINAL LINES ////////////////////////////////////////////////////////
-document.penFinalBack = draftingTable.getContext("2d");
+document.penFinalBack = document.draftingTable.getContext("2d");
 document.penFinalBack.fillStyle= "black";
 document.penFinalBack.strokeStyle = "black";
 
@@ -145,7 +145,7 @@ document.penFinalBack.stroke();
 
 // create an image from the canvas
 
-// var blockURLBack = draftingTable.toDataURL();
+// var blockURLBack = document.draftingTable.toDataURL();
 
 // console.log(blockURLBack)
 });
