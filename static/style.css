@@ -55,9 +55,6 @@
 	margin-top: 0px;
 }
 
-body {
-	background-image: url("static/img/roughcloth.png");
-}
 
 footer {
 	font-family: "Raleway";
@@ -87,6 +84,10 @@ footer {
 	height: 20in;
 }
 
-#drafting-table-front {
-	height: 500px;
+.drafting-table-front {
+	height: 30em;
+}
+
+.drafting-table-back {
+	height: 30em;
 }
