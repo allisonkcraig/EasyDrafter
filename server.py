@@ -23,7 +23,7 @@ def home_page():
 
 @app.route('/start')
 def measure_page():
-    """Allow input of measurements for pattern draft"""
+    """Allow input of measurements to find side template pattern"""
 
     return render_template("basic-measure-page.html")
 
@@ -35,15 +35,48 @@ def pattern_page():
 
 @app.route('/front-draft')
 def front_draft_page():
-    """Save measurement chart and image of pattern to db"""
-
-    return render_template("front-draft.html")
+    """Use template measurements to draft a frotn block and allow users to change block to fit them using inputs"""
+    bust_input = request.args.get("bust")
+    waist_input = request.args.get("waist")
+    return render_template("front-draft.html", bust_input=bust_input, waist_input=waist_input)
 
 @app.route('/back-draft')
 def back_draft_page():
     """Save measurement chart and image of pattern to db"""
+    bust_input = request.args.get("bust")
+    waist_input = request.args.get("waist")
+    full_length_input = request.args.get("full-length")
+    center_front_input = request.args.get("center-front")
+    front_shoulder_slope_input = request.args.get("front-shoulder-slope")
+    strap_input = request.args.get("strap")
+    front_across_shoulder_input = request.args.get("front-across-shoulder")
+    across_chest_input = request.args.get("across-chest")
+    bust_depth_input = request.args.get("bust-depth")
+    shoulder_length_input = request.args.get("shoulder-length")
+    bust_arc_input = request.args.get("bust-arc")
+    bust_span_input = request.args.get("bust-span")
+    waist_arc_input = request.args.get("waist-arc")
+    dart_placement_input = request.args.get("dart-placement")
+    side_length_input = request.args.get("side-length")
 
-    return render_template("back-draft.html")
+
+    return render_template("back-draft.html", 
+                            bust_input=bust_input, 
+                            waist_input=waist_input,
+                            full_length_input=full_length_input,
+                            center_front_input=center_front_input,
+                            front_shoulder_slope_input=front_shoulder_slope_input,
+                            strap_input=strap_input,
+                            front_across_shoulder_input=front_across_shoulder_input,
+                            across_chest_input=across_chest_input,
+                            bust_depth_input=bust_depth_input,
+                            shoulder_length_input=shoulder_length_input,
+                            bust_arc_input=bust_arc_input,
+                            bust_span_input=bust_span_input,
+                            waist_arc_input=waist_arc_input,
+                            dart_placement_input=dart_placement_input,
+                            side_length_input=side_length_input
+                            )
 
 @app.route('/print')
 def print_pattern():

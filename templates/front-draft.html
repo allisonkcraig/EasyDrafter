@@ -8,104 +8,127 @@
 {% endblock %}
 
 
+
+
 {% block content %}
 
 <div class="container">
-	
-	<div class="row">
+		<div class="row">
 		<div class="col-md-4">
-			<h1 class="heading-titles">Front</h1>
+			<h1 class="heading-titles table-name">Front</h1>
 			<div class="table">
-				<canvas id="drafting-table-front" width="461" height="461"></canvas>
+				<canvas id="drafting-table-front" class="drafting-table" width="461" height="461"></canvas>
 			</div>
 		</div>
+			<div class="col-md-4 col-md-offset-2">
+				<div id="measurement-table">
+				<center><h3 class="heading-titles instructions">Change Measurements Below in Inches</h3></center>
+				<form  action="/back-draft" class="form-horizontal">
+					<div class="row">
+						<div class="form-group">
+							<label for="full-length" class="col-sm-5 control-label">Full Length</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="full-length" placeholder="17.75" value='17.75'>
+							</div>
+						</div>
 
-		<div class="col-md-4 col-md-offset-2">
-			<div id="measurement-table">
-			<center><h3 class="heading-titles">Change Measurements Below in Inches</h3></center>
-			<form  action="/back-draft" class="form-horizontal">
-				<div class="row">
-					<div class="form-group">
-						<label for="full-length" class="col-sm-5 control-label">Full Length</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="full-length" placeholder="inches">
+						<div class="form-group">
+							<label for="center-front" class="col-sm-5 control-label">Center Front</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="center-front" placeholder="15.00" value="15.00">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="center-front" class="col-sm-5 control-label">Center Front</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="center-front" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputWaist" class="col-sm-5 control-label">Full Length</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="inputWaist" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="shoulder-slope" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="strap" class="col-sm-5 control-label">Strap</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="strap" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="full-length" class="col-sm-5 control-label">Full Length</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="full-length" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="center-front" class="col-sm-5 control-label">Center Front</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="center-front" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputWaist" class="col-sm-5 control-label">Full Length</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="inputWaist" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="shoulder-slope" placeholder="inches">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="strap" class="col-sm-5 control-label">Strap</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" name="strap" placeholder="inches">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<div class="col-md-4 col-md-offset-5">
-							<button type="submit" class="btn btn-default">NEXT</button>
+						<div class="form-group">
+							<label for="front-shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="front-shoulder-slope" placeholder="17.25" value="17.25">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="strap" class="col-sm-5 control-label">Strap</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="strap" placeholder="10.00" value="10.00">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="front-across-shoulder" class="col-sm-5 control-label">Across Shoulder</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="front-across-shoulder" placeholder="7.50" value="7.50">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="across-chest" class="col-sm-5 control-label">Across Chest</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="across-chest" placeholder="6.37" value="6.37">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="bust-depth" class="col-sm-5 control-label">Bust Depth</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="bust-depth" placeholder="9.25" value="9.25">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="shoulder-length" class="col-sm-5 control-label">Shoulder Length</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="shoulder-length" placeholder="5.00" value="5.00">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="bust-arc" class="col-sm-5 control-label">Bust Arc</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="bust-arc" placeholder="9.75" value="9.75">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="bust-span" class="col-sm-5 control-label">Bust Span</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="bust-span" placeholder="3.75" value="3.75">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="waist-arc" class="col-sm-5 control-label">Waist Arc</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="waist-arc" placeholder="6.86" value="6.86">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="dart-placement" class="col-sm-5 control-label">Dart Placement</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="dart-placement" placeholder="3.25" value="3.25">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="side-length" class="col-sm-5 control-label">Side Length</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" name="side-length" placeholder="8.50" value="8.50">
+							</div>
+						</div>
+
+						<input type="hidden" name="bust" value="{{ bust_input }}">
+						<input type="hidden" name="waist" value="{{ waist_input }}">
+
+						<div class="form-group">
+							<div class="col-md-4 col-md-offset-5">
+								<button type="submit" class="btn btn-default">NEXT</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
-
-
-		</div>
-
 	</div>
-
-	<div class="row">
-		<div class="col-md-4 col-md-offset-2 bottom-button">
-			<button id="submit-front" type="submit" class="btn btn-default">DOWNLOAD</button>
-		</div>
-	</div>
-
 </div>
 
 {% endblock %}

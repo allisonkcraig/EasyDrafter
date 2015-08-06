@@ -1,8 +1,18 @@
-#drafting-table {
-	margin: auto;
-    border:3px solid #1E697B;
-    padding: 10px;
-    margin-left: 0px;
+body {
+	margin-bottom: 2em;
+}
+
+.container {
+	margin-top: -2em;
+}
+
+.drafting-table {
+	margin-top: 5em;
+ /*   border:3px solid #1E697B;*/
+/*    padding: 10px;*/
+/*    margin-left: 0px;*/
+    position: fixed;
+
 }
 
 
@@ -20,7 +30,11 @@
 .heading-titles {
 	font-family: 'Pacifico', cursive;
 	color: #EA8C86;
-	margin-bottom: 1em;
+	margin-bottom: 0.5em;
+}
+
+.table-name {
+	position: fixed;
 }
 
 #corner-logo{
@@ -95,10 +109,12 @@ footer {
 	height: 30em;
 }
 
-.bottom-button {
-	margin-bottom: 2em;
-}
 
 .raleway {
 	font-family: "Raleway";
+}
+
+.instructions {
+	font-size: 1.5em;
+	margin-bottom: 1em;
 }

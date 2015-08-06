@@ -68,10 +68,10 @@ class Measurement_Chart(db.Model):
     user = db.relationship("User",
                            backref=db.backref("Measurement_Charts"))
 
-    # def __repr__(self):
-    #     """Provide helpful representation when printed."""
+    def __repr__(self):
+        """Provide helpful representation when printed."""
 
-    #     return "<Chart Id= %s Release Date= user_id>" % (self.chart_id, self.released_at)
+        return "<Chart Id= %s Release Date= %s>" % (self.chart_id, self.user_id)
 
 
     # TODO EXPLAND THIS FUNCTION TO ADD MORE MEASUREMENTS
