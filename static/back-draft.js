@@ -122,36 +122,25 @@ console.log(pointHYScaled);
 // Calculate coordinates of shoulder dart along shoulder seam 
 var shoulderDartXScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
 var shoulderDartYScaled = document.locatePointOnC(((backShoulderLength / 2) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
-// Calculate points of shoulder dart along shoulder seam 
+	// Calculate points of shoulder dart along shoulder seam 
 var shoulderDartLeg2XScaled = document.locatePointOnC(((backShoulderLength / 2 + 0.25) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
 var shoulderDartLeg2YScaled  = document.locatePointOnC(((backShoulderLength / 2 ) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
-// Calculate points of shoulder dart along shoulder seam 
+	// Calculate points of shoulder dart along shoulder seam 
 var shoulderDartLeg1XScaled = document.locatePointOnC(((backShoulderLength / 2 - 0.25) * document.scale), pointHXScaled - scaledBackNeck, (backShoulderLength * document.scale));
 var shoulderDartLeg1YScaled  = document.locatePointOnC(((backShoulderLength / 2 - 0.375) * document.scale), pointHYScaled, (backShoulderLength * document.scale));
 
 //Calculate point for shoulder dart along line
-//Set up function as follows: (axisWanted1, axisWanted2, secondAxis1, secondAxis2, distance to travel)
+	//Set up function as follows: (axisWanted1, axisWanted2, secondAxis1, secondAxis2, distance to travel)
 shoulderDartApexX = document.findAxisForPointOnLine(shoulderDartXScaled,((dartPlacement + (backDartIntake / 2))  * document.scale), shoulderDartYScaled , (document.scaledfullLengthBack - (sideLength * document.scale)), 3 * document.scale)
 console.log("scaled back neck: ", scaledBackNeck)
 console.log("X: " , shoulderDartApexX)
-// Offset my axis point by the point at which the line starts on my grid at the shoulder
+	// Offset my axis point by the point at which the line starts on my grid at the shoulder
 offsetShoulderDartApexX = (shoulderDartXScaled + scaledBackNeck) + shoulderDartApexX 
 console.log("offset", offsetShoulderDartApexX)
 shoulderDartApexY = Math.abs(document.findAxisForPointOnLine(shoulderDartYScaled , (document.scaledfullLengthBack - (sideLength * document.scale)),shoulderDartXScaled,((dartPlacement + (backDartIntake / 2))  * document.scale), 3 * document.scale))
-// Offset my axis point by the point at which the line starts on my grid at the shoulder
+	// Offset my axis point by the point at which the line starts on my grid at the shoulder
 offsetShoulderDartApexY = shoulderDartYScaled  + shoulderDartApexY 
 console.log("Y: " , shoulderDartApexY)
-
-
-
-//Calculate shoulder dart using x,y coordinates of bottom dart apex and shoulder dart starting point
-// shoulderDartRise = shoulderDartYScaled - (document.scaledfullLengthBack - (sideLength * document.scale));
-// console.log(shoulderDartRise/20)
-// shoulderDartRun = shoulderDartXScaled - ((dartPlacement + (backDartIntake / 2))  * document.scale);
-// console.log(shoulderDartRun/20)
-
-// lengthOfDartAligmentLine = pythagoreanAAndB(shoulderDartRise,shoulderDartRun);
-// console.log(lengthOfDartAligmentLine/20)
 
 
 // set up pen and set colors for temporary lines
@@ -164,6 +153,7 @@ penBack.strokeStyle = "#EA8C86";
 penBack.beginPath()
 penBack.moveTo(0, 0);
 penBack.fillRect(0,0, 3, 3); // a
+
 
 //FULL LENGTH ***********************************************************
 penBack.lineTo(0, (document.scaledfullLengthBack)); // a to b
@@ -197,10 +187,8 @@ shoulderDartXScaled
 penBack.fillRect(shoulderDartXScaled + scaledBackNeck , shoulderDartYScaled, 3, 3); // center of shoulder dart
 penBack.moveTo(shoulderDartXScaled+ scaledBackNeck, shoulderDartYScaled);
 penBack.lineTo((dartPlacement + (backDartIntake / 2))  * document.scale, (document.scaledfullLengthBack - (sideLength * document.scale))); // point 0
-// penBack.fillRect(offsetShoulderDartApexX, offsetShoulderDartApexY, 3 , 3) // Point of shoulder dart apex
-
+	// Second Dart Leg
 penBack.moveTo(shoulderDartLeg1XScaled + scaledBackNeck, shoulderDartLeg1YScaled)
-
 penBack.lineTo(offsetShoulderDartApexX, offsetShoulderDartApexY);
 penBack.lineTo(shoulderDartLeg2XScaled + scaledBackNeck, shoulderDartLeg2YScaled);
 
@@ -209,19 +197,10 @@ penBack.lineTo(shoulderDartLeg2XScaled + scaledBackNeck, shoulderDartLeg2YScaled
 penBack.fillRect(scaledBackNeck, 0, 3, 3) // point f
 
 
-// // armhole curve needs to be calibrated
-// var startx = document.scaledBackAcrossShoulder;
-// var endy = backAcrossShoulder * document.scale;
-// penBack.moveTo((document.scaledBackAcrossShoulder), (document.scaledOffset));
-
-// penBack.quadraticCurveTo(startx, endy * document.scale ,document.scaledBackArc, (backAcrossShoulder * document.scale)); // needs to be calibrated
-// penBack.moveTo(0, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset);
-// penBack.lineTo((acrossBack + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLengthBack - centerBack) - 0.375 * document.scale))) /3 + document.scaledOffset); // across back - to armhole
-
-
 // SHOULDER SEAM ***************************************************
 penBack.moveTo(scaledBackNeck, 0) // point f
 penBack.lineTo(pointHXScaled, pointHYScaled) // point h
+
 
 // apply stroke to lines
 penBack.stroke();
@@ -247,23 +226,25 @@ penFinalBack.lineTo(+0.5, (((fullLengthBack - centerBack) -0.375)*document.scale
 
 
 // SHOULDER SEAM ***************************************************
-penBack.moveTo(scaledBackNeck, 0);
-penBack.lineTo(shoulderDartLeg1XScaled + scaledBackNeck, shoulderDartLeg1YScaled);
-
-penBack.lineTo(offsetShoulderDartApexX, offsetShoulderDartApexY);
-penBack.lineTo(shoulderDartLeg2XScaled + scaledBackNeck, shoulderDartLeg2YScaled);
-penBack.lineTo(pointHXScaled, pointHYScaled)
+penFinalBack.moveTo(scaledBackNeck, 0);
+penFinalBack.lineTo(shoulderDartLeg1XScaled + scaledBackNeck, shoulderDartLeg1YScaled);
+penFinalBack.lineTo(offsetShoulderDartApexX, offsetShoulderDartApexY);
+penFinalBack.lineTo(shoulderDartLeg2XScaled + scaledBackNeck, shoulderDartLeg2YScaled);
+penFinalBack.lineTo(pointHXScaled, pointHYScaled)
 
 
 // ARMHOLE ***************************************************************
-var controlx = (acrossChest * 0.725) * document.scale;
-var controly = (strapRise / 0.886) * document.scale;
+var bArmControlX = (acrossBack * 0.725) * document.scale;
+var bArmControlY = ((offSetSideSeamRiseScaled / document.scale) / 0.986) * document.scale;
+penFinalBack.moveTo(pointHXScaled, pointHYScaled); //starting point of curve
+penFinalBack.quadraticCurveTo(bArmControlX ,bArmControlY ,(backArc * document.scale), offSetSideSeamRiseScaled); // needs to be calibrated
 
-pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
-pen.quadraticCurveTo(controlx ,controly ,document.scaledBustArc, (strapRise * document.scale)); // needs to be calibrated
-console.log('StrapRise:', strapRise)
-// apply stroke to lines
-pen.stroke();
+// NECKLINE ***************************************************************
+var bNeckControlX = scaledBackNeck
+var bNeckControlY = (((fullLengthBack - centerBack) - 0.375)*document.scale)
+penFinalBack.moveTo(scaledBackNeck, 0); //starting point of curve
+penFinalBack.quadraticCurveTo(bNeckControlX ,bNeckControlY ,(scaledBackNeck / 2), (((fullLengthBack - centerBack) - 0.375)*document.scale)); // needs to be calibrated
+penFinalBack.lineTo(0, (((fullLengthBack - centerBack) - 0.375)*document.scale))
 
 // WAIST DART LEGS ***************************************************************
 penFinalBack.moveTo(0, document.scaledfullLengthBack);

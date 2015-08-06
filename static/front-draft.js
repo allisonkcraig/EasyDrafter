@@ -42,6 +42,7 @@ var locatePointOnC = function(distanceOnC, fullSideX, fullSideC) {
 
 
 // basic measurements
+var pattern_nickname = "Allison's-First-Pattern.png"
 var bust = 36.00;
 var waist = 26.00;
 var abdomen = 34.25;
@@ -112,14 +113,15 @@ document.scaledOffset = (fullLength - frontShoulderSlopeRise) * document.scale; 
 //FULL LENGTH ***********************************************************
 pen.lineTo(0, (document.scaledFullLength)); // a to b
 pen.fillRect(0, (document.scaledFullLength), 3, 3); // b
-
 pen.moveTo(0, (((fullLength - centerFront) -0.375)*document.scale)); // move to neckline
 pen.lineTo(80, (((fullLength - centerFront) -0.375)*document.scale)); // d squared off
+
 
 // ACROSS SHOULDER *******************************************************
 pen.moveTo(0, 0);
 pen.lineTo((document.scaledFrontAcrossShoulder), 0); // a to c
 pen.lineTo((document.scaledFrontAcrossShoulder), 100); // square off c
+
 
 // BUST ARC **************************************************************
 pen.moveTo(0, (document.scaledFullLength)); 
@@ -129,16 +131,17 @@ pen.lineTo(document.scaledBustArc, 60) // square up from e
 pen.moveTo(document.scaledDartPlacement, (document.scaledFullLength)); 
 pen.fillRect(document.scaledDartPlacement, document.scaledFullLength, 3, 3); // dart placement
 
+
 // SHOULDER STRAP *********************************************************
 pen.moveTo(0, document.scaledFullLength); 
 pen.lineTo(document.scaledFrontAcrossShoulder, document.scaledOffset) // b to g
 pen.fillRect(document.scaledFrontAcrossShoulder, document.scaledOffset, 3, 3); // g
 
+
 // BUST POINT *************************************************************
 pen.fillRect(document.scaledPointHX, (document.scaledOffset + document.scaledPointHY), 3, 3); //calculate point h
-
-
 pen.moveTo(0, (document.scaledOffset + document.scaledPointHY)) // point L
+
 
 //BUST POINT **************************************************************
 pen.lineTo((bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY)); // to point M (bust point)
@@ -156,23 +159,18 @@ pen.fillRect(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 *
 pen.moveTo(0, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset);
 pen.lineTo((acrossChest + 0.25) * document.scale, (((document.scaledPointHY)- ((fullLength - centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); //to point O
 
+
 //SHOULDER ***************************************************************
 pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)) // b to g
 pen.lineTo(((frontAcrossShoulder - shoulderLengthRun) * document.scale), 0); // g to i
 
-
+ 
+// HELPER LINES **********************************************************
 pen.lineTo( document.scaledBustArc, (strapRise * document.scale)) // i to j
 pen.lineTo(((bustArc + 1.5)* document.scale), ((strapRise * document.scale) + (sideLengthRise * document.scale)) )// j to k
 pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength))// line to f
 
 
-// ARMHOLE ***************************************************************
-var controlx = (acrossChest * 0.725) * document.scale;
-var controly = (strapRise / 0.886) * document.scale;
-
-pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
-pen.quadraticCurveTo(controlx ,controly ,document.scaledBustArc, (strapRise * document.scale)); // needs to be calibrated
-console.log('StrapRise:', strapRise)
 // apply stroke to lines
 pen.stroke();
 
@@ -217,6 +215,14 @@ penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffse
 penFinalFront.lineTo(((frontAcrossShoulder - shoulderLengthRun) * document.scale), 0); // g to i
 
 
+// ARMHOLE ***************************************************************
+var controlx = (acrossChest * 0.725) * document.scale;
+var controly = (strapRise / 0.886) * document.scale;
+penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
+penFinalFront.quadraticCurveTo(controlx ,controly ,document.scaledBustArc, (strapRise * document.scale)); // needs to be calibrated
+
+
+
 // apply stroke to lines
 penFinalFront.stroke();
 
@@ -227,8 +233,20 @@ var blockURL = draftingTable.toDataURL();
 var image = $('<img>').attr('src', blockURL);
 $('body').append(image);
 
-console.log(blockURL)
+// console.log(blockURL)
+// followed the tutorial at this link to use jQuery to save an image http://www.htmlgoodies.com/html5/markup/using-the-html5-download-attribute.html#fbid=69jJQ3N3m89
+ $('#save-front').on('click', function(){ 	
+ 	$('body').append($('<a>')       				//append a new '<a>' element to the DOM
+        .css('display', 'none')             		//hide the new '<a>' element
+          .attr('href', image.attr('src'))  		//make the image path the link href
+            .attr('download', pattern_nickname)     //keep the file name
+              .append(image.clone()))       		//copy the image into the new '<a>' element
+                .find('img:last()')         		//obtain a reference to the copied image
+                  .trigger( 'click' );
+	//image.attr('download', 'my_pattern.jpg').trigger('click');
 
+//  	$('save-front').attr('download', 'blockURL');
+ })
 // DECIDE HOW TO USE URL OBJECT TO EITHER SAVE OR VIEW IMAGE
 
 // var output = blockURL.replace(/^data:image\/(png|jpg);base64,/, "");
