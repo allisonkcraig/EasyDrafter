@@ -158,9 +158,9 @@ $(document).ready(function() {
 		// apply stroke to lines
 		document.penFinalFront.stroke();
 
-	}
+	};
 
-	document.draftFrontCanvas()
+	document.draftFrontCanvas();
 
 })
 
