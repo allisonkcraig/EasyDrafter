@@ -1,7 +1,8 @@
 $(document).ready(function() {
 	
 	document.draftBackCanvas = function(){
-		document.processBackForm()	
+		document.processBackForm();
+
 		// establish drafting table and pen
 		document.draftingTableBack = document.getElementById("drafting-table-back");
 		document.gridPenBack = document.draftingTableBack.getContext("2d");
@@ -30,12 +31,12 @@ $(document).ready(function() {
 		// START TEMPORARY LINES ////////////////////////////////////////////////////////
 		// set up pen and set colors for temporary lines
 		document.penBack = document.draftingTableBack.getContext("2d");
-		document.penBack.fillStyle="#83AF9B";
+		document.penBack.fillStyle = "#83AF9B";
 		document.penBack.strokeStyle = "#EA8C86";
 
 
 		// draw lines and dots ***********************************************************
-		document.penBack.beginPath()
+		document.penBack.beginPath();
 		document.penBack.moveTo(0, 0);
 
 
@@ -54,13 +55,13 @@ $(document).ready(function() {
 		// BACK ARC **************************************************************
 		document.penBack.moveTo(0, (document.scaledfullLengthBack)); 
 		document.penBack.lineTo(document.scaledBackArc, (document.scaledfullLengthBack)); // b to e
-		document.penBack.lineTo(document.scaledBackArc, 60) // square up from e
+		document.penBack.lineTo(document.scaledBackArc, 60); // square up from e
 		document.penBack.moveTo(document.scaledDartPlacement, (document.scaledfullLengthBack)); 
 
 
 		// SLOPE *********************************************************
 		document.penBack.moveTo(0, document.scaledfullLengthBack); 
-		document.penBack.lineTo(document.scaledBackAcrossShoulder, document.scaledOffset) // b to g
+		document.penBack.lineTo(document.scaledBackAcrossShoulder, document.scaledOffset); // b to g
 
 
 		// SHOULDER DART ***************************************************************
@@ -68,14 +69,14 @@ $(document).ready(function() {
 		document.penBack.moveTo(document.shoulderDartXScaled+ document.scaledBackNeck, document.shoulderDartYScaled);
 		document.penBack.lineTo((document.dartPlacement + (document.backDartIntake / 2))  * document.scale, (document.scaledfullLengthBack - (document.sideLength * document.scale))); // point 0
 			// Second Dart Leg
-		document.penBack.moveTo(document.shoulderDartLeg1XScaled + document.scaledBackNeck, document.shoulderDartLeg1YScaled)
+		document.penBack.moveTo(document.shoulderDartLeg1XScaled + document.scaledBackNeck, document.shoulderDartLeg1YScaled);
 		document.penBack.lineTo(document.offsetShoulderDartApexX, document.offsetShoulderDartApexY);
 		document.penBack.lineTo(document.shoulderDartLeg2XScaled + document.scaledBackNeck, document.shoulderDartLeg2YScaled);
 
 
 		// SHOULDER SEAM ***************************************************
-		document.penBack.moveTo(document.scaledBackNeck, 0) // point f
-		document.penBack.lineTo(document.pointHXScaled, document.pointHYScaled) // point h
+		document.penBack.moveTo(document.scaledBackNeck, 0); // point f
+		document.penBack.lineTo(document.pointHXScaled, document.pointHYScaled); // point h
 
 
 		// apply stroke to lines
@@ -92,7 +93,7 @@ $(document).ready(function() {
 
 
 		// instantiate lines and dots
-		document.penFinalBack.beginPath()
+		document.penFinalBack.beginPath();
 		document.penFinalBack.moveTo(0, 0);
 
 
@@ -106,7 +107,7 @@ $(document).ready(function() {
 		document.penFinalBack.lineTo(document.shoulderDartLeg1XScaled + document.scaledBackNeck, document.shoulderDartLeg1YScaled);
 		document.penFinalBack.lineTo(document.offsetShoulderDartApexX, document.offsetShoulderDartApexY);
 		document.penFinalBack.lineTo(document.shoulderDartLeg2XScaled + document.scaledBackNeck, document.shoulderDartLeg2YScaled);
-		document.penFinalBack.lineTo(document.pointHXScaled, document.pointHYScaled)
+		document.penFinalBack.lineTo(document.pointHXScaled, document.pointHYScaled);
 
 
 		// ARMHOLE ***************************************************************
@@ -147,6 +148,6 @@ $(document).ready(function() {
 	}
 
 
-document.draftBackCanvas()
+document.draftBackCanvas();
 
 });

@@ -10,19 +10,19 @@ $(document).ready(function(){
 	document.processFrontForm = function() {
 		document.scale = 20;
 		//INPUT measurments.
-		document.fullLength = $('form input[name="full-length"]').val();
-		document.centerFront = $('form input[name="center-front"]').val();
-		document.frontShoulderSlope = $('form input[name="front-shoulder-slope"]').val();
-		document.strap = $('form input[name="strap"]').val();
-		document.frontAcrossShoulder = $('form input[name="front-across-shoulder"]').val();
-		document.acrossChest = $('form input[name="across-chest"]').val();
-		document.bustDepth = $('form input[name="bust-depth"]').val();
-		document.shoulderLength = $('form input[name="shoulder-length"]').val();
-		document.bustArc = $('form input[name="bust-arc"]').val();
-		document.bustSpan = $('form input[name="bust-span"]').val();
-		document.waistArc = $('form input[name="waist-arc"]').val();
-		document.dartPlacement = $('form input[name="dart-placement"]').val();
-		document.sideLength = $('form input[name="side-length"]').val();
+		document.fullLength = parseFloat($('form input[name="full-length"]').val());
+		document.centerFront = parseFloat($('form input[name="center-front"]').val());
+		document.frontShoulderSlope = parseFloat($('form input[name="front-shoulder-slope"]').val());
+		document.strap = parseFloat($('form input[name="strap"]').val());
+		document.frontAcrossShoulder = parseFloat($('form input[name="front-across-shoulder"]').val());
+		document.acrossChest = parseFloat($('form input[name="across-chest"]').val());
+		document.bustDepth = parseFloat($('form input[name="bust-depth"]').val());
+		document.shoulderLength = parseFloat($('form input[name="shoulder-length"]').val());
+		document.bustArc = parseFloat($('form input[name="bust-arc"]').val());
+		document.bustSpan = parseFloat($('form input[name="bust-span"]').val());
+		document.waistArc = parseFloat($('form input[name="waist-arc"]').val());
+		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val());
+		document.sideLength = parseFloat($('form input[name="side-length"]').val());
 
 
 		// calculating rises and runs for right angle formulas
@@ -63,23 +63,24 @@ $(document).ready(function(){
 
 	document.processBackForm = function() {
 		document.scale = 20;
-		// INPUT measurements
-		document.fullLengthBack = $('form input[name="full-length-back"]').val();
-		document.centerBack = $('form input[name="center-back"]').val();
-		document.backShoulderSlope = $('form input[name="back-shoulder-slope"]').val();
-		document.acrossBack = $('form input[name="across-back"]').val();
-		document.shoulderLength = $('form input[name="shoulder-length"]').val();
-		document.backShoulderLength = document.shoulderLength + 0.5; // added dart intake for back dart
-		document.backArc = $('form input[name="back-arc"]').val() + 0.75;
-		document.waistArcBack = $('form input[name="waist-arc-back"]').val();
-		document.dartPlacement = $('form input[name="dart-placement"]').val();
-		document.backNeck = $('form input[name="back-neck"]').val();
-		document.backAcrossShoulder = $('form input[name="back-across-shoulder"]').val();
-		document.backDartIntake = $('form input[name="back-dart-intake"]').val();
 		// get from frotn draft jinja in session
-		document.sideLength = $('form input[name="side-length"]').val();
-		document.shoulderLength = $('form input[name="shoulder-length"]').val(); 
-
+		document.sideLength = parseFloat($('form input[name="side-length"]').val());
+		document.shoulderLength = parseFloat($('form input[name="shoulder-length"]').val()); 
+		// INPUT measurements
+		document.fullLengthBack = parseFloat($('form input[name="full-length-back"]').val());
+		document.centerBack = parseFloat($('form input[name="center-back"]').val());
+		document.backShoulderSlope = parseFloat($('form input[name="back-shoulder-slope"]').val());
+		document.acrossBack = parseFloat($('form input[name="across-back"]').val());
+		document.shoulderLength = parseFloat($('form input[name="shoulder-length"]').val());
+		document.backShoulderLength = document.shoulderLength + 0.5; // added dart intake for back dart
+		document.backArc = parseFloat($('form input[name="back-arc"]').val()) + 0.75;
+		document.waistArcBack = parseFloat($('form input[name="waist-arc-back"]').val());
+		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val());
+		document.backNeck = parseFloat($('form input[name="back-neck"]').val());
+		document.backAcrossShoulder = parseFloat($('form input[name="back-across-shoulder"]').val());
+		document.backDartIntake = parseFloat($('form input[name="back-dart-intake"]').val());
+		
+		
 		// Scaled Measurements
 		document.scaledfullLengthBack = document.fullLengthBack * document.scale;
 		document.scaledBackAcrossShoulder = document.backAcrossShoulder * document.scale;
@@ -87,7 +88,7 @@ $(document).ready(function(){
 		document.scaledDartPlacement = document.dartPlacement * document.scale;
 		document.scaledBackNeck =  document.backNeck * document.scale;
 
-
+		
 		// Find slope offset o fron the top of the axis. -- point g's y axis 
 		document.backShoulderSlopeRise = document.pythagoreanCAndA( document.backShoulderSlope, document.backAcrossShoulder)
 		document.scaledOffset = (document.fullLengthBack - document.backShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
@@ -97,13 +98,13 @@ $(document).ready(function(){
 		document.sideSeamRiseScaled = document.pythagoreanCAndA(document.sideLength, (document.backArc) - (document.backDartIntake + document.waistArcBack)) * document.scale;
 		document.offSetSideSeamRiseScaled = (document.scaledfullLengthBack + 0.1875 * document.scale) - document.sideSeamRiseScaled ;// y axis of point n
 
-
+	
 		//Find shoulder coordinates through right triangle geometry
 		document.lengthOfFToGScaled = document.pythagoreanAAndB((document.scaledBackAcrossShoulder - document.scaledBackNeck), document.scaledOffset);
 		document.pointHXScaled = document.findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, (document.scaledBackAcrossShoulder - document.scaledBackNeck), document.backShoulderLength * document.scale) + (document.scaledBackNeck)
 		document.pointHYScaled = document.findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, document.scaledOffset, document.backShoulderLength * document.scale) 
 
-
+	
 		// Calculate coordinates of shoulder dart along shoulder seam 
 		document.shoulderDartXScaled = document.locatePointOnC(((document.backShoulderLength / 2) * document.scale), document.pointHXScaled - document.scaledBackNeck, (document.backShoulderLength * document.scale));
 		document.shoulderDartYScaled = document.locatePointOnC(((document.backShoulderLength / 2) * document.scale), document.pointHYScaled, (document.backShoulderLength * document.scale));
