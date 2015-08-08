@@ -1,49 +1,57 @@
 {% extends 'base.html' %}
 
 {% block head %}
-	<script src='static/functions.js'></script>
-	<script src='static/measurements.js'></script>
-	<script src='static/front-draft.js'></script>
-	<script src='static/back-draft.js'></script>
-	<script src='static/save-block.js'></script>
+	<script src='static/js/functions.js'></script>
+	<script src='static/js/measurements.js'></script>
+	<script src='static/js/front-draft.js'></script>
+	<script src='static/js/back-draft.js'></script>
+	<script src='static/js/save-block.js'></script>
 {% endblock %}
 
 
 {% block content %}
-	<h1>FRONT INFO</h1>
-	{{ bust_input }}<br>
-	{{ waist_input }}<br>
-	<h1>FRONT INFO</h1>              
-	{{full_length_input}}<br>
-	{{center_front_input}}<br>
-	{{front_shoulder_slope_input}}<br>
-	{{strap_input}}<br>
-	{{front_across_shoulder_input}}<br>
-	{{across_chest_input}}<br>
-	{{bust_depth_input}}<br>
-	{{shoulder_length_input}}<br>
-	{{bust_arc_input}}<br>
-	{{bust_span_input}}<br>
-	{{waist_arc_input}}<br>
-	{{dart_placement_input}}<br>
-	{{side_length_input}}<br>
+{% if session.get('current-measurements') %}
+	<span id="all-data"
+		data-nickname-input="{{ session['basic_measurements'].get('nickname_input') }}"
+		data-bust-input="{{ session['basic_measurements'].get('bust_input') }}"
+		data-waist-input="{{ session['basic_measurements'].get('waist_input') }}"
+	 
+		data-full-length-input="{{session['front_measurements'].get('full-length-input') }}"
+		data-center-front-input="{{session['front_measurements'].get('center_front_input') }}"
+		data-front-shoulder-slope-input="{{session['front_measurements'].get('front_shoulder_slope_input') }}"
+		data-strap-input="{{session['front_measurements'].get('strap_input') }}"
+		data-front-across-shoulder-input="{{session['front_measurements'].get('front_across_shoulder_input') }}"
+		data-across-chest-input="{{session['front_measurements'].get('across_chest_input') }}"
+		data-bust-depth-input="{{session['front_measurements'].get('bust_depth_input') }}"
+		data-shoulder-length-input="{{session['front_measurements'].get('shoulder_length_input') }}"
+		data-bust-arc-input="{{session['front_measurements'].get('bust_arc_input') }}"
+		data-bust-span-input="{{session['front_measurements'].get('bust_span_input') }}"
+		data-waist-arc-input="{{session['front_measurements'].get('waist_arc_input') }}"
+		data-dart-placement-input="{{session['front_measurements'].get('dart_placement_input') }}"
+		data-side-length-input="{{session['front_measurements'].get('side_length_input') }}"
 
-	<h1>BACK INFO</h1>
-	{{full_length_back_input}}
-	{{center_back_input}}
-	{{back_shoulder_slope_input}}
-	{{across_back_input}}
-	{{back_shoulder_length_input}}
-	{{back_arc_input}}
-	{{back_neck_input}}
-	{{back_across_shoulder_input}}
-	{{back_dart_intake_input}}
+		data-full-length-back-input="{{session['back_measurements'].get('full-length-back_input') }}"
+		data-center-back-input="{{session['back_measurements'].get('center_back_input') }}"
+		data-back-shoulder-slope-input="{{session['back_measurements'].get('back_shoulder_slope_input') }}"
+		data-across-back-input="{{session['back_measurements'].get('across_back_input') }}"
+		data-back-shoulder-length-input="{{session['back_measurements'].get('back_shoulder_length_input') }}"
+		data-back-arc-input="{{session['back_measurements'].get('back_arc_input') }}"
+		data-waist-arc-back-input="{{session['back_measurements'].get('waist_arc_back_input') }}"
+		data-back-neck-input="{{session['back_measurements'].get('back_neck_input') }}"
+		data-back-across-shoulder-input="{{session['back_measurements'].get('back_across_shoulder_input') }}"
+		data-back-dart-intake-input="{{session['back_measurements'].get('back_dart_intake_input') }}"
+		>
+	</span>
+
+{% else %}
+	<a href="/start">Please Fill out this form</a>
+{% endif %}
 
 <div class="container">
 	
 	<div class="row">
 		<div class="col-md-4">
-			<h1 class="heading-titles">Front</h1>
+			<h1 class="heading-titles">Front</h1> 
 			<div class="table">
 				<canvas id="drafting-table-front" width="461" height="461"></canvas>
 			</div>
@@ -60,11 +68,11 @@
 
 	<div class="row">
 		<div class="col-md-4 col-md-offset-2 ">
-			<button id="save-front" type="submit" class="btn btn-default bottom-button">DOWNLOAD</button>
+			<button id="save-front" type="submit" class="btn btn-default bottom-button">DOWNLOAD FRONT</button>
 		</div>
 
 		<div class="col-md-4 col-md-offset-2 ">
-			<button id="save-back" type="submit" class="btn btn-default bottom-button">DOWNLOAD</button>
+			<button id="save-back" type="submit" class="btn btn-default bottom-button">DOWNLOAD BACK</button>
 		</div>
 	</div>
 

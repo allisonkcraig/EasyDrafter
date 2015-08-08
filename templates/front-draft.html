@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block head %}
-	<script src='static/functions.js'></script>
-	<script src='static/measurements.js'></script>
-	<script src='static/front-draft.js'></script>
-	<script src='static/save-block.js'></script>
+	<script src='static/js/functions.js'></script>
+	<script src='static/js/measurements.js'></script>
+	<script src='static/js/front-draft.js'></script>
+	<script src="static/js/ajax-call-front-canvas.js"></script>
+	<script src='static/js/save-block.js'></script>
 {% endblock %}
 
 
@@ -12,44 +13,48 @@
 
 {% block content %}
 
+<p id="your_nickname"></p>
+
 <div class="container">
 		<div class="row">
 		<div class="col-md-4">
 			<h1 class="heading-titles table-name">Front</h1>
 			<div class="table">
+				<span id="canvas-front">
 				<canvas id="drafting-table-front" class="drafting-table" width="461" height="461"></canvas>
+				</span>
 			</div>
 		</div>
 			<div class="col-md-4 col-md-offset-2">
 				<div id="measurement-table">
 				<center><h3 class="heading-titles instructions">Change Measurements Below in Inches</h3></center>
-				<form  action="/back-draft" class="form-horizontal">
+				<form  action="/back-draft" class="form-horizontal" id="front-measurement-form">
 					<div class="row">
 						<div class="form-group">
 							<label for="full-length" class="col-sm-5 control-label">Full Length</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="full-length" placeholder="17.75" value='17.75'>
+								<input type="number" class="form-control" step="0.01" name="full-length" placeholder="17.75" value="17.75">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="center-front" class="col-sm-5 control-label">Center Front</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="center-front" placeholder="15.00" value="15.00">
+								<input type="number" class="form-control" step="0.01" name="center-front" placeholder="15.00" value="15.00">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="front-shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="front-shoulder-slope" placeholder="17.25" value="17.25">
+								<input type="number" class="form-control" step="0.01" name="front-shoulder-slope" placeholder="17.25" value="17.25">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="strap" class="col-sm-5 control-label">Strap</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="strap" placeholder="10.00" value="10.00">
+								<input type="number" class="form-control" step="0.01" name="strap" placeholder="10.00" value="10.00">
 							</div>
 						</div>
 
@@ -116,8 +121,7 @@
 							</div>
 						</div>
 
-						<input type="hidden" name="bust" value="{{ bust_input }}">
-						<input type="hidden" name="waist" value="{{ waist_input }}">
+
 
 						<div class="form-group">
 							<div class="col-md-4 col-md-offset-5">
@@ -126,6 +130,11 @@
 						</div>
 					</div>
 				</form>
+					<div class="form-group">
+							<div class="col-md-4 col-md-offset-5">
+								<button id="poof" type="submit" class="btn btn-default">POOF</button>
+							</div>
+						</div>
 			</div>
 		</div>
 	</div>

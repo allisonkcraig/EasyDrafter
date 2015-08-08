@@ -1,4 +1,5 @@
 body {
+	padding-top: 65px;
 	margin-bottom: 2em;
 }
 
@@ -24,7 +25,6 @@ body {
 	height: 80px;
 	margin-bottom: 15px;
 	font-size: 30px;
-	
 }
 
 .heading-titles {
