@@ -1,9 +1,9 @@
 
 var getSessionData = function(){
-	console.log("running");
+	// console.log("running");
 
 	$.get("/get-measurements", function(data_returned){
-		console.log(data_returned);
+		// console.log(data_returned);
 	});
 };
 

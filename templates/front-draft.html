@@ -4,8 +4,8 @@
 	<script src='static/js/functions.js'></script>
 	<script src='static/js/measurements.js'></script>
 	<script src='static/js/front-draft.js'></script>
-	<script src="static/js/ajax-call-front-canvas.js"></script>
-	<script src='static/js/save-block.js'></script>
+	<!--  <script src="static/js/ajax-call-front-canvas.js"></script> -->
+	<!--  <script src='static/js/save-block.js'></script>  -->
 {% endblock %}
 
 
@@ -33,7 +33,7 @@
 						<div class="form-group">
 							<label for="full-length" class="col-sm-5 control-label">Full Length</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="full-length" placeholder="17.75" value="17.75">
+								<input type="number" class="form-control" id="click-me" step="0.01" name="full-length" placeholder="17.75" value="17.75">
 							</div>
 						</div>
 
@@ -61,63 +61,63 @@
 						<div class="form-group">
 							<label for="front-across-shoulder" class="col-sm-5 control-label">Across Shoulder</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="front-across-shoulder" placeholder="7.50" value="7.50">
+								<input type="number" class="form-control" step="0.01" name="front-across-shoulder" placeholder="7.50" value="7.50">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="across-chest" class="col-sm-5 control-label">Across Chest</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="across-chest" placeholder="6.37" value="6.37">
+								<input type="number" class="form-control" step="0.01" name="across-chest" placeholder="6.37" value="6.37">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="bust-depth" class="col-sm-5 control-label">Bust Depth</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="bust-depth" placeholder="9.25" value="9.25">
+								<input type="number" class="form-control" step="0.01" name="bust-depth" placeholder="9.25" value="9.25">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="shoulder-length" class="col-sm-5 control-label">Shoulder Length</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="shoulder-length" placeholder="5.00" value="5.00">
+								<input type="number" class="form-control" step="0.01" name="shoulder-length" placeholder="5.00" value="5.00">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="bust-arc" class="col-sm-5 control-label">Bust Arc</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="bust-arc" placeholder="9.75" value="9.75">
+								<input type="number" class="form-control" step="0.01" name="bust-arc" placeholder="9.75" value="9.75">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="bust-span" class="col-sm-5 control-label">Bust Span</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="bust-span" placeholder="3.75" value="3.75">
+								<input type="number" class="form-control" step="0.01" name="bust-span" placeholder="3.75" value="3.75">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="waist-arc" class="col-sm-5 control-label">Waist Arc</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="waist-arc" placeholder="6.86" value="6.86">
+								<input type="number" class="form-control" step="0.01" name="waist-arc" placeholder="6.86" value="6.86">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="dart-placement" class="col-sm-5 control-label">Dart Placement</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="dart-placement" placeholder="3.25" value="3.25">
+								<input type="number" class="form-control" step="0.01" name="dart-placement" placeholder="3.25" value="3.25">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="side-length" class="col-sm-5 control-label">Side Length</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" name="side-length" placeholder="8.50" value="8.50">
+								<input type="number" class="form-control" step="0.01" name="side-length" placeholder="8.50" value="8.50">
 							</div>
 						</div>
 
@@ -130,11 +130,12 @@
 						</div>
 					</div>
 				</form>
+
 					<div class="form-group">
-							<div class="col-md-4 col-md-offset-5">
-								<button id="poof" type="submit" class="btn btn-default">POOF</button>
-							</div>
+						<div class="col-md-4 col-md-offset-5">
+							<button id="change" type="submit" class="btn btn-default">SEE CHANGE</button>
 						</div>
+					</div>
 			</div>
 		</div>
 	</div>

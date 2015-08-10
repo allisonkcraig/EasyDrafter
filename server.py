@@ -130,7 +130,7 @@ def process_login():
             return render_template("profile.html", user=customer)
         
     else:
-        iflash("No such email")
+        flash("No such email")
         return redirect("/login")
 
 

@@ -20,7 +20,6 @@ class User(db.Model):
     password = db.Column(db.String(64), nullable=False)
     fname = db.Column(db.String(15), nullable=False)
 
-
     # @classmethod
     # def get_by_email(cls, email):
     #     """Query for a specific melon in the database by the primary key"""
@@ -46,22 +45,31 @@ class Measurement_Chart(db.Model):
     user_id = db.Column(db.String(100), db.ForeignKey('Users.user_id'))
     bust = db.Column(db.Integer, nullable=False)
     waist = db.Column(db.Integer, nullable=False)
-    cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
-    # cflength = db.Column(db.Integer, nullable=False)
+
+    full_length = db.Column(db.Integer, nullable=False) 
+    center_front = db.Column(db.Integer, nullable=False)
+    front_shoulder_slope = db.Column(db.Integer, nullable=False)
+    strap = db.Column(db.Integer, nullable=False)
+    front_across_shoulder = db.Column(db.Integer, nullable=False)
+    across_chest = db.Column(db.Integer, nullable=False)
+    bust_depth = db.Column(db.Integer, nullable=False)
+    shoulder_length = db.Column(db.Integer, nullable=False)
+    bust_arc = db.Column(db.Integer, nullable=False)
+    bust_span = db.Column(db.Integer, nullable=False)
+    waist_arc = db.Column(db.Integer, nullable=False)
+    dart_placement = db.Column(db.Integer, nullable=False)
+    side_length = db.Column(db.Integer, nullable=False)
+
+    full_length_back = db.Column(db.Integer, nullable=False)
+    center_back = db.Column(db.Integer, nullable=False)
+    back_shoulder_slope = db.Column(db.Integer, nullable=False)
+    across_back = db.Column(db.Integer, nullable=False)
+    back_shoulder_length = db.Column(db.Integer, nullable=False)
+    back_arc = db.Column(db.Integer, nullable=False)
+    waist_arc_back = db.Column(db.Integer, nullable=False)
+    back_neck = db.Column(db.Integer, nullable=False)
+    back_across_shoulder = db.Column(db.Integer, nullable=False)
+    back_dart_intake = db.Column(db.Integer, nullable=False)
 
 
     # Define relationship to user
@@ -71,10 +79,10 @@ class Measurement_Chart(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Chart Id= %s Release Date= %s>" % (self.chart_id, self.user_id)
+        return "<Chart Id= %s User Id= %s>" % (self.chart_id, self.user_id)
 
 
-    # TODO EXPLAND THIS FUNCTION TO ADD MORE MEASUREMENTS
+    # TODO EXPAND THIS FUNCTION TO ADD MORE MEASUREMENTS
     @classmethod
     def add_chart_to_db(cls, nickname, user_id, bust, waist, cflength):
         chart_to_add = cls(nickname, user_id, bust, waist, cflength)

@@ -6,24 +6,24 @@ $(document).ready(function() {
 		// establish drafting table and document.pen
 		var draftingTableFront = document.getElementById("drafting-table-front");
 
-		var gridPenFront = draftingTableFront.getContext("2d");
+		document.gridPenFront = draftingTableFront.getContext("2d");
 
 		// y axis grid lines
 		for (var y = 0.5; y < 461; y += 20) {
-			gridPenFront.beginPath();
-			gridPenFront.moveTo(0, y);
-			gridPenFront.lineTo(601, y);
-			gridPenFront.strokeStyle = "#E8E8EE";
-			gridPenFront.stroke();
+			document.gridPenFront.beginPath();
+			document.gridPenFront.moveTo(0, y);
+			document.gridPenFront.lineTo(601, y);
+			document.gridPenFront.strokeStyle = "#E8E8EE";
+			document.gridPenFront.stroke();
 			};
 
 		// x axis grid lines
 		for (var x = 0.5; x < 601; x += 20) {
-			gridPenFront.beginPath();
-			gridPenFront.strokeStyle = "#E8E8EE";
-			gridPenFront.moveTo(x, 0);
-			gridPenFront.lineTo(x, 601);
-			gridPenFront.stroke();
+			document.gridPenFront.beginPath();
+			document.gridPenFront.strokeStyle = "#E8E8EE";
+			document.gridPenFront.moveTo(x, 0);
+			document.gridPenFront.lineTo(x, 601);
+			document.gridPenFront.stroke();
 			};
 
 
@@ -160,9 +160,32 @@ $(document).ready(function() {
 
 	};
 
+
+	// document.clearCanvas = function(context) {
+ //    context.clearRect(0, 0, 461, 461);
+	// };
+
 	document.draftFrontCanvas();
 
-})
+
+	// $("#click-me").on("focusout",function() {
+	// 	console.log('IT WORKS')
+	// 	// document.clearCanvas(document.gridPenFront);
+	// 	// document.clearCanvas(document.pen);
+	// 	// document.clearCanvas(document.penFinalFront);
+	// 	// document.draftFrontCanvas();
+	// });
+
+	$("#change").blur(function() {
+		document.clearCanvas(document.gridPenFront);
+		document.clearCanvas(document.pen);
+		document.clearCanvas(document.penFinalFront);
+		document.draftFrontCanvas();
+	});
+
+});
+
+
 
 
 

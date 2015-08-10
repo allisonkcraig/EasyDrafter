@@ -46,4 +46,9 @@ $(document).ready(function() {
 		return axisFromOrigin
 	};
 
+	// Clear the canvas so I can re-draft using update measurements 
+	document.clearCanvas = function(context) {
+    	context.clearRect(0, 0, 461, 461);
+	};
+
 })
