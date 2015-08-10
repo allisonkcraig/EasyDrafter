@@ -148,6 +148,13 @@ $(document).ready(function() {
 	}
 
 
-document.draftBackCanvas();
+	document.draftBackCanvas();
+
+	$('.form-control').blur(function() {
+		document.clearCanvas(document.gridPenBack);
+		document.clearCanvas(document.penBack);
+		document.clearCanvas(document.penFinalBack);
+		document.draftBackCanvas();
+	});
 
 });

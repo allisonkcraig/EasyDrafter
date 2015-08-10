@@ -5,7 +5,7 @@ import jinja2
 
 import model
 
-from model import User, connect_to_db, db
+from model import User, Size_Chart, Measurement_Chart, connect_to_db, db
 
 
 app = Flask(__name__)
@@ -30,12 +30,23 @@ def measure_page():
 
 @app.route('/front-draft')
 def front_draft_page():
-    """Use template measurements to draft a front block and allow users to change block to fit them using inputs"""
+    """Use template measurements to draft a front block that closest fit them and allow users to change block to fit them using inputs, """
+
+
     session['basic_measurements'] = {
         'nickname_input': request.args.get("nickname"),
         'bust_input' : request.args.get("bust"),
         'waist_input' : request.args.get("waist")
     }
+
+
+    if session['basic_measurements']['bust_input'] / session['basic_measurements']['waist_input'] > 1.40:
+        size_chart = Size_Chart.query.filter(Size_Chart.bust >= session['basic_measurements']['bust_input'], Size_Chart.bust < session['basic_measurements']['bust_input']-1 ).one()
+    else:
+        pass
+
+
+    size_chart = Size_Chart.query.filter(Size_Chart.size_id == 8).one()
 
     return render_template("front-draft.html")
 

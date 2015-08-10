@@ -27,7 +27,6 @@ class User(db.Model):
 
 
 
-
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -41,7 +40,7 @@ class Measurement_Chart(db.Model):
 
     chart_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     nickname = db.Column(db.Integer, nullable=False)
-    pattern_url = db.Column(db.String(100), nullable=False)
+    # pattern_url = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.String(100), db.ForeignKey('Users.user_id'))
     bust = db.Column(db.Integer, nullable=False)
     waist = db.Column(db.Integer, nullable=False)
@@ -84,9 +83,84 @@ class Measurement_Chart(db.Model):
 
     # TODO EXPAND THIS FUNCTION TO ADD MORE MEASUREMENTS
     @classmethod
-    def add_chart_to_db(cls, nickname, user_id, bust, waist, cflength):
-        chart_to_add = cls(nickname, user_id, bust, waist, cflength)
+    def add_chart_to_db(cls, 
+                        chart_id,
+                        nickname,
+                        user_id,
+                        bust,
+                        waist,
+
+                        full_length,
+                        center_front,
+                        front_shoulder_slope,
+                        strap,
+                        front_across_shoulder,
+                        across_chest,
+                        bust_depth,
+                        shoulder_length,
+                        bust_arc,
+                        bust_span,
+                        waist_arc,
+                        dart_placement,
+                        side_length,
+
+                        full_length_back,
+                        center_back,
+                        back_shoulder_slope,
+                        across_back,
+                        back_shoulder_length,
+                        back_arc,
+                        waist_arc_back,
+                        back_neck,
+                        back_across_shoulder,
+                        back_dart_intake):
+        chart_to_add = cls(
+            chart_id, nickname, user_id, bust, waist, 
+            full_length, center_front, front_shoulder_slope, strap, front_across_shoulder, across_chest, bust_depth, shoulder_length, bust_arc, bust_span, waist_arc, dart_placement, side_length,
+            full_length_back, center_back, back_shoulder_slope, across_back, back_shoulder_length, back_arc, waist_arc_back, back_neck, back_across_shoulder, back_dart_intake)
         db.session.add(chart_to_add)
+        db.session.commit()
+
+
+
+class Size_Chart(db.Model):
+    """Measurement Charts for specific users."""
+    
+    __tablename__ = "Size_Charts"
+
+    size_id = db.Column(db.Integer, primary_key=True)
+    bust = db.Column(db.Integer, nullable=False)
+    waist = db.Column(db.Integer, nullable=False)
+
+    full_length = db.Column(db.Integer, nullable=False) 
+    center_front = db.Column(db.Integer, nullable=False)
+    front_shoulder_slope = db.Column(db.Integer, nullable=False)
+    strap = db.Column(db.Integer, nullable=False)
+    front_across_shoulder = db.Column(db.Integer, nullable=False)
+    across_chest = db.Column(db.Integer, nullable=False)
+    bust_depth = db.Column(db.Integer, nullable=False)
+    shoulder_length = db.Column(db.Integer, nullable=False)
+    bust_arc = db.Column(db.Integer, nullable=False)
+    bust_span = db.Column(db.Integer, nullable=False)
+    waist_arc = db.Column(db.Integer, nullable=False)
+    dart_placement = db.Column(db.Integer, nullable=False)
+    side_length = db.Column(db.Integer, nullable=False)
+
+    full_length_back = db.Column(db.Integer, nullable=False)
+    center_back = db.Column(db.Integer, nullable=False)
+    back_shoulder_slope = db.Column(db.Integer, nullable=False)
+    across_back = db.Column(db.Integer, nullable=False)
+    back_arc = db.Column(db.Integer, nullable=False)
+    waist_arc_back = db.Column(db.Integer, nullable=False)
+    back_neck = db.Column(db.Integer, nullable=False)
+    back_across_shoulder = db.Column(db.Integer, nullable=False)
+    back_dart_intake = db.Column(db.Integer, nullable=False)
+
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Chart Size= %s>" % (self.size_id)
 
 
 

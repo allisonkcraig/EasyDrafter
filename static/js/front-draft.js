@@ -167,16 +167,7 @@ $(document).ready(function() {
 
 	document.draftFrontCanvas();
 
-
-	// $("#click-me").on("focusout",function() {
-	// 	console.log('IT WORKS')
-	// 	// document.clearCanvas(document.gridPenFront);
-	// 	// document.clearCanvas(document.pen);
-	// 	// document.clearCanvas(document.penFinalFront);
-	// 	// document.draftFrontCanvas();
-	// });
-
-	$("#change").blur(function() {
+	$(".form-control").blur(function() {
 		document.clearCanvas(document.gridPenFront);
 		document.clearCanvas(document.pen);
 		document.clearCanvas(document.penFinalFront);
