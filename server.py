@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, redirect, flash, ses
 import os
 # from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
-import json
+import simplejson
 
 import model
 
@@ -44,18 +44,25 @@ def front_draft_page():
         print session['basic_measurements']['bust_input']
         size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(session['basic_measurements']['bust_input']), Size_Chart.bust > float(session['basic_measurements']['bust_input']) -1 ).first()
         print size_chart
-        print type(size_chart)
-        return json.dumps(size_chart)
-        print type(size_chart)
-        session['measurements'] = size_chart
-        print type(session['measurements'])
+        size_chart_dictionary = size_chart.__dict__
+        del size_chart_dictionary['_sa_instance_state']
+        print type(size_chart_dictionary)
+        print size_chart_dictionary
+        print simplejson.dumps(size_chart_dictionary)
+
+        session['measurements'] = size_chart_dictionary
+        # # print type(size_chart)
+        # # session['measurements'] = size_chart
+        # print type(session['measurements'])
+        # print session['measurements']
+
 
     else:
         size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(session['basic_measurements']['waist_input']), Size_Chart.waist > float(session['basic_measurements']['waist_input']) -1 ).first()
         print size_chart
         print type(size_chart)
-        session['measurements'] = size_chart
-        print session['measurements']
+        # session['measurements'] = size_chart
+        # print session['measurements']
 
 
     size_chart = Size_Chart.query.filter(Size_Chart.size_id == 8).one()
