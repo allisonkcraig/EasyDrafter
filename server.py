@@ -31,14 +31,15 @@ def measure_page():
 def front_draft_page():
     """Use template measurements to draft a front block that closest fit them and allow users to change block to fit them using inputs, """
     
-    nickname_input = request.args.get("nickname")
-    bust_input = request.args.get("bust")
-    waist_input = request.args.get("waist")
+
+    session['measurements']['nickname'] = request.args.get("nickname")
+    session['measurements']['bust'] = request.args.get("bust")
+    session['measurements']['waist'] = request.args.get("waist")
     
 
 
-    if float(bust_input) / float(waist_input) > 1.40: # the largest ratio of wiast to bust in my standard sizes
-        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(bust_input), Size_Chart.bust > float(bust_input) -1 ).first()
+    if float(session['measurements']['bust']) / float(session['measurements']['waist']) > 1.40: # the largest ratio of waist to bust in my standard sizes
+        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(session['measurements']['bust']), Size_Chart.bust > float(session['measurements']['bust']) -1 ).first()
         print size_chart
         size_chart_dictionary = size_chart.__dict__
         print size_chart_dictionary
@@ -46,7 +47,7 @@ def front_draft_page():
         session['measurements'] = size_chart_dictionary
 
     else:
-        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(waist_input), Size_Chart.waist > float(waist_input) -1 ).first()
+        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(session['measurements']['waist']), Size_Chart.waist > float(session['measurements']['waist']) -1 ).first()
         print size_chart
         size_chart_dictionary = size_chart.__dict__
         print size_chart_dictionary
@@ -65,12 +66,38 @@ def back_draft_page():
     """Save measurement chart and image of pattern to db"""
 
 
+
+
+    session['measurements']['full_length'] = request.args.get('full-length')
+    session['measurements']['center_front'] = request.args.get('center-front')
+    session['measurements']['front_shoulder_slope'] = request.args.get('front-shoulder-slope')
+    session['measurements']['strap'] = request.args.get('strap')
+    session['measurements']['front_across_shoulder'] = request.args.get('front-across-shoulder')
+    session['measurements']['across_chest'] = request.args.get('across-chest')
+    session['measurements']['bust_depth'] = request.args.get('bust-depth')
+    session['measurements']['shoulder_length'] = request.args.get('shoulder-length')
+    session['measurements']['bust_arc'] = request.args.get('bust-arc')
+    session['measurements']['bust_span'] = request.args.get('bust-span')
+    session['measurements']['waist_arc'] = request.args.get('waist-arc')
+    session['measurements']['dart_placement'] = request.args.get('dart-placement')
+    session['measurements']['side_length'] = request.args.get('side-length')
+
     return render_template("back-draft.html", size_chart=session['measurements'])
 
 
 @app.route('/pattern')
 def pattern_page():
     """Save measurement chart and image of pattern to db"""
+    session['measurements']['full_length_back'] = request.args.get("full-length-back")
+    session['measurements']['center_back'] = request.args.get("center-back")
+    session['measurements']['back_shoulder_slope'] = request.args.get("back-shoulder-slope")
+    session['measurements']['across_back'] = request.args.get("across-back")
+    session['measurements']['back_arc'] = request.args.get("back-arc")
+    session['measurements']['waist_arc_back'] = request.args.get("waist-arc-back")
+    session['measurements']['back_neck'] = request.args.get("back-neck")
+    session['measurements']['back_across_shoulder'] = request.args.get("back-across-shoulder")
+    session['measurements']['back_dart_intake'] = request.args.get("back-dart-intake")
+
 
 
     return render_template("canvas.html", size_chart=session['measurements'])
