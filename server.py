@@ -20,7 +20,6 @@ def home_page():
 	return render_template('/splash-page.html')
 
 
-
 @app.route('/start')
 def measure_page():
     """Allow input of measurements to find side template pattern"""
@@ -40,10 +39,18 @@ def front_draft_page():
     }
 
 
-    if session['basic_measurements']['bust_input'] / session['basic_measurements']['waist_input'] > 1.40:
-        size_chart = Size_Chart.query.filter(Size_Chart.bust >= session['basic_measurements']['bust_input'], Size_Chart.bust < session['basic_measurements']['bust_input']-1 ).one()
+    if float(session['basic_measurements']['bust_input']) / float(session['basic_measurements']['waist_input']) > 1.40: # the largest ratio of wiast to bust in my standard sizes
+        print session['basic_measurements']['bust_input']
+        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(session['basic_measurements']['bust_input']), Size_Chart.bust > float(session['basic_measurements']['bust_input']) -1 ).first()
+        print size_chart
+        # session['measurements'] = size_chart
+        # print session['measurements']
+
     else:
-        pass
+        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(session['basic_measurements']['waist_input']), Size_Chart.waist > float(session['basic_measurements']['waist_input']) -1 ).first()
+        print size_chart
+        # session['measurements'] = size_chart
+        # print session['measurements']
 
 
     size_chart = Size_Chart.query.filter(Size_Chart.size_id == 8).one()
@@ -143,8 +150,6 @@ def process_login():
     else:
         flash("No such email")
         return redirect("/login")
-
-
 
 
 @app.route('/profile')
