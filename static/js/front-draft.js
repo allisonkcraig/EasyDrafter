@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	document.draftFrontCanvas = function(){
+		console.log("draftFrontCanvas")
 		document.processFrontForm()
 		// take in an object that that will be the way you store the data
 		// establish drafting table and document.pen

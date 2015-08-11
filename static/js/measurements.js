@@ -8,6 +8,9 @@ $(document).ready(function(){
 
 
 	document.processFrontForm = function() {
+
+		console.log('processFrontForm')
+
 		document.scale = 20;
 		//INPUT measurments.
 		document.fullLength = parseFloat($('form input[name="full-length"]').val());
@@ -62,6 +65,9 @@ $(document).ready(function(){
 
 
 	document.processBackForm = function() {
+
+		console.log('processBackForm')
+
 		document.scale = 20;
 		// get from frotn draft jinja in session
 		document.sideLength = parseFloat($('form input[name="side-length"]').val());

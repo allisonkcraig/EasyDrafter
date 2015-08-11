@@ -5,13 +5,13 @@
 	<script src='static/js/measurements.js'></script>
 	<script src='static/js/front-draft.js'></script>
 	<script src='static/js/back-draft.js'></script>
-	<script src='static/js/save-block.js'></script>
+	<!-- <script src='static/js/save-block.js'></script> -->
 {% endblock %}
 
 
 {% block content %}
 {% if session.get('current-measurements') %}
-	<span id="all-data"
+<!-- 	<span id="all-data"
 		data-nickname-input="{{ session['basic_measurements'].get('nickname_input') }}"
 		data-bust-input="{{ session['basic_measurements'].get('bust_input') }}"
 		data-waist-input="{{ session['basic_measurements'].get('waist_input') }}"
@@ -41,7 +41,7 @@
 		data-back-across-shoulder-input="{{session['back_measurements'].get('back_across_shoulder_input') }}"
 		data-back-dart-intake-input="{{session['back_measurements'].get('back_dart_intake_input') }}"
 		>
-	</span>
+	</span> -->
 
 {% else %}
 	<a href="/start">Please Fill out this form</a>
@@ -64,6 +64,32 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Front Measurements -->
+	<input type="hidden" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
+	<input type="hidden" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
+	<input type="hidden" name="front-shoulder-slope" placeholder="{{ size_chart['front_shoulder_slope'] }}" value="{{ size_chart['front_shoulder_slope'] }}">
+	<input type="hidden" name="strap" placeholder="{{ size_chart['strap'] }}" value="{{ size_chart['strap'] }}">
+	<input type="hidden" name="front-across-shoulder" placeholder="{{ size_chart['front_across_shoulder'] }}" value="{{ size_chart['front_across_shoulder'] }}">
+	<input type="hidden" name="across-chest" placeholder="{{ size_chart['across_chest'] }}" value="{{ size_chart['across_chest'] }}">
+	<input type="hidden" name="bust-depth" placeholder="{{ size_chart['bust_depth'] }}" value="{{ size_chart['bust_depth'] }}">
+	<input type="hidden" name="shoulder-length" placeholder="{{ size_chart['shoulder_length'] }}" value="{{ size_chart['shoulder_length'] }}">
+	<input type="hidden" name="bust-arc" placeholder="{{ size_chart['bust_arc'] }}" value="{{ size_chart['bust_arc'] }}">
+	<input type="hidden" name="bust-span" placeholder="{{ size_chart['bust_span'] }}" value="{{ size_chart['bust_span'] }}">
+	<input type="hidden" name="waist-arc" placeholder="{{ size_chart['waist_arc'] }}" value="{{ size_chart['waist_arc'] }}">
+	<input type="hidden" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
+	<input type="hidden" name="side-length" placeholder="{{ size_chart['side_length'] }}" value="{{ size_chart['side_length'] }}">
+
+	<!-- Back Measurements -->
+	<input type="hidden" name="full-length-back" placeholder="{{ size_chart['full_length_back'] }}" value="{{ size_chart['full_length_back'] }}">
+	<input type="hidden" name="center-back" placeholder="{{ size_chart['center_back'] }}" value="{{ size_chart['center_back'] }}">
+	<input type="hidden" name="back-shoulder-slope" placeholder="{{ size_chart['back_shoulder_slope'] }}" value="{{ size_chart['back_shoulder_slope'] }}">
+	<input type="hidden" name="across-back" placeholder="{{ size_chart['across_back'] }}" value="{{ size_chart['across_back'] }}">
+	<input type="hidden" name="back-arc" placeholder="{{ size_chart['back_arc'] }}" value="{{ size_chart['back_arc'] }}">
+	<input type="hidden" name="waist-arc-back" placeholder="{{ size_chart['waist_arc_back'] }}" value="{{ size_chart['waist_arc_back'] }}">
+	<input type="hidden" name="back-neck" placeholder="{{ size_chart['back_neck'] }}" value="{{ size_chart['back_neck'] }}">
+	<input type="hidden" name="back-across-shoulder" placeholder="{{ size_chart['back_across_shoulder'] }}" value="{{ size_chart['back_across_shoulder'] }}">
+	<input type="hidden" name="back-dart-intake" placeholder="{{ size_chart['back_dart_intake'] }}" value="{{ size_chart['back_dart_intake'] }}">
 
 
 	<div class="row">

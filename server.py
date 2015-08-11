@@ -30,17 +30,15 @@ def measure_page():
 @app.route('/front-draft')
 def front_draft_page():
     """Use template measurements to draft a front block that closest fit them and allow users to change block to fit them using inputs, """
+    
+    nickname_input = request.args.get("nickname")
+    bust_input = request.args.get("bust")
+    waist_input = request.args.get("waist")
+    
 
 
-    session['basic_measurements'] = {
-        'nickname_input': request.args.get("nickname"),
-        'bust_input' : request.args.get("bust"),
-        'waist_input' : request.args.get("waist")
-    }
-
-
-    if float(session['basic_measurements']['bust_input']) / float(session['basic_measurements']['waist_input']) > 1.40: # the largest ratio of wiast to bust in my standard sizes
-        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(session['basic_measurements']['bust_input']), Size_Chart.bust > float(session['basic_measurements']['bust_input']) -1 ).first()
+    if float(bust_input) / float(waist_input) > 1.40: # the largest ratio of wiast to bust in my standard sizes
+        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(bust_input), Size_Chart.bust > float(bust_input) -1 ).first()
         print size_chart
         size_chart_dictionary = size_chart.__dict__
         print size_chart_dictionary
@@ -48,7 +46,7 @@ def front_draft_page():
         session['measurements'] = size_chart_dictionary
 
     else:
-        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(session['basic_measurements']['waist_input']), Size_Chart.waist > float(session['basic_measurements']['waist_input']) -1 ).first()
+        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(waist_input), Size_Chart.waist > float(waist_input) -1 ).first()
         print size_chart
         size_chart_dictionary = size_chart.__dict__
         print size_chart_dictionary
@@ -62,35 +60,9 @@ def front_draft_page():
     return render_template("front-draft.html", size_chart=session['measurements'])
 
 
-# @app.route('/get-measurements', methods=['GET'])
-# def front_draft_ajax():
-#     """Return canvas update"""
-
-#     print session['measurements']
-
-#     return jsonify(session['measurements'])
-
-
 @app.route('/back-draft')
 def back_draft_page():
     """Save measurement chart and image of pattern to db"""
-
-    #Meaasurements From Front Draft
-    session['front_measurements'] = {
-    'full_length_input' : request.args.get("full-length"),
-    'center_front_input' : request.args.get("center-front"),
-    'front_shoulder_slope_input' : request.args.get("front-shoulder-slope"),
-    'strap_input' : request.args.get("strap"),
-    'front_across_shoulder_input' : request.args.get("front-across-shoulder"),
-    'across_chest_input' : request.args.get("across-chest"),
-    'bust_depth_input' : request.args.get("bust-depth"),
-    'shoulder_length_input' : request.args.get("shoulder-length"),
-    'bust_arc_input' : request.args.get("bust-arc"),
-    'bust_span_input' : request.args.get("bust-span"),
-    'waist_arc_input' : request.args.get("waist-arc"),
-    'dart_placement_input' : request.args.get("dart-placement"),
-    'side_length_input' : request.args.get("side-length")
-    }
 
 
     return render_template("back-draft.html", size_chart=session['measurements'])
@@ -100,20 +72,8 @@ def back_draft_page():
 def pattern_page():
     """Save measurement chart and image of pattern to db"""
 
-    session['back_measurements'] = {
-    "full_length_back_input" : request.args.get("full-length-back"),
-    "center_back_input" : request.args.get("center-back"),
-    "back_shoulder_slope_input" : request.args.get("back-shoulder-slope"),
-    "across_back_input" : request.args.get("across-back"),
-    "back_shoulder_length_input" : request.args.get("back-shoulder-length"),
-    "back_arc_input" : request.args.get("back-arc"),
-    "waist_arc_back_input" : request.args.get("waist-arc-back"),
-    "back_neck_input" : request.args.get("back-neck"),
-    "back_across_shoulder_input" : request.args.get("back-across-shoulder"),
-    "back_dart_intake_input" : request.args.get("back-dart-intake")
-    } 
 
-    return render_template("canvas.html", session=session)
+    return render_template("canvas.html", size_chart=session['measurements'])
                             
 
 @app.route('/print')

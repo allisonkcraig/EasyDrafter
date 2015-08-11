@@ -94,11 +94,10 @@ $(document).ready(function() {
 
 		// instantiate lines and dots
 		document.penFinalBack.beginPath();
-		document.penFinalBack.moveTo(0, 0);
 
 
 		// CENTERFRONT ***************************************************
-		document.penFinalBack.moveTo(0.5, (document.scaledFullLength), 3, 3); // b
+		document.penFinalBack.moveTo(0.5, document.scaledFullLength); // b
 		document.penFinalBack.lineTo(0.5, (((document.fullLengthBack - document.centerBack) -0.375) * document.scale)); // move to neckline, ofset half a pixel so it shows on the canvas better
 
 
@@ -112,7 +111,7 @@ $(document).ready(function() {
 
 		// ARMHOLE ***************************************************************
 		document.bArmControlX = (document.acrossBack * 0.725) * document.scale;
-		document.bArmControlY = ((document.offSetSideSeamRiseScaled / document.scale) / 0.986) * document.scale;
+		document.bArmControlY = ((document.offSetSideSeamRiseScaled / document.scale) / 1.086) * document.scale;
 		document.penFinalBack.moveTo(document.pointHXScaled, document.pointHYScaled); //starting point of curve
 		document.penFinalBack.quadraticCurveTo(document.bArmControlX ,document.bArmControlY ,(document.backArc * document.scale), document.offSetSideSeamRiseScaled); // needs to be calibrated
 
