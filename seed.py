@@ -44,6 +44,7 @@ def load_size_charts():
                         size_id=size_id,
                         bust=bust, 
                         waist=waist, 
+
                         full_length=full_length, 
                         center_front=center_front,
                         front_shoulder_slope=front_shoulder_slope,

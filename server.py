@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template, redirect, flash, ses
 import os
 # from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
+import json
 
 import model
 
@@ -43,14 +44,18 @@ def front_draft_page():
         print session['basic_measurements']['bust_input']
         size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(session['basic_measurements']['bust_input']), Size_Chart.bust > float(session['basic_measurements']['bust_input']) -1 ).first()
         print size_chart
-        # session['measurements'] = size_chart
-        # print session['measurements']
+        print type(size_chart)
+        return json.dumps(size_chart)
+        print type(size_chart)
+        session['measurements'] = size_chart
+        print type(session['measurements'])
 
     else:
         size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(session['basic_measurements']['waist_input']), Size_Chart.waist > float(session['basic_measurements']['waist_input']) -1 ).first()
         print size_chart
-        # session['measurements'] = size_chart
-        # print session['measurements']
+        print type(size_chart)
+        session['measurements'] = size_chart
+        print session['measurements']
 
 
     size_chart = Size_Chart.query.filter(Size_Chart.size_id == 8).one()
@@ -58,13 +63,13 @@ def front_draft_page():
     return render_template("front-draft.html")
 
 
-@app.route('/get-measurements', methods=['GET'])
-def front_draft_ajax():
-    """Return canvas update"""
+# @app.route('/get-measurements', methods=['GET'])
+# def front_draft_ajax():
+#     """Return canvas update"""
 
-    print session['measurements']
+#     print session['measurements']
 
-    return jsonify(session['measurements'])
+#     return jsonify(session['measurements'])
 
 
 @app.route('/back-draft')
@@ -135,7 +140,7 @@ def process_login():
     email_input = request.form.get("email")
     pword_input = request.form.get("password")
     print "before line"
-    customer = User.query.filter_by(email = email_input).first()
+    customer = User.query.filter_by(email=email_input).first()
 
     print "after line"
     if customer:
