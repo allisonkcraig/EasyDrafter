@@ -98,8 +98,8 @@ $(document).ready(function() {
 
 
 		// CENTERFRONT ***************************************************
-		document.penFinalBack.moveTo(0, (document.scaledFullLength), 3, 3); // b
-		document.penFinalBack.lineTo(+0.5, (((document.fullLengthBack - document.centerBack) -0.375)*document.scale)); // move to neckline, ofset half a pixel so it shows on the canvas better
+		document.penFinalBack.moveTo(0.5, (document.scaledFullLength), 3, 3); // b
+		document.penFinalBack.lineTo(0.5, (((document.fullLengthBack - document.centerBack) -0.375) * document.scale)); // move to neckline, ofset half a pixel so it shows on the canvas better
 
 
 		// SHOULDER SEAM ***************************************************

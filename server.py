@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, render_template, redirect, flash, ses
 import os
 # from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
-import simplejson
 
 import model
 
@@ -41,33 +40,26 @@ def front_draft_page():
 
 
     if float(session['basic_measurements']['bust_input']) / float(session['basic_measurements']['waist_input']) > 1.40: # the largest ratio of wiast to bust in my standard sizes
-        print session['basic_measurements']['bust_input']
         size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(session['basic_measurements']['bust_input']), Size_Chart.bust > float(session['basic_measurements']['bust_input']) -1 ).first()
         print size_chart
         size_chart_dictionary = size_chart.__dict__
-        del size_chart_dictionary['_sa_instance_state']
-        print type(size_chart_dictionary)
         print size_chart_dictionary
-        print simplejson.dumps(size_chart_dictionary)
-
+        del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
-        # # print type(size_chart)
-        # # session['measurements'] = size_chart
-        # print type(session['measurements'])
-        # print session['measurements']
-
 
     else:
         size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(session['basic_measurements']['waist_input']), Size_Chart.waist > float(session['basic_measurements']['waist_input']) -1 ).first()
         print size_chart
-        print type(size_chart)
-        # session['measurements'] = size_chart
-        # print session['measurements']
+        size_chart_dictionary = size_chart.__dict__
+        print size_chart_dictionary
+        del size_chart_dictionary['_sa_instance_state']
+        session['measurements'] = size_chart_dictionary
+
 
 
     size_chart = Size_Chart.query.filter(Size_Chart.size_id == 8).one()
 
-    return render_template("front-draft.html")
+    return render_template("front-draft.html", size_chart=session['measurements'])
 
 
 # @app.route('/get-measurements', methods=['GET'])
@@ -101,7 +93,7 @@ def back_draft_page():
     }
 
 
-    return render_template("back-draft.html", session=session)
+    return render_template("back-draft.html", size_chart=session['measurements'])
 
 
 @app.route('/pattern')

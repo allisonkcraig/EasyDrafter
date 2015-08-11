@@ -23,7 +23,6 @@ $(document).ready(function() {
 
 	// find a proportionatly bigger traingle from sides of smaller traingle given 
 	document.findLengthOfBiggerTriangleSide = function(smallSideC, smallSideA, fullSideC) {
-		console.log('HI')
 		var x = smallSideA * fullSideC;
 		bigSideA =  x / smallSideC;
 		return bigSideA

@@ -28,76 +28,69 @@
 					<div class="form-group">
 						<label for="full-length-back" class="col-sm-5 control-label">Full Length</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="full-length-back" placeholder="18.00" value="18.00">
+							<input type="number" class="form-control" step="0.01" name="full-length-back" placeholder="{{ size_chart['full_length_back'] }}" value="{{ size_chart['full_length_back'] }}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="center-back" class="col-sm-5 control-label">Center Back</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="center-back" placeholder="17.25" value="17.25">
+							<input type="number" class="form-control" step="0.01" name="center-back" placeholder="{{ size_chart['center_back'] }}" value="{{ size_chart['center_back'] }}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="back-shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="back-shoulder-slope" placeholder="17.25" value="17.25">
+							<input type="number" class="form-control" step="0.01" name="back-shoulder-slope" placeholder="{{ size_chart['back_shoulder_slope'] }}" value="{{ size_chart['back_shoulder_slope'] }}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="across-back" class="col-sm-5 control-label">Across Back</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="across-back" placeholder="7" value="7">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="back-shoulder-length" class="col-sm-5 control-label">Back Shoulder Length</label>
-						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="back-shoulder-length" placeholder="5.5" value="5.5">
+							<input type="number" class="form-control" step="0.01" name="across-back" placeholder="{{ size_chart['across_back'] }}" value="{{ size_chart['across_back'] }}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="back-arc" class="col-sm-5 control-label">Back Arc</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="back-arc" placeholder="7.5" value="7.5">
+							<input type="number" class="form-control" step="0.01" name="back-arc" placeholder="{{ size_chart['back_arc'] }}" value="{{ size_chart['back_arc'] }}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="waist-arc-back" class="col-sm-5 control-label">Waist Arc Back</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="waist-arc-back" placeholder="6.25" value="6.25">
+							<input type="number" class="form-control" step="0.01" name="waist-arc-back" placeholder="{{ size_chart['waist_arc_back'] }}" value="{{ size_chart['waist_arc_back'] }}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="back-neck" class="col-sm-5 control-label">Back Neck</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="back-neck" placeholder="3.25" value="3.25">
+							<input type="number" class="form-control" step="0.01" name="back-neck" placeholder="{{ size_chart['back_neck'] }}" value="{{ size_chart['back_neck'] }}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="back-across-shoulder" class="col-sm-5 control-label">Back Across Shoulder</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="back-across-shoulder" placeholder="7.63" value="7.63">
+							<input type="number" class="form-control" step="0.01" name="back-across-shoulder" placeholder="{{ size_chart['back_across_shoulder'] }}" value="{{ size_chart['back_across_shoulder'] }}">
 						</div> 
 					</div>
 
 					<div class="form-group">
 						<label for="back-dart-intake" class="col-sm-5 control-label">Back Dart Intake</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" step="0.01" name="back-dart-intake" placeholder="1.25" value="1.25">
+							<input type="number" class="form-control" step="0.01" name="back-dart-intake" placeholder="{{ size_chart['back_dart_intake'] }}" value="{{ size_chart['back_dart_intake'] }}">
 						</div> 
 					</div>
 
-					<input type="hidden" name="side-length" value="{{ session['front_measurements']['side_length_input'] }}">
-					<input type="hidden" name="shoulder-length" value="{{ session['front_measurements']['shoulder_length_input'] }}">
-					<input type="hidden" name="dart-placement" value="{{ session['front_measurements']['dart_placement_input'] }}">
+					<input type="hidden" name="side-length" value="{{ size_chart['side_length'] }}">
+					<input type="hidden" name="shoulder-length" value="{{ size_chart['shoulder_length'] }}">
+					<input type="hidden" name="dart-placement" value="{{ size_chart['dart_placement'] }}">
 						
 
 					<div class="form-group">
