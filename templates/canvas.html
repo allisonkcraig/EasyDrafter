@@ -107,7 +107,7 @@ function(){
                 var doc = new jsPDF();
                 doc.addImage(imageData, 'JPEG', 12, 10);
                 var croppingYPosition = 1095;
-                var croppingXPosition = 700;
+                var croppingXPosition = 400;
                 count = (image.height) / 1095;
                 countx = (image.width) / 700;
 
@@ -118,9 +118,9 @@ function(){
                         var sourceX = 0;
                         var sourceY = croppingYPosition;
                         var sourceWidth = image.width;
-                        var sourceHeight = sourceWidth;
-                        var destWidth = sourceWidth ; // scales exponentially
-                        var destHeight = sourceHeight ; // scales exponentially
+                        var sourceHeight = image.height;
+                        var destWidth = sourceWidth; // scales exponentially
+                        var destHeight = sourceHeight; // scales exponentially
                         var destX = 0; 
                         var destY = 0;
                         var canvas1 = document.createElement('canvas');
@@ -145,13 +145,13 @@ function(){
                     for (var i = 1; i < countx; i++) {
                 	console.log("HHHHHHHEEEYY!")
                         doc.addPage();
-                        var sourceX = croppingYPosition;
+                        var sourceX = croppingXPosition; // where we start stealing image
                         var sourceY = croppingYPosition;
-                        var sourceWidth = image.width;
-                        var sourceHeight = sourceWidth;
-                        var destWidth = sourceWidth;
+                        var sourceWidth = image.width; // controls how big of an image we steal from the sourc image
+                        var sourceHeight = image.height;
+                        var destWidth = sourceWidth; // controll how big image is on PDF
                         var destHeight = sourceHeight;
-                        var destX = 0;
+                        var destX = 0; //where top left corver goes on PDF
                         var destY = 0;
                         var canvas1 = document.createElement('canvas');
                         canvas1.setAttribute('height', destHeight);

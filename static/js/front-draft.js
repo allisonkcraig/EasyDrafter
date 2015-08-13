@@ -13,7 +13,7 @@ $(document).ready(function() {
 		document.pen.fillStyle="white";
 		document.pen.beginPath()
 		document.pen.moveTo(0, 0);
-		document.pen.fillRect(0,0, document.canvasHeight, document.canvasWidth)
+		document.pen.fillRect(0,0, document.canvasHeight * 20, document.canvasWidth * 20)
 		document.pen.stroke();
 
 		
