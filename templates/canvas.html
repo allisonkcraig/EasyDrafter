@@ -10,63 +10,31 @@
 
 
 {% block content %}
-{% if session.get('current-measurements') %}
-<!-- 	<span id="all-data"
-		data-nickname-input="{{ session['basic_measurements'].get('nickname_input') }}"
-		data-bust-input="{{ session['basic_measurements'].get('bust_input') }}"
-		data-waist-input="{{ session['basic_measurements'].get('waist_input') }}"
-	 
-		data-full-length-input="{{session['front_measurements'].get('full-length-input') }}"
-		data-center-front-input="{{session['front_measurements'].get('center_front_input') }}"
-		data-front-shoulder-slope-input="{{session['front_measurements'].get('front_shoulder_slope_input') }}"
-		data-strap-input="{{session['front_measurements'].get('strap_input') }}"
-		data-front-across-shoulder-input="{{session['front_measurements'].get('front_across_shoulder_input') }}"
-		data-across-chest-input="{{session['front_measurements'].get('across_chest_input') }}"
-		data-bust-depth-input="{{session['front_measurements'].get('bust_depth_input') }}"
-		data-shoulder-length-input="{{session['front_measurements'].get('shoulder_length_input') }}"
-		data-bust-arc-input="{{session['front_measurements'].get('bust_arc_input') }}"
-		data-bust-span-input="{{session['front_measurements'].get('bust_span_input') }}"
-		data-waist-arc-input="{{session['front_measurements'].get('waist_arc_input') }}"
-		data-dart-placement-input="{{session['front_measurements'].get('dart_placement_input') }}"
-		data-side-length-input="{{session['front_measurements'].get('side_length_input') }}"
-
-		data-full-length-back-input="{{session['back_measurements'].get('full-length-back_input') }}"
-		data-center-back-input="{{session['back_measurements'].get('center_back_input') }}"
-		data-back-shoulder-slope-input="{{session['back_measurements'].get('back_shoulder_slope_input') }}"
-		data-across-back-input="{{session['back_measurements'].get('across_back_input') }}"
-		data-back-shoulder-length-input="{{session['back_measurements'].get('back_shoulder_length_input') }}"
-		data-back-arc-input="{{session['back_measurements'].get('back_arc_input') }}"
-		data-waist-arc-back-input="{{session['back_measurements'].get('waist_arc_back_input') }}"
-		data-back-neck-input="{{session['back_measurements'].get('back_neck_input') }}"
-		data-back-across-shoulder-input="{{session['back_measurements'].get('back_across_shoulder_input') }}"
-		data-back-dart-intake-input="{{session['back_measurements'].get('back_dart_intake_input') }}"
-		>
-	</span> -->
-
-{% else %}
-	<a href="/start">Please Fill out this form</a>
-{% endif %}
 
 <div class="container">
-	
+	<!--h1></h1-->
 	<div class="row">
 		<div class="col-md-4">
 			<h1 class="heading-titles">Front</h1> 
 			<div class="table">
-				<canvas id="drafting-table-front" width="461" height="461"></canvas>
+				<canvas id="drafting-table-front" class="drafting-table" width="461" height="461"></canvas>
 			</div>
 		</div>
 
 		<div class="col-md-4 col-md-offset-2">
 			<h1 class="heading-titles">Back</h1>
 			<div class="table">
-				<canvas id="drafting-table-back" width="461" height="461"></canvas>
+				<canvas id="drafting-table-back" class="drafting-table" width="461" height="461"></canvas>
 			</div>
 		</div>
 	</div>
+	<script>
+		console.log($('#test').val());
+	</script>
 
+<form>
 	<!-- Front Measurements -->
-	<input type="hidden" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
+	<input type="hidden" id="test" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
 	<input type="hidden" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
 	<input type="hidden" name="front-shoulder-slope" placeholder="{{ size_chart['front_shoulder_slope'] }}" value="{{ size_chart['front_shoulder_slope'] }}">
 	<input type="hidden" name="strap" placeholder="{{ size_chart['strap'] }}" value="{{ size_chart['strap'] }}">
@@ -91,7 +59,7 @@
 	<input type="hidden" name="back-across-shoulder" placeholder="{{ size_chart['back_across_shoulder'] }}" value="{{ size_chart['back_across_shoulder'] }}">
 	<input type="hidden" name="back-dart-intake" placeholder="{{ size_chart['back_dart_intake'] }}" value="{{ size_chart['back_dart_intake'] }}">
 
-
+</form>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-2 ">
 			<button id="save-front" type="submit" class="btn btn-default bottom-button">DOWNLOAD FRONT</button>

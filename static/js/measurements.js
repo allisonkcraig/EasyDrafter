@@ -12,7 +12,7 @@ $(document).ready(function(){
 		console.log('processFrontForm')
 
 		document.scale = 20;
-		//INPUT measurments.
+		//INPUT measurments.		
 		document.fullLength = parseFloat($('form input[name="full-length"]').val());
 		document.centerFront = parseFloat($('form input[name="center-front"]').val());
 		document.frontShoulderSlope = parseFloat($('form input[name="front-shoulder-slope"]').val());
