@@ -7,11 +7,12 @@
 $(document).ready(function(){
 
 
-	document.processFrontForm = function() {
+	document.processFrontForm = function(scaleIn) {
 
 		console.log('processFrontForm')
 
-		document.scale = 20;
+		document.scale = scaleIn || 20;
+
 		//INPUT measurments.		
 		document.fullLength = parseFloat($('form input[name="full-length"]').val());
 		document.centerFront = parseFloat($('form input[name="center-front"]').val());
@@ -64,11 +65,12 @@ $(document).ready(function(){
 
 
 
-	document.processBackForm = function() {
+	document.processBackForm = function(scaleIn) {
+
 
 		console.log('processBackForm')
 
-		document.scale = 20;
+		document.scale = scaleIn || 20;
 		// get from frotn draft jinja in session
 		document.sideLength = parseFloat($('form input[name="side-length"]').val());
 		document.shoulderLength = parseFloat($('form input[name="shoulder-length"]').val()); 

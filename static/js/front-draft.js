@@ -1,35 +1,47 @@
 $(document).ready(function() {
+	document.canvasHeight = 2001
+	document.canvasWidth = 1546
 
 	document.draftFrontCanvas = function(){
 		console.log("draftFrontCanvas")
-		document.processFrontForm()
+		document.processFrontForm(103)
 		// take in an object that that will be the way you store the data
 		// establish drafting table and document.pen
 		document.draftingTableFront = document.getElementById("drafting-table-front");
 
+		document.pen = document.draftingTableFront.getContext("2d");
+		document.pen.fillStyle="white";
+		document.pen.beginPath()
+		document.pen.moveTo(0, 0);
+		document.pen.fillRect(0,0, document.canvasHeight, document.canvasWidth)
+		document.pen.stroke();
+
+		
+
 		document.gridPenFront = document.draftingTableFront.getContext("2d");
 
 		// y axis grid lines
-		for (var y = 0.5; y < 461; y += 20) {
+		for (var y = 0.5; y < document.canvasHeight; y += document.scale) {
 			document.gridPenFront.beginPath();
 			document.gridPenFront.moveTo(0, y);
-			document.gridPenFront.lineTo(601, y);
+			document.gridPenFront.lineTo(2001, y);
 			document.gridPenFront.strokeStyle = "#E8E8EE";
 			document.gridPenFront.stroke();
 			};
 
 		// x axis grid lines
-		for (var x = 0.5; x < 601; x += 20) {
+		for (var x = 0.5; x < document.canvasWidth; x += document.scale) {
 			document.gridPenFront.beginPath();
 			document.gridPenFront.strokeStyle = "#E8E8EE";
 			document.gridPenFront.moveTo(x, 0);
-			document.gridPenFront.lineTo(x, 601);
+			document.gridPenFront.lineTo(x, 1556);
 			document.gridPenFront.stroke();
 			};
 
 
 		// START TEMPORARY LINES ////////////////////////////////////////////////////////
-		// set up pen and set colors for temporary lines
+		// set up pen and set colors for temporary line
+
 		document.pen = document.draftingTableFront.getContext("2d");
 		document.pen.fillStyle="#83AF9B";
 		document.pen.strokeStyle = "#EA8C86";
@@ -158,6 +170,7 @@ $(document).ready(function() {
 
 		// apply stroke to lines
 		document.penFinalFront.stroke();
+
 
 	};
 

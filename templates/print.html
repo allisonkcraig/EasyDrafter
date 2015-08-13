@@ -5,11 +5,9 @@
 	<script src='static/js/functions.js'></script>
 	<script src='static/js/measurements.js'></script>
 	<script src='static/js/front-draft.js'></script>
+	<script src='static/js/jspdf.min.js'></script>
 	<style type="text/css">
-		#drafting-table-front {
-			height:6900px;
 
-		}
 	</style>
 </head>
 <body>
@@ -20,6 +18,46 @@ DO NOT SCALE YOUR BLOCK.
 Each square should be an inch
 
 <canvas id="drafting-table-front" class="drafting-table" width="461" height="461"></canvas>
+<canvas id="the-canvas" class="drafting-table" width="461" height="461"></canvas>
+<script>
 
+
+		setTimeout(function() {
+
+		var canvas = document.draftingTableFront;
+		document.blockURL = document.draftingTableFront.toDataURL("image/jpeg", 1.0);
+
+		console.log(document.blockURL)
+      	var pdf = new jsPDF();
+
+      	console.log(pdf)
+      	// setTimeout(function() {
+      	pdf.addImage(document.blockURL, 'JPEG', 0, 0, 0, 0);
+      	pdf.save("front.pdf");
+      	// }, 500);
+
+      	}, 500);
+
+      
+
+// PDFJS.getDocument("front.pdf").then(function(pdf) {
+// pdf.getPage(1).then(function(page) {
+// 	var vscale = 1;
+// 	var viewport = page.getViewport(vscale);
+
+// 	var canvas = document.getElementById('drafting-table-front');
+// 	var context = canvas.getContext('2d');
+// 	canvas.height = viewport.height;
+// 	canvas.width = viewport.width;
+
+// 	var renderContext = {
+//   	canvasContext: context,
+//   	viewport: viewport
+// 	};
+// 	page.render(renderContext);
+// });
+// });
+
+</script>
 </body>
 </html>
