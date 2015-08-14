@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	document.draftFrontCanvas = function(){
 		console.log("draftFrontCanvas")
-		document.processFrontForm(103)
+		document.processFrontForm(100)
 		// take in an object that that will be the way you store the data
 		// establish drafting table and document.pen
 		document.draftingTableFront = document.getElementById("drafting-table-front");
@@ -34,7 +34,7 @@ $(document).ready(function() {
 			document.gridPenFront.beginPath();
 			document.gridPenFront.strokeStyle = "#E8E8EE";
 			document.gridPenFront.moveTo(x, 0);
-			document.gridPenFront.lineTo(x, 1556);
+			document.gridPenFront.lineTo(x, 2001);
 			document.gridPenFront.stroke();
 			};
 
