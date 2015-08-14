@@ -2,12 +2,12 @@ $(document).ready(function() {
 	document.canvasHeight = 2001
 	document.canvasWidth = 1546
 
-	document.draftFrontCanvas = function(){
+	document.draftFrontCanvas = function(frontTableName, scale){
 		console.log("draftFrontCanvas")
-		document.processFrontForm(100)
+		document.processFrontForm(scale)
 		// take in an object that that will be the way you store the data
 		// establish drafting table and document.pen
-		document.draftingTableFront = document.getElementById("drafting-table-front");
+		document.draftingTableFront = document.getElementById(frontTableName);
 
 		document.pen = document.draftingTableFront.getContext("2d");
 		document.pen.fillStyle="white";
@@ -62,7 +62,7 @@ $(document).ready(function() {
 		// ACROSS SHOULDER *******************************************************
 		document.pen.moveTo(0, 0);
 		document.pen.lineTo((document.scaledFrontAcrossShoulder), 0); // a to c
-		document.pen.lineTo((document.scaledFrontAcrossShoulder), 100); // square off c
+		document.pen.lineTo((document.scaledFrontAcrossShoulder), 5 * scale); // square off c
 
 
 		// BUST ARC **************************************************************
@@ -179,13 +179,13 @@ $(document).ready(function() {
  //    context.clearRect(0, 0, 461, 461);
 	// };
 
-	document.draftFrontCanvas();
+	// document.draftFrontCanvas();
 
 	$(".form-control").blur(function() {
 		document.clearCanvas(document.gridPenFront);
 		document.clearCanvas(document.pen);
 		document.clearCanvas(document.penFinalFront);
-		document.draftFrontCanvas();
+		document.draftFrontCanvas("drafting-table-front", 20);
 	});
 
 });

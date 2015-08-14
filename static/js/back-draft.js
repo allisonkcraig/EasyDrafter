@@ -1,10 +1,11 @@
 $(document).ready(function() {
 	
-	document.draftBackCanvas = function(){
-		document.processBackForm();
+	document.draftBackCanvas = function(backTableName, scale){
+
+		document.processBackForm(scale);
 
 		// establish drafting table and pen
-		document.draftingTableBack = document.getElementById("drafting-table-back");
+		document.draftingTableBack = document.getElementById(backTableName);
 		document.gridPenBack = document.draftingTableBack.getContext("2d");
 
 
@@ -49,7 +50,7 @@ $(document).ready(function() {
 		// ACROSS SHOULDER *******************************************************
 		document.penBack.moveTo(0, 0);
 		document.penBack.lineTo((document.scaledBackAcrossShoulder), 0); // a to c
-		document.penBack.lineTo((document.scaledBackAcrossShoulder), 100); // square off c
+		document.penBack.lineTo((document.scaledBackAcrossShoulder), 5 * scale); // square off c
 
 
 		// BACK ARC **************************************************************
@@ -147,13 +148,13 @@ $(document).ready(function() {
 	}
 
 
-	document.draftBackCanvas();
+
 
 	$('.form-control').blur(function() {
 		document.clearCanvas(document.gridPenBack);
 		document.clearCanvas(document.penBack);
 		document.clearCanvas(document.penFinalBack);
-		document.draftBackCanvas();
+		document.draftBackCanvas("drafting-table-back", 20);
 	});
 
 });

@@ -101,15 +101,6 @@ footer {
 	height: 20in;
 }
 
-.drafting-table-front {
-	height: 30em;
-}
-
-.drafting-table-back {
-	height: 30em;
-}
-
-
 .raleway {
 	font-family: "Raleway";
 }
@@ -117,4 +108,9 @@ footer {
 .instructions {
 	font-size: 1.5em;
 	margin-bottom: 1em;
+}
+
+#hidden-canvas {
+	padding-top: 400000px;
+	position: fixed;
 }
