@@ -21,9 +21,15 @@
 				<button class="btn btn-default">Start</button>
 			</form>
 			<br>
-			<form action="/login">
+
+
+			{% if session['logged_in_customer_email'] is defined %}
+                  Welcome Back!
+            {% else %}   
+				<form action="/login">
 				<button class="btn btn-default">Log In</button>
-			</form>
+				</form>
+			{% endif %}
 		</center>
 	</div>
 	<footer><a href="https://github.com/allisonkcraig" id="footer-a">app by Allison Craig</a></footer>

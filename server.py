@@ -31,27 +31,36 @@ def measure_page():
 def front_draft_page():
     """Use template measurements to draft a front block that closest fit them and allow users to change block to fit them using inputs """
     
+    # session['measurements'] = {}
 
-    session['measurements']['nickname'] = request.args.get("nickname")
-    session['measurements']['bust'] = request.args.get("bust")
-    session['measurements']['waist'] = request.args.get("waist")
-    
+    bust_input = request.args.get("bust")
+    waist_input = request.args.get("waist")
 
-    if float(session['measurements']['bust']) / float(session['measurements']['waist']) > 1.40: # the largest ratio of waist to bust in my standard sizes
-        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(session['measurements']['bust']), Size_Chart.bust > float(session['measurements']['bust']) -1 ).first()
-        print size_chart
+
+    if float(bust_input) / float(waist_input) > 1.40: # the largest ratio of waist to bust in my standard sizes
+        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(bust_input), Size_Chart.bust > float(bust_input) -1 ).first()
+        # print size_chart
         size_chart_dictionary = size_chart.__dict__
-        print size_chart_dictionary
+        # print size_chart_dictionary
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
+       
 
     else:
-        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(session['measurements']['waist']), Size_Chart.waist > float(session['measurements']['waist']) -1 ).first()
-        print size_chart
+        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(waist_input), Size_Chart.waist > float(waist_input) -1 ).first()
+        # print size_chart
         size_chart_dictionary = size_chart.__dict__
-        print size_chart_dictionary
+        # print size_chart_dictionary
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
+ 
+
+
+    session['measurements']['nickname'] = request.args.get("nickname")
+    print session['measurements']['nickname']
+    print session['measurements']
+    session['measurements']['bust'] = bust_input
+    session['measurements']['waist'] = waist_input
 
 
     return render_template("front-draft.html", size_chart=session['measurements'])
@@ -96,11 +105,50 @@ def pattern_page():
     return render_template("canvas.html", size_chart=session['measurements'])
                             
 
-@app.route('/print')
-def print_pattern():
-    """Query image of pattern and scale up to print via AJAX"""
+@app.route('/save')
+def save_pattern():
+    """Redirect after Save Block measurements"""
+    measurements_to_add = Measurement_Chart(
+        nickname=session['measurements']['nickname'],
+        user_id=session['current_user_id'],
+        bust=session['measurements']['bust'],   
+        waist=session['measurements']['waist'],
 
-    return render_template("print.html")
+        full_length=session['measurements']['full_length'],
+        center_front=session['measurements']['center_front'],
+        front_shoulder_slope=session['measurements']['front_shoulder_slope'],
+        strap=session['measurements']['strap'],
+        front_across_shoulder=session['measurements']['front_across_shoulder'],
+        across_chest=session['measurements']['across_chest'],
+        bust_depth=session['measurements']['bust_depth'],
+        shoulder_length=session['measurements']['shoulder_length'],
+        bust_arc=session['measurements']['bust_arc'],
+        bust_span=session['measurements']['bust_span'],
+        waist_arc=session['measurements']['waist_arc'],
+        dart_placement=session['measurements']['dart_placement'],
+        side_length=session['measurements']['side_length'],
+
+        full_length_back=session['measurements']['full_length_back'],
+        center_back=session['measurements']['center_back'],
+        back_shoulder_slope=session['measurements']['back_shoulder_slope'],
+        across_back=session['measurements']['across_back'],
+        back_arc=session['measurements']['back_arc'],
+        waist_arc_back=session['measurements']['waist_arc_back'],
+        back_neck=session['measurements']['back_neck'],
+        back_across_shoulder=session['measurements']['back_across_shoulder'],
+        back_dart_intake=session['measurements']['back_dart_intake'])
+ 
+    print measurements_to_add
+     
+    db.session.add(measurements_to_add)
+    db.session.commit() 
+
+    user_email = session['logged_in_customer_email']
+
+    user = User.query.filter(User.email == user_email).one() 
+
+    flash("Save Successful!!")
+    return render_template("profile.html", user=user, session=session)
 
 
 @app.route("/login", methods=["GET"])
@@ -118,16 +166,22 @@ def process_login():
 
     email_input = request.form.get("email")
     pword_input = request.form.get("password")
-    print "before line"
-    customer = User.query.filter_by(email=email_input).first()
 
-    print "after line"
+
+    ser_email = session['logged_in_customer_email']
+    user = User.query.filter(User.email == user_email).one()
+
     if customer:
         if pword_input != customer.password:
             flash("Incorrect password")
             return redirect("/login")
         else:
             flash("Login successful!!")
+            current_user = User.query.filter_by(email=email_input).first()
+            current_user_dict = current_user.__dict__
+            session['current_user_id'] = current_user_dict['user_id']
+            print session['current_user_id']
+            # print "+++++++++++++++++++++", session['current_user_id']
             session['logged_in_customer_email'] = email_input
             return render_template("profile.html", user=customer)
         
@@ -141,7 +195,11 @@ def user_profile_page():
     """Display user information and saved blocks"""
 
     user_email = session['logged_in_customer_email']
+
     user = User.query.filter(User.email == user_email).one()
+
+
+    saved_blocks = Measurement_Chart.query(Measurement_Chart.user_id==session['current_user_id']).all()
 
     return render_template("profile.html", user=user)
 
@@ -150,6 +208,8 @@ def user_profile_page():
 def process_logout():
     """Log out user and send them to the splash page"""
     del session['logged_in_customer_email']
+    del session['current_user_id']
+    del session['measurements']
     flash("You have been logged out")
     return redirect("/")
 

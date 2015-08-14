@@ -8,7 +8,7 @@ body {
 }
 
 .drafting-table {
-	margin-top: 2em;
+	margin-top: 5em;
  /*   border:3px solid #1E697B;*/
 /*    padding: 10px;*/
 /*    margin-left: 0px;*/
@@ -16,6 +16,10 @@ body {
     display: block;
 
 
+}
+
+.btn {
+	font-family: "Raleway";
 }
 
 .download-button {

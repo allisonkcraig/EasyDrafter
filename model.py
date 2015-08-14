@@ -40,7 +40,6 @@ class Measurement_Chart(db.Model):
 
     chart_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     nickname = db.Column(db.Integer, nullable=False)
-    # pattern_url = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.String(100), db.ForeignKey('Users.user_id'))
     bust = db.Column(db.Integer, nullable=False)
     waist = db.Column(db.Integer, nullable=False)
@@ -63,7 +62,6 @@ class Measurement_Chart(db.Model):
     center_back = db.Column(db.Integer, nullable=False)
     back_shoulder_slope = db.Column(db.Integer, nullable=False)
     across_back = db.Column(db.Integer, nullable=False)
-    back_shoulder_length = db.Column(db.Integer, nullable=False)
     back_arc = db.Column(db.Integer, nullable=False)
     waist_arc_back = db.Column(db.Integer, nullable=False)
     back_neck = db.Column(db.Integer, nullable=False)
