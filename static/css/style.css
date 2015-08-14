@@ -8,14 +8,19 @@ body {
 }
 
 .drafting-table {
-	margin-top: 5em;
+	margin-top: 2em;
  /*   border:3px solid #1E697B;*/
 /*    padding: 10px;*/
 /*    margin-left: 0px;*/
     position: fixed;
+    display: block;
+
 
 }
 
+.download-button {
+	display: inline;
+}
 
 #measurement-table {
 	font-family: "Raleway";
@@ -72,7 +77,6 @@ body {
 	margin-top: 0px;
 }
 
-
 footer {
 	font-family: "Raleway";
 	background-color: #EA8C86;
@@ -111,6 +115,8 @@ footer {
 }
 
 #hidden-canvas {
-	padding-top: 400000px;
-	position: fixed;
+	position: absolute;
+	padding-left: 5000px;
+	display: block;
+	z-index: -1;
 }

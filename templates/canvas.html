@@ -8,12 +8,6 @@
 	<script src='static/js/jspdf.min.js'></script>
 	<script src='static/js/canvas2image.js'></script>
 
-	<style>
-	/*	#drafting-table-front {
-			height:600px;
-
-		}*/
-</style>
 {% endblock %}
 
 
@@ -22,7 +16,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
-			<h1 class="heading-titles">Front</h1> 
+			<h1 class="heading-titles">Front</h1><button id="save-front" type="submit" class="btn btn-default download-button">DOWNLOAD FRONT PDF</button> 
 			<!-- <button id="save-front" type="submit" class="btn btn-default bottom-button">DOWNLOAD FRONT PDF</button> -->
 			<div class="table">
 				<canvas id="drafting-table-front" class="drafting-table" width="461" height="461"></canvas>
@@ -30,19 +24,16 @@
 		</div>
 
 		<div class="col-md-4 col-md-offset-2">
-			<h1 class="heading-titles">Back</h1>
+			<h1 class="heading-titles">Back</h1><button id="save-back" type="submit" class="btn btn-default download-button">DOWNLOAD BACK PDF</button>
 			<div class="table">
-				<canvas id="drafting-table-back" class="drafting-table" width="1546" height="461"></canvas>
+				<canvas id="drafting-table-back" class="drafting-table" width="461" height="461"></canvas>
 			</div>
 		</div>
 	</div>
-	<script>
-		console.log($('#test').val());
-	</script>
 
-
-<div class="row">
-		<div class="col-md-4">
+<!-- 
+	<div class="row">
+		<div class="col-md-12 col-md-offset-12">
 			
 			<div class="table">
 				<canvas id="drafting-table-front-large" class="drafting-table" width="1546" height="2001"></canvas>
@@ -51,184 +42,68 @@
 
 		<div class="col-md-4 col-md-offset-2">
 			<div class="table">
-				<canvas id="drafting-table-back" class="drafting-table" width="1546" height="461"></canvas>
+				<canvas id="drafting-table-back" class="drafting-table" width="1546" height="2001"></canvas>
 			</div>
 		</div>
-	</div>
-<form>
-	<!-- Front Measurements -->
-	<input type="hidden" id="test" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
-	<input type="hidden" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
-	<input type="hidden" name="front-shoulder-slope" placeholder="{{ size_chart['front_shoulder_slope'] }}" value="{{ size_chart['front_shoulder_slope'] }}">
-	<input type="hidden" name="strap" placeholder="{{ size_chart['strap'] }}" value="{{ size_chart['strap'] }}">
-	<input type="hidden" name="front-across-shoulder" placeholder="{{ size_chart['front_across_shoulder'] }}" value="{{ size_chart['front_across_shoulder'] }}">
-	<input type="hidden" name="across-chest" placeholder="{{ size_chart['across_chest'] }}" value="{{ size_chart['across_chest'] }}">
-	<input type="hidden" name="bust-depth" placeholder="{{ size_chart['bust_depth'] }}" value="{{ size_chart['bust_depth'] }}">
-	<input type="hidden" name="shoulder-length" placeholder="{{ size_chart['shoulder_length'] }}" value="{{ size_chart['shoulder_length'] }}">
-	<input type="hidden" name="bust-arc" placeholder="{{ size_chart['bust_arc'] }}" value="{{ size_chart['bust_arc'] }}">
-	<input type="hidden" name="bust-span" placeholder="{{ size_chart['bust_span'] }}" value="{{ size_chart['bust_span'] }}">
-	<input type="hidden" name="waist-arc" placeholder="{{ size_chart['waist_arc'] }}" value="{{ size_chart['waist_arc'] }}">
-	<input type="hidden" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
-	<input type="hidden" name="side-length" placeholder="{{ size_chart['side_length'] }}" value="{{ size_chart['side_length'] }}">
+	</div> -->
 
-	<!-- Back Measurements -->
-	<input type="hidden" name="full-length-back" placeholder="{{ size_chart['full_length_back'] }}" value="{{ size_chart['full_length_back'] }}">
-	<input type="hidden" name="center-back" placeholder="{{ size_chart['center_back'] }}" value="{{ size_chart['center_back'] }}">
-	<input type="hidden" name="back-shoulder-slope" placeholder="{{ size_chart['back_shoulder_slope'] }}" value="{{ size_chart['back_shoulder_slope'] }}">
-	<input type="hidden" name="across-back" placeholder="{{ size_chart['across_back'] }}" value="{{ size_chart['across_back'] }}">
-	<input type="hidden" name="back-arc" placeholder="{{ size_chart['back_arc'] }}" value="{{ size_chart['back_arc'] }}">
-	<input type="hidden" name="waist-arc-back" placeholder="{{ size_chart['waist_arc_back'] }}" value="{{ size_chart['waist_arc_back'] }}">
-	<input type="hidden" name="back-neck" placeholder="{{ size_chart['back_neck'] }}" value="{{ size_chart['back_neck'] }}">
-	<input type="hidden" name="back-across-shoulder" placeholder="{{ size_chart['back_across_shoulder'] }}" value="{{ size_chart['back_across_shoulder'] }}">
-	<input type="hidden" name="back-dart-intake" placeholder="{{ size_chart['back_dart_intake'] }}" value="{{ size_chart['back_dart_intake'] }}">
+	<form>
 
-</form>
-	<div class="row">
-		<div class="col-md-4">
-			<button id="save-front" type="submit" class="btn btn-default bottom-button">DOWNLOAD FRONT PDF</button>
-		</div>
+		<!-- Front Measurements -->
+		<input type="hidden" id="test" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
+		<input type="hidden" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
+		<input type="hidden" name="front-shoulder-slope" placeholder="{{ size_chart['front_shoulder_slope'] }}" value="{{ size_chart['front_shoulder_slope'] }}">
+		<input type="hidden" name="strap" placeholder="{{ size_chart['strap'] }}" value="{{ size_chart['strap'] }}">
+		<input type="hidden" name="front-across-shoulder" placeholder="{{ size_chart['front_across_shoulder'] }}" value="{{ size_chart['front_across_shoulder'] }}">
+		<input type="hidden" name="across-chest" placeholder="{{ size_chart['across_chest'] }}" value="{{ size_chart['across_chest'] }}">
+		<input type="hidden" name="bust-depth" placeholder="{{ size_chart['bust_depth'] }}" value="{{ size_chart['bust_depth'] }}">
+		<input type="hidden" name="shoulder-length" placeholder="{{ size_chart['shoulder_length'] }}" value="{{ size_chart['shoulder_length'] }}">
+		<input type="hidden" name="bust-arc" placeholder="{{ size_chart['bust_arc'] }}" value="{{ size_chart['bust_arc'] }}">
+		<input type="hidden" name="bust-span" placeholder="{{ size_chart['bust_span'] }}" value="{{ size_chart['bust_span'] }}">
+		<input type="hidden" name="waist-arc" placeholder="{{ size_chart['waist_arc'] }}" value="{{ size_chart['waist_arc'] }}">
+		<input type="hidden" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
+		<input type="hidden" name="side-length" placeholder="{{ size_chart['side_length'] }}" value="{{ size_chart['side_length'] }}">
 
-		<div class="col-md-4">
-			<button id="save-back" type="submit" class="btn btn-default bottom-button">DOWNLOAD BACK PDF</button>
-		</div>
-	</div>
+		<!-- Back Measurements -->
+		<input type="hidden" name="full-length-back" placeholder="{{ size_chart['full_length_back'] }}" value="{{ size_chart['full_length_back'] }}">
+		<input type="hidden" name="center-back" placeholder="{{ size_chart['center_back'] }}" value="{{ size_chart['center_back'] }}">
+		<input type="hidden" name="back-shoulder-slope" placeholder="{{ size_chart['back_shoulder_slope'] }}" value="{{ size_chart['back_shoulder_slope'] }}">
+		<input type="hidden" name="across-back" placeholder="{{ size_chart['across_back'] }}" value="{{ size_chart['across_back'] }}">
+		<input type="hidden" name="back-arc" placeholder="{{ size_chart['back_arc'] }}" value="{{ size_chart['back_arc'] }}">
+		<input type="hidden" name="waist-arc-back" placeholder="{{ size_chart['waist_arc_back'] }}" value="{{ size_chart['waist_arc_back'] }}">
+		<input type="hidden" name="back-neck" placeholder="{{ size_chart['back_neck'] }}" value="{{ size_chart['back_neck'] }}">
+		<input type="hidden" name="back-across-shoulder" placeholder="{{ size_chart['back_across_shoulder'] }}" value="{{ size_chart['back_across_shoulder'] }}">
+		<input type="hidden" name="back-dart-intake" placeholder="{{ size_chart['back_dart_intake'] }}" value="{{ size_chart['back_dart_intake'] }}">
+
+	</form>
 
 </div>
 
 <!-- Hidden Canvases for printing large -->
 <div class="row" id="hidden-canvas">
-		<div class="col-md-4">
+	<div class="col-md-4">
 			
-			<div class="table">
-				<canvas id="drafting-table-front-large" class="drafting-table" width="1546" height="2001"></canvas>
-			</div>
-		</div>
-
-		<div class="col-md-4 col-md-offset-2">
-			<div class="table">
-				<canvas id="drafting-table-back" class="drafting-table" width="1546" height="461"></canvas>
-			</div>
+		<div class="table">
+			<canvas id="drafting-table-front-large" class="drafting-table" width="1546" height="2001"></canvas>
 		</div>
 	</div>
 
+	<div class="col-md-4 col-md-offset-2">
+		<div class="table">
+			<canvas id="drafting-table-back-large" class="drafting-table" width="1546" height="2001"></canvas>
+		</div>
+	</div>
+</div>
+
 <script>
+
 $(document).ready(function(){
-document.draftFrontCanvas("drafting-table-front",20);
 document.draftFrontCanvas("drafting-table-front-large",100);
-document.draftFrontCanvas("drafting-table-back", 20)
+document.draftFrontCanvas("drafting-table-front",20);
+document.draftBackCanvas("drafting-table-back-large", 100)
+document.draftBackCanvas("drafting-table-back", 20)
+
 })
-
-// $('#save-front').on('click', 
-// 	function(){
-
-// 		setTimeout(function() {	
-
-// 			document.draftingTableFront = document.getElementById("drafting-table-front-large");
-
-// 			var imageData = document.draftingTableFront.toDataURL("image/jpeg");
-// 			var image = new Image();
-// 			image = Canvas2Image.convertToJPEG(document.draftingTableFront);
-// 			var doc = new jsPDF();
-// 			doc.addImage(imageData, 'JPEG', 12, 10);
-// 			var croppingYPosition = 999;
-// 			var croppingXPosition = 699;
-// 			count = (image.height) / 1001;
-// 			countx = (image.width) / 701;
-
-
-// 			for (var i = 1; i < count; i++) {
-
-// 				doc.addPage();
-//                         var sourceX = 0; // where we start stealing image
-//                         var sourceY = croppingYPosition;
-//                         var sourceWidth = image.width; // controls how big of an image we steal from the sourc image
-//                         var sourceHeight = image.height;
-//                         var destWidth = sourceWidth;  // controll how big image is on PDF
-//                         var destHeight = sourceHeight; // scales exponentially
-//                         var destX = 0; //where top left corver goes on PDF
-//                         var destY = 0;
-//                         var canvas1 = document.createElement('canvas');
-//                         canvas1.setAttribute('height', destHeight);
-//                         canvas1.setAttribute('width', destWidth);                         
-//                         var ctx = canvas1.getContext("2d");
-//                         ctx.drawImage(image, sourceX, 
-//                         	sourceY,
-//                         	sourceWidth,
-//                         	sourceHeight, 
-//                         	destX, 
-//                         	destY, 
-//                         	destWidth, 
-//                         	destHeight);
-//                         var image2 = new Image();
-//                         image2 = Canvas2Image.convertToJPEG(canvas1);
-//                         image2Data = image2.src;
-//                         doc.addImage(image2Data, 'JPEG', 12, 10);
-//                         croppingYPosition += destHeight;              
-//                     };    
-
-//                     for (var i = 1; i < count; i++) {
-
-//                     	doc.addPage();
-//                         var sourceX = croppingXPosition; // where we start stealing image
-//                         var sourceY = 0;
-//                         var sourceWidth = image.width; // controls how big of an image we steal from the sourc image
-//                         var sourceHeight = image.height;
-//                         var destWidth = sourceWidth; // controll how big image is on PDF
-//                         var destHeight = sourceHeight;
-//                         var destX = 0; //where top left corver goes on PDF
-//                         var destY = 0;
-//                         var canvas1 = document.createElement('canvas');
-//                         canvas1.setAttribute('height', destHeight);
-//                         canvas1.setAttribute('width', destWidth);                         
-//                         var ctx = canvas1.getContext("2d");
-//                         ctx.drawImage(image, sourceX, 
-//                         	sourceY,
-//                         	sourceWidth,
-//                         	sourceHeight, 
-//                         	destX, 
-//                         	destY, 
-//                         	destWidth, 
-//                         	destHeight);
-//                         var image2 = new Image();
-//                         image2 = Canvas2Image.convertToJPEG(canvas1);
-//                         image2Data = image2.src;
-//                         doc.addImage(image2Data, 'JPEG', 12, 10);
-//                         croppingYPosition += destHeight;              
-//                     };              
-//                     var croppingYPosition = 999;
-
-//                     for (var i = 1; i < count; i++) {
-//                     	console.log("Page 3")
-//                     	doc.addPage();
-//                         var sourceX = croppingXPosition; // where we start stealing image
-//                         var sourceY = croppingYPosition;
-//                         var sourceWidth = image.width; // controls how big of an image we steal from the sourc image
-//                         var sourceHeight = image.height;
-//                         var destWidth = sourceWidth; // controll how big image is on PDF
-//                         var destHeight = sourceHeight;
-//                         var destX = 0; //where top left corver goes on PDF
-//                         var destY = 0;
-//                         var canvas1 = document.createElement('canvas');
-//                         canvas1.setAttribute('height', destHeight);
-//                         canvas1.setAttribute('width', destWidth);                         
-//                         var ctx = canvas1.getContext("2d");
-//                         ctx.drawImage(image, sourceX, 
-//                         	sourceY,
-//                         	sourceWidth,
-//                         	sourceHeight, 
-//                         	destX, 
-//                         	destY, 
-//                         	destWidth, 
-//                         	destHeight);
-//                         var image2 = new Image();
-//                         image2 = Canvas2Image.convertToJPEG(canvas1);
-//                         image2Data = image2.src;
-//                         doc.addImage(image2Data, 'JPEG', 12, 10);
-//                         croppingYPosition += destHeight;              
-//                     };            
-//                     doc.save("pattern.pdf");
-//                 }, 500);
-// });
 
 </script>
 <script src='static/js/print-pattern.js'></script>

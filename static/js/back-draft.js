@@ -1,30 +1,40 @@
 $(document).ready(function() {
-	
+	document.canvasHeight = 2001
+	document.canvasWidth = 1546
+
 	document.draftBackCanvas = function(backTableName, scale){
 
 		document.processBackForm(scale);
 
 		// establish drafting table and pen
 		document.draftingTableBack = document.getElementById(backTableName);
+
+		document.pen = document.draftingTableBack.getContext("2d");
+		document.pen.fillStyle="white";
+		document.pen.beginPath()
+		document.pen.moveTo(0, 0);
+		document.pen.fillRect(0,0, document.canvasHeight * 20, document.canvasWidth * 20)
+		document.pen.stroke();
+
 		document.gridPenBack = document.draftingTableBack.getContext("2d");
 
 
 		// y axis grid lines
-		for (var y = 0.5; y < 461; y += 20) {
+		for (var y = 0.5; y < 2001; y += document.scale) {
 			document.gridPenBack.beginPath();
 			document.gridPenBack.moveTo(0, y);
-			document.gridPenBack.lineTo(601, y);
+			document.gridPenBack.lineTo(2001, y);
 			document.gridPenBack.strokeStyle = "#E8E8EE";
 			document.gridPenBack.stroke();
 			};
 
 
 		// x axis grid lines
-		for (var x = 0.5; x < 601; x += 20) {
+		for (var x = 0.5; x < 2001; x += document.scale) {
 			document.gridPenBack.beginPath();
 			document.gridPenBack.strokeStyle = "#E8E8EE";
 			document.gridPenBack.moveTo(x, 0);
-			document.gridPenBack.lineTo(x, 601);
+			document.gridPenBack.lineTo(x, 2001);
 			document.gridPenBack.stroke();
 			};
 
@@ -56,7 +66,7 @@ $(document).ready(function() {
 		// BACK ARC **************************************************************
 		document.penBack.moveTo(0, (document.scaledfullLengthBack)); 
 		document.penBack.lineTo(document.scaledBackArc, (document.scaledfullLengthBack)); // b to e
-		document.penBack.lineTo(document.scaledBackArc, 60); // square up from e
+		document.penBack.lineTo(document.scaledBackArc, 3 * scale); // square up from e
 		document.penBack.moveTo(document.scaledDartPlacement, (document.scaledfullLengthBack)); 
 
 

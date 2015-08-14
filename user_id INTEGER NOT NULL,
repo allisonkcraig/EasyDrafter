@@ -1,0 +1,15 @@
+user_id INTEGER NOT NULL, 
+	email VARCHAR(64) NOT NULL, 
+	password VARCHAR(64) NOT NULL, 
+	fname VARCHAR(15) NOT NULL, 
+	PRIMARY KEY (user_id), 
+	UNIQUE (email)
+
+
+INSERT INTO Users (email, password, fname)
+VALUES ("allison@craig.net", "hello", "Allison K.");
+
+
+
+INSERT INTO Users (email, password, fname)
+VALUES ("allisonkcraig@gmail.com", "hello", "Allison C.");

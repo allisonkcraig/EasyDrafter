@@ -106,7 +106,7 @@ $('#save-front').on('click',
                         doc.addImage(image2Data, 'JPEG', 12, 10);
                         croppingYPosition += destHeight;              
                     };            
-                    doc.save("pattern.pdf");
+                    doc.save("pattern-front.pdf");
                 }, 500);
 });
 
@@ -115,7 +115,7 @@ $('#save-back').on('click',
 
         setTimeout(function() { 
             
-            document.draftingTableFront = document.getElementById("drafting-table-back");
+            document.draftingTableFront = document.getElementById("drafting-table-back-large");
 
             var imageData = document.draftingTableFront.toDataURL("image/jpeg");
             var image = new Image();
@@ -218,6 +218,6 @@ $('#save-back').on('click',
                         doc.addImage(image2Data, 'JPEG', 12, 10);
                         croppingYPosition += destHeight;              
                     };            
-                    doc.save("pattern.pdf");
+                    doc.save("pattern-back.pdf");
                 }, 500);
 });
