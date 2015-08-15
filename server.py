@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, redirect, flash, session
+from flask import Flask, request, jsonify, render_template, redirect, flash, session, g
 import os
 # from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
@@ -227,8 +227,17 @@ def process_logout():
     flash("You have been logged out")
     return redirect("/")
 
+# JS_TESTING_MODE = False
+
+# @app.before_request
+# def add_tests():
+#     g.jasmine_tests = JS_TESTING_MODE
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+    # import sys
+    # if sys.argv[-1] == "jstest":
+    #     JS_TESTING_MODE = True
     connect_to_db(app)
     app.run(debug=True, port=port)

@@ -1,11 +1,4 @@
-// // basic measurements
-// var pattern_nickname = "Allison's-First-Pattern.png"
-// var bust = 36.00;
-// var waist = 26.00;
-
-
 $(document).ready(function(){
-
 
 	document.processFrontForm = function(scaleIn) {
 
