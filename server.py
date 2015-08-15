@@ -138,17 +138,30 @@ def save_pattern():
         back_across_shoulder=session['measurements']['back_across_shoulder'],
         back_dart_intake=session['measurements']['back_dart_intake'])
  
-    print measurements_to_add
+    # print measurements_to_add
      
     db.session.add(measurements_to_add)
     db.session.commit() 
 
-    user_email = session['logged_in_customer_email']
-
-    user = User.query.filter(User.email == user_email).one() 
-
+  
     flash("Save Successful!!")
-    return render_template("profile.html", user=user, session=session)
+    return redirect("/profile")
+
+
+@app.route('/print/<int:chart_id_selected>')
+def print_page(chart_id_selected):
+    """Checks chart_id of selected measurement chart and allows you to print"""
+
+    current_chart = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_selected).first()
+
+    current_chart_dict = current_chart.__dict__
+
+    if current_chart_dict['_sa_instance_state']:
+        del current_chart_dict['_sa_instance_state']
+    
+    session['measurements'] = current_chart_dict
+
+    return render_template("canvas.html", size_chart=session['measurements'])
 
 
 @app.route("/login", methods=["GET"])
@@ -168,11 +181,13 @@ def process_login():
     pword_input = request.form.get("password")
 
 
-    ser_email = session['logged_in_customer_email']
-    user = User.query.filter(User.email == user_email).one()
+    session['logged_in_customer_email'] = email_input
 
-    if customer:
-        if pword_input != customer.password:
+
+    user = User.query.filter(User.email == email_input).one()
+
+    if user:
+        if pword_input != user.password:
             flash("Incorrect password")
             return redirect("/login")
         else:
@@ -181,9 +196,8 @@ def process_login():
             current_user_dict = current_user.__dict__
             session['current_user_id'] = current_user_dict['user_id']
             print session['current_user_id']
-            # print "+++++++++++++++++++++", session['current_user_id']
             session['logged_in_customer_email'] = email_input
-            return render_template("profile.html", user=customer)
+            return redirect("/profile")
         
     else:
         flash("No such email")
@@ -196,12 +210,12 @@ def user_profile_page():
 
     user_email = session['logged_in_customer_email']
 
-    user = User.query.filter(User.email == user_email).one()
+    user = User.query.filter(User.email==user_email).one()
+    print type(user)
 
+    saved_blocks = Measurement_Chart.query.filter(Measurement_Chart.user_id==1).all()
 
-    saved_blocks = Measurement_Chart.query(Measurement_Chart.user_id==session['current_user_id']).all()
-
-    return render_template("profile.html", user=user)
+    return render_template("profile.html", user=user, session=session, savedblocks=saved_blocks)
 
 
 @app.route("/logout")

@@ -8,7 +8,7 @@ body {
 }
 
 .drafting-table {
-	margin-top: 5em;
+	margin-top: 1em;
  /*   border:3px solid #1E697B;*/
 /*    padding: 10px;*/
 /*    margin-left: 0px;*/
@@ -28,6 +28,10 @@ body {
 
 #measurement-table {
 	font-family: "Raleway";
+}
+
+.working-table {
+	padding-top: 5em;
 }
 
 .header {

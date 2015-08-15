@@ -21,105 +21,104 @@
 
 <div class="container">
 		<div class="row">
-		<div class="col-md-4">
+		<div class="col-xs-12 col-md-6">
 			<h1 class="heading-titles table-name">Front</h1>
 			<div class="table">
 				<span id="canvas-front">
-				<canvas id="drafting-table-front" class="drafting-table" width="461" height="461"></canvas>
+				<canvas id="drafting-table-front" class="drafting-table working-table" width="461" height="461"></canvas>
 				</span>
 			</div>
 		</div>
-			<div class="col-md-4 col-md-offset-2">
+			<div class="col-xs-12 col-md-4">
 				<div id="measurement-table">
 				<center><h3 class="heading-titles instructions">Change Measurements Below in Inches</h3></center>
 				<form  action="/back-draft" class="form-horizontal" id="front-measurement-form">
-					<div class="row">
 						<div class="form-group">
-							<label for="full-length" class="col-sm-5 control-label">Full Length</label>
+							<label for="full-length" class="col-sm-6 control-label">Full Length</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="center-front" class="col-sm-5 control-label">Center Front</label>
+							<label for="center-front" class="col-sm-6 control-label">Center Front</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="front-shoulder-slope" class="col-sm-5 control-label">Shoulder Slope</label>
+							<label for="front-shoulder-slope" class="col-sm-6 control-label">Shoulder Slope</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="front-shoulder-slope" placeholder="{{ size_chart['front_shoulder_slope'] }}" value="{{ size_chart['front_shoulder_slope'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="strap" class="col-sm-5 control-label">Strap</label>
+							<label for="strap" class="col-sm-6 control-label">Strap</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="strap" placeholder="{{ size_chart['strap'] }}" value="{{ size_chart['strap'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="front-across-shoulder" class="col-sm-5 control-label">Across Shoulder</label>
+							<label for="front-across-shoulder" class="col-sm-6 control-label">Across Shoulder</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="front-across-shoulder" placeholder="{{ size_chart['front_across_shoulder'] }}" value="{{ size_chart['front_across_shoulder'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="across-chest" class="col-sm-5 control-label">Across Chest</label>
+							<label for="across-chest" class="col-sm-6 control-label">Across Chest</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="across-chest" placeholder="{{ size_chart['across_chest'] }}" value="{{ size_chart['across_chest'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="bust-depth" class="col-sm-5 control-label">Bust Depth</label>
+							<label for="bust-depth" class="col-sm-6 control-label">Bust Depth</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="bust-depth" placeholder="{{ size_chart['bust_depth'] }}" value="{{ size_chart['bust_depth'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="shoulder-length" class="col-sm-5 control-label">Shoulder Length</label>
+							<label for="shoulder-length" class="col-sm-6 control-label">Shoulder Length</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="shoulder-length" placeholder="{{ size_chart['shoulder_length'] }}" value="{{ size_chart['shoulder_length'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="bust-arc" class="col-sm-5 control-label">Bust Arc</label>
+							<label for="bust-arc" class="col-sm-6 control-label">Bust Arc</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="bust-arc" placeholder="{{ size_chart['bust_arc'] }}" value="{{ size_chart['bust_arc'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="bust-span" class="col-sm-5 control-label">Bust Span</label>
+							<label for="bust-span" class="col-sm-6 control-label">Bust Span</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="bust-span" placeholder="{{ size_chart['bust_span'] }}" value="{{ size_chart['bust_span'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="waist-arc" class="col-sm-5 control-label">Waist Arc</label>
+							<label for="waist-arc" class="col-sm-6 control-label">Waist Arc</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="waist-arc" placeholder="{{ size_chart['waist_arc'] }}" value="{{ size_chart['waist_arc'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="dart-placement" class="col-sm-5 control-label">Dart Placement</label>
+							<label for="dart-placement" class="col-sm-6 control-label">Dart Placement</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="side-length" class="col-sm-5 control-label">Side Length</label>
+							<label for="side-length" class="col-sm-6 control-label">Side Length</label>
 							<div class="col-sm-4">
 								<input type="number" class="form-control" step="0.01" name="side-length" placeholder="{{ size_chart['side_length'] }}" value="{{ size_chart['side_length'] }}">
 							</div>
@@ -133,8 +132,9 @@
 							</div>
 						</div>
 					</div>
+					</div>
 				</form>
-			</div>
+			
 		</div>
 	</div>
 </div>

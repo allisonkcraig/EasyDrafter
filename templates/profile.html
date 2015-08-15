@@ -5,7 +5,16 @@
 
 <center><h3 class="raleway">Email: {{ user.email }}</h3></center>
 
+{% if savedblocks %}
 <center><h3 class="raleway">Your Saved Blocks: </h3></center>
+<center><h4 class="raleway">click to reprint</h4></center>
 
+{% for block in savedblocks %}
+
+	<center><a href='/print/{{block.chart_id}}'><h4>{{ block.nickname }}</h4></a></center>
+	<input type="hidden" name="{{ block.chart_id }}" value="{{ block.chart_id }}">
+
+{% endfor %}
+{% endif %}
 
 {% endblock %}

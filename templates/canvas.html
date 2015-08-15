@@ -1,53 +1,44 @@
 {% extends 'base.html' %}
 
 {% block head %}
-	<script src='static/js/functions.js'></script>
-	<script src='static/js/measurements.js'></script>
-	<script src='static/js/front-draft.js'></script>
-	<script src='static/js/back-draft.js'></script>
-	<script src='static/js/jspdf.min.js'></script>
-	<script src='static/js/canvas2image.js'></script>
+	<script src='/static/js/functions.js'></script>
+	<script src='/static/js/measurements.js'></script>
+	<script src='/static/js/front-draft.js'></script>
+	<script src='/static/js/back-draft.js'></script>
+	<script src='/static/js/jspdf.min.js'></script>
+	<script src='/static/js/canvas2image.js'></script>
 
 {% endblock %}
-
-
 {% block content %}
-<form action="/save">
-	<button class="btn btn-default">SAVE</button>
-</form>
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6 col-md-offset-3">
+	<center><h1 class="heading-titles">{{ size_chart.nickname }}</h1></center>
+	{% if session['logged_in_customer_email'] is defined %}
+	<br>
+		<form action="/save">
+			<center><button class="btn btn-default">SAVE</button></center>
+		</form>
+	</div>
+	</div>
+	{% endif %}
+	<div class="row">
+		<div class="col-md-4 col-md-offset-1">
 			<h1 class="heading-titles">Front</h1><button id="save-front" type="submit" class="btn btn-default download-button">DOWNLOAD FRONT PDF</button> 
 			<div class="table">
-				<canvas id="drafting-table-front" class="drafting-table" width="461" height="461"></canvas>
+				<canvas id="drafting-table-front" class="drafting-table" width="346" height="346"></canvas>
 			</div>
 		</div>
 
 		<div class="col-md-4 col-md-offset-2">
 			<h1 class="heading-titles">Back</h1><button id="save-back" type="submit" class="btn btn-default download-button">DOWNLOAD BACK PDF</button>
 			<div class="table">
-				<canvas id="drafting-table-back" class="drafting-table" width="461" height="461"></canvas>
+				<canvas id="drafting-table-back" class="drafting-table" width="346" height="346"></canvas>
 			</div>
 		</div>
 	</div>
 
-<!-- 
-	<div class="row">
-		<div class="col-md-12 col-md-offset-12">
-			
-			<div class="table">
-				<canvas id="drafting-table-front-large" class="drafting-table" width="1546" height="2001"></canvas>
-			</div>
-		</div>
-
-		<div class="col-md-4 col-md-offset-2">
-			<div class="table">
-				<canvas id="drafting-table-back" class="drafting-table" width="1546" height="2001"></canvas>
-			</div>
-		</div>
-	</div> -->
 
 	<form>
 
@@ -101,12 +92,12 @@
 
 $(document).ready(function(){
 document.draftFrontCanvas("drafting-table-front-large",100);
-document.draftFrontCanvas("drafting-table-front",20);
-document.draftBackCanvas("drafting-table-back-large", 100)
-document.draftBackCanvas("drafting-table-back", 20)
+document.draftFrontCanvas("drafting-table-front", 15);
+document.draftBackCanvas("drafting-table-back-large", 100);
+document.draftBackCanvas("drafting-table-back", 15);
 
 })
 
 </script>
-<script src='static/js/print-pattern.js'></script>
+<script src='/static/js/print-pattern.js'></script>
 {% endblock %}
