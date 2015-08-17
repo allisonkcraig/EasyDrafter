@@ -218,15 +218,15 @@ def user_profile_page():
     return render_template("profile.html", user=user, session=session, savedblocks=saved_blocks)
 
 
-@app.route("/delete-block")
+@app.route("/delete-block", methods=["POST"])
 def delete_block():
     # event.prevent_default()
-
-    chart_id_input = request.args.get("delete-button")
+    chart_id_input = request.form["delete-button"]
     chart_in_db = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_input).all()
     db.session.delete(chart_in_db)
     db.session.commit()
-    pass
+    flash("Block has been deleted")
+    return 
 
 @app.route("/logout")
 def process_logout():
