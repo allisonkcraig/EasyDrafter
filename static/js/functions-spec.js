@@ -1,4 +1,4 @@
-// Test on canvas.html
+// Test for functions.js
 
 
 describe("My pythagoreanCAndA function should", function () {
@@ -7,31 +7,50 @@ describe("My pythagoreanCAndA function should", function () {
         expect(document.pythagoreanCAndA(3, 1)).toBe(2.8284271247461903);
     });
 
-    // it("should add negative numbers", function () {
-    //     expect(adder(1, -1)).toBe(99);
-    // });
+    it("should give NAN for a A side that is longer than Hypotoneuse", function () {
+        expect(document.pythagoreanCAndA(1, 2)).toBeNaN();
+    });
 
 });
 
 
-	// // right angle equations to find rise or run
-	// document.pythagoreanCAndA = function(c, a) {
-	// 	var sideB = Math.sqrt((Math.pow(c, y = 2)) - (Math.pow(a, y = 2)));
-	// 	return sideB
-	// };
+describe("My pythagoreanAAndB function should", function () {
 
-	// // right angle equations to find hypononeuse
-	// document.pythagoreanAAndB = function(a, b) {
-	// 	var sideC = Math.sqrt((Math.pow(a, y = 2)) + (Math.pow(b, y = 2)));
-	// 	return sideC
-	// };
+    it("should take two numbers and use them to find the length of Hypotoneuse of a right triangle", function () {
+        expect(document.pythagoreanAAndB(1, 2)).toBe(2.23606797749979);
+    });
+
+    it("should take two numbers and use them to find the length of Hypotoneuse of a right triangle", function () {
+        expect(document.pythagoreanAAndB(1, 2)).toBe(2.23606797749979);
+    });
+
+});
 
 
-	// // find the coordinates for a point on side c of a right trainagle with the sides of a proportionatly bigger trinagle
-	// document.locatePointOnC = function(distanceOnC, fullSideX, fullSideC) {
-	// 	var x = distanceOnC * fullSideX;
-	// 	return x / fullSideC
-	// };
+describe("My locatePointOnC function should", function () {
+
+    it("take coordinates and find a point along the Hypotoneuse", function () {
+        expect(document.locatePointOnC(3, 5, 5)).toBe(3);
+    });
+
+    it("should take two numbers and use them to find the length of Hypotoneuse of a right triangle", function () {
+         expect(document.locatePointOnC(3, 8, 5)).toBe(4.8);
+    });
+
+});
+
+
+describe("My findLengthOfBiggerTriangleSide function should", function () {
+
+    it("take coordinates and find a point along the Hypotoneuse", function () {
+        expect(document.findLengthOfBiggerTriangleSide(3, 4, 6)).toBe(8);
+    });
+
+    // it("should take two numbers and use them to find the length of Hypotoneuse of a right triangle", function () {
+    //      expect(document.findLengthOfBiggerTriangleSide(8, 3, 9)).toBe(3.375);
+    // });
+
+});
 
 
 	// // find a proportionatly bigger traingle from sides of smaller traingle given 

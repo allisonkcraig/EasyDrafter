@@ -13,6 +13,20 @@
 
 	<center><a href='/print/{{block.chart_id}}'><h4>{{ block.nickname }}</h4></a></center>
 	<input type="hidden" name="{{ block.chart_id }}" value="{{ block.chart_id }}">
+	<form action="/delete-block">
+		<button class="btn btn-default" name="delete-button" value="{{ block.chart_id }}">DELETE BLOCK</button>
+	</form>
+
+<script>
+
+$.get("/delete-block", "{{ block.chart_id }}", function (data){
+    alert(data);
+});
+
+$('#{{ block.chart_id }}').click(getAdjective);
+
+</script>
+
 
 {% endfor %}
 {% endif %}
