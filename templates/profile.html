@@ -9,32 +9,42 @@
 <center><h3 class="raleway">Your Saved Blocks: </h3></center>
 <center><h4 class="raleway">click to reprint</h4></center>
 
-{% for block in savedblocks %}
+{% for sblock in savedblocks %}
 	<div class="saved-block">
-		<center><a href='/print/{{block.chart_id}}'><h4>{{ block.nickname }}</h4></a></center>
-		<input type="hidden" name="{{ block.chart_id }}" value="{{ block.chart_id }}">
-	
-		<button class="btn btn-default" id="delete-button{{ block.chart_id }}" value="{{ block.chart_id }}">DELETE BLOCK</button>
+		<center><a href='/print/{{sblock.chart_id}}'><h4>{{ sblock.nickname }}</h4></a></center>
+		<input type="hidden" name="{{ sblock.chart_id }}" value="{{ sblock.chart_id }}">
+		<center>
+		
+			<button class="btn btn-default delete-btn" value="{{ sblock.chart_id }}">DELETE BLOCK</button>
+
+		</center>
 	</div>
 
-<script>
-
-function deleteBlock () {
-	console.log("Inside Function")
-	jsonify({{ block.chart_id }})
-$.post("/delete-block", {  }, function (data){
-	console.log("inside post request")
-
-	$('.saved-block').hide();
-    alert(data);
-});
-}
-
-$('#delete-button{{ block.chart_id }}').on('click', deleteBlock);
-
-</script>
 
 {% endfor %}
 {% endif %}
+
+<script>
+
+function deleteBlock (evt) {
+	evt.preventDefault();
+
+	$.ajax({
+		url: "/delete-block",
+		data: {'chart-id':$(this).val()},
+		type: "POST",
+		success: function(response) {
+			console.log(response)
+		},
+		error: function(error) {
+			console.log('error')
+		}
+	});
+	$(this).closest('.saved-block').remove();
+}
+
+$('.delete-btn').on('click', deleteBlock);
+
+</script>
 
 {% endblock %}

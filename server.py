@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, redirect, flash, ses
 import os
 # from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
-
+import json
 import model
 
 from model import User, Size_Chart, Measurement_Chart, connect_to_db, db
@@ -57,8 +57,8 @@ def front_draft_page():
 
 
     session['measurements']['nickname'] = request.args.get("nickname")
-    print session['measurements']['nickname']
-    print session['measurements']
+    # print session['measurements']['nickname']
+    # print session['measurements']
     session['measurements']['bust'] = bust_input
     session['measurements']['waist'] = waist_input
 
@@ -211,7 +211,7 @@ def user_profile_page():
     user_email = session['logged_in_customer_email']
 
     user = User.query.filter(User.email==user_email).one()
-    print type(user)
+    # print type(user)
 
     saved_blocks = Measurement_Chart.query.filter(Measurement_Chart.user_id==1).all()
 
@@ -220,13 +220,13 @@ def user_profile_page():
 
 @app.route("/delete-block", methods=["POST"])
 def delete_block():
-    # event.prevent_default()
-    chart_id_input = request.form["delete-button"]
-    chart_in_db = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_input).all()
+    chart_id_input = request.form.get("chart-id")
+    print chart_id_input, "+++++++++++++++++++++"
+    chart_in_db = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_input).first()
     db.session.delete(chart_in_db)
     db.session.commit()
-    flash("Block has been deleted")
-    return 
+    return jsonify({'status':'ok'})
+
 
 @app.route("/logout")
 def process_logout():
