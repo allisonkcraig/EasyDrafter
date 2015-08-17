@@ -184,7 +184,7 @@ def process_login():
     session['logged_in_customer_email'] = email_input
 
 
-    user = User.query.filter(User.email == email_input).one()
+    user = User.query.filter(User.email == email_input).first()
 
     if user:
         if pword_input != user.password:
@@ -221,9 +221,13 @@ def user_profile_page():
 @app.route("/logout")
 def process_logout():
     """Log out user and send them to the splash page"""
-    del session['logged_in_customer_email']
-    del session['current_user_id']
-    del session['measurements']
+    if session['logged_in_customer_email']:
+        del session['logged_in_customer_email']
+    if session['current_user_id']:
+        del session['current_user_id']
+    if session.get('measurements'):
+        del session['measurements']
+
     flash("You have been logged out")
     return redirect("/")
 

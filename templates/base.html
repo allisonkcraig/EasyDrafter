@@ -15,10 +15,11 @@
 		<div class="container-fluid" class="header">
 			<a class="navbar-brand" id="corner-logo" href="/">Pattern Pro</a>
 			<ul class="nav navbar-nav">	
-				<li><a href="/start">Draft New Block</a></li>	
+
 			{% if session['logged_in_customer_email'] is defined %}
-                  <li><a href="/logout" id="logout">Log Out</a></li> 
-                  <li><a href="/profile" id="profile">Profile</a></li> 
+				<li><a href="/start">Draft New Block</a></li>	
+                <li><a href="/logout" id="logout">Log Out</a></li> 
+                <li><a href="/profile" id="profile">Profile</a></li> 
             {% else %}    
                   <li><a href="/login">Log In</a></li>
                 {% endif %}
