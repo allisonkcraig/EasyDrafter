@@ -53,12 +53,18 @@ describe("My findLengthOfBiggerTriangleSide function should", function () {
 });
 
 
-	// // find a proportionatly bigger traingle from sides of smaller traingle given 
-	// document.findLengthOfBiggerTriangleSide = function(smallSideC, smallSideA, fullSideC) {
-	// 	var x = smallSideA * fullSideC;
-	// 	bigSideA =  x / smallSideC;
-	// 	return bigSideA
-	// };
+// describe("My findAxisForPointOnLine function should", function () {
+
+//     it("take coordinates and find a point along the Hypotoneuse", function () {
+//         expect(document.findLengthOfBiggerTriangleSide(3, 4, 6)).toBe(8);
+//     });
+
+//     // it("should take two numbers and use them to find the length of Hypotoneuse of a right triangle", function () {
+//     //      expect(document.findLengthOfBiggerTriangleSide(8, 3, 9)).toBe(3.375);
+//     // });
+
+// });
+
 
 	// // Find point on a straight line with two (x,y) coordinates for each end where point 1 is the side you would like to start at.
 	// // The first two coordinates you evaluate will be the axis you return (ie, entering x before y will return x, entering y before x will return y)
@@ -77,7 +83,4 @@ describe("My findLengthOfBiggerTriangleSide function should", function () {
 	// 	return axisFromOrigin
 	// };
 
-	// // Clear the canvas so I can re-draft using update measurements 
-	// document.clearCanvas = function(context) {
- //    	context.clearRect(0, 0, 461, 461);
-	// };
+

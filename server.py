@@ -5,6 +5,7 @@ import jinja2
 import json
 import model
 
+
 from model import User, Size_Chart, Measurement_Chart, connect_to_db, db
 
 
@@ -15,14 +16,16 @@ app.secret_key = os.environ['SECRET_KEY']
 
 app.jinja_env.undefined = jinja2.StrictUndefined
 
+
 @app.route('/')
 def home_page():
-	return render_template('/splash-page.html')
+    """Render Homepage."""
+    return render_template('/splash-page.html')
 
 
 @app.route('/start')
 def measure_page():
-    """Allow input of measurements to find side template pattern"""
+    """Allow input of measurements to find size of template pattern from DB"""
 
     return render_template("basic-measure-page.html")
 
@@ -31,34 +34,22 @@ def measure_page():
 def front_draft_page():
     """Use template measurements to draft a front block that closest fit them and allow users to change block to fit them using inputs """
     
-    # session['measurements'] = {}
-
     bust_input = request.args.get("bust")
     waist_input = request.args.get("waist")
 
-
     if float(bust_input) / float(waist_input) > 1.40: # the largest ratio of waist to bust in my standard sizes
         size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(bust_input), Size_Chart.bust > float(bust_input) -1 ).first()
-        # print size_chart
         size_chart_dictionary = size_chart.__dict__
-        # print size_chart_dictionary
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
        
-
     else:
         size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(waist_input), Size_Chart.waist > float(waist_input) -1 ).first()
-        # print size_chart
         size_chart_dictionary = size_chart.__dict__
-        # print size_chart_dictionary
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
  
-
-
     session['measurements']['nickname'] = request.args.get("nickname")
-    # print session['measurements']['nickname']
-    # print session['measurements']
     session['measurements']['bust'] = bust_input
     session['measurements']['waist'] = waist_input
 
@@ -90,7 +81,7 @@ def back_draft_page():
 
 @app.route('/pattern')
 def pattern_page():
-    """Send Back Draft measurements to session and save measurement chart to db"""
+    """Send Back Draft measurements to session and show both drafts side by side"""
 
     session['measurements']['full_length_back'] = request.args.get("full-length-back")
     session['measurements']['center_back'] = request.args.get("center-back")
@@ -107,7 +98,8 @@ def pattern_page():
 
 @app.route('/save')
 def save_pattern():
-    """Redirect after Save Block measurements"""
+    """Save measurements to DB for speific user and redirect to profile page"""
+
     measurements_to_add = Measurement_Chart(
         nickname=session['measurements']['nickname'],
         user_id=session['current_user_id'],
@@ -137,12 +129,9 @@ def save_pattern():
         back_neck=session['measurements']['back_neck'],
         back_across_shoulder=session['measurements']['back_across_shoulder'],
         back_dart_intake=session['measurements']['back_dart_intake'])
- 
-    # print measurements_to_add
-     
+
     db.session.add(measurements_to_add)
     db.session.commit() 
-
   
     flash("Save Successful!!")
     return redirect("/profile")
@@ -150,7 +139,7 @@ def save_pattern():
 
 @app.route('/print/<int:chart_id_selected>')
 def print_page(chart_id_selected):
-    """Checks chart_id of selected measurement chart and allows you to print"""
+    """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
 
     current_chart = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_selected).first()
 
@@ -191,7 +180,7 @@ def process_login():
             flash("Incorrect password")
             return redirect("/login")
         else:
-            flash("Login successful!!")
+            flash("Login successful!")
             current_user = User.query.filter_by(email=email_input).first()
             current_user_dict = current_user.__dict__
             session['current_user_id'] = current_user_dict['user_id']
@@ -203,6 +192,44 @@ def process_login():
         flash("No such email")
         return redirect("/login")
 
+
+@app.route('/facebook_login_portal', methods=['POST'])
+def facebook_login():
+    """Handles the login from the facebook login button"""
+    
+    fb_user_id = request.form.get('fbUserId')
+    fb_fname = request.form.get('fbFname')
+    # fb_lname = request.form.get('fbLname')
+    fb_email = request.form.get('fbEmail')
+    current_acces_token = request.form.get('accessToken')
+    # fb_friends = json.loads(request.form.get('fbFriends'))
+    print "fb_friends_list: ", fb_friends
+
+    fb_user = User.query.filter_by(fb_id=fb_user_id).first()
+
+
+    if fb_user:
+        # User has previously logged into MLM
+        user_id = fb_user.user_id
+        session['current_user_id'] = user_id
+        session['current_acces_token'] = current_acces_token
+
+        flash('Login successful!')
+
+    else:
+        # First time for user logging into MLM
+        # add the user to the database
+        User.add_user(email=fb_email, fname=fb_fname, lname=fb_lname, fb_id=fb_user_id)
+        #access that user's information, add it to the session
+        fb_user = User.query.filter_by(fb_id=fb_user_id).first()
+        user_id = fb_user.user_id
+        
+        session['current_user_id'] = user_id
+        session['current_acces_token'] = current_acces_token
+        
+        flash('Thanks for creating an account with Pattern Pro')
+        
+    return redirect("/profile")
 
 @app.route('/profile')
 def user_profile_page():
@@ -230,28 +257,31 @@ def delete_block():
 
 @app.route("/logout")
 def process_logout():
-    """Log out user and send them to the splash page"""
+    """Log out user and send them to the splash page. Delete session information for logged in user"""
     if session['logged_in_customer_email']:
         del session['logged_in_customer_email']
     if session['current_user_id']:
         del session['current_user_id']
     if session.get('measurements'):
         del session['measurements']
+    if session['fb_user_id']:
+        del session['fb_user_id']
+       
 
-    flash("You have been logged out")
+        flash("You have been logged out")
     return redirect("/")
 
-# JS_TESTING_MODE = False
+JS_TESTING_MODE = False
 
-# @app.before_request
-# def add_tests():
-#     g.jasmine_tests = JS_TESTING_MODE
+@app.before_request
+def add_tests():
+    g.jasmine_tests = JS_TESTING_MODE
 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    # import sys
-    # if sys.argv[-1] == "jstest":
-    #     JS_TESTING_MODE = True
+    import sys
+    if sys.argv[-1] == "jstest":
+        JS_TESTING_MODE = True
     connect_to_db(app)
     app.run(debug=True, port=port)

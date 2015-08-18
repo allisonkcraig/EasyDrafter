@@ -4,7 +4,14 @@
 	<script src='static/js/functions.js'></script>
 	<script src='static/js/measurements.js'></script>
 	<script src='static/js/front-draft.js'></script>
-	<!--  <script src="static/js/ajax-call-front-canvas.js"></script> -->
+	{% if g.jasmine_tests %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.css"></link>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine-html.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/boot.js"></script>
+    <script src="/static/js/functions-spec.js"></script>
+	{% endif %}
+	
 	<script>
 		$(document).ready(function(){
 			document.draftFrontCanvas("drafting-table-front", 20);
@@ -16,8 +23,6 @@
 
 
 {% block content %}
-
-<p id="your_nickname"></p>
 
 <div class="container">
 		<div class="row">

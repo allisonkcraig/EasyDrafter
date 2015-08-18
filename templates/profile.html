@@ -6,10 +6,12 @@
 <center><h3 class="raleway">Email: {{ user.email }}</h3></center>
 
 {% if savedblocks %}
+
 <center><h3 class="raleway">Your Saved Blocks: </h3></center>
 <center><h4 class="raleway">click to reprint</h4></center>
 
 {% for sblock in savedblocks %}
+
 	<div class="saved-block">
 		<center><a href='/print/{{sblock.chart_id}}'><h4>{{ sblock.nickname }}</h4></a></center>
 		<input type="hidden" name="{{ sblock.chart_id }}" value="{{ sblock.chart_id }}">
@@ -19,7 +21,6 @@
 
 		</center>
 	</div>
-
 
 {% endfor %}
 {% endif %}

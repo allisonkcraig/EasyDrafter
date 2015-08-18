@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Pattern Pro</title>
+	<script scr="/static/js/fb-oauth.js"></script>
 	<script src="/static/js/jquery-1.11.3.min.js"></script>
 	{% block head %}{% endblock %}
 	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
@@ -11,6 +12,15 @@
 	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
 </head>
 <body>
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=511805018989046";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid" class="header">
 			<a class="navbar-brand" id="corner-logo" href="/">Pattern Pro</a>
@@ -22,6 +32,7 @@
                 <li><a href="/profile" id="profile">Profile</a></li> 
             {% else %}    
                   <li><a href="/login">Log In</a></li>
+                  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
                 {% endif %}
              </ul>
 		</div>
@@ -34,6 +45,6 @@
   {% endwith %}
 
 	{% block content %}{% endblock %}
-	<footer><a href="https://github.com/allisonkcraig" id="footer-a">app by Allison Craig</a></footer>
+	<footer><a href="https://github.com/allisonkcraig" target="blank" id="footer-a">app by Allison Craig</a></footer>
 </body>
 </html>

@@ -16,15 +16,17 @@ class User(db.Model):
     __tablename__ = "Users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    fb_id = db.Column(db.String(64), unique=True, nullable=True)
     email = db.Column(db.String(64), unique=True, nullable=False)
     password = db.Column(db.String(64), nullable=False)
     fname = db.Column(db.String(15), nullable=False)
 
-    # @classmethod
-    # def get_by_email(cls, email):
-    #     """Query for a specific melon in the database by the primary key"""
-    #      = db.session.query.filter(cls.email==email).first()
-
+    @classmethod
+    def add_user(cls, email, fname,  password=None, fb_id=None):
+        """Insert a new user into the users table"""
+        user = cls(email=email, password=password, fname=fname, fb_id=fb_id)
+        db.session.add(user)
+        db.session.commit()
 
 
     def __repr__(self):
