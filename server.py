@@ -140,7 +140,7 @@ def front_draft_page():
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
  
-    session['measurements']['nickname'] = request.args.get("nickname")
+    # session['measurements']['nickname'] = request.args.get("nickname")
     session['measurements']['bust'] = bust_input
     session['measurements']['waist'] = waist_input
 
