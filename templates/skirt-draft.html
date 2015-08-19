@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<!--script src='static/js/functions.js'></script>
+	<script src='static/js/measurements.js'></script-->
+	<script src='static/js/skirt-draft.js'></script>
+	{% if g.jasmine_tests %}
+	<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.css"></link>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine-html.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/boot.js"></script>
+    <script src="/static/js/functions-spec.js"></script-->
+	{% endif %}
+	<script>
+		$(document).ready(function(){
+			document.draftSkirtCanvas("drafting-table-skirt", 20);
+		});
+	</script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-6">
+			<h1 class="heading-titles table-name">Skirt</h1>
+			<div class="table">
+				<canvas id="drafting-table-skirt" class="drafting-table working-table" width="461" height="461"></canvas>
+			</div>
+		</div>
+		
+		<!-- INSET MEASUREMENT TABLE HERE -->
+
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

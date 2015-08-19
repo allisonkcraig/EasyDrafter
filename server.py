@@ -120,6 +120,10 @@ def measure_page():
 
     return render_template("basic-measure-page.html")
 
+@app.route('/skirt-draft')
+def skirt_draft_page():
+
+    return render_template("skirt-draft.html")
 
 @app.route('/front-draft')
 def front_draft_page():
