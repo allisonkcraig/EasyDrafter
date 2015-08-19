@@ -188,7 +188,6 @@ def pattern_page():
 @app.route('/save')
 def save_pattern():
     """Save measurements to DB for speific user and redirect to profile page"""
-    print session['measurements']['nickname']
     session['measurements']['nickname'] = request.args.get("nickname")
     print request.args.get("nickname")
     print session['measurements']['nickname']
@@ -281,7 +280,7 @@ def process_login():
 
     if user:
         if pword_input != user.password:
-            flash("Incorrect password")
+            flash("Your email and password did not match our records.")
             return redirect("/login")
         else:
             flash("Login successful!")
@@ -293,7 +292,7 @@ def process_login():
             return redirect("/profile")
         
     else:
-        flash("No such email")
+        flash("Your email and password did not match our records.")
         return redirect("/login")
 
 
@@ -327,7 +326,7 @@ def process_registration():
     # add_user(email_input, password_input, fname_input)
     session['logged_in_customer_email'] = email_input
 
-    flash("Thanks for registering")
+    flash("Thanks for registering!")
 
     user = User.query.filter(User.email == email_input).first()
 

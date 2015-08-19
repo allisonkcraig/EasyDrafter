@@ -17,7 +17,7 @@
 		 
 	</script>
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid" class="header">
+		<!-- <div class="container-fluid" class="header"> -->
 			<a class="navbar-brand" id="corner-logo" href="/">Pattern Pro</a>
 			<ul class="nav navbar-nav">	
 
@@ -29,16 +29,10 @@
             {% else %}    
                   <li><a href="/login">Log In</a></li>
                   <li><a href="/register">Register</a></li>
-                  <li><a href="/fb-login">Login with Facebook</a></li>
-                  <div id="fb-root"></div>
-                  <li><fb:login-button size='large' 
-          autologoutlink = 'true' 
-          scope="public_profile,email,user_friends" 
-          onlogin="checkLoginState();">
-  </fb:login-button><li>
-                {% endif %}
+<!--                   <li><a href="/fb-login">Login with Facebook</a></li>
+ -->                {% endif %}
              </ul>
-		</div>
+	<!-- 	</div> -->
 	</nav>
 					<div
 				  class="fb-like"
