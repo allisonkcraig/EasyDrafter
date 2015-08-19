@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Pattern Pro</title>
-	<script scr="/static/js/fb-oauth.js"></script>
 	<script src="/static/js/jquery-1.11.3.min.js"></script>
 	{% block head %}{% endblock %}
 	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
@@ -11,33 +10,42 @@
 	<link rel='stylesheet' href='/static/css/style.css'>
 	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
 </head>
-<body>
-	<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=511805018989046";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+<body>	
+	<!--script src="/static/js/fb.js"></script-->
+
+	<script>
+		 
 	</script>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid" class="header">
 			<a class="navbar-brand" id="corner-logo" href="/">Pattern Pro</a>
 			<ul class="nav navbar-nav">	
 
-			{% if session['logged_in_customer_email'] is defined %}
+			{% if session['current_user_id'] is defined %}
 				<li><a href="/start">Draft New Block</a></li>	
-                <li><a href="/logout" id="logout">Log Out</a></li> 
+                <li><a href="/logout" id="logout">Log Out</a></li>
+                <li class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true" scope='public_profile,email'></li> 
                 <li><a href="/profile" id="profile">Profile</a></li> 
             {% else %}    
                   <li><a href="/login">Log In</a></li>
-                  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+                  <li><a href="/register">Register</a></li>
+                  <li><a href="/fb-login">Login with Facebook</a></li>
+                  <div id="fb-root"></div>
+                  <li><fb:login-button size='large' 
+          autologoutlink = 'true' 
+          scope="public_profile,email,user_friends" 
+          onlogin="checkLoginState();">
+  </fb:login-button><li>
                 {% endif %}
              </ul>
 		</div>
 	</nav>
-
+					<div
+				  class="fb-like"
+				  data-share="true"
+				  data-width="450"
+				  data-show-faces="true">
+				</div>
 	{% with messages = get_flashed_messages() %}
       {% for message in messages %}
           <div class="alert alert-warning">{{ message }}</div>
@@ -46,5 +54,6 @@
 
 	{% block content %}{% endblock %}
 	<footer><a href="https://github.com/allisonkcraig" target="blank" id="footer-a">app by Allison Craig</a></footer>
+
 </body>
 </html>

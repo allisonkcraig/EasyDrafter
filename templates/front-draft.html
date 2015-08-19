@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block head %}
-	<script src='static/js/functions.js'></script>
-	<script src='static/js/measurements.js'></script>
-	<script src='static/js/front-draft.js'></script>
+	<script src='/static/js/functions.js'></script>
+	<script src='/static/js/measurements.js'></script>
+	<script src='/static/js/front-draft.js'></script>
 	{% if g.jasmine_tests %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.css"></link>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.js"></script>
@@ -41,91 +41,91 @@
 						<div class="form-group">
 							<label for="full-length" class="col-sm-6 control-label">Full Length</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="center-front" class="col-sm-6 control-label">Center Front</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="front-shoulder-slope" class="col-sm-6 control-label">Shoulder Slope</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="front-shoulder-slope" placeholder="{{ size_chart['front_shoulder_slope'] }}" value="{{ size_chart['front_shoulder_slope'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="front-shoulder-slope" placeholder="{{ size_chart['front_shoulder_slope'] }}" value="{{ size_chart['front_shoulder_slope'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="strap" class="col-sm-6 control-label">Strap</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="strap" placeholder="{{ size_chart['strap'] }}" value="{{ size_chart['strap'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="strap" placeholder="{{ size_chart['strap'] }}" value="{{ size_chart['strap'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="front-across-shoulder" class="col-sm-6 control-label">Across Shoulder</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="front-across-shoulder" placeholder="{{ size_chart['front_across_shoulder'] }}" value="{{ size_chart['front_across_shoulder'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="front-across-shoulder" placeholder="{{ size_chart['front_across_shoulder'] }}" value="{{ size_chart['front_across_shoulder'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="across-chest" class="col-sm-6 control-label">Across Chest</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="across-chest" placeholder="{{ size_chart['across_chest'] }}" value="{{ size_chart['across_chest'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="across-chest" placeholder="{{ size_chart['across_chest'] }}" value="{{ size_chart['across_chest'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="bust-depth" class="col-sm-6 control-label">Bust Depth</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="bust-depth" placeholder="{{ size_chart['bust_depth'] }}" value="{{ size_chart['bust_depth'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="bust-depth" placeholder="{{ size_chart['bust_depth'] }}" value="{{ size_chart['bust_depth'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="shoulder-length" class="col-sm-6 control-label">Shoulder Length</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="shoulder-length" placeholder="{{ size_chart['shoulder_length'] }}" value="{{ size_chart['shoulder_length'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="shoulder-length" placeholder="{{ size_chart['shoulder_length'] }}" value="{{ size_chart['shoulder_length'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="bust-arc" class="col-sm-6 control-label">Bust Arc</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="bust-arc" placeholder="{{ size_chart['bust_arc'] }}" value="{{ size_chart['bust_arc'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="bust-arc" placeholder="{{ size_chart['bust_arc'] }}" value="{{ size_chart['bust_arc'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="bust-span" class="col-sm-6 control-label">Bust Span</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="bust-span" placeholder="{{ size_chart['bust_span'] }}" value="{{ size_chart['bust_span'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="bust-span" placeholder="{{ size_chart['bust_span'] }}" value="{{ size_chart['bust_span'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="waist-arc" class="col-sm-6 control-label">Waist Arc</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="waist-arc" placeholder="{{ size_chart['waist_arc'] }}" value="{{ size_chart['waist_arc'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="waist-arc" placeholder="{{ size_chart['waist_arc'] }}" value="{{ size_chart['waist_arc'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="dart-placement" class="col-sm-6 control-label">Dart Placement</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="side-length" class="col-sm-6 control-label">Side Length</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" step="0.01" name="side-length" placeholder="{{ size_chart['side_length'] }}" value="{{ size_chart['side_length'] }}">
+								<input type="number" class="form-control update-button" step="0.01" name="side-length" placeholder="{{ size_chart['side_length'] }}" value="{{ size_chart['side_length'] }}">
 							</div>
 						</div>
 

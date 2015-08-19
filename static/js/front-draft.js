@@ -181,7 +181,7 @@ $(document).ready(function() {
 
 	// document.draftFrontCanvas();
 
-	$(".form-control").blur(function() {
+	$(".update-button").blur(function() {
 		document.clearCanvas(document.gridPenFront);
 		document.clearCanvas(document.pen);
 		document.clearCanvas(document.penFinalFront);

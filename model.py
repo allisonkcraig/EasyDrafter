@@ -18,7 +18,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fb_id = db.Column(db.String(64), unique=True, nullable=True)
     email = db.Column(db.String(64), unique=True, nullable=False)
-    password = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(64), nullable=True)
     fname = db.Column(db.String(15), nullable=False)
 
     @classmethod

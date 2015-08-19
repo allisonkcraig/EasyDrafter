@@ -7,22 +7,32 @@
 
 {% if savedblocks %}
 
-<center><h3 class="raleway">Your Saved Blocks: </h3></center>
-<center><h4 class="raleway">click to reprint</h4></center>
-
+<center><h3 class="raleway">Your Saved Measurements: </h3></center>
+<table class="table table-hover table-striped">
+	<th><center>Measurement Chart Name</center></th>
+	<th></th>
+	<th></th>
+	<th></th>
 {% for sblock in savedblocks %}
-
-	<div class="saved-block">
-		<center><a href='/print/{{sblock.chart_id}}'><h4>{{ sblock.nickname }}</h4></a></center>
+	<tr class="saved-block">
+		<td><center><h4>{{ sblock.nickname }}</h4></center>
 		<input type="hidden" name="{{ sblock.chart_id }}" value="{{ sblock.chart_id }}">
 		<center>
-		
-			<button class="btn btn-default delete-btn" value="{{ sblock.chart_id }}">DELETE BLOCK</button>
+			<td><form action='/print/{{sblock.chart_id}}'>
+				<button class="btn btn-default">PRINT BLOCK</button>
+			</form></td>
+			<td><form action='/edit/{{sblock.chart_id}}'>
+				<button class="btn btn-default" value="{{ sblock.chart_id }}">EDIT BLOCK</button>
+			</form></td>
+
+			<td><button class="btn btn-default delete-btn" name='chart-id' value="{{ sblock.chart_id }}">DELETE BLOCK</button></td>
 
 		</center>
-	</div>
+		</td>
+	</tr>
 
 {% endfor %}
+</table>
 {% endif %}
 
 <script>
@@ -45,6 +55,25 @@ function deleteBlock (evt) {
 }
 
 $('.delete-btn').on('click', deleteBlock);
+
+function deleteBlock (evt) {
+	evt.preventDefault();
+
+	$.ajax({
+		url: "/delete-block",
+		data: {'chart-id':$(this).val()},
+		type: "POST",
+		success: function(response) {
+			console.log(response)
+		},
+		error: function(error) {
+			console.log('error')
+		}
+	});
+	$(this).closest('.saved-block').remove();
+}
+
+$('.edit-name-btn').on('click', deleteBlock);
 
 </script>
 

@@ -160,7 +160,7 @@ $(document).ready(function() {
 
 
 
-	$('.form-control').blur(function() {
+	$('.update-button').blur(function() {
 		document.clearCanvas(document.gridPenBack);
 		document.clearCanvas(document.penBack);
 		document.clearCanvas(document.penFinalBack);

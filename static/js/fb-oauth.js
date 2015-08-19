@@ -2,6 +2,7 @@
 //Created with help with permission from https://github.com/akvanhar/HB-FinalProject/blob/master/static/fblogin.js
 
 function collectUserDetails(accessToken) {
+  console.log('collectUserDetails');
 	//make a FB api call and return an object of user details.
  	FB.api('/me', 
  			{fields: ['last_name', 'first_name', 'email', 'id']}, 
@@ -9,33 +10,15 @@ function collectUserDetails(accessToken) {
  		
 	 		var userDetails = {
 	 			fname: response.first_name,
-	 			// lname: response.last_name,
 	 			email: response.email,
 	 			fbUserId: response.id
 	 		}
-	 		// collectUserFriends(accessToken, userDetails);
  			});
  }
 
-// function collectUserFriends(accessToken, userDetails) {
-//     FB.api('/me/friends',
-//       function (response) {
-//         if (response && !response.error) {
-//           var friends = response.data; //data is a list of objects.
-//           var friendsList = []
-//           for (var i = 0; i < friends.length; i++ ) {
-//             friendsList.push(friends[i].id);
-//           }//endfor
-//         }//endif
-//         friendsList = JSON.stringify(friendsList);
-//         console.log('Friends list: ');
-//         console.log(friendsList);
-//         submitInfoToServer(accessToken, userDetails, friendsList);
-//       }
-//       );
-//   }
 
 function submitInfoToServer(accessToken, userDetails, friendsList) {
+    console.log('submitInfoToServer');
       //takes the access token, and a userdetails list as input, submits a form to the server.
       //userDetails is an object with fname, lname, email and fbUserId
       //friendsList is a list of friend facebook ids.
@@ -44,16 +27,13 @@ function submitInfoToServer(accessToken, userDetails, friendsList) {
       var form = document.createElement('form');
       var userIdElement = document.createElement('input');
       var userFnameElement = document.createElement('input');
-      var userLnameElement = document.createElement('input');
       var userEmailElement = document.createElement('input');
-      // var userFriendsElement = document.createElement('input');
       var currentAccessToken = document.createElement('input');
 
       //put everything all together
 
       var fbUserId = userDetails.fbUserId;
       var fname = userDetails.fname;
-      var lname = userDetails.lname;
       var email = userDetails.email;
       var accessToken = accessToken;
       // var userFriends = friendsList;
@@ -65,31 +45,26 @@ function submitInfoToServer(accessToken, userDetails, friendsList) {
       //set element values
       userIdElement.value = fbUserId;
       userFnameElement.value = fname;
-      userLnameElement.value = lname;
       userEmailElement.value = email;
       currentAccessToken.value = accessToken;
-      // userFriendsElement.value = userFriends;
 
       //set element names
       userIdElement.name = 'fbUserId';
       userFnameElement.name = 'fbFname';
-      userLnameElement.name = 'fbLname';
       userEmailElement.name = 'fbEmail';
       currentAccessToken.name = 'accessToken';
-      // userFriendsElement.name = 'fbFriends';
 
       //append elements to the form.
       form.appendChild(userIdElement);
       form.appendChild(userFnameElement);
-      form.appendChild(userLnameElement);
       form.appendChild(userEmailElement);
       form.appendChild(currentAccessToken);
-      // form.appendChild(userFriendsElement);
 
       document.body.appendChild(form);
       debugger;
       form.submit();
   }
+
 
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -104,7 +79,7 @@ function statusChangeCallback(response) {
     	collectUserDetails(accessToken);
 
     } else if (response.status === 'not_authorized') {
-      // User is connected to FB, but not MLM
+      // User is connected to FB, but not PP
       document.getElementById('status').innerHTML = 'Please log into Make Less Mush.';
     } else {
       // The person is not logged into Facebook, so we're not sure if
@@ -113,41 +88,38 @@ function statusChangeCallback(response) {
     }
   }
 
-function checkLoginState() {
-	FB.getLoginStatus(function(response) {
-	  statusChangeCallback(response);
-	});
-}
 
+// function checkLoginStatus() {
+//    console.log('checkLoginState');
+
+// 	   FB.getLoginStatus(function(response) {
+// 	   statusChangeCallback(response);
+// 	   });
+// }
 
 window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '511805018989046', //Pattern Pro appId
-    cookie     : true,  // enable cookies to allow the server to access the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
-  });
+    FB.init({
+      appId      : '511805018989046',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
 
-  //Now check to see which of the three login statuses is present for the user
-    FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-};
+    function checkLoginStatus() {
+    console.log('checkLoginState');
 
-// Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+       FB.getLoginStatus(function(response) {
+       statusChangeCallback(response);
+       });
+    }
 
-$(document).ready(function() {
 
-  $("#logout").on("click",
-      FB.logout(function(response) {
-        // user is now logged out
-      }); )
-})
+  };
 
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
