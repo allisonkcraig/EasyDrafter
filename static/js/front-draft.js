@@ -157,7 +157,7 @@ $(document).ready(function() {
 		document.fArmControlx = (document.acrossChest * 0.725) * document.scale;
 		document.fArmControly = (document.strapRise / 0.886) * document.scale;
 		document.penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
-		document.penFinalFront.quadraticCurveTo(document.fArmControlx ,document.fArmControly ,document.scaledBustArc, (document.strapRise * document.scale)); // needs to be calibrated
+		document.penFinalFront.quadraticCurveTo(document.fArmControlx ,document.fArmControly ,document.scaledBustArc, (document.strapRise * document.scale));
 
 
 		// NECKLINE ***************************************************************

@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-	<!--script src='static/js/functions.js'></script>
-	<script src='static/js/measurements.js'></script-->
+	<script src='static/js/functions.js'></script>
 	<script src='static/js/skirt-draft.js'></script>
 	{% if g.jasmine_tests %}
 	<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.css"></link>
@@ -14,6 +13,7 @@
 	<script>
 		$(document).ready(function(){
 			document.draftSkirtCanvas("drafting-table-skirt", 20);
+			console.log("DRAFTING SKIRT")
 		});
 	</script>
 {% endblock %}
