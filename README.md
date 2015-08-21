@@ -2,14 +2,13 @@
 Project for Hackbright to draft clothing pattern blocks.
 
 # Table of Contents
-* [Requirements](#requirements)
-* [Requirements](#requirements)
+* [About the Project](#about)
+* [Author](#author)
 * [Requirements](#requirements)
 
+# <a name="about"></a>About the Project
 
-# <a name="Author"></a>Requirements
-
-# <a name="requirements"></a>Requirements
+# <a name="Author"></a>Author
 
 # <a name="requirements"></a>Requirements
 * "Flask" <http://flask.pocoo.org/>
