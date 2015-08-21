@@ -114,11 +114,22 @@ def home_page():
     return render_template('/splash-page.html')
 
 
+@app.route('/choose-block')
+def choose_block_page():
+    """User decides which block to draft"""
+
+    return render_template("block-choice.html")
+
 @app.route('/start')
 def measure_page():
     """Allow input of measurements to find size of template pattern from DB"""
-
-    return render_template("basic-measure-page.html")
+    block_choice = request.args.get("block-choice")
+    if block_choice == "top":
+        session['measurements']
+        return render_template("/basic-measure-page.html")
+    elif block_choice == "skirt":
+        session['measurements']
+        return render_template("skirt-draft.html")
 
 @app.route('/skirt-draft')
 def skirt_draft_page():

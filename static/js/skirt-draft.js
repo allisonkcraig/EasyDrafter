@@ -13,14 +13,14 @@ $(document).ready(function() {
 		document.spaceBetweenDarts = 1.25 * document.scale; // constant variable
 		document.hipArcEase = 0.5 * document.scale; //constant variable
 
-		document.waist = 26 * document.scale; 
-		document.hip = 37.5 * document.scale;
-		document.waistToKnee = 25 * document.scale;
-		document.centerFrontHipDepth = 9 * document.scale;
-		document.backHipArc = (9.5 * document.scale) + document.hipArcEase;
-		document.centerBackHipDepth = (8.75 * document.scale) + document.hipArcEase;
-		document.frontHipArc = 9 * document.scale;
-		document.dartPlacement = 3.25 * document.scale;
+		document.waist = parseFloat($('form input[name="waist"]').val()) * document.scale; 
+		document.hip = parseFloat($('form input[name="hip"]').val()) * document.scale;
+		document.waistToKnee = parseFloat($('form input[name="skirt-length"]').val()) * document.scale;
+		document.centerFrontHipDepth = parseFloat($('form input[name="center-front-hip-depth"]').val()) * document.scale;
+		document.backHipArc = (parseFloat($('form input[name="back-hip-arc"]').val()) * document.scale) + document.hipArcEase;
+		document.centerBackHipDepth = (parseFloat($('form input[name="center-back-hip-depth"]').val()) * document.scale) + document.hipArcEase;
+		document.frontHipArc = parseFloat($('form input[name="front-hip-arc"]').val()) * document.scale;
+		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val()) * document.scale;
 		document.determineDartIntakeSkirt(document.waist, document.hip);
 
 	
@@ -173,7 +173,7 @@ $(document).ready(function() {
 		document.clearCanvas(document.gridPen);
 		document.clearCanvas(document.pen);
 		document.clearCanvas(document.penFinal);
-		document.draftFrontCanvas("drafting-table-skirt", 20);
+		document.draftSkirtCanvas("drafting-table-skirt", 20);
 	});
 
 };
