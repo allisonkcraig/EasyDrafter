@@ -16,5 +16,6 @@ Project for Hackbright to draft clothing pattern blocks.
 * "jQuery" <http://flask.pocoo.org/>
 * "Jinja2" <http://flask.pocoo.org/>
 * "Bootstrap" <http://flask.pocoo.org/>
+* "jsPDF" <https://parall.ax/products/jspdf>
 
 # <a name="contact"></a>Contact
