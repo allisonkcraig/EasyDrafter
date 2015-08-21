@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container' id="first-page">
+	<div id="measurement-table">
+			<center><h3 class="heading-titles">Which Block Would You Like To Create?</h3></center>
+			
+
+
+
+
+
+
+<form  action="/start" class="form-horizontal">
+<label for="top"><input type="radio" name="block-choice" value="top" checked />TOP</label>
+<br>
+<label for="skirt"><input type="radio" name="block-choice" value="skirt" />SKIRT</label>
+<button type="submit"></button>
+</form>
+
+	
+	</div>
+</div>
+
+{% endblock %}

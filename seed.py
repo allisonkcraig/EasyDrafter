@@ -1,10 +1,10 @@
 """Utility file to seed ratings database from MovieLens data in seed_data/"""
 
-from model import Size_Chart, connect_to_db, db
+from model import Size_Chart_Top, Size_Chart_Skirt, connect_to_db, db
 from server import app
 
-def load_size_charts():
-    """Load size charts from template-charts into database."""
+def load_size_charts_top():
+    """Load size charts from template-charts-tops into database."""
     with open('seed_data/template-charts', 'r') as size_chart_data:
         for line in size_chart_data:
             line.rstrip()
@@ -40,7 +40,7 @@ def load_size_charts():
 
 
 
-            size_chart_inserted = Size_Chart(
+            size_chart_inserted = Size_Chart_Top(
                         size_id=size_id,
                         bust=bust, 
                         waist=waist, 
@@ -73,9 +73,40 @@ def load_size_charts():
 
             db.session.commit()
 
-        
+def load_size_charts_skirt():
+    """Load size charts from template-charts-tops into database."""
+    with open('seed_data/template-charts-skirt', 'r') as size_chart_data:
+        for line in size_chart_data:
+            line.rstrip()
+            row = line.split('|')
+    
+            size_id = row[0]
+            hip = row[1]
+            waist = row[2]
+
+            center_front_hip_depth = row[3] 
+            back_hip_arc = row[4]
+            center_back_hip_depth = row[5]
+            front_hip_arc = row[6]
+            dart_placement = row[7]
+      
+            size_chart_inserted = Size_Chart_Skirt(
+                        size_id=size_id,
+                        hip=hip, 
+                        waist=waist, 
+
+                        center_front_hip_depth=center_front_hip_depth, 
+                        back_hip_arc=back_hip_arc,
+                        center_back_hip_depth=center_back_hip_depth,
+                        front_hip_arc=front_hip_arc,
+                        dart_placement=dart_placement)
+                  
+            db.session.add(size_chart_inserted)
+
+            db.session.commit()
 
 if __name__ == "__main__":
     connect_to_db(app)
 
-    load_size_charts()
+    load_size_charts_top()
+    load_size_charts_skirt()

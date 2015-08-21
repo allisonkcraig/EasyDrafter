@@ -8,7 +8,7 @@ import model
 from flask_oauth import OAuth
 
 
-from model import User, Size_Chart, Measurement_Chart, connect_to_db, db
+from model import User, Size_Chart_Top, Size_Chart_Skirt, Measurement_Chart_Top, Measurement_Chart_Skirt, connect_to_db, db
 
 
 app = Flask(__name__)
@@ -125,16 +125,35 @@ def measure_page():
     """Allow input of measurements to find size of template pattern from DB"""
     block_choice = request.args.get("block-choice")
     if block_choice == "top":
-        session['measurements']
         return render_template("/basic-measure-page.html")
     elif block_choice == "skirt":
-        session['measurements']
-        return render_template("skirt-draft.html")
+        return render_template("/basic-measure-page-skirt.html")
 
 @app.route('/skirt-draft')
 def skirt_draft_page():
 
-    return render_template("skirt-draft.html")
+    hip_input = request.args.get("hip")
+    waist_input = request.args.get("waist")
+
+    if float(hip_input) / float(waist_input) > 1.30: # the largest ratio of waist to hip in my standard sizes
+        size_chart = Size_Chart_Skirt.query.filter(Size_Chart_Skirt.hip >= float(hip_input), Size_Chart_Skirt.hip > float(hip_input) -1 ).first()
+        size_chart_dictionary = size_chart.__dict__
+        del size_chart_dictionary['_sa_instance_state']
+        session['measurements'] = size_chart_dictionary
+       
+    else:
+        size_chart = Size_Chart_Skirt.query.filter(Size_Chart_Skirt.waist >= float(waist_input), Size_Chart_Skirt.waist > float(waist_input) -1 ).first()
+        size_chart_dictionary = size_chart.__dict__
+        del size_chart_dictionary['_sa_instance_state']
+        session['measurements'] = size_chart_dictionary
+ 
+    # session['measurements']['nickname'] = request.args.get("nickname")
+    session['measurements']['hip'] = hip_input
+    session['measurements']['waist'] = waist_input
+
+    print session['measurements']
+    return render_template("skirt-draft.html", size_chart=session['measurements'])
+
 
 @app.route('/front-draft')
 def front_draft_page():
@@ -144,13 +163,13 @@ def front_draft_page():
     waist_input = request.args.get("waist")
 
     if float(bust_input) / float(waist_input) > 1.40: # the largest ratio of waist to bust in my standard sizes
-        size_chart = Size_Chart.query.filter(Size_Chart.bust >= float(bust_input), Size_Chart.bust > float(bust_input) -1 ).first()
+        size_chart = Size_Chart_Top.query.filter(Size_Chart_Top.bust >= float(bust_input), Size_Chart_Top.bust > float(bust_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
        
     else:
-        size_chart = Size_Chart.query.filter(Size_Chart.waist >= float(waist_input), Size_Chart.waist > float(waist_input) -1 ).first()
+        size_chart = Size_Chart_Top.query.filter(Size_Chart_Top.waist >= float(waist_input), Size_Chart_Top.waist > float(waist_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
