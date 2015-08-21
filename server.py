@@ -275,7 +275,7 @@ def save_pattern():
     elif block_type == "skirt":
         measurements_to_add = Measurement_Chart_Skirt(
             nickname=session['measurements']['nickname'],
-            user_id=session['measurements']['current_user_id'],
+            user_id=session['current_user_id'],
             waist=session['measurements']['waist'],
             hip=session['measurements']['hip'],
             center_front_hip_depth=session['measurements']['center_front_hip_depth'],

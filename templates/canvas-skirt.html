@@ -56,6 +56,10 @@
 	<form>
 
 		<!-- Skirt Measurements -->
+		<input type="hidden" name="hip" placeholder="{{ size_chart['hip'] }}" value="{{ size_chart['hip'] }}">
+
+		<input type="hidden" name="waist" placeholder="{{ size_chart['waist'] }}" value="{{ size_chart['waist'] }}">
+
 		<input type="hidden" id="test" name="center-front-hip-depth" placeholder="{{ size_chart['center_front_hip_depth'] }}" value="{{ size_chart['center_front_hip_depth'] }}">
 		
 		<input type="hidden" name="front-hip-arc" placeholder="{{ size_chart['front_hip_arc'] }}" value="{{ size_chart['front_hip_arc'] }}">
@@ -76,7 +80,7 @@
 	<div class="col-md-4">
 			
 		<div class="table">
-			<canvas id="drafting-table-skirt-large" class="drafting-table" width="4000" height="4000"></canvas>
+			<canvas id="drafting-table-skirt-large" class="drafting-table" width="2100" height="2000"></canvas>
 		</div>
 	</div>
 
@@ -86,7 +90,7 @@
 <script>
 
 $(document).ready(function(){
-document.draftSkirtCanvas("drafting-table-skirt-large",100);
+document.draftSkirtCanvas("drafting-table-skirt-large",90);
 document.draftSkirtCanvas("drafting-table-skirt", 10);
 
 })

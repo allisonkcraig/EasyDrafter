@@ -52,7 +52,7 @@ $(document).ready(function() {
 		document.gridPen = document.draftingTable.getContext("2d");
 
 		// y axis grid lines
-		for (var y = 0.5; y < document.canvasHeight; y += document.scale) {
+		for (var y = 0.5; y < document.canvasHeight * 20; y += document.scale) {
 			document.gridPen.beginPath();
 			document.gridPen.moveTo(0, y);
 			document.gridPen.lineTo(2001, y);
@@ -61,7 +61,7 @@ $(document).ready(function() {
 			};
 
 		// x axis grid lines
-		for (var x = 0.5; x < document.canvasWidth; x += document.scale) {
+		for (var x = 0.5; x < document.canvasWidth * 20; x += document.scale) {
 			document.gridPen.beginPath();
 			document.gridPen.strokeStyle = "#E8E8EE";
 			document.gridPen.moveTo(x, 0);
