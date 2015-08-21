@@ -42,45 +42,46 @@ document.waist = 26 * document.scale;
 			<div class="col-xs-12 col-md-4">
 				<div id="measurement-table">
 				<center><h3 class="heading-titles instructions">Change Measurements Below in Inches</h3></center>
-				<form  action="/print-skirt" class="form-horizontal" id="front-measurement-form">
+				<form  action="/pattern" class="form-horizontal" id="front-measurement-form">
 
 						<div class="form-group">
 							<label for="center-front-hip-depth" class="col-sm-6 control-label">Center Front Hip Depth</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control update-button" step="0.01" name="center-front-hip-depth" placeholder="9" value="9">
+								<input type="number" class="form-control update-button" step="0.01" name="center-front-hip-depth" placeholder="{{ size_chart['center_front_hip_depth'] }}" value="{{ size_chart['center_front_hip_depth'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="front-hip-arc" class="col-sm-6 control-label">Front Hip Arc</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control update-button" step="0.01" name="front-hip-arc" placeholder="9" value="9">
+								<input type="number" class="form-control update-button" step="0.01" name="front-hip-arc" placeholder="{{ size_chart['front_hip_arc'] }}" value="{{ size_chart['front_hip_arc'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="center-back-hip-depth" class="col-sm-6 control-label">Center Back Hip Depth</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control update-button" step="0.01" name="center-back-hip-depth" placeholder="8.75" value="8.75">
+								<input type="number" class="form-control update-button" step="0.01" name="center-back-hip-depth" placeholder="{{ size_chart['center_back_hip_depth'] }}" value="{{ size_chart['center_back_hip_depth'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="back-hip-arc" class="col-sm-6 control-label">Back Hip Arc</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control update-button" step="0.01" name="back-hip-arc" placeholder="9.5" value="9.5">
+								<input type="number" class="form-control update-button" step="0.01" name="back-hip-arc" placeholder="{{ size_chart['back_hip_arc'] }}" value="{{ size_chart['back_hip_arc'] }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="dart-placement" class="col-sm-6 control-label">Dart Placement</label>
 							<div class="col-sm-4">
-								<input type="number" class="form-control update-button" step="0.01" name="dart-placement" placeholder="3.25" value="3.25">
+								<input type="number" class="form-control update-button" step="0.01" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
 							</div>
 						</div>
 
-							<input type="hidden" name="waist" value="26">
-					<input type="hidden" name="hip" value="36">
+							<input type="hidden" name="waist" value="{{ size_chart['waist'] }}">
+							<input type="hidden" name="hip" value="{{ size_chart['hip'] }}">
+							<input type="hidden" name="block-type" value="skirt">
 
 						<div class="form-group">
 							<div class="col-md-4 col-md-offset-5">

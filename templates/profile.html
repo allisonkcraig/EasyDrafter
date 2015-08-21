@@ -5,27 +5,57 @@
 
 <center><h3 class="raleway">Email: {{ user.email }}</h3></center>
 
-{% if savedblocks %}
+{% if savedblockstops %}
 
-<center><h3 class="raleway">Your Saved Measurements: </h3></center>
+<center><h3 class="raleway">Your Saved Tops Blocks: </h3></center>
 <table class="table table-hover table-striped">
 	<th><center>Measurement Chart Name</center></th>
 	<th></th>
 	<th></th>
 	<th></th>
-{% for sblock in savedblocks %}
+{% for sblocktop in savedblockstops %}
 	<tr class="saved-block">
-		<td><center><h4>{{ sblock.nickname }}</h4></center>
-		<input type="hidden" name="{{ sblock.chart_id }}" value="{{ sblock.chart_id }}">
+		<td><center><h4>{{ sblocktop.nickname }}</h4></center>
+		<input type="hidden" name="{{ sblocktop.chart_id }}" value="{{ sblocktop.chart_id }}">
 		<center>
-			<td><form action='/print/{{sblock.chart_id}}'>
+			<td><form action='/print/{{sblocktop.chart_id}}'>
 				<button class="btn btn-default">PRINT BLOCK</button>
 			</form></td>
-			<td><form action='/edit/{{sblock.chart_id}}'>
-				<button class="btn btn-default" value="{{ sblock.chart_id }}">EDIT BLOCK</button>
+			<td><form action='/edit/{{sblocktop.chart_id}}'>
+				<button class="btn btn-default" value="{{ sblocktop.chart_id }}">EDIT BLOCK</button>
 			</form></td>
 
-			<td><button class="btn btn-danger delete-btn" name='chart-id' value="{{ sblock.chart_id }}">DELETE BLOCK</button></td>
+			<td><button class="btn btn-danger delete-btn" name='chart-id' value="{{ sblocktop.chart_id }}">DELETE BLOCK</button></td>
+
+		</center>
+		</td>
+	</tr>
+
+{% endfor %}
+</table>
+{% endif %}
+
+{% if savedblocksskirts %}
+
+<center><h3 class="raleway">Your Saved Tops Blocks: </h3></center>
+<table class="table table-hover table-striped">
+	<th><center>Measurement Chart Name</center></th>
+	<th></th>
+	<th></th>
+	<th></th>
+{% for sblockskirt in savedblocksskirts %}
+	<tr class="saved-block">
+		<td><center><h4>{{ sblockskirt.nickname }}</h4></center>
+		<input type="hidden" name="{{ sblockskirt.chart_id }}" value="{{ sblockskirt.chart_id }}">
+		<center>
+			<td><form action='/print/{{sblockskirt.chart_id}}'>
+				<button class="btn btn-default">PRINT BLOCK</button>
+			</form></td>
+			<td><form action='/edit/{{sblockskirt.chart_id}}'>
+				<button class="btn btn-default" value="{{ sblockskirt.chart_id }}">EDIT BLOCK</button>
+			</form></td>
+
+			<td><button class="btn btn-danger delete-btn" name='chart-id' value="{{ sblockskirt.chart_id }}">DELETE BLOCK</button></td>
 
 		</center>
 		</td>

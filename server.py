@@ -206,59 +206,87 @@ def back_draft_page():
 @app.route('/pattern')
 def pattern_page():
     """Send Back Draft measurements to session and show both drafts side by side"""
-    session['measurements']['full_length_back'] = request.args.get("full-length-back")
-    session['measurements']['center_back'] = request.args.get("center-back")
-    session['measurements']['back_shoulder_slope'] = request.args.get("back-shoulder-slope")
-    session['measurements']['across_back'] = request.args.get("across-back")
-    session['measurements']['back_arc'] = request.args.get("back-arc")
-    session['measurements']['waist_arc_back'] = request.args.get("waist-arc-back")
-    session['measurements']['back_neck'] = request.args.get("back-neck")
-    session['measurements']['back_across_shoulder'] = request.args.get("back-across-shoulder")
-    session['measurements']['back_dart_intake'] = request.args.get("back-dart-intake")
+    block_type = request.args.get("block-type")
+    print block_type
 
-    return render_template("canvas.html", size_chart=session['measurements'])
-                            
+    if block_type == "top":
+        session['measurements']['full_length_back'] = request.args.get("full-length-back")
+        session['measurements']['center_back'] = request.args.get("center-back")
+        session['measurements']['back_shoulder_slope'] = request.args.get("back-shoulder-slope")
+        session['measurements']['across_back'] = request.args.get("across-back")
+        session['measurements']['back_arc'] = request.args.get("back-arc")
+        session['measurements']['waist_arc_back'] = request.args.get("waist-arc-back")
+        session['measurements']['back_neck'] = request.args.get("back-neck")
+        session['measurements']['back_across_shoulder'] = request.args.get("back-across-shoulder")
+        session['measurements']['back_dart_intake'] = request.args.get("back-dart-intake")
+
+        return render_template("canvas.html", size_chart=session['measurements'])
+
+    elif block_type =="skirt":
+        session['measurements']['center_front_hip_depth'] = request.args.get("center-front-hip-depth")
+        session['measurements']['front_hip_arc'] = request.args.get("front-hip-arc")
+        session['measurements']['center_back_hip_depth'] = request.args.get("center-back-hip-depth")
+        session['measurements']['back_hip_arc'] = request.args.get("back-hip-arc")
+        session['measurements']['dart_placement'] = request.args.get("dart-placement")
+
+        return render_template("canvas-skirt.html", size_chart=session['measurements'])
 
 @app.route('/save')
 def save_pattern():
     """Save measurements to DB for speific user and redirect to profile page"""
     session['measurements']['nickname'] = request.args.get("nickname")
-    print request.args.get("nickname")
-    print session['measurements']['nickname']
+    block_type= request.args.get("block-type")
+    print block_type
+    if block_type == "top":
+        
+        measurements_to_add = Measurement_Chart_Top(
+            nickname=session['measurements']['nickname'],
+            user_id=session['current_user_id'],
+            bust=session['measurements']['bust'],   
+            waist=session['measurements']['waist'],
 
-    measurements_to_add = Measurement_Chart(
-        nickname=session['measurements']['nickname'],
-        user_id=session['current_user_id'],
-        bust=session['measurements']['bust'],   
-        waist=session['measurements']['waist'],
+            full_length=session['measurements']['full_length'],
+            center_front=session['measurements']['center_front'],
+            front_shoulder_slope=session['measurements']['front_shoulder_slope'],
+            strap=session['measurements']['strap'],
+            front_across_shoulder=session['measurements']['front_across_shoulder'],
+            across_chest=session['measurements']['across_chest'],
+            bust_depth=session['measurements']['bust_depth'],
+            shoulder_length=session['measurements']['shoulder_length'],
+            bust_arc=session['measurements']['bust_arc'],
+            bust_span=session['measurements']['bust_span'],
+            waist_arc=session['measurements']['waist_arc'],
+            dart_placement=session['measurements']['dart_placement'],
+            side_length=session['measurements']['side_length'],
 
-        full_length=session['measurements']['full_length'],
-        center_front=session['measurements']['center_front'],
-        front_shoulder_slope=session['measurements']['front_shoulder_slope'],
-        strap=session['measurements']['strap'],
-        front_across_shoulder=session['measurements']['front_across_shoulder'],
-        across_chest=session['measurements']['across_chest'],
-        bust_depth=session['measurements']['bust_depth'],
-        shoulder_length=session['measurements']['shoulder_length'],
-        bust_arc=session['measurements']['bust_arc'],
-        bust_span=session['measurements']['bust_span'],
-        waist_arc=session['measurements']['waist_arc'],
-        dart_placement=session['measurements']['dart_placement'],
-        side_length=session['measurements']['side_length'],
+            full_length_back=session['measurements']['full_length_back'],
+            center_back=session['measurements']['center_back'],
+            back_shoulder_slope=session['measurements']['back_shoulder_slope'],
+            across_back=session['measurements']['across_back'],
+            back_arc=session['measurements']['back_arc'],
+            waist_arc_back=session['measurements']['waist_arc_back'],
+            back_neck=session['measurements']['back_neck'],
+            back_across_shoulder=session['measurements']['back_across_shoulder'],
+            back_dart_intake=session['measurements']['back_dart_intake'])
 
-        full_length_back=session['measurements']['full_length_back'],
-        center_back=session['measurements']['center_back'],
-        back_shoulder_slope=session['measurements']['back_shoulder_slope'],
-        across_back=session['measurements']['across_back'],
-        back_arc=session['measurements']['back_arc'],
-        waist_arc_back=session['measurements']['waist_arc_back'],
-        back_neck=session['measurements']['back_neck'],
-        back_across_shoulder=session['measurements']['back_across_shoulder'],
-        back_dart_intake=session['measurements']['back_dart_intake'])
+        db.session.add(measurements_to_add)
+        db.session.commit() 
+      
+    elif block_type == "skirt":
+        measurements_to_add = Measurement_Chart_Skirt(
+            nickname=session['measurements']['nickname'],
+            user_id=session['measurements']['current_user_id'],
+            waist=session['measurements']['waist'],
+            hip=session['measurements']['hip'],
+            center_front_hip_depth=session['measurements']['center_front_hip_depth'],
+            back_hip_arc=session['measurements']['back_hip_arc'],
+            center_back_hip_depth=session['measurements']['center_back_hip_depth'],
+            front_hip_arc=session['measurements']['front_hip_arc'],
+            dart_placement=session['measurements']['dart_placement'])
 
-    db.session.add(measurements_to_add)
-    db.session.commit() 
-  
+        db.session.add(measurements_to_add)
+        db.session.commit() 
+
     flash("Save Successful!!")
     return redirect("/profile")
 
@@ -397,9 +425,10 @@ def user_profile_page():
     current_user_id = user.user_id
 
 
-    saved_blocks = Measurement_Chart.query.filter(Measurement_Chart.user_id==current_user_id).all()
+    saved_blocks_tops = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.user_id==current_user_id).all()
+    saved_blocks_skirts = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.user_id==current_user_id).all()
 
-    return render_template("profile.html", user=user, session=session, savedblocks=saved_blocks)
+    return render_template("profile.html", user=user, session=session, savedblockstops=saved_blocks_tops, savedblocksskirts=saved_blocks_skirts)
 
 
 @app.route("/delete-block", methods=["POST"])
