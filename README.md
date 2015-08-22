@@ -1,16 +1,14 @@
 # Hackbright-Final-Project
-Project for Hackbright to draft clothing pattern blocks.
+Pattern Pro is a wed app created by Allison Craig which is used to create clothing pattern blocks for tailors and seamstresses.
+In traditional clothing patternmaking, drafting blocks can take a lot of time and have human error. My app makes it quick and easy to make a block so the pattern drafter can get to making more complex patterns quicker. 
 
 # Table of Contents
-* [About the Project](#about)
 * [Author](#author)
-* [Requirements](#requirements)
+* [Installation](#installation)
 
-# <a name="about"></a>About the Project
+# <a name="author"></a>Author
 
-# <a name="Author"></a>Author
-
-# <a name="requirements"></a>Requirements
+# <a name="installation"></a>Installation
 * "Flask" <http://flask.pocoo.org/>
 * "Flask - SQLAlchemy" <http://flask.pocoo.org/>
 * "jQuery" <http://flask.pocoo.org/>
