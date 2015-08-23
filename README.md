@@ -7,6 +7,8 @@ In traditional clothing patternmaking, drafting blocks can take a lot of time an
 * [Installation](#installation)
 
 # <a name="author"></a>Author
+Allison Craig is a software engineer from San Francisco, CA.
+
 
 # <a name="installation"></a>Installation
 * "Flask" <http://flask.pocoo.org/>

@@ -16,16 +16,18 @@
 {% for sblocktop in savedblockstops %}
 	<tr class="saved-block">
 		<td><center><h4>{{ sblocktop.nickname }}</h4></center>
-		<input type="hidden" name="{{ sblocktop.chart_id }}" value="{{ sblocktop.chart_id }}">
 		<center>
 			<td><form action='/print/{{sblocktop.chart_id}}'>
 				<button class="btn btn-default">PRINT BLOCK</button>
 			</form></td>
 			<td><form action='/edit/{{sblocktop.chart_id}}'>
+
+				<input type="hidden" name="block-type" value="top">
+
 				<button class="btn btn-default" value="{{ sblocktop.chart_id }}">EDIT BLOCK</button>
 			</form></td>
 
-			<td><button class="btn btn-danger delete-btn" name='chart-id' value="{{ sblocktop.chart_id }}">DELETE BLOCK</button></td>
+			<td><button class="btn btn-danger delete-btn" id='chart-id' value="{{ sblocktop.chart_id }}">DELETE BLOCK</button></td>
 
 		</center>
 		</td>
@@ -46,13 +48,17 @@
 {% for sblockskirt in savedblocksskirts %}
 	<tr class="saved-block">
 		<td><center><h4>{{ sblockskirt.nickname }}</h4></center>
-		<input type="hidden" name="{{ sblockskirt.chart_id }}" value="{{ sblockskirt.chart_id }}">
+		<form>
+		</form>
 		<center>
 			<td><form action='/print/{{sblockskirt.chart_id}}'>
 				<button class="btn btn-default">PRINT BLOCK</button>
 			</form></td>
 			<td><form action='/edit/{{sblockskirt.chart_id}}'>
 				<button class="btn btn-default" value="{{ sblockskirt.chart_id }}">EDIT BLOCK</button>
+
+				<input type="hidden" name="block-type" value="skirt">
+
 			</form></td>
 
 			<td><button class="btn btn-danger delete-btn" name='chart-id' value="{{ sblockskirt.chart_id }}">DELETE BLOCK</button></td>

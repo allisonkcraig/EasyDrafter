@@ -235,7 +235,7 @@ def pattern_page():
 def save_pattern():
     """Save measurements to DB for speific user and redirect to profile page"""
     session['measurements']['nickname'] = request.args.get("nickname")
-    block_type= request.args.get("block-type")
+    block_type = request.args.get("block-type")
     print block_type
     if block_type == "top":
         
@@ -294,32 +294,57 @@ def save_pattern():
 @app.route('/print/<int:chart_id_selected>')
 def print_page(chart_id_selected):
     """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
+    block_type = request.args.get("block-type")
+    print block_type
 
-    current_chart = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_selected).first()
-
-    current_chart_dict = current_chart.__dict__
-
-    if current_chart_dict['_sa_instance_state']:
-        del current_chart_dict['_sa_instance_state']
+    if block_type == "top":
+        current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).first()
+        current_chart_dict = current_chart.__dict__
+        if current_chart_dict['_sa_instance_state']:
+            del current_chart_dict['_sa_instance_state']
     
-    session['measurements'] = current_chart_dict
+        session['measurements'] = current_chart_dict
+        return render_template("canvas.html", size_chart=session['measurements'])
 
-    return render_template("canvas.html", size_chart=session['measurements'])
+    if block_type == "skirt":
+        current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).first()
+        current_chart_dict = current_chart.__dict__
+        if current_chart_dict['_sa_instance_state']:
+            del current_chart_dict['_sa_instance_state']
+    
+        session['measurements'] = current_chart_dict
+        return render_template("canvas-skirt.html", size_chart=session['measurements'])
 
 
 @app.route('/edit/<int:chart_id_selected>')
 def edit_page(chart_id_selected):
     """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
-    current_chart = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_selected).first()
+    block_type = request.args.get("block-type")
+    print block_type
 
-    current_chart_dict = current_chart.__dict__
+    if block_type == "top":
+        current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).one()
 
-    if current_chart_dict['_sa_instance_state']:
-        del current_chart_dict['_sa_instance_state']
-    
-    session['measurements'] = current_chart_dict
+        current_chart_dict = current_chart.__dict__
 
-    return render_template("front-draft.html", size_chart=session['measurements'])
+        if current_chart_dict['_sa_instance_state']:
+            del current_chart_dict['_sa_instance_state']
+        
+        session['measurements'] = current_chart_dict
+
+        return render_template("front-draft.html", size_chart=session['measurements'])
+
+    if block_type == "skirt":
+        current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).one()
+
+        current_chart_dict = current_chart.__wdict__
+
+        if current_chart_dict['_sa_instance_state']:
+            del current_chart_dict['_sa_instance_state']
+        
+        session['measurements'] = current_chart_dict
+
+        return render_template("skirt-draft.html", size_chart=session['measurements'])
 
 @app.route("/login", methods=["GET"])
 def show_login():
@@ -434,8 +459,15 @@ def user_profile_page():
 @app.route("/delete-block", methods=["POST"])
 def delete_block():
     chart_id_input = request.form.get("chart-id")
+    block_type = request.form.get("block-type")
     print chart_id_input, "+++++++++++++++++++++"
-    chart_in_db = Measurement_Chart.query.filter(Measurement_Chart.chart_id==chart_id_input).first()
+    print block_type, "+++++++++++++++++++++"
+    if block_type == "top":
+        chart_in_db = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_input).first()
+     
+    if block_type == "skirt":
+        chart_in_db = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_input).first()
+    
     db.session.delete(chart_in_db)
     db.session.commit()
     return jsonify({'status':'ok'})

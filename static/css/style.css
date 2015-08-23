@@ -147,3 +147,7 @@ footer {
 	display: block;
 	z-index: -1;
 }
+
+.type-icon {
+	height: 275px;
+}
