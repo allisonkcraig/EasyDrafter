@@ -398,9 +398,29 @@ $('#save-skirt').on('click',
                         doc.addImage(image2Data, 'JPEG', 12, 10);
                         croppingYPosition += destHeight;              
                     };           
-                
+                   doc.save("pattern-skirt.pdf");
 
-                    doc.save("pattern-skirt.pdf");
+
+               
+                 
+                    console.log("This is" + doc )
+            
+
+
+                  
+                    // $.ajax({
+                    //     url: '/dropbox-save',
+                    //     data : {'hi': doc},
+                    //     cache: false,
+                    //     contentType: false,
+                    //     processData: false,
+                    //     method: 'POST',
+                    //     success: function(response) {
+                    //     console.log("HI") }
+                    //     })
+                
+                    
                 }, 500);
+
 
 });

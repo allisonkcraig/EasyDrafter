@@ -15,16 +15,49 @@ app = Flask(__name__)
 
 oauth = OAuth()
 app.secret_key = os.environ['SECRET_KEY'] 
-# fb_client_id = os.environ['FB_CLIENT_ID'] 
-# fb_client_secret = os.environ['FB_CLIENT_SECRET'] 
-
-#much source secrets.sh each time you enter virtual env, will go away after each session
+#much sure to source secrets.sh each time you enter virtual env, will go away after each session
 
 app.jinja_env.undefined = jinja2.StrictUndefined
 
+# Include the Dropbox SDK
+import dropbox
 
+# Get your app key and secret from the Dropbox developer website
+dropbox_app_key = os.environ['DB_APP_KEY']
+dropbox_app_secret = os.environ['DB_APP_SECRET']
 
+dropbox_access_token = os.environ['DB_ACCESS_TOKEN']
 
+@app.route('/dropbox-authenticate')
+def dropbox_oauth():
+
+    flow = dropbox.client.DropboxOAuth2FlowNoRedirect(dropbox_app_key, dropbox_app_secret)
+
+    # Have the user sign in and authorize this token
+    authorize_url = flow.start()
+    print '1. Go to: ' + authorize_url
+    print '2. Click "Allow" (you might have to log in first)'
+    print '3. Copy the authorization code.'
+    code = raw_input("Enter the authorization code here: ").strip()
+
+    # This will fail if the user enters an invalid authorization code
+    access_token, user_id = flow.finish(code)
+
+    client = dropbox.client.DropboxClient(access_token)
+    print 'linked account: ', client.account_info()
+
+    f = open('skirt.png', 'rb')
+    response = client.put_file('/magnum-opus.txt', f)
+    print 'uploaded: ', response
+    pass
+
+@app.route('/dropbox-save', methods=["POST"])
+def dropbox_save():
+    data = request.files.get("hi")
+    print data
+    print "TYPE", type(data)
+
+    return jsonify({'status':'ok'})
 
 
 @app.route('/')
