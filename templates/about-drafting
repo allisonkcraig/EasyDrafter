@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container' id="first-page">
+	<h1>Pattern Drafting Terminology</h1>
+	<h3>What is Pattern Drafting?</h3>
+	Pattern drafting is the process of taking a person's measurements and creatignblocks or aptterns which fit them. It is a very important part of fashion design!
+	<h3>Blocks vs Patterns</h3>
+	This app creates blocks which are used as templates. You trace them and manipulate them to create patterns. To create a pattern out of you must add seam allowances!
+	<h3>Blocks vs Patterns</h3>
+</div>
+
+{% endblock %}

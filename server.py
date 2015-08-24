@@ -15,8 +15,8 @@ app = Flask(__name__)
 
 oauth = OAuth()
 app.secret_key = os.environ['SECRET_KEY'] 
-fb_client_id = os.environ['FB_CLIENT_ID'] 
-fb_client_secret = os.environ['FB_CLIENT_SECRET'] 
+# fb_client_id = os.environ['FB_CLIENT_ID'] 
+# fb_client_secret = os.environ['FB_CLIENT_SECRET'] 
 
 #much source secrets.sh each time you enter virtual env, will go away after each session
 
@@ -24,88 +24,7 @@ app.jinja_env.undefined = jinja2.StrictUndefined
 
 
 
-facebook = oauth.remote_app('facebook',
-            base_url='https://graph.facebook.com/',
-            request_token_url=None,
-            access_token_url='/oauth/access_token',
-            authorize_url='https://www.facebook.com/dialog/oauth',
-            consumer_key=fb_client_id,
-            consumer_secret=fb_client_secret,
-            request_token_params={'scope': 'email'}
-)
 
-
-@app.route('/fb-login')
-def facebook_login():
-    """send user data through facebook oauth to retreive user information"""
-    print "facebook_login"
-    return facebook.authorize(callback=url_for('facebook_authorized',
-                                               next=request.args.get(
-                                                   'next') or request.referrer or None,
-                                               _external=True))
-
-
-@app.route('/fb-login/authorized')
-@facebook.authorized_handler
-def facebook_authorized(response):
-    """Process login and get user information"""
-    print "facebook_authorized"
-    next_url = request.args.get('next') or url_for('index')
-
-    if response is None:
-        flash("Invalid Login")
-        return render_template("/")
-
-    #adds information about our user to the session
-    session['logged_in'] = True
-    session['oauth_token'] = (response['access_token'], '')
-    me = facebook.get('/me')
-    #calls function to create or retrieve user object, adds additional info to the session
-    user = add_new_user()
-    session['current_user_id'] = user.id
-    session['user_name'] = me.data['first_name']
-    # session['favorites'] = [""]
-
-    return redirect('/profile')
-
-
-def add_new_user():
-    """ Uses FB id to check for exisiting user in db. If none, adds new user."""
-
-    # names facebook me object as fb_user
-    fb_user = facebook.get('/me').data
-
-    # queries database comparing user id with the ids in users table
-    existing_user = User.query(model.User).filter(
-        User.facebook_id == fb_user['id']).first()
-
-    # if user not present, instantiates new user object
-    if existing_user is None:
-        new_user = model.User()
-        new_user.fb_id = fb_user['id']
-        new_user.fname = fb_user['first_name']
-        new_user.email = fb_user['email']
-
-
-        # commit new user to database
-        model.session.add(new_user)
-        model.session.commit()
-
-        # Go get that new user
-        current_user = User.query.filter(User.fb_id == fb_user['id']).first()
-
-    
-        return current_user
-
-    #work with queried user
-    else:
-        return existing_user
-
-
-@facebook.tokengetter
-def get_facebook_oauth_token():
-
-    return session.get('oauth_token')
 
 
 @app.route('/')
@@ -113,6 +32,10 @@ def home_page():
     """Render Homepage."""
     return render_template('/splash-page.html')
 
+@app.route('/about-drafting')
+def about_page():
+    """Renders page which explains pattern drafting."""
+    return render_template('/about-drafting.html')
 
 @app.route('/choose-block')
 def choose_block_page():
@@ -120,14 +43,18 @@ def choose_block_page():
 
     return render_template("block-choice.html")
 
-@app.route('/start')
-def measure_page():
+@app.route('/start-top')
+def measure_top_page():
     """Allow input of measurements to find size of template pattern from DB"""
-    block_choice = request.args.get("block-choice")
-    if block_choice == "top":
-        return render_template("/basic-measure-page.html")
-    elif block_choice == "skirt":
-        return render_template("/basic-measure-page-skirt.html")
+    
+    return render_template("/basic-measure-page.html")
+
+
+@app.route('/start-skirt')
+def measure_skirt_page():
+    """Allow input of measurements to find size of template pattern from DB"""
+    
+    return render_template("/basic-measure-page-skirt.html")
 
 @app.route('/skirt-draft')
 def skirt_draft_page():
@@ -291,60 +218,61 @@ def save_pattern():
     return redirect("/profile")
 
 
-@app.route('/print/<int:chart_id_selected>')
-def print_page(chart_id_selected):
+@app.route('/print-top/<int:chart_id_selected>')
+def print_top_page(chart_id_selected):
     """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
-    block_type = request.args.get("block-type")
-    print block_type
 
-    if block_type == "top":
-        current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).first()
-        current_chart_dict = current_chart.__dict__
-        if current_chart_dict['_sa_instance_state']:
-            del current_chart_dict['_sa_instance_state']
+    current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).first()
+    current_chart_dict = current_chart.__dict__
+    if current_chart_dict['_sa_instance_state']:
+        del current_chart_dict['_sa_instance_state']
     
-        session['measurements'] = current_chart_dict
-        return render_template("canvas.html", size_chart=session['measurements'])
+    session['measurements'] = current_chart_dict
+    return render_template("canvas.html", size_chart=session['measurements'])
 
-    if block_type == "skirt":
-        current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).first()
-        current_chart_dict = current_chart.__dict__
-        if current_chart_dict['_sa_instance_state']:
-            del current_chart_dict['_sa_instance_state']
-    
-        session['measurements'] = current_chart_dict
-        return render_template("canvas-skirt.html", size_chart=session['measurements'])
-
-
-@app.route('/edit/<int:chart_id_selected>')
-def edit_page(chart_id_selected):
+@app.route('/print-skirt/<int:chart_id_selected>')
+def print_skirt_page(chart_id_selected):
     """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
-    block_type = request.args.get("block-type")
-    print block_type
+  
+    current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).first()
+    current_chart_dict = current_chart.__dict__
+    if current_chart_dict['_sa_instance_state']:
+        del current_chart_dict['_sa_instance_state']
+    
+    session['measurements'] = current_chart_dict
+    return render_template("canvas-skirt.html", size_chart=session['measurements'])
 
-    if block_type == "top":
-        current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).one()
 
-        current_chart_dict = current_chart.__dict__
+@app.route('/edit-top/<int:chart_id_selected>')
+def edit_top_page(chart_id_selected):
+    """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
 
-        if current_chart_dict['_sa_instance_state']:
-            del current_chart_dict['_sa_instance_state']
+    current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).one()
+
+    current_chart_dict = current_chart.__dict__
+
+    if current_chart_dict['_sa_instance_state']:
+        del current_chart_dict['_sa_instance_state']
         
-        session['measurements'] = current_chart_dict
+    session['measurements'] = current_chart_dict
 
-        return render_template("front-draft.html", size_chart=session['measurements'])
+    return render_template("front-draft.html", size_chart=session['measurements'])
 
-    if block_type == "skirt":
-        current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).one()
 
-        current_chart_dict = current_chart.__wdict__
+@app.route('/edit-skirt/<int:chart_id_selected>')
+def edit_skirt_page(chart_id_selected):
+    """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
 
-        if current_chart_dict['_sa_instance_state']:
-            del current_chart_dict['_sa_instance_state']
+    current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).one()
+
+    current_chart_dict = current_chart.__wdict__
+
+    if current_chart_dict['_sa_instance_state']:
+        del current_chart_dict['_sa_instance_state']
         
-        session['measurements'] = current_chart_dict
+    session['measurements'] = current_chart_dict
 
-        return render_template("skirt-draft.html", size_chart=session['measurements'])
+    return render_template("skirt-draft.html", size_chart=session['measurements'])
 
 @app.route("/login", methods=["GET"])
 def show_login():

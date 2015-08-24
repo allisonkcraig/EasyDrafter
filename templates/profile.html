@@ -17,12 +17,10 @@
 	<tr class="saved-block">
 		<td><center><h4>{{ sblocktop.nickname }}</h4></center>
 		<center>
-			<td><form action='/print/{{sblocktop.chart_id}}'>
+			<td><form action='/print-top/{{sblocktop.chart_id}}'>
 				<button class="btn btn-default">PRINT BLOCK</button>
 			</form></td>
-			<td><form action='/edit/{{sblocktop.chart_id}}'>
-
-				<input type="hidden" name="block-type" value="top">
+			<td><form action='/edit-top/{{sblocktop.chart_id}}'>
 
 				<button class="btn btn-default" value="{{ sblocktop.chart_id }}">EDIT BLOCK</button>
 			</form></td>
@@ -51,14 +49,11 @@
 		<form>
 		</form>
 		<center>
-			<td><form action='/print/{{sblockskirt.chart_id}}'>
+			<td><form action='/print-skirt/{{sblockskirt.chart_id}}'>
 				<button class="btn btn-default">PRINT BLOCK</button>
 			</form></td>
-			<td><form action='/edit/{{sblockskirt.chart_id}}'>
+			<td><form action='/edit-skirt/{{sblockskirt.chart_id}}'>
 				<button class="btn btn-default" value="{{ sblockskirt.chart_id }}">EDIT BLOCK</button>
-
-				<input type="hidden" name="block-type" value="skirt">
-
 			</form></td>
 
 			<td><button class="btn btn-danger delete-btn" name='chart-id' value="{{ sblockskirt.chart_id }}">DELETE BLOCK</button></td>
