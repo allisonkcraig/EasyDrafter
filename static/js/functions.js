@@ -58,46 +58,64 @@ document.determineDartIntakeSkirt =  function(waist, hip){
 			document.backDartIntake = 1.375 * document.scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
+			var dartDifferent = 13
+			return dartDifferent 
 		} else if (difference > 11) {
 			document.frontDartIntake = 0.625 * document.scale;
 			document.backDartIntake = 1.375 * document.scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
+			var dartDifferent = 12
+			return dartDifferent 
 		} else if (difference > 10) {
 			document.frontDartIntake = 0.625 * document.scale;
 			document.backDartIntake = 1.25 * document.scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
+			var dartDifferent = 11
+			return dartDifferent 
 		} else if (difference > 9) {
 			document.frontDartIntake = 0.5 * document.scale;
 			document.backDartIntake = 1 * document.scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
+			var dartDifferent = 10
+			return dartDifferent 
 		} else if (difference > 7) {
 			document.frontDartIntake = 0.375 * document.scale;
 			document.backDartIntake = 0.875 * document.scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
+			var dartDifferent = 8
+			return dartDifferent 
 		} else if (difference > 6) {
 			document.frontDartIntake = 0.5 * document.scale;
 			document.backDartIntake = 0.75 * document.scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 2;
+			var dartDifferent = 7
+			return dartDifferent 
 		} else if (difference > 5) {
 			document.frontDartIntake = 0.5 * document.scale;
 			document.backDartIntake = 0.625 * document.scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 2;
+			var dartDifferent = 6
+			return dartDifferent 
 		} else if (difference > 4) {
 			document.frontDartIntake = 0.5 * document.scale;
 			document.backDartIntake = 1 * document.scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 1;
+			var dartDifferent = 5
+			return dartDifferent 
 		} else if (difference > 3) {
 			document.frontDartIntake = 0.5 * document.scale;
 			document.backDartIntake = 0.75 * document.scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 1;
+			var dartDifferent = 4
+			return dartDifferent 
 		}
 
 	

@@ -49,17 +49,18 @@ describe("My findLengthOfBiggerTriangleSide function should", function () {
 });
 
 
-// describe("My findAxisForPointOnLine function should", function () {
+describe("My determineDartIntakeSkirt function should", function () {
 
-//     it("take coordinates and find a point along the Hypotoneuse", function () {
-//         expect(document.findLengthOfBiggerTriangleSide(3, 4, 6)).toBe(8);
-//     });
+    it("return an approximate difference of a waist and a hip measurement", function () {
+        expect(document.determineDartIntakeSkirt(29,39)).toBe(10);
+    });
 
-//     // it("should take two numbers and use them to find the length of Hypotoneuse of a right triangle", function () {
-//     //      expect(document.findLengthOfBiggerTriangleSide(8, 3, 9)).toBe(3.375);
-//     // });
+    it("return an approximate difference rounded when one number is a float", function () {
+        expect(document.determineDartIntakeSkirt(24.5,39)).toBe(13);
+    });
 
-// });
+
+});
 
 
 	// // Find point on a straight line with two (x,y) coordinates for each end where point 1 is the side you would like to start at.

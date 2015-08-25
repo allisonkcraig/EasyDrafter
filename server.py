@@ -308,7 +308,7 @@ def edit_skirt_page(chart_id_selected):
 
     current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).one()
 
-    current_chart_dict = current_chart.__wdict__
+    current_chart_dict = current_chart.__dict__
 
     if current_chart_dict['_sa_instance_state']:
         del current_chart_dict['_sa_instance_state']
