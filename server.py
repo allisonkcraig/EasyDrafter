@@ -71,6 +71,11 @@ def about_page():
     """Renders page which explains pattern drafting."""
     return render_template('/about-drafting.html')
 
+@app.route('/testing')
+def testing_page():
+    """Renders page with Jasmine Testing."""
+    return render_template('/testing.html')
+
 @app.route('/choose-block')
 def choose_block_page():
     """User decides which block to draft"""
@@ -92,6 +97,7 @@ def measure_skirt_page():
 
 @app.route('/skirt-draft')
 def skirt_draft_page():
+    """Use template measurements to draft a skirt that closest fits user and allows users to edit measurements in inputs"""
 
     hip_input = request.args.get("hip")
     waist_input = request.args.get("waist")
@@ -118,7 +124,7 @@ def skirt_draft_page():
 
 @app.route('/front-draft')
 def front_draft_page():
-    """Use template measurements to draft a front block that closest fit them and allow users to change block to fit them using inputs """
+    """Use template measurements to draft a front block that closest fits user and allow users to change block to fit them using inputs """
     
     bust_input = request.args.get("bust")
     waist_input = request.args.get("waist")
@@ -166,7 +172,9 @@ def back_draft_page():
 
 @app.route('/pattern')
 def pattern_page():
-    """Send Back Draft measurements to session and show both drafts side by side"""
+    """Checks for type of block and send measurements to session. 
+    Shows drafts and allows you to imput a nickname to save and buttons to save to PDF"""
+
     block_type = request.args.get("block-type")
     print block_type
 
@@ -194,7 +202,8 @@ def pattern_page():
 
 @app.route('/save')
 def save_pattern():
-    """Save measurements to DB for speific user and redirect to profile page"""
+    """Save measurements to DB for current user and redirect to profile page"""
+
     session['measurements']['nickname'] = request.args.get("nickname")
     block_type = request.args.get("block-type")
     print block_type
@@ -254,7 +263,7 @@ def save_pattern():
 
 @app.route('/print-top/<int:chart_id_selected>')
 def print_top_page(chart_id_selected):
-    """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
+    """Checks chart_id of selected top measurement chart and directs you to a page where you can print"""
 
     current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).first()
     current_chart_dict = current_chart.__dict__
@@ -266,7 +275,7 @@ def print_top_page(chart_id_selected):
 
 @app.route('/print-skirt/<int:chart_id_selected>')
 def print_skirt_page(chart_id_selected):
-    """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
+    """Checks chart_id of selected skirt measurement chart and directs you to a page where you can print"""
   
     current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).first()
     current_chart_dict = current_chart.__dict__
@@ -279,7 +288,7 @@ def print_skirt_page(chart_id_selected):
 
 @app.route('/edit-top/<int:chart_id_selected>')
 def edit_top_page(chart_id_selected):
-    """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
+    """Checks chart_id of selected measurement chart and directs you to a page where you can edit the front draft"""
 
     current_chart = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_selected).one()
 
@@ -295,7 +304,7 @@ def edit_top_page(chart_id_selected):
 
 @app.route('/edit-skirt/<int:chart_id_selected>')
 def edit_skirt_page(chart_id_selected):
-    """Checks chart_id of selected measurement chart and directs you to a page where you can print"""
+    """Checks chart_id of selected measurement chart and directs you the drafting page so you can change measurements."""
 
     current_chart = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_selected).one()
 
@@ -384,24 +393,6 @@ def process_registration():
     return redirect("/profile")
 
 
-    # if user:
-    #     if pword_input != user.password:
-    #         flash("Incorrect password")
-    #         return redirect("/login")
-    #     else:
-    #         flash("Login successful!")
-    #         current_user = User.query.filter_by(email=email_input).first()
-    #         current_user_dict = current_user.__dict__
-    #         session['current_user_id'] = current_user_dict['user_id']
-    #         print session['current_user_id']
-    #         session['logged_in_customer_email'] = email_input
-    #         return redirect("/profile")
-        
-    # else:
-    #     flash("No such email")
-    #     return redirect("/login")
-
-
 @app.route('/profile')
 def user_profile_page():
     """Display user information and saved blocks"""
@@ -418,22 +409,26 @@ def user_profile_page():
     return render_template("profile.html", user=user, session=session, savedblockstops=saved_blocks_tops, savedblocksskirts=saved_blocks_skirts)
 
 
-@app.route("/delete-block", methods=["POST"])
-def delete_block():
+@app.route("/delete-block-top", methods=["POST"])
+def delete_block_top():
+    """Deletes top block via AJAX call"""
+
     chart_id_input = request.form.get("chart-id")
-    block_type = request.form.get("block-type")
-    print chart_id_input, "+++++++++++++++++++++"
-    print block_type, "+++++++++++++++++++++"
-    if block_type == "top":
-        chart_in_db = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_input).first()
-     
-    if block_type == "skirt":
-        chart_in_db = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_input).first()
-    
+    test = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==6).first()
+    chart_in_db = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_input).first()
     db.session.delete(chart_in_db)
     db.session.commit()
     return jsonify({'status':'ok'})
 
+@app.route("/delete-block-skirt", methods=["POST"])
+def delete_block_skirt():
+    """Deletes skirt block via AJAX call"""
+
+    chart_id_input = request.form.get("chart-id")
+    chart_in_db = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_input).first()
+    db.session.delete(chart_in_db)
+    db.session.commit()
+    return jsonify({'status':'ok'})
 
 @app.route("/logout")
 def process_logout():
@@ -442,20 +437,6 @@ def process_logout():
        
     flash("You have been logged out")
     return redirect("/")
-
-
-@app.route('/logbutton')
-def logbutton():
-    """You get here if you click the login/logout button from any page other than login/signup"""
-    
-    if 'current_user_id' in session:
-        del session['current_user_id']
-        flash("Logout successful!")
-    if 'current_acces_token' in session:
-        del session['current_acces_token']
-        flash("You have logged out of Facebook")
-     
-    return redirect("/login")
 
 
 JS_TESTING_MODE = False

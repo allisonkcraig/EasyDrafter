@@ -24,8 +24,9 @@
 
 				<button class="btn btn-default" value="{{ sblocktop.chart_id }}">EDIT BLOCK</button>
 			</form></td>
+			<td>
+			<button class="btn btn-danger delete-btn-top" name='chart-id' value="{{ sblocktop.chart_id }}">DELETE BLOCK</button></td>
 
-			<td><button class="btn btn-danger delete-btn" id='chart-id' value="{{ sblocktop.chart_id }}">DELETE BLOCK</button></td>
 
 		</center>
 		</td>
@@ -56,7 +57,7 @@
 				<button class="btn btn-default" value="{{ sblockskirt.chart_id }}">EDIT BLOCK</button>
 			</form></td>
 
-			<td><button class="btn btn-danger delete-btn" name='chart-id' value="{{ sblockskirt.chart_id }}">DELETE BLOCK</button></td>
+			<td><button class="btn btn-danger delete-btn-skirt" name='chart-id' value="{{ sblockskirt.chart_id }}">DELETE BLOCK</button></td>
 
 		</center>
 		</td>
@@ -68,11 +69,29 @@
 
 <script>
 
-function deleteBlock (evt) {
+// function deleteBlock (evt) {
+// 	evt.preventDefault();
+
+// 	$.ajax({
+// 		url: "/delete-block",
+// 		data: {'chart-id':$(this).val()},
+// 		type: "POST",
+// 		success: function(response) {
+// 			console.log(response)
+// 		},
+// 		error: function(error) {
+// 			console.log('error')
+// 		}
+// 	});
+// 	$(this).closest('.saved-block').remove();
+// }
+
+
+function deleteBlockTop (evt) {
 	evt.preventDefault();
 
 	$.ajax({
-		url: "/delete-block",
+		url: "/delete-block-top",
 		data: {'chart-id':$(this).val()},
 		type: "POST",
 		success: function(response) {
@@ -85,13 +104,13 @@ function deleteBlock (evt) {
 	$(this).closest('.saved-block').remove();
 }
 
-$('.delete-btn').on('click', deleteBlock);
+$('.delete-btn-top').on('click', deleteBlockTop);
 
-function deleteBlock (evt) {
+function deleteBlockSkirt (evt) {
 	evt.preventDefault();
 
 	$.ajax({
-		url: "/delete-block",
+		url: "/delete-block-skirt",
 		data: {'chart-id':$(this).val()},
 		type: "POST",
 		success: function(response) {
@@ -104,8 +123,7 @@ function deleteBlock (evt) {
 	$(this).closest('.saved-block').remove();
 }
 
-$('.edit-name-btn').on('click', deleteBlock);
-
+$('.delete-btn-skirt').on('click', deleteBlockSkirt);
 </script>
 
 {% endblock %}

@@ -42,13 +42,9 @@ describe("My locatePointOnC function should", function () {
 
 describe("My findLengthOfBiggerTriangleSide function should", function () {
 
-    it("take coordinates and find a point along the Hypotoneuse", function () {
+    it("take coordinates and find a proportionatly bigger side of a triangle", function () {
         expect(document.findLengthOfBiggerTriangleSide(3, 4, 6)).toBe(8);
     });
-
-    // it("should take two numbers and use them to find the length of Hypotoneuse of a right triangle", function () {
-    //      expect(document.findLengthOfBiggerTriangleSide(8, 3, 9)).toBe(3.375);
-    // });
 
 });
 

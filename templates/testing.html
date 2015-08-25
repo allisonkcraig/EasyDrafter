@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<script src='/static/js/functions.js'></script>
+	
+
+	
+	{% if g.jasmine_tests %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.css"></link>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine-html.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/boot.js"></script>
+    <script src="/static/js/functions-spec.js"></script>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+<center><h1 class="raleway">Jasmine Testing</h1></center>
+{% endblock %}
