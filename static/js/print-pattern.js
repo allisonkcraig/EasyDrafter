@@ -1,3 +1,4 @@
+var doc;
 $('#save-front').on('click', 
 	function(){
 
@@ -232,7 +233,7 @@ $('#save-skirt').on('click',
             var imageData = document.draftingTableSkirt.toDataURL("image/jpeg");
             var image = new Image();
             image = Canvas2Image.convertToJPEG(document.draftingTableSkirt);
-            var doc = new jsPDF();
+            doc = new jsPDF();
             doc.addImage(imageData, 'JPEG', 12, 10);
             var croppingYPosition = 999;
             var croppingXPosition = 699;
@@ -398,29 +399,102 @@ $('#save-skirt').on('click',
                         doc.addImage(image2Data, 'JPEG', 12, 10);
                         croppingYPosition += destHeight;              
                     };           
-                   doc.save("pattern-skirt.pdf");
+                    doc.save("pattern-skirt.pdf");
 
+                    // pdfUpload();
+                    // ajaxFileUpload()
 
-               
-                 
-                    console.log("This is" + doc )
-            
-
-
-                  
-                    // $.ajax({
-                    //     url: '/dropbox-save',
-                    //     data : {'hi': doc},
-                    //     cache: false,
-                    //     contentType: false,
-                    //     processData: false,
-                    //     method: 'POST',
-                    //     success: function(response) {
-                    //     console.log("HI") }
-                    //     })
+//CAN WE SAVE A FILE TO A THING PLEASE. --> AS IN, SAVE THIS PDF THAT IS CREATED, TO SERVER OR TO
+//FOLDER THAT IS NOT DOWNLOADS OR EMAIL OR SOMETHING 
                 
                     
                 }, 500);
 
-
 });
+
+/////////////////////////////////////////////////////////////////////////////////
+//http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously?rq=1
+
+// var pdfUpload = function(){
+//     var formData = new FormData();
+//     formData.append("pdf_file", doc);
+//     console.log(doc);
+//     console.log(formData);
+
+//     $.ajax({
+//             url: '/dropbox-save',  //Server script to process data
+//             type: 'POST',
+//             xhr: function() {  // Custom XMLHttpRequest
+//                 var myXhr = $.ajaxSettings.xhr();
+//                 if(myXhr.upload){ // Check if upload property exists
+//                     myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
+//                 }
+//                 return myXhr;
+//             },
+//             // //Ajax events
+//             // beforeSend: beforeSendHandler,
+//             // success: completeHandler,
+//             // error: errorHandler,
+//             // Form data
+//             data: formData,
+//             //Options to tell jQuery not to process data or worry about content-type.
+//             cache: false,
+//             contentType: false,
+//             processData: false
+//         });
+
+// };
+
+///////////////////////////////////////////////////////////////////////////////////
+
+//http://stackoverflow.com/questions/19580959/jquerysending-pdf-to-server-via-ajax
+// var ajaxFileUpload = function(){
+//     //starting setting some animation when the ajax starts and completes
+//     // $("#loading")
+//     // .ajaxStart(function(){
+//     //     $(this).show();
+//     // })
+//     // .ajaxComplete(function(){
+//     //     $(this).hide();
+//     // });
+
+    
+//         prepareing ajax file upload
+//         url: the url of script file handling the uploaded files
+//                     fileElementId: the file type of input element id and it will be the index of  $_FILES Array()
+//         dataType: it support json, xml
+//         secureuri:use secure protocol
+//         success: call back function when the ajax complete
+//         error: callback function when the ajax failed
+
+            
+//     $.ajaxFileUpload
+//     (
+//         {
+//             url:'/dropbox-save', 
+//             secureuri:false,
+//             data: doc,
+//             dataType: 'json',
+//             success: function (data, status)
+//             {
+//                 if(typeof(data.error) != 'undefined')
+//                 {
+//                     if(data.error != '')
+//                     {
+//                         alert(data.error);
+//                     }else
+//                     {
+//                         alert(data.msg);
+//                     }
+//                 }
+//             },
+//             error: function (data, status, e)
+//             {
+//                 alert(e);
+//             }
+//         }
+//     );
+
+//     return false;
+
+// };

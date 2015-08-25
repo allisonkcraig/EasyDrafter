@@ -20,12 +20,13 @@ $(document).ready(function(){
 		document.waistArc = parseFloat($('form input[name="waist-arc"]').val());
 		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val());
 		document.sideLength = parseFloat($('form input[name="side-length"]').val());
+		document.bustEase = 0.25
 
 
 		// calculating rises and runs for right angle formulas
 		document.frontShoulderSlopeRise = document.pythagoreanCAndA((document.frontShoulderSlope + 0.125), document.frontAcrossShoulder);
 		document.shoulderLengthRun = document.pythagoreanCAndA(document.shoulderLength,(document.fullLength - document.frontShoulderSlopeRise));
-		document.strapRise = document.pythagoreanCAndA((document.strap + 0.375), ((document.bustArc +0.25)- document.shoulderLengthRun));
+		document.strapRise = document.pythagoreanCAndA((document.strap + 0.375), ((document.bustArc + document.bustEase)- document.shoulderLengthRun));
 		document.sideLengthRise = document.pythagoreanCAndA(document.sideLength, 1.25)
 
 

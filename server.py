@@ -53,11 +53,12 @@ def dropbox_oauth():
 
 @app.route('/dropbox-save', methods=["POST"])
 def dropbox_save():
-    data = request.files.get("hi")
-    print data
-    print "TYPE", type(data)
+    print "STUFF:", request.form
+    # print data
+    # print "TYPE", type(data)
 
-    return jsonify({'status':'ok'})
+    # return jsonify({'status':'ok'})
+    return "Success Yay"
 
 
 @app.route('/')
