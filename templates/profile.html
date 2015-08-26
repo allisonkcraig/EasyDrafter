@@ -14,23 +14,21 @@
 	<th></th>
 	<th></th>
 {% for sblocktop in savedblockstops %}
-	<tr class="saved-block">
-		<td><center><h4>{{ sblocktop.nickname }}</h4></center>
-		<center>
-			<td><form action='/print-top/{{sblocktop.chart_id}}'>
-				<button class="btn btn-default">PRINT BLOCK</button>
-			</form></td>
-			<td><form action='/edit-top/{{sblocktop.chart_id}}'>
+		<tr class="saved-block">
+			<td><center><h4>{{ sblocktop.nickname }}</h4></center>
+				<center>
+					<td><form action='/print-top/{{sblocktop.chart_id}}'>
+						<button class="btn btn-default">PRINT BLOCK</button>
+					</form></td>
+					<td><form action='/edit-top/{{sblocktop.chart_id}}'>
 
-				<button class="btn btn-default" value="{{ sblocktop.chart_id }}">EDIT BLOCK</button>
-			</form></td>
-			<td>
-			<button class="btn btn-danger delete-btn-top" name='chart-id' value="{{ sblocktop.chart_id }}">DELETE BLOCK</button></td>
-
-
-		</center>
-		</td>
-	</tr>
+						<button class="btn btn-default" value="{{ sblocktop.chart_id }}">EDIT BLOCK</button>
+					</form></td>
+					<td>
+						<button class="btn btn-danger delete-btn-top" name='chart-id' value="{{ sblocktop.chart_id }}">DELETE BLOCK</button></td>
+					</center>
+				</td>
+			</tr>
 
 {% endfor %}
 </table>
@@ -45,47 +43,27 @@
 	<th></th>
 	<th></th>
 {% for sblockskirt in savedblocksskirts %}
-	<tr class="saved-block">
-		<td><center><h4>{{ sblockskirt.nickname }}</h4></center>
-		<form>
-		</form>
-		<center>
-			<td><form action='/print-skirt/{{sblockskirt.chart_id}}'>
-				<button class="btn btn-default">PRINT BLOCK</button>
-			</form></td>
-			<td><form action='/edit-skirt/{{sblockskirt.chart_id}}'>
-				<button class="btn btn-default" value="{{ sblockskirt.chart_id }}">EDIT BLOCK</button>
-			</form></td>
-
-			<td><button class="btn btn-danger delete-btn-skirt" name='chart-id' value="{{ sblockskirt.chart_id }}">DELETE BLOCK</button></td>
-
-		</center>
-		</td>
-	</tr>
+		<tr class="saved-block">
+			<td><center><h4>{{ sblockskirt.nickname }}</h4></center>
+				<form>
+				</form>
+				<center>
+					<td><form action='/print-skirt/{{sblockskirt.chart_id}}'>
+						<button class="btn btn-default">PRINT BLOCK</button>
+					</form></td>
+					<td><form action='/edit-skirt/{{sblockskirt.chart_id}}'>
+						<button class="btn btn-default" value="{{ sblockskirt.chart_id }}">EDIT BLOCK</button>
+					</form></td>
+					<td><button class="btn btn-danger delete-btn-skirt" name='chart-id' value="{{ sblockskirt.chart_id }}">DELETE BLOCK</button></td>
+				</center>
+			</td>
+		</tr>
 
 {% endfor %}
 </table>
 {% endif %}
 
 <script>
-
-// function deleteBlock (evt) {
-// 	evt.preventDefault();
-
-// 	$.ajax({
-// 		url: "/delete-block",
-// 		data: {'chart-id':$(this).val()},
-// 		type: "POST",
-// 		success: function(response) {
-// 			console.log(response)
-// 		},
-// 		error: function(error) {
-// 			console.log('error')
-// 		}
-// 	});
-// 	$(this).closest('.saved-block').remove();
-// }
-
 
 function deleteBlockTop (evt) {
 	evt.preventDefault();

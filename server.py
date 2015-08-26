@@ -21,17 +21,30 @@ app.jinja_env.undefined = jinja2.StrictUndefined
 
 @app.route('/')
 def home_page():
-    """Render Homepage."""
-    return render_template('/splash-page.html')
+    """Render Homepage, adding name if user is logged in."""
+    if 'logged_in_customer_email' in session:
+        user_email = session['logged_in_customer_email']
+        user = User.query.filter(User.email==user_email).one()
+        return render_template('/splash-page.html', user=user)
+    else:
+        return render_template('/splash-page.html')
+
+@app.route('/videos')
+def video_page():
+    """Render page with videos relating to pattern drafting."""
+
+    return render_template('/video-page.html')
 
 @app.route('/about-drafting')
 def about_page():
     """Renders page which explains pattern drafting."""
+
     return render_template('/about-drafting.html')
 
 @app.route('/testing')
 def testing_page():
     """Renders page with Jasmine Testing."""
+
     return render_template('/testing.html')
 
 @app.route('/choose-block')
@@ -299,7 +312,6 @@ def process_login():
             flash("Your email and password did not match our records.")
             return redirect("/login")
         else:
-            flash("Login successful!")
             current_user = User.query.filter_by(email=email_input).first()
             current_user_dict = current_user.__dict__
             session['current_user_id'] = current_user_dict['user_id']
@@ -326,6 +338,12 @@ def process_registration():
     Find the user's login credentials look up the user, and store them in the session."""
 
     email_input = request.form.get("email")
+
+    user = User.query.filter(User.email == email_input).first()
+    if user != None:
+        flash("There is already a user with that email address!")
+        return redirect("/register")
+
     pword_input = request.form.get("password")
     fname_input = request.form.get("fname")
 

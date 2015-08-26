@@ -18,7 +18,6 @@ $(document).ready(function(){
 		document.waistArc = parseFloat($('form input[name="waist-arc"]').val());
 		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val());
 		document.sideLength = parseFloat($('form input[name="side-length"]').val());
-
 		document.bustEase = 0.25 // constant variable 	
 
 
@@ -51,7 +50,6 @@ $(document).ready(function(){
 		document.scaledPointHX = document.pointHX * document.scale;
 		document.scaledPointHY = document.pointHY * document.scale;
 		document.scaledOffset = (document.fullLength - document.frontShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
-
 
 
 	}

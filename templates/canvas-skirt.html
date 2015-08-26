@@ -6,86 +6,75 @@
 	<script src='/static/js/skirt-draft.js'></script>
 	<script src='/static/js/jspdf.min.js'></script>
 	<script src='/static/js/canvas2image.js'></script>
-
-
 {% endblock %}
+
 {% block content %}
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-	<center>	
-		<form action="/save">			
-			<div class="form-group raleway">
-				<label for="nickname" class="col-sm-4 control-label">Nickname</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control" name="nickname" placeholder="nickname" required>
-					<input type="hidden" name="block-type" value="skirt">
-				</div>
-			</div>
-
-	</center>
-	</div>
-
-	<br>
-		
-			<center><button class="btn btn-default">SAVE</button></center>
-		</form>
-
+			<center>	
+				<form action="/save">			
+					<div class="form-group raleway">
+						<label for="nickname" class="col-sm-4 control-label">Nickname</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="nickname" placeholder="nickname" required>
+							<input type="hidden" name="block-type" value="skirt">
+						</div>
+					</div>
+					<br>
+					<center>
+						<button class="btn btn-default">SAVE</button>
+					</center>
+				</form>
+			</center>
+		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-4 col-md-offset-1">
+		<div class="col-md-4 col-md-offset-4">
 			<h1 class="heading-titles">Skirt</h1><button id="save-skirt" type="submit" class="btn btn-default download-button">DOWNLOAD SKIRT PDF</button> 
 			<div class="table">
 				<canvas id="drafting-table-skirt" class="drafting-table" width="346" height="346"></canvas>
 			</div>
 		</div>
 
-	
+		<form>
+			<!-- Skirt Measurements -->
+			<input type="hidden" name="hip" placeholder="{{ size_chart['hip'] }}" value="{{ size_chart['hip'] }}">
 
+			<input type="hidden" name="waist" placeholder="{{ size_chart['waist'] }}" value="{{ size_chart['waist'] }}">
 
-	<form>
+			<input type="hidden" id="test" name="center-front-hip-depth" placeholder="{{ size_chart['center_front_hip_depth'] }}" value="{{ size_chart['center_front_hip_depth'] }}">
 
-		<!-- Skirt Measurements -->
-		<input type="hidden" name="hip" placeholder="{{ size_chart['hip'] }}" value="{{ size_chart['hip'] }}">
+			<input type="hidden" name="front-hip-arc" placeholder="{{ size_chart['front_hip_arc'] }}" value="{{ size_chart['front_hip_arc'] }}">
 
-		<input type="hidden" name="waist" placeholder="{{ size_chart['waist'] }}" value="{{ size_chart['waist'] }}">
+			<input type="hidden" name="center-back-hip-depth" placeholder="{{ size_chart['center_back_hip_depth'] }}" value="{{ size_chart['center_back_hip_depth'] }}">
 
-		<input type="hidden" id="test" name="center-front-hip-depth" placeholder="{{ size_chart['center_front_hip_depth'] }}" value="{{ size_chart['center_front_hip_depth'] }}">
-		
-		<input type="hidden" name="front-hip-arc" placeholder="{{ size_chart['front_hip_arc'] }}" value="{{ size_chart['front_hip_arc'] }}">
-		
-		<input type="hidden" name="center-back-hip-depth" placeholder="{{ size_chart['center_back_hip_depth'] }}" value="{{ size_chart['center_back_hip_depth'] }}">
-		
-		<input type="hidden" name="back-hip-arc" placeholder="{{ size_chart['back_hip_arc'] }}" value="{{ size_chart['back_hip_arc'] }}">
-		
-		<input type="hidden" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
-		
-	
-	</form>
+			<input type="hidden" name="back-hip-arc" placeholder="{{ size_chart['back_hip_arc'] }}" value="{{ size_chart['back_hip_arc'] }}">
 
-</div>
+			<input type="hidden" name="dart-placement" placeholder="{{ size_chart['dart_placement'] }}" value="{{ size_chart['dart_placement'] }}">
 
-<!-- Hidden Canvases for printing large -->
-<div class="row" id="hidden-canvas">
-	<div class="col-md-4">
+		</form>
+
+	</div>
+
+	<!-- Hidden Canvases for printing large -->
+	<div class="row" id="hidden-canvas">
+		<div class="col-md-4">
 			
-		<div class="table">
-			<canvas id="drafting-table-skirt-large" class="drafting-table" width="2100" height="2000"></canvas>
+			<div class="table">
+				<canvas id="drafting-table-skirt-large" class="drafting-table" width="2100" height="2000"></canvas>
+			</div>
 		</div>
 	</div>
 
-
-</div>
-
 <script>
 
-$(document).ready(function(){
-document.draftSkirtCanvas("drafting-table-skirt-large",90);
-document.draftSkirtCanvas("drafting-table-skirt", 10);
-
-})
+	$(document).ready(function(){
+	document.draftSkirtCanvas("drafting-table-skirt-large",90);
+	document.draftSkirtCanvas("drafting-table-skirt", 10);
+	})
 
 </script>
 <script src='/static/js/print-pattern.js'></script>

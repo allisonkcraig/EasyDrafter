@@ -33,6 +33,12 @@ body {
 }
 
 
+#video-page {
+	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
+	background-size: cover;
+}
+
+
 #measurement-table {
 	font-family: "Raleway";
 }
@@ -85,12 +91,29 @@ body {
 	font-family: "Raleway";
 	color: white;
 }
+
+
 .splash-body {
 	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
 	background-size: 100%;
 	background-position: 0 50%;
 	color:white;
 }
+
+.video-body {
+	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
+	background-size: cover;
+	color:white;
+}
+
+
+#video-header {
+	text-shadow: 2px 2px white;
+	color: #EA8C86;
+	font-family: 'Pacifico', cursive;
+	font-size: 100px;
+}
+
 
 .navbar {
 	font-family: "Raleway";
@@ -144,6 +167,7 @@ footer {
 	display: block;
 	z-index: -1;
 }
+
 
 .type-icon {
 	height: 275px;

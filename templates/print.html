@@ -22,23 +22,23 @@ Each square should be an inch
 <script>
 
 
-		setTimeout(function() {
+setTimeout(function() {
 
-		var canvas = document.draftingTableFront;
-		document.blockURL = document.draftingTableFront.toDataURL("image/jpeg", 1.0);
+	var canvas = document.draftingTableFront;
+	document.blockURL = document.draftingTableFront.toDataURL("image/jpeg", 1.0);
 
-		console.log(document.blockURL)
-      	var pdf = new jsPDF();
+	console.log(document.blockURL)
+	var pdf = new jsPDF();
 
-      	console.log(pdf)
+	console.log(pdf)
       	// setTimeout(function() {
-      	pdf.addImage(document.blockURL, 'JPEG', 0, 0, 0, 0);
-      	pdf.save("front.pdf");
+      		pdf.addImage(document.blockURL, 'JPEG', 0, 0, 0, 0);
+      		pdf.save("front.pdf");
       	// }, 500);
 
-      	}, 500);
+}, 500);
 
-      
+
 
 // PDFJS.getDocument("front.pdf").then(function(pdf) {
 // pdf.getPage(1).then(function(page) {

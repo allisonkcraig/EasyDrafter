@@ -31,7 +31,7 @@ $(document).ready(function() {
 			document.gridPen.lineTo(2001, y);
 			document.gridPen.strokeStyle = "#E8E8EE";
 			document.gridPen.stroke();
-			};
+		};
 
 		// x axis grid lines
 		for (var x = 0.5; x < document.canvasWidth * 20; x += document.scale) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 			document.gridPen.moveTo(x, 0);
 			document.gridPen.lineTo(x, 2001);
 			document.gridPen.stroke();
-			};
+		};
 
 
 		//START TEMPORARY LINES ////////////////////////////////////////////////////////
@@ -112,9 +112,9 @@ $(document).ready(function() {
 		document.penFinal.lineTo(document.dartPlacement + document.backDartIntake, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.5);
 
 		if (document.backNumOfDarts == 2) {
-		document.penFinal.lineTo(document.dartPlacement + document.backDartIntake + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
-		document.penFinal.lineTo(document.dartPlacement + (document.backDartIntake *1.5) + document.spaceBetweenDarts, document.offsetFromTop + document.backDartLength);
-		document.penFinal.lineTo(document.dartPlacement + (document.backDartIntake *2) + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
+			document.penFinal.lineTo(document.dartPlacement + document.backDartIntake + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
+			document.penFinal.lineTo(document.dartPlacement + (document.backDartIntake *1.5) + document.spaceBetweenDarts, document.offsetFromTop + document.backDartLength);
+			document.penFinal.lineTo(document.dartPlacement + (document.backDartIntake *2) + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
 		}
 		document.penFinal.lineTo(document.backWaistArc, document.offsetFromTop - document.hipRise);
 
@@ -131,22 +131,22 @@ $(document).ready(function() {
 		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake, document.offsetFromTop);
 
 		if (document.frontNumOfDarts == 2) {
-		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.spaceBetweenDarts, document.offsetFromTop);
-		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - (document.frontDartIntake/2) - document.spaceBetweenDarts , document.offsetFromTop + document.frontDartLength);
+			document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.spaceBetweenDarts, document.offsetFromTop);
+			document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - (document.frontDartIntake/2) - document.spaceBetweenDarts , document.offsetFromTop + document.frontDartLength);
 		}
 
 		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake - document.spaceBetweenDarts, document.offsetFromTop);
-			
+		
 
 		document.penFinal.stroke();
 
-	$(".update-button").blur(function() {
-		document.clearCanvas(document.gridPen);
-		document.clearCanvas(document.pen);
-		document.clearCanvas(document.penFinal);
-		document.draftSkirtCanvas("drafting-table-skirt", 20);
-	});
+		$(".update-button").blur(function() {
+			document.clearCanvas(document.gridPen);
+			document.clearCanvas(document.pen);
+			document.clearCanvas(document.penFinal);
+			document.draftSkirtCanvas("drafting-table-skirt", 20);
+		});
 
-};
+	};
 
 })

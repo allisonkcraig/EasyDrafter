@@ -28,6 +28,7 @@ $(document).ready(function() {
 		return bigSideA
 	};
 
+
 	// Find point on a straight line with two (x,y) coordinates for each end where point 1 is the side you would like to start at.
 	// The first two coordinates you evaluate will be the axis you return (ie, entering x before y will return x, entering y before x will return y)
 	document.findAxisForPointOnLine = function(x1, x2, y1, y2, pixelsFromPoint1) {
@@ -45,12 +46,14 @@ $(document).ready(function() {
 		return axisFromOrigin
 	};
 
+
 	// Clear the canvas so I can re-draft using update measurements 
 	document.clearCanvas = function(context) {
-    	context.clearRect(0, 0, 461, 461);
+		context.clearRect(0, 0, 461, 461);
 	};
+	
 
-document.determineDartIntakeSkirt =  function(waist, hip){
+	document.determineDartIntakeSkirt =  function(waist, hip){
 		var difference = hip - waist
 
 		if (difference > 12) {
@@ -117,8 +120,6 @@ document.determineDartIntakeSkirt =  function(waist, hip){
 			var dartDifferent = 4
 			return dartDifferent 
 		}
-
-	
 
 	}
 

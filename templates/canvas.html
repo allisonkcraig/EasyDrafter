@@ -7,33 +7,28 @@
 	<script src='/static/js/back-draft.js'></script>
 	<script src='/static/js/jspdf.min.js'></script>
 	<script src='/static/js/canvas2image.js'></script>
-
-
-
 {% endblock %}
+
 {% block content %}
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-	<center>	
-		<form action="/save">			
-			<div class="form-group raleway">
-				<label for="nickname" class="col-sm-4 control-label">Nickname</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control" name="nickname" placeholder="nickname" required>
-					<input type="hidden" name="block-type" value="top">
-				</div>
-			</div>
+			<center>	
+				<form action="/save">			
+					<div class="form-group raleway">
+						<label for="nickname" class="col-sm-4 control-label">Nickname</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="nickname" placeholder="nickname" required>
+							<input type="hidden" name="block-type" value="top">
+						</div>
+					</div>	
+					<br>
 
-	</center>
-	</div>
-
-	<br>
-		
-			<center><button class="btn btn-default">SAVE</button></center>
-		</form>
-
+					<center><button class="btn btn-default">SAVE</button></center>
+				</form>
+			</center>
+		</div>
 	</div>
 
 	<div class="row">
@@ -52,9 +47,7 @@
 		</div>
 	</div>
 
-
 	<form>
-
 		<!-- Front Measurements -->
 		<input type="hidden" id="test" name="full-length" placeholder="{{ size_chart['full_length'] }}" value="{{ size_chart['full_length'] }}">
 		<input type="hidden" name="center-front" placeholder="{{ size_chart['center_front'] }}" value="{{ size_chart['center_front'] }}">
@@ -82,13 +75,11 @@
 		<input type="hidden" name="back-dart-intake" placeholder="{{ size_chart['back_dart_intake'] }}" value="{{ size_chart['back_dart_intake'] }}">
 
 	</form>
-
 </div>
 
 <!-- Hidden Canvases for printing large -->
 <div class="row" id="hidden-canvas">
 	<div class="col-md-4">
-			
 		<div class="table">
 			<canvas id="drafting-table-front-large" class="drafting-table" width="1546" height="2001"></canvas>
 		</div>

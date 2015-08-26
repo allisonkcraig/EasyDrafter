@@ -12,7 +12,7 @@ for (var y = 0.5; y < 461; y += 20) {
 	gridPenFront.lineTo(601, y);
 	gridPenFront.strokeStyle = "#E8E8EE";
 	gridPenFront.stroke();
-	};
+};
 
 // x axis grid lines
 for (var x = 0.5; x < 601; x += 20) {
@@ -21,7 +21,7 @@ for (var x = 0.5; x < 601; x += 20) {
 	gridPenFront.moveTo(x, 0);
 	gridPenFront.lineTo(x, 601);
 	gridPenFront.stroke();
-	};
+};
 
 // right angle equations to find rise or run
 var pythagoreanCAndA = function(c, a) {
