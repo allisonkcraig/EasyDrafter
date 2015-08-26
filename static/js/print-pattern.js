@@ -369,7 +369,6 @@ $('#save-skirt').on('click',
 
                     var croppingYPosition = 999;
    
-
                      for (var i = 1; i < count; i++) {
                         console.log("Page 3")
                         doc.addPage();
@@ -401,16 +400,15 @@ $('#save-skirt').on('click',
                     };           
                     doc.save("pattern-skirt.pdf");
 
-                    // pdfUpload();
-                    // ajaxFileUpload()
 
-//CAN WE SAVE A FILE TO A THING PLEASE. --> AS IN, SAVE THIS PDF THAT IS CREATED, TO SERVER OR TO
-//FOLDER THAT IS NOT DOWNLOADS OR EMAIL OR SOMETHING 
+
                 
                     
                 }, 500);
 
 });
+
+////////Below I tried to send my pdf object to my flask server in hopes of sending to theDropbox API//////
 
 /////////////////////////////////////////////////////////////////////////////////
 //http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously?rq=1

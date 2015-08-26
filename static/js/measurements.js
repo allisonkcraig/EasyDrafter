@@ -2,8 +2,6 @@ $(document).ready(function(){
 
 	document.processFrontForm = function(scaleIn) {
 
-		console.log('processFrontForm')
-
 		document.scale = scaleIn || 20;
 
 		//INPUT measurments.		
@@ -20,7 +18,8 @@ $(document).ready(function(){
 		document.waistArc = parseFloat($('form input[name="waist-arc"]').val());
 		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val());
 		document.sideLength = parseFloat($('form input[name="side-length"]').val());
-		document.bustEase = 0.25
+
+		document.bustEase = 0.25 // constant variable 	
 
 
 		// calculating rises and runs for right angle formulas
@@ -60,9 +59,6 @@ $(document).ready(function(){
 
 
 	document.processBackForm = function(scaleIn) {
-
-
-		console.log('processBackForm')
 
 		document.scale = scaleIn || 20;
 		// get from frotn draft jinja in session
@@ -128,6 +124,36 @@ $(document).ready(function(){
 		document.offsetShoulderDartApexY = document.shoulderDartYScaled  + document.shoulderDartApexY 
 
 
+	}
+
+	document.processSkirtForm = function(scaleIn) {
+		document.scale = scaleIn || 20;
+		document.offsetFromTop = 2 * document.scale // allows for room at top of draft for hip details
+
+		document.waistArcEase = 0.25  * document.scale; // constant variable
+		document.hipRise = 0.25 * document.scale; // constant variable
+		document.backDartLength = 5.5 * document.scale; // constant variable
+		document.frontDartLength = 3.5 * document.scale; // constant variable
+		document.spaceBetweenDarts = 1.25 * document.scale; // constant variable
+		document.hipArcEase = 0.5 * document.scale; //constant variable
+		document.waistToKnee = 25 * document.scale; 
+
+		//from form on skirt-draft.html
+		document.waist = parseFloat($('form input[name="waist"]').val()) * document.scale; 
+		document.hip = parseFloat($('form input[name="hip"]').val()) * document.scale;
+		document.centerFrontHipDepth = parseFloat($('form input[name="center-front-hip-depth"]').val()) * document.scale;
+		document.backHipArc = (parseFloat($('form input[name="back-hip-arc"]').val()) * document.scale) + document.hipArcEase;
+		document.centerBackHipDepth = (parseFloat($('form input[name="center-back-hip-depth"]').val()) * document.scale) + document.hipArcEase;
+		document.frontHipArc = parseFloat($('form input[name="front-hip-arc"]').val()) * document.scale;
+		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val()) * document.scale;
+		
+		//calculations
+		document.determineDartIntakeSkirt(document.waist, document.hip);
+		document.addToFrontWaistArc = ((document.frontDartIntake * document.frontNumOfDarts) + document.waistArcEase)
+		document.addToBackWaistArc = ((document.backDartIntake * document.backNumOfDarts) + document.waistArcEase) 
+		document.pointOfHipCurve = ((document.centerFrontHipDepth / 3) * 2) + document.offsetFromTop
+		document.frontWaistArc = (6.75 * document.scale) + document.addToFrontWaistArc;
+		document.backWaistArc = (6.25 * document.scale) + document.addToBackWaistArc;
 	}
 
 })

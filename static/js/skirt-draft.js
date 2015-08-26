@@ -2,36 +2,9 @@ $(document).ready(function() {
 
 
 	document.draftSkirtCanvas = function(skirtTableName, scale){
-		document.scale = scale
-		document.offsetFromTop = 2 * document.scale // allows for room at top of draft for hip details
-		console.log("draftSkirtCanvas")
-
-		document.waistArcEase = 0.25  * document.scale; // constant variable
-		document.hipRise = 0.25 * document.scale; // constant variable
-		document.backDartLength = 5.5 * document.scale; // constant variable
-		document.frontDartLength = 3.5 * document.scale; // constant variable
-		document.spaceBetweenDarts = 1.25 * document.scale; // constant variable
-		document.hipArcEase = 0.5 * document.scale; //constant variable
-		document.waistToKnee = 25 * document.scale;
-
-		document.waist = parseFloat($('form input[name="waist"]').val()) * document.scale; 
-		document.hip = parseFloat($('form input[name="hip"]').val()) * document.scale;
-		document.centerFrontHipDepth = parseFloat($('form input[name="center-front-hip-depth"]').val()) * document.scale;
-		document.backHipArc = (parseFloat($('form input[name="back-hip-arc"]').val()) * document.scale) + document.hipArcEase;
-		document.centerBackHipDepth = (parseFloat($('form input[name="center-back-hip-depth"]').val()) * document.scale) + document.hipArcEase;
-		document.frontHipArc = parseFloat($('form input[name="front-hip-arc"]').val()) * document.scale;
-		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val()) * document.scale;
-		
-		document.determineDartIntakeSkirt(document.waist, document.hip);
-		document.addToFrontWaistArc = ((document.frontDartIntake * document.frontNumOfDarts) + document.waistArcEase)
-		document.addToBackWaistArc = ((document.backDartIntake * document.backNumOfDarts) + document.waistArcEase) 
-		document.pointOfHipCurve = ((document.centerFrontHipDepth / 3) * 2) + document.offsetFromTop
-		document.frontWaistArc = (6.75 * document.scale) + document.addToFrontWaistArc;
-		document.backWaistArc = (6.25 * document.scale) + document.addToBackWaistArc;
 
 
-
-
+	document.processSkirtForm(scale) // processes skirt measurments from form
 
 	document.canvasHeight = 2001;
 	document.canvasWidth = 1546;
