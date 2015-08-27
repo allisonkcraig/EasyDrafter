@@ -1,28 +1,27 @@
 
-$(document).ready(function() {
 
 	// right angle equations to find rise or run
-	document.pythagoreanCAndA = function(c, a) {
+	var pythagoreanCAndA = function(c, a) {
 		var sideB = Math.sqrt((Math.pow(c, y = 2)) - (Math.pow(a, y = 2)));
 		return sideB
 	};
 
 	// right angle equations to find hypononeuse
-	document.pythagoreanAAndB = function(a, b) {
+	var pythagoreanAAndB = function(a, b) {
 		var sideC = Math.sqrt((Math.pow(a, y = 2)) + (Math.pow(b, y = 2)));
 		return sideC
 	};
 
 
 	// find the coordinates for a point on side c of a right trainagle with the sides of a proportionatly bigger trinagle
-	document.locatePointOnC = function(distanceOnC, fullSideX, fullSideC) {
+	var locatePointOnC = function(distanceOnC, fullSideX, fullSideC) {
 		var x = distanceOnC * fullSideX;
 		return x / fullSideC
 	};
 
 
 	// find a proportionatly bigger traingle from sides of smaller traingle given 
-	document.findLengthOfBiggerTriangleSide = function(smallSideC, smallSideA, fullSideC) {
+	var findLengthOfBiggerTriangleSide = function(smallSideC, smallSideA, fullSideC) {
 		var x = smallSideA * fullSideC;
 		bigSideA =  x / smallSideC;
 		return bigSideA
@@ -31,13 +30,13 @@ $(document).ready(function() {
 
 	// Find point on a straight line with two (x,y) coordinates for each end where point 1 is the side you would like to start at.
 	// The first two coordinates you evaluate will be the axis you return (ie, entering x before y will return x, entering y before x will return y)
-	document.findAxisForPointOnLine = function(x1, x2, y1, y2, pixelsFromPoint1) {
+	var findAxisForPointOnLine = function(x1, x2, y1, y2, pixelsFromPoint1) {
 		var leg1 = x1 - x2;
 		// console.log("LEG 1: ", leg1)
 		var leg2 = y1 - y2;
 		// console.log("LEG 2: ", leg2)
 		//rise over run
-		var lenghtOfHypo = document.pythagoreanAAndB(leg1, leg2);
+		var lenghtOfHypo = pythagoreanAAndB(leg1, leg2);
 		// console.log("LENGTH OF HYPO: ", lenghtOfHypo)
 		var x = pixelsFromPoint1 * leg1;
 		// console.log("X: ", x)
@@ -48,79 +47,79 @@ $(document).ready(function() {
 
 
 	// Clear the canvas so I can re-draft using update measurements 
-	document.clearCanvas = function(context) {
+	var clearCanvas = function(context) {
 		context.clearRect(0, 0, 461, 461);
 	};
 	
 
-	document.determineDartIntakeSkirt =  function(waist, hip){
+	var determineDartIntakeSkirt =  function(waist, hip, scale){
 		var difference = hip - waist
 
 		if (difference > 12) {
-			document.frontDartIntake = 0.625 * document.scale;
-			document.backDartIntake = 1.375 * document.scale;
+			document.frontDartIntake = 0.625 * scale;
+			document.backDartIntake = 1.375 * scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
-			var dartDifferent = 13
-			return dartDifferent 
+			document.dartDifferent = 13
+			return document.dartDifferent 
 		} else if (difference > 11) {
-			document.frontDartIntake = 0.625 * document.scale;
-			document.backDartIntake = 1.375 * document.scale;
+			document.frontDartIntake = 0.625 * scale;
+			document.backDartIntake = 1.375 * scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
-			var dartDifferent = 12
-			return dartDifferent 
+			document.dartDifferent = 12
+			return document.dartDifferent 
 		} else if (difference > 10) {
-			document.frontDartIntake = 0.625 * document.scale;
-			document.backDartIntake = 1.25 * document.scale;
+			document.frontDartIntake = 0.625 * scale;
+			document.backDartIntake = 1.25 * scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
-			var dartDifferent = 11
-			return dartDifferent 
+			document.dartDifferent = 11
+			return document.dartDifferent 
 		} else if (difference > 9) {
-			document.frontDartIntake = 0.5 * document.scale;
-			document.backDartIntake = 1 * document.scale;
+			document.frontDartIntake = 0.5 * scale;
+			document.backDartIntake = 1 * scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
-			var dartDifferent = 10
-			return dartDifferent 
+			document.dartDifferent = 10
+			return document.dartDifferent 
 		} else if (difference > 7) {
-			document.frontDartIntake = 0.375 * document.scale;
-			document.backDartIntake = 0.875 * document.scale;
+			document.frontDartIntake = 0.375 * scale;
+			document.backDartIntake = 0.875 * scale;
 			document.frontNumOfDarts = 2;
 			document.backNumOfDarts = 2;
-			var dartDifferent = 8
-			return dartDifferent 
+			document.dartDifferent = 8
+			return document.dartDifferent 
 		} else if (difference > 6) {
-			document.frontDartIntake = 0.5 * document.scale;
-			document.backDartIntake = 0.75 * document.scale;
+			document.frontDartIntake = 0.5 * scale;
+			document.backDartIntake = 0.75 * scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 2;
-			var dartDifferent = 7
-			return dartDifferent 
+			document.dartDifferent = 7
+			return document.dartDifferent 
 		} else if (difference > 5) {
-			document.frontDartIntake = 0.5 * document.scale;
-			document.backDartIntake = 0.625 * document.scale;
+			document.frontDartIntake = 0.5 * scale;
+			document.backDartIntake = 0.625 * scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 2;
-			var dartDifferent = 6
-			return dartDifferent 
+			document.dartDifferent = 6
+			return document.dartDifferent 
 		} else if (difference > 4) {
-			document.frontDartIntake = 0.5 * document.scale;
-			document.backDartIntake = 1 * document.scale;
+			document.frontDartIntake = 0.5 * scale;
+			document.backDartIntake = 1 * scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 1;
-			var dartDifferent = 5
-			return dartDifferent 
+			document.dartDifferent = 5
+			return document.dartDifferent 
 		} else if (difference > 3) {
-			document.frontDartIntake = 0.5 * document.scale;
-			document.backDartIntake = 0.75 * document.scale;
+			document.frontDartIntake = 0.5 * scale;
+			document.backDartIntake = 0.75 * scale;
 			document.frontNumOfDarts = 1;
 			document.backNumOfDarts = 1;
-			var dartDifferent = 4
-			return dartDifferent 
+			document.dartDifferent = 4
+			return document.dartDifferent 
 		}
 
 	}
 
-})
+

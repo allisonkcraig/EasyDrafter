@@ -1,152 +1,148 @@
-$(document).ready(function() {
+draftSkirtCanvas = function(skirtTableName, scale){
 
+	var scale = scale;
+	document.processSkirtForm(scale); // processes skirt measurments from form
 
-	document.draftSkirtCanvas = function(skirtTableName, scale){
-
-
-	document.processSkirtForm(scale) // processes skirt measurments from form
-
-	document.canvasHeight = 2001;
-	document.canvasWidth = 1546;
+	var canvasHeight = 2001;
+	var canvasWidth = 1546;
 
 		// take in an object that that will be the way you store the data
-		// establish drafting table and document.pen
-		document.draftingTable = document.getElementById(skirtTableName);
+		// establish drafting table and pen
+		var draftingTable = document.getElementById(skirtTableName);
 
-		document.pen = document.draftingTable.getContext("2d");
-		document.pen.fillStyle="white";
-		document.pen.beginPath()
-		document.pen.moveTo(0, 0);
-		document.pen.fillRect(0,0, document.canvasHeight * 20, document.canvasWidth * 20)
-		document.pen.stroke();
+		var gridpen = draftingTable.getContext("2d");
+		gridpen.fillStyle="white";
+		gridpen.beginPath()
+		gridpen.moveTo(0, 0);
+		gridpen.fillRect(0,0, canvasHeight * 100, canvasWidth * 100);
+		gridpen.stroke();
 
 		
 
-		document.gridPen = document.draftingTable.getContext("2d");
+		gridPen = draftingTable.getContext("2d");
 
 		// y axis grid lines
-		for (var y = 0.5; y < document.canvasHeight * 20; y += document.scale) {
-			document.gridPen.beginPath();
-			document.gridPen.moveTo(0, y);
-			document.gridPen.lineTo(2001, y);
-			document.gridPen.strokeStyle = "#E8E8EE";
-			document.gridPen.stroke();
+		for (var y = 0.5; y < canvasHeight * 20; y += scale) {
+			gridPen.beginPath();
+			gridPen.moveTo(0, y);
+			gridPen.lineTo(2001, y);
+			gridPen.strokeStyle = "#E8E8EE";
+			gridPen.stroke();
 		};
 
 		// x axis grid lines
-		for (var x = 0.5; x < document.canvasWidth * 20; x += document.scale) {
-			document.gridPen.beginPath();
-			document.gridPen.strokeStyle = "#E8E8EE";
-			document.gridPen.moveTo(x, 0);
-			document.gridPen.lineTo(x, 2001);
-			document.gridPen.stroke();
+		for (var x = 0.5; x < canvasWidth * 20; x += scale) {
+			gridPen.beginPath();
+			gridPen.strokeStyle = "#E8E8EE";
+			gridPen.moveTo(x, 0);
+			gridPen.lineTo(x, 2001);
+			gridPen.stroke();
 		};
 
 
 		//START TEMPORARY LINES ////////////////////////////////////////////////////////
 		// set up pen and set colors for temporary line
 
-		document.pen = document.draftingTable.getContext("2d");
-		document.pen.fillStyle="#83AF9B";
-		document.pen.strokeStyle = "#EA8C86";
+		var pen = draftingTable.getContext("2d");
+		pen.fillStyle="#83AF9B";
+		pen.strokeStyle = "#EA8C86";
 
 
 		// draw lines and dots
-		document.pen.beginPath();
+		pen.beginPath();
 
 		// CENTER DIVIDING LINE
-		document.pen.moveTo(document.backHipArc, document.offsetFromTop + document.waistToKnee);
-		document.pen.lineTo(document.backHipArc, document.offsetFromTop);
+		pen.moveTo(document.backHipArc, document.offsetFromTop + document.waistToKnee);
+		pen.lineTo(document.backHipArc, document.offsetFromTop);
 
 		// WAIST LINE
-		document.pen.moveTo(0, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth)); // along point A
-		document.pen.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop);
+		pen.moveTo(0, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth)); // along point A
+		pen.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop);
 
 		
 		// HIP LINE
-		document.pen.moveTo(0, document.offsetFromTop + document.centerFrontHipDepth);
-		document.pen.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop + document.centerFrontHipDepth);
+		pen.moveTo(0, document.offsetFromTop + document.centerFrontHipDepth);
+		pen.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop + document.centerFrontHipDepth);
 		
 		// LABEL FRONT AND BACK
-		document.pen.fillText("FRONT", document.backWaistArc + (document.frontWaistArc/2), 225);
-		document.pen.fillText("BACK", (document.backWaistArc/2), 225);
+		pen.fillText("FRONT", document.backWaistArc + (document.frontWaistArc/2), 225);
+		pen.fillText("BACK", (document.backWaistArc/2), 225);
 
-		document.pen.stroke();
+		pen.stroke();
 
 		// START FINAL LINES ////////////////////////////////////////////////////////
-		document.penFinal = document.draftingTable.getContext("2d");
-		document.penFinal.fillStyle= "black";
-		document.penFinal.strokeStyle = "black";
-		document.penFinal.beginPath();
+		var penFinal = draftingTable.getContext("2d");
+		penFinal.fillStyle= "black";
+		penFinal.strokeStyle = "black";
+		penFinal.beginPath();
 
 		// CENTER BACK LINE
-		document.penFinal.moveTo(0, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth)); // along point A
-		document.penFinal.lineTo(0, document.offsetFromTop + document.waistToKnee);
+		penFinal.moveTo(0, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth)); // along point A
+		penFinal.lineTo(0, document.offsetFromTop + document.waistToKnee);
 
 		// SKIRT HEM
-		document.penFinal.moveTo(0, document.offsetFromTop + document.waistToKnee);
-		document.penFinal.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop + document.waistToKnee);
+		penFinal.moveTo(0, document.offsetFromTop + document.waistToKnee);
+		penFinal.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop + document.waistToKnee);
 
 		// CENTER FRONT LINE
-		document.penFinal.moveTo(document.backHipArc + document.frontHipArc, document.offsetFromTop + document.waistToKnee);
-		document.penFinal.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop);
+		penFinal.moveTo(document.backHipArc + document.frontHipArc, document.offsetFromTop + document.waistToKnee);
+		penFinal.lineTo(document.backHipArc + document.frontHipArc, document.offsetFromTop);
 
 		// CENTER DIVIDING LINE
-		document.penFinal.moveTo(document.backHipArc, document.offsetFromTop + document.waistToKnee);
-		document.penFinal.lineTo(document.backHipArc, document.pointOfHipCurve);
+		penFinal.moveTo(document.backHipArc, document.offsetFromTop + document.waistToKnee);
+		penFinal.lineTo(document.backHipArc, document.pointOfHipCurve);
 
 		// FRONT WAIST ARC
-		document.penFinal.moveTo((document.backHipArc + document.frontHipArc) - document.frontWaistArc, document.offsetFromTop - document.hipRise);	
-		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake - document.spaceBetweenDarts, document.offsetFromTop);
+		penFinal.moveTo((document.backHipArc + document.frontHipArc) - document.frontWaistArc, document.offsetFromTop - document.hipRise);	
+		penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake - document.spaceBetweenDarts, document.offsetFromTop);
 
 		// BACK HIP CURVE
-		document.bHipControlx = document.backHipArc / 0.99; // calculate based on depth of curve
-		document.bHipControly = document.pointOfHipCurve; // calculate off endpoint y 
-		document.penFinal.moveTo(document.backWaistArc, document.offsetFromTop - document.hipRise);
-		document.penFinal.quadraticCurveTo(document.bHipControlx ,document.bHipControly , document.backHipArc, document.pointOfHipCurve);
+		var bHipControlx = document.backHipArc; // calculate based on depth of curve
+		var bHipControly = document.pointOfHipCurve; // calculate off endpoint y 
+		penFinal.moveTo(document.backWaistArc, document.offsetFromTop - document.hipRise);
+		penFinal.quadraticCurveTo(bHipControlx ,bHipControly , document.backHipArc, document.pointOfHipCurve);
 
 		// BACK DART LEGS
-		document.penFinal.moveTo(0, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth));
-		document.penFinal.lineTo(document.dartPlacement, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth));
-		document.penFinal.lineTo(document.dartPlacement + (document.backDartIntake/2), document.offsetFromTop + document.backDartLength);	
-		document.penFinal.lineTo(document.dartPlacement + document.backDartIntake, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.5);
+		penFinal.moveTo(0, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth));
+		penFinal.lineTo(document.dartPlacement, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth));
+		penFinal.lineTo(document.dartPlacement + (document.backDartIntake/2), document.offsetFromTop + document.backDartLength);	
+		penFinal.lineTo(document.dartPlacement + document.backDartIntake, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.5);
 
 		if (document.backNumOfDarts == 2) {
-			document.penFinal.lineTo(document.dartPlacement + document.backDartIntake + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
-			document.penFinal.lineTo(document.dartPlacement + (document.backDartIntake *1.5) + document.spaceBetweenDarts, document.offsetFromTop + document.backDartLength);
-			document.penFinal.lineTo(document.dartPlacement + (document.backDartIntake *2) + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
+			penFinal.lineTo(document.dartPlacement + document.backDartIntake + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
+			penFinal.lineTo(document.dartPlacement + (document.backDartIntake *1.5) + document.spaceBetweenDarts, document.offsetFromTop + document.backDartLength);
+			penFinal.lineTo(document.dartPlacement + (document.backDartIntake *2) + document.spaceBetweenDarts, document.offsetFromTop - (document.centerFrontHipDepth - document.centerBackHipDepth) / 1.75);
 		}
-		document.penFinal.lineTo(document.backWaistArc, document.offsetFromTop - document.hipRise);
+		penFinal.lineTo(document.backWaistArc, document.offsetFromTop - document.hipRise);
 
 		// FRONT HIP CURVE
-		document.fHipControlx = document.frontHipArc * 1.1; // calculate based on depth of curve
-		document.fHipControly = document.pointOfHipCurve; // calculate off endpoint y 
-		document.penFinal.moveTo((document.frontHipArc + document.backHipArc) - document.frontWaistArc, document.offsetFromTop - document.hipRise);
-		document.penFinal.quadraticCurveTo(document.fHipControlx ,document.fHipControly , (document.frontHipArc + document.backHipArc) - document.frontHipArc, document.pointOfHipCurve);
+		var fHipControlx = document.backHipArc; // calculate based on depth of curve
+		var fHipControly = document.pointOfHipCurve; // calculate off endpoint y 
+		penFinal.moveTo((document.frontHipArc + document.backHipArc) - document.frontWaistArc, document.offsetFromTop - document.hipRise);
+		penFinal.quadraticCurveTo(fHipControlx ,fHipControly , (document.frontHipArc + document.backHipArc) - document.frontHipArc, document.pointOfHipCurve);
 
 		// FRONT DART LEGS
-		document.penFinal.moveTo(document.backHipArc + document.frontHipArc, document.offsetFromTop);	
-		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement, document.offsetFromTop);
-		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - (document.frontDartIntake/2), document.offsetFromTop + document.frontDartLength);
-		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake, document.offsetFromTop);
+		penFinal.moveTo(document.backHipArc + document.frontHipArc, document.offsetFromTop);	
+		penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement, document.offsetFromTop);
+		penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - (document.frontDartIntake/2), document.offsetFromTop + document.frontDartLength);
+		penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake, document.offsetFromTop);
 
 		if (document.frontNumOfDarts == 2) {
-			document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.spaceBetweenDarts, document.offsetFromTop);
-			document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - (document.frontDartIntake/2) - document.spaceBetweenDarts , document.offsetFromTop + document.frontDartLength);
+			penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.spaceBetweenDarts, document.offsetFromTop);
+			penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - (document.frontDartIntake/2) - document.spaceBetweenDarts , document.offsetFromTop + document.frontDartLength);
 		}
 
-		document.penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake - document.spaceBetweenDarts, document.offsetFromTop);
+		penFinal.lineTo((document.backHipArc + document.frontHipArc) - document.dartPlacement - document.frontDartIntake - document.spaceBetweenDarts, document.offsetFromTop);
 		
 
-		document.penFinal.stroke();
+		penFinal.stroke();
 
 		$(".update-button").blur(function() {
-			document.clearCanvas(document.gridPen);
-			document.clearCanvas(document.pen);
-			document.clearCanvas(document.penFinal);
-			document.draftSkirtCanvas("drafting-table-skirt", 20);
+			clearCanvas(gridPen);
+			clearCanvas(pen);
+			clearCanvas(penFinal);
+			draftSkirtCanvas("drafting-table-skirt", 20);
 		});
 
 	};
 
-})

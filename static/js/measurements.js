@@ -1,5 +1,3 @@
-$(document).ready(function(){
-
 	document.processFrontForm = function(scaleIn) {
 
 		document.scale = scaleIn || 20;
@@ -11,8 +9,8 @@ $(document).ready(function(){
 		document.strap = parseFloat($('form input[name="strap"]').val());
 		document.frontAcrossShoulder = parseFloat($('form input[name="front-across-shoulder"]').val());
 		document.acrossChest = parseFloat($('form input[name="across-chest"]').val());
-		document.bustDepth = parseFloat($('form input[name="bust-depth"]').val());
-		document.shoulderLength = parseFloat($('form input[name="shoulder-length"]').val());
+		bustDepth = parseFloat($('form input[name="bust-depth"]').val());
+		var shoulderLength = parseFloat($('form input[name="shoulder-length"]').val());
 		document.bustArc = parseFloat($('form input[name="bust-arc"]').val());
 		document.bustSpan = parseFloat($('form input[name="bust-span"]').val());
 		document.waistArc = parseFloat($('form input[name="waist-arc"]').val());
@@ -22,24 +20,24 @@ $(document).ready(function(){
 
 
 		// calculating rises and runs for right angle formulas
-		document.frontShoulderSlopeRise = document.pythagoreanCAndA((document.frontShoulderSlope + 0.125), document.frontAcrossShoulder);
-		document.shoulderLengthRun = document.pythagoreanCAndA(document.shoulderLength,(document.fullLength - document.frontShoulderSlopeRise));
-		document.strapRise = document.pythagoreanCAndA((document.strap + 0.375), ((document.bustArc + document.bustEase)- document.shoulderLengthRun));
-		document.sideLengthRise = document.pythagoreanCAndA(document.sideLength, 1.25)
+		document.frontShoulderSlopeRise = pythagoreanCAndA((document.frontShoulderSlope + 0.125), document.frontAcrossShoulder);
+		document.shoulderLengthRun = pythagoreanCAndA(shoulderLength,(document.fullLength - document.frontShoulderSlopeRise));
+		document.strapRise = pythagoreanCAndA((document.strap + 0.375), ((document.bustArc + document.bustEase)- document.shoulderLengthRun));
+		document.sideLengthRise = pythagoreanCAndA(document.sideLength, 1.25)
 
 
 		// calling functions for calulating point H
-		document.pointHX = document.locatePointOnC(document.bustDepth, document.frontAcrossShoulder, document.frontShoulderSlope);
-		document.pointHY = document.locatePointOnC(document.bustDepth, document.frontShoulderSlopeRise, document.frontShoulderSlope);
+		document.pointHX = locatePointOnC(bustDepth, document.frontAcrossShoulder, document.frontShoulderSlope);
+		document.pointHY = locatePointOnC(bustDepth, document.frontShoulderSlopeRise, document.frontShoulderSlope);
 
 
 		// Calculate distance and rise and run of second dart leg
 		document.waistRemaining = document.waistArc - document.dartPlacement // find the remaining waist needed
 		document.dartLegRise = document.fullLength - (document.strapRise  + document.sideLengthRise)
 		document.dartLegRun = (document.bustArc + 1.25 + 0.25) - document.dartPlacement
-		document.dartLegC = document.pythagoreanAAndB(document.dartLegRun, document.dartLegRise) // length of f to k
-		document.dartY = document.fullLength - document.locatePointOnC(document.waistRemaining, document.dartLegRise, document.dartLegC)
-		document.dartX = (document.bustArc + 1.25) - document.locatePointOnC(document.waistRemaining, document.dartLegRun, document.dartLegC)
+		document.dartLegC = pythagoreanAAndB(document.dartLegRun, document.dartLegRise) // length of f to k
+		document.dartY = document.fullLength - locatePointOnC(document.waistRemaining, document.dartLegRise, document.dartLegC)
+		document.dartX = (document.bustArc + 1.25) - locatePointOnC(document.waistRemaining, document.dartLegRun, document.dartLegC)
 
 
 		// Scaled Measurements
@@ -146,7 +144,7 @@ $(document).ready(function(){
 		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val()) * document.scale;
 		
 		//calculations
-		document.determineDartIntakeSkirt(document.waist, document.hip);
+		determineDartIntakeSkirt(document.waist, document.hip, document.scale);
 		document.addToFrontWaistArc = ((document.frontDartIntake * document.frontNumOfDarts) + document.waistArcEase)
 		document.addToBackWaistArc = ((document.backDartIntake * document.backNumOfDarts) + document.waistArcEase) 
 		document.pointOfHipCurve = ((document.centerFrontHipDepth / 3) * 2) + document.offsetFromTop
@@ -154,5 +152,5 @@ $(document).ready(function(){
 		document.backWaistArc = (6.25 * document.scale) + document.addToBackWaistArc;
 	}
 
-})
+
 

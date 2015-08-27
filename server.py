@@ -70,15 +70,25 @@ def measure_skirt_page():
 def skirt_draft_page():
     """Use template measurements to draft a skirt that closest fits user and allows users to edit measurements in inputs"""
 
-    hip_input = request.args.get("hip")
-    waist_input = request.args.get("waist")
+    hip_input = int(request.args.get("hip"))
+    waist_input = int(request.args.get("waist"))
+
+    if hip_input < 35.5: 
+        hip_input = 35.5
+    elif hip_input > 44:
+        hip_input = 44
+
+
+    if waist_input < 24:
+        waist_input = 24 
+    elif waist_input > 32.5:
+        waist_input = 32.5
 
     if float(hip_input) / float(waist_input) > 1.30: # the largest ratio of waist to hip in my standard sizes
         size_chart = Size_Chart_Skirt.query.filter(Size_Chart_Skirt.hip >= float(hip_input), Size_Chart_Skirt.hip > float(hip_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
         del size_chart_dictionary['_sa_instance_state']
-        session['measurements'] = size_chart_dictionary
-       
+        session['measurements'] = size_chart_dictionary    
     else:
         size_chart = Size_Chart_Skirt.query.filter(Size_Chart_Skirt.waist >= float(waist_input), Size_Chart_Skirt.waist > float(waist_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
@@ -97,15 +107,25 @@ def skirt_draft_page():
 def front_draft_page():
     """Use template measurements to draft a front block that closest fits user and allow users to change block to fit them using inputs """
     
-    bust_input = request.args.get("bust")
-    waist_input = request.args.get("waist")
+    bust_input = int(request.args.get("bust"))
+    waist_input = int(request.args.get("waist"))
 
-    if float(bust_input) / float(waist_input) > 1.40: # the largest ratio of waist to bust in my standard sizes
+    if bust_input < 34:
+        bust_input = 34
+    elif bust_input > 42.5:
+        bust_input = 42.5
+
+
+    if waist_input < 24:
+        waist_input = 24
+    elif waist_input > 32.5:
+        waist_input = 32.5
+      
+    if float(bust_input) / float(waist_input) > 1.30: # the largest ratio of waist to bust in my standard sizes
         size_chart = Size_Chart_Top.query.filter(Size_Chart_Top.bust >= float(bust_input), Size_Chart_Top.bust > float(bust_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
         del size_chart_dictionary['_sa_instance_state']
-        session['measurements'] = size_chart_dictionary
-       
+        session['measurements'] = size_chart_dictionary  
     else:
         size_chart = Size_Chart_Top.query.filter(Size_Chart_Top.waist >= float(waist_input), Size_Chart_Top.waist > float(waist_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
