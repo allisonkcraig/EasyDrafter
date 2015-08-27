@@ -3,6 +3,7 @@ $(document).ready(function() {
 	document.canvasWidth = 1546
 
 	document.draftFrontCanvas = function(frontTableName, scale){
+		console.log("draftFrontCanvas")
 		document.processFrontForm(scale)
 		// take in an object that that will be the way you store the data
 		// establish drafting table and document.pen
@@ -181,9 +182,9 @@ $(document).ready(function() {
 	// document.draftFrontCanvas();
 
 	$(".update-button").blur(function() {
-		clearCanvas(document.gridPenFront);
-		clearCanvas(document.pen);
-		clearCanvas(document.penFinalFront);
+		document.clearCanvas(document.gridPenFront);
+		document.clearCanvas(document.pen);
+		document.clearCanvas(document.penFinalFront);
 		document.draftFrontCanvas("drafting-table-front", 20);
 	});
 

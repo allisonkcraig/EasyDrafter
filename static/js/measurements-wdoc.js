@@ -84,38 +84,38 @@
 
 		
 		// Find slope offset o fron the top of the axis. -- point g's y axis 
-		document.backShoulderSlopeRise = pythagoreanCAndA( document.backShoulderSlope, document.backAcrossShoulder)
+		document.backShoulderSlopeRise = document.pythagoreanCAndA( document.backShoulderSlope, document.backAcrossShoulder)
 		document.scaledOffset = (document.fullLengthBack - document.backShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
 
 
 		// calculating rises and runs for right angle formulas of SIDE SEAM
-		document.sideSeamRiseScaled = pythagoreanCAndA(document.sideLength, (document.backArc) - (document.backDartIntake + document.waistArcBack)) * document.scale;
+		document.sideSeamRiseScaled = document.pythagoreanCAndA(document.sideLength, (document.backArc) - (document.backDartIntake + document.waistArcBack)) * document.scale;
 		document.offSetSideSeamRiseScaled = (document.scaledfullLengthBack + 0.1875 * document.scale) - document.sideSeamRiseScaled ;// y axis of point n
 
 	
 		//Find shoulder coordinates through right triangle geometry
-		document.lengthOfFToGScaled = pythagoreanAAndB((document.scaledBackAcrossShoulder - document.scaledBackNeck), document.scaledOffset);
-		document.pointHXScaled = findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, (document.scaledBackAcrossShoulder - document.scaledBackNeck), document.backShoulderLength * document.scale) + (document.scaledBackNeck)
-		document.pointHYScaled = findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, document.scaledOffset, document.backShoulderLength * document.scale) 
+		document.lengthOfFToGScaled = document.pythagoreanAAndB((document.scaledBackAcrossShoulder - document.scaledBackNeck), document.scaledOffset);
+		document.pointHXScaled = document.findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, (document.scaledBackAcrossShoulder - document.scaledBackNeck), document.backShoulderLength * document.scale) + (document.scaledBackNeck)
+		document.pointHYScaled = document.findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, document.scaledOffset, document.backShoulderLength * document.scale) 
 
 	
 		// Calculate coordinates of shoulder dart along shoulder seam 
-		document.shoulderDartXScaled = locatePointOnC(((document.backShoulderLength / 2) * document.scale), document.pointHXScaled - document.scaledBackNeck, (document.backShoulderLength * document.scale));
-		document.shoulderDartYScaled = locatePointOnC(((document.backShoulderLength / 2) * document.scale), document.pointHYScaled, (document.backShoulderLength * document.scale));
+		document.shoulderDartXScaled = document.locatePointOnC(((document.backShoulderLength / 2) * document.scale), document.pointHXScaled - document.scaledBackNeck, (document.backShoulderLength * document.scale));
+		document.shoulderDartYScaled = document.locatePointOnC(((document.backShoulderLength / 2) * document.scale), document.pointHYScaled, (document.backShoulderLength * document.scale));
 			// Calculate points of shoulder dart along shoulder seam 
-		document.shoulderDartLeg2XScaled = locatePointOnC(((document.backShoulderLength / 2 + 0.25) * document.scale), document.pointHXScaled - document.scaledBackNeck, (document.backShoulderLength * document.scale));
-		document.shoulderDartLeg2YScaled  = locatePointOnC(((document.backShoulderLength / 2 ) * document.scale), document.pointHYScaled, (document.backShoulderLength * document.scale));
+		document.shoulderDartLeg2XScaled = document.locatePointOnC(((document.backShoulderLength / 2 + 0.25) * document.scale), document.pointHXScaled - document.scaledBackNeck, (document.backShoulderLength * document.scale));
+		document.shoulderDartLeg2YScaled  = document.locatePointOnC(((document.backShoulderLength / 2 ) * document.scale), document.pointHYScaled, (document.backShoulderLength * document.scale));
 			// Calculate points of shoulder dart along shoulder seam 
-		document.shoulderDartLeg1XScaled = locatePointOnC(((document.backShoulderLength / 2 - 0.25) * document.scale), document.pointHXScaled - document.scaledBackNeck, (document.backShoulderLength * document.scale));
-		document.shoulderDartLeg1YScaled  = locatePointOnC(((document.backShoulderLength / 2 - 0.375) * document.scale), document.pointHYScaled, (document.backShoulderLength * document.scale));
+		document.shoulderDartLeg1XScaled = document.locatePointOnC(((document.backShoulderLength / 2 - 0.25) * document.scale), document.pointHXScaled - document.scaledBackNeck, (document.backShoulderLength * document.scale));
+		document.shoulderDartLeg1YScaled  = document.locatePointOnC(((document.backShoulderLength / 2 - 0.375) * document.scale), document.pointHYScaled, (document.backShoulderLength * document.scale));
 
 
 		//Calculate point for shoulder dart along line
 			//Set up function as follows: (axisWanted1, axisWanted2, secondAxis1, secondAxis2, distance to travel)
-		document.shoulderDartApexX = findAxisForPointOnLine(document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)), 3 * document.scale)
+		document.shoulderDartApexX = document.findAxisForPointOnLine(document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)), 3 * document.scale)
 			// Offset my axis point by the point at which the line starts on my grid at the shoulder
 		document.offsetShoulderDartApexX = (document.shoulderDartXScaled + document.scaledBackNeck) + document.shoulderDartApexX 
-		document.shoulderDartApexY = Math.abs(findAxisForPointOnLine(document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)),document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), 3 * document.scale))
+		document.shoulderDartApexY = Math.abs(document.findAxisForPointOnLine(document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)),document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), 3 * document.scale))
 			// Offset my axis point by the point at which the line starts on my grid at the shoulder
 		document.offsetShoulderDartApexY = document.shoulderDartYScaled  + document.shoulderDartApexY 
 
