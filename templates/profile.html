@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<script src="static/js/delete-blocks.js"></script>
-
-<script src="static/js/delete-blocks-spec.js"></script>
-
 <center><h1 class='heading-titles'>Hey, {{ user.fname }} !</h1></center>
 
 <center><h3 class="raleway">Email: {{ user.email }}</h3></center>
@@ -36,7 +32,7 @@
 {% endfor %}
 </table>
 {% endif %}
-
+<script src="static/js/delete-blocks.js"></script>
 {% if savedblocksskirts %}
 
 <center><h3 class="raleway">Your Saved Skirt Blocks: </h3></center>

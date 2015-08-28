@@ -2,8 +2,11 @@ body {
 	padding-top: 70px;
 	margin-bottom: 2em;
 	padding-bottom: 4em;
-	background-image: url("/static/img/roughcloth.png");
-	opacity: 50%;
+}
+
+
+.nickname{
+	padding-top: 1em;
 }
 
 
@@ -74,6 +77,11 @@ body {
 }
 
 
+.block-title{
+	padding-bottom: 0.5em;
+}
+
+
 #corner-logo{
 	font-family: 'Pacifico', cursive;
 	font-size: 30px;
@@ -94,7 +102,7 @@ body {
 .content-splash {
 	width: 50%;
 	margin: 0 auto;
-	margin-top: 14em;
+	margin-top: 17em;
 	font-family: "Raleway";
 	color: white;
 }
@@ -103,7 +111,7 @@ body {
 .splash-body {
 	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
 	background-size: 100%;
-	background-position: 0 50%;
+	background-position: 0px 50%;
 	color:white;
 }
 

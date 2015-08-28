@@ -262,7 +262,7 @@ def print_top_page(chart_id_selected):
         del current_chart_dict['_sa_instance_state']
     
     session['measurements'] = current_chart_dict
-    return render_template("canvas.html", size_chart=session['measurements'])
+    return render_template("print-top.html", size_chart=session['measurements'])
 
 @app.route('/print-skirt/<int:chart_id_selected>')
 def print_skirt_page(chart_id_selected):
@@ -274,7 +274,7 @@ def print_skirt_page(chart_id_selected):
         del current_chart_dict['_sa_instance_state']
     
     session['measurements'] = current_chart_dict
-    return render_template("canvas-skirt.html", size_chart=session['measurements'])
+    return render_template("print-skirt.html", size_chart=session['measurements'])
 
 
 @app.route('/edit-top/<int:chart_id_selected>')

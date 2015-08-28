@@ -158,7 +158,9 @@ $(document).ready(function() {
 	}
 
 
-
+	document.clearCanvas = function(context) {
+    context.clearRect(0, 0, 461, 461);
+	};
 
 	$('.update-button').blur(function() {
 		document.clearCanvas(document.gridPenBack);
