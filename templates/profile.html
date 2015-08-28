@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+<script src="static/js/delete-blocks.js"></script>
+
+<script src="static/js/delete-blocks-spec.js"></script>
 
 <center><h1 class='heading-titles'>Hey, {{ user.fname }} !</h1></center>
 
@@ -63,45 +66,5 @@
 </table>
 {% endif %}
 
-<script>
-
-function deleteBlockTop (evt) {
-	evt.preventDefault();
-
-	$.ajax({
-		url: "/delete-block-top",
-		data: {'chart-id':$(this).val()},
-		type: "POST",
-		success: function(response) {
-			console.log(response)
-		},
-		error: function(error) {
-			console.log('error')
-		}
-	});
-	$(this).closest('.saved-block').remove();
-}
-
-$('.delete-btn-top').on('click', deleteBlockTop);
-
-function deleteBlockSkirt (evt) {
-	evt.preventDefault();
-
-	$.ajax({
-		url: "/delete-block-skirt",
-		data: {'chart-id':$(this).val()},
-		type: "POST",
-		success: function(response) {
-			console.log(response)
-		},
-		error: function(error) {
-			console.log('error')
-		}
-	});
-	$(this).closest('.saved-block').remove();
-}
-
-$('.delete-btn-skirt').on('click', deleteBlockSkirt);
-</script>
 
 {% endblock %}
