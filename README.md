@@ -4,18 +4,14 @@ In traditional clothing patternmaking, drafting blocks can take a lot of time an
 
 # Table of Contents
 * [About The Project](#about)
-* [Author](#author)
 * [Technologies Used](#technologiesused)
+* [Author](#author)
 
 # <a name="about"></a>About The Project
 The main compenent of this app is the pattern drafting algorithms which were created to mimic traditional pattern drafting techniques using HTML5 Canvas and Javascript.
 
-# <a name="author"></a>Author
-Allison Craig is a software engineer from San Francisco, CA.
-
-
 # <a name="technologiesused"></a>Technologies Used
-* [Javascript]
+* Javascript
 * [Python](https://www.python.org/)
 * [Flask](http://flask.pocoo.org/)
 * [Flask - SQLAlchemy](http://flask.pocoo.org/)
@@ -24,4 +20,5 @@ Allison Craig is a software engineer from San Francisco, CA.
 * [Bootstrap"](http://getbootstrap.com/2.3.2/)
 * [jsPDF](https://parall.ax/products/jspdf)
 
-# <a name="contact"></a>Contact
+# <a name="author"></a>Author
+Allison Craig is a software engineer from San Francisco, CA.
