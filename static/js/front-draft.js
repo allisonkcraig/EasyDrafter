@@ -53,27 +53,27 @@ $(document).ready(function() {
 
 
 		// FULL LENGTH ***********************************************************
-		document.pen.lineTo(0, (document.scaledFullLength)); // a to b
-		document.pen.moveTo(0, (((document.fullLength - document.centerFront) -0.375)*document.scale)); // move to neckline
-		document.pen.lineTo(80, (((document.fullLength - document.centerFront) -0.375)*document.scale)); // d squared off
+		document.pen.lineTo(0, (document.fullLength)); // a to b
+		document.pen.moveTo(0, ((document.fullLength - document.centerFront) -(0.375*document.scale))); // move to neckline
+		document.pen.lineTo(80, ((document.fullLength - document.centerFront) -(0.375*document.scale))); // d squared off
 
 
 		// ACROSS SHOULDER *******************************************************
 		document.pen.moveTo(0, 0);
-		document.pen.lineTo((document.scaledFrontAcrossShoulder), 0); // a to c
-		document.pen.lineTo((document.scaledFrontAcrossShoulder), 5 * scale); // square off c
+		document.pen.lineTo((document.frontAcrossShoulder), 0); // a to c
+		document.pen.lineTo((document.frontAcrossShoulder), 5 * scale); // square off c
 
 
 		// BUST ARC **************************************************************
-		document.pen.moveTo(0, (document.scaledFullLength)); 
-		document.pen.lineTo(document.scaledBustArc, (document.scaledFullLength)); // b to e
-		document.pen.lineTo(document.scaledBustArc, 60); // square up from e
-		document.pen.moveTo(document.scaledDartPlacement, (document.scaledFullLength)); 
+		document.pen.moveTo(0, (document.fullLength)); 
+		document.pen.lineTo(document.bustArc, document.fullLength); // b to e
+		document.pen.lineTo(document.bustArc, 60); // square up from e
+		document.pen.moveTo(document.dartPlacement, document.fullLength); 
 
 
 		// SHOULDER STRAP *********************************************************
-		document.pen.moveTo(0, document.scaledFullLength); 
-		document.pen.lineTo(document.scaledFrontAcrossShoulder, document.scaledOffset); // b to g
+		document.pen.moveTo(0, document.fullLength); 
+		document.pen.lineTo(document.frontAcrossShoulder, document.scaledOffset); // b to g
 
 
 		// BUST POINT *************************************************************
@@ -82,31 +82,31 @@ $(document).ready(function() {
 
 
 		// BUST POINT **************************************************************
-		document.pen.lineTo((document.bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY)); // to point M (bust point)
+		document.pen.lineTo((document.bustSpan), (document.scaledOffset + document.scaledPointHY)); // to point M (bust point)
 
 
 		// DART LEGS ***************************************************************
-		document.pen.moveTo((document.bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
-		document.pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength));// line to f
+		document.pen.moveTo((document.bustSpan), (document.scaledOffset + document.scaledPointHY));
+		document.pen.lineTo(document.dartPlacement, (document.fullLength));// line to f
 		// second dart
-		document.pen.moveTo((document.bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
-		document.pen.lineTo(document.dartX * document.scale, document.dartY * document.scale);// line to second dart leg
+		document.pen.moveTo((document.bustSpan), (document.scaledOffset + document.scaledPointHY));
+		document.pen.lineTo(document.dartX, document.dartY);// line to second dart leg
 
 
 		// ACROSS CHEST ***************************************************************
-		document.pen.moveTo(0, (((document.scaledPointHY)- ((document.fullLength - document.centerFront) -0.375 * document.scale))) /3 + document.scaledOffset);
-		document.pen.lineTo((document.acrossChest + 0.25) * document.scale, (((document.scaledPointHY)- ((document.fullLength - document.centerFront) -0.375 * document.scale))) /3 + document.scaledOffset, 5, 5); //to point O
+		document.pen.moveTo(0, (((document.scaledPointHY)- ((document.fullLength - document.centerFront) -(0.375 * document.scale))) /3 + document.scaledOffset));
+		document.pen.lineTo((document.acrossChest + (0.25* document.scale)), ((document.scaledPointHY)- ((document.fullLength - document.centerFront) -(0.375 * document.scale))) / 3 + document.scaledOffset, 5, 5); //to point O
 
 
 		// SHOULDER ***************************************************************
-		document.pen.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)); // b to g
-		document.pen.lineTo(((document.frontAcrossShoulder - document.shoulderLengthRun) * document.scale), 0); // g to i
+		document.pen.moveTo((document.frontAcrossShoulder), (document.scaledOffset)); // b to g
+		document.pen.lineTo((document.frontAcrossShoulder - document.shoulderLengthRun), 0); // g to i
 
 		 
 		// HELPER LINES **********************************************************
-		document.pen.lineTo( document.scaledBustArc, (document.strapRise * document.scale)); // i to j
-		document.pen.lineTo(((document.bustArc + 1.5)* document.scale), ((document.strapRise * document.scale) + (document.sideLengthRise * document.scale)) );// j to k
-		document.pen.lineTo(document.scaledDartPlacement, (document.scaledFullLength));// line to f
+		document.pen.lineTo( document.bustArc, document.strapRise); // i to j
+		document.pen.lineTo((document.bustArc + (1.5* document.scale)), document.strapRise + document.sideLengthRise);// j to k
+		document.pen.lineTo(document.dartPlacement, (document.fullLength));// line to f
 
 
 		// apply stroke to lines
@@ -127,44 +127,44 @@ $(document).ready(function() {
 
 
 		// CENTERFRONT 
-		document.penFinalFront.moveTo(0, (document.scaledFullLength), 3, 3); // b
-		document.penFinalFront.lineTo(+0.5, (((document.fullLength - document.centerFront) -0.375)*document.scale)); // move to neckline, ofset half a pixel so it shows on the canvas better
+		document.penFinalFront.moveTo(0, (document.fullLength), 3, 3); // b
+		document.penFinalFront.lineTo(+0.5, ((document.fullLength - document.centerFront) -(0.375 * document.scale))); // move to neckline, ofset half a pixel so it shows on the canvas better
 
 
 		// DART LEGS ***************************************************************
-		document.penFinalFront.moveTo((document.bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
-		document.penFinalFront.lineTo(document.scaledDartPlacement, (document.scaledFullLength)); // line to f
-		document.penFinalFront.lineTo(0, (document.scaledFullLength))
-		document.penFinalFront.moveTo((document.bustSpan * document.scale), (document.scaledOffset + document.scaledPointHY));
-		document.penFinalFront.lineTo(document.dartX * document.scale, document.dartY * document.scale);// line to second dart leg
+		document.penFinalFront.moveTo(document.bustSpan, (document.scaledOffset + document.pointHY));
+		document.penFinalFront.lineTo(document.dartPlacement, document.fullLength); // line to f
+		document.penFinalFront.lineTo(0, document.fullLength)
+		document.penFinalFront.moveTo(document.bustSpan, (document.scaledOffset + document.pointHY));
+		document.penFinalFront.lineTo(document.dartX , document.dartY);// line to second dart leg
 
 
 		// WAIST SIDE OF DART ******************************************************
-		document.penFinalFront.lineTo(((document.bustArc + 1.5)* document.scale), ((document.strapRise * document.scale) + (document.sideLengthRise * document.scale)) )
+		document.penFinalFront.lineTo((document.bustArc + (1.5 * document.scale)), (document.strapRise + document.sideLengthRise) )
 
 
 		// SIDE SEAM ******************************************************
-		document.penFinalFront.lineTo( document.scaledBustArc, (document.strapRise * document.scale)) // i to j
+		document.penFinalFront.lineTo( document.bustArc, document.strapRise) // i to j
 
 
 		// SHOULDER ***************************************************************
-		document.penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset)); // b to g
-		document.penFinalFront.lineTo(((document.frontAcrossShoulder - document.shoulderLengthRun) * document.scale), 0); // g to i
+		document.penFinalFront.moveTo(document.frontAcrossShoulder, document.scaledOffset); // b to g
+		document.penFinalFront.lineTo((document.frontAcrossShoulder - document.shoulderLengthRun), 0); // g to i
 
 
 		// ARMHOLE ***************************************************************
-		document.fArmControlx = (document.acrossChest * 0.725) * document.scale;
-		document.fArmControly = (document.strapRise / 0.886) * document.scale;
-		document.penFinalFront.moveTo((document.scaledFrontAcrossShoulder), (document.scaledOffset));
-		document.penFinalFront.quadraticCurveTo(document.fArmControlx ,document.fArmControly ,document.scaledBustArc, (document.strapRise * document.scale));
+		document.fArmControlx = (document.acrossChest * 0.725);
+		document.fArmControly = (document.strapRise / 0.886);
+		document.penFinalFront.moveTo((document.frontAcrossShoulder), (document.scaledOffset));
+		document.penFinalFront.quadraticCurveTo(document.fArmControlx ,document.fArmControly ,document.bustArc, document.strapRise);
 
 
 		// NECKLINE ***************************************************************
-		document.fNeckControlX = (document.frontAcrossShoulder - document.shoulderLengthRun) * document.scale;
-		document.fNeckControlY = ((document.fullLength - document.centerFront) - 0.375)*document.scale;
-		document.penFinalFront.moveTo((document.frontAcrossShoulder - document.shoulderLengthRun) * document.scale, 0); //starting point of curve
-		document.penFinalFront.quadraticCurveTo(document.fNeckControlX ,document.fNeckControlY ,0, (((document.fullLength - document.centerFront) - 0.375)*document.scale)); // needs to be calibrated
-		document.penFinalFront.lineTo(0, (((document.fullLength - document.centerFront) - 0.375)*document.scale));
+		document.fNeckControlX = (document.frontAcrossShoulder - document.shoulderLengthRun);
+		document.fNeckControlY = (document.fullLength - document.centerFront) -(0.375 * document.scale);
+		document.penFinalFront.moveTo((document.frontAcrossShoulder - document.shoulderLengthRun), 0); //starting point of curve
+		document.penFinalFront.quadraticCurveTo(document.fNeckControlX ,document.fNeckControlY ,0, ((document.fullLength - document.centerFront) - (0.375 * document.scale))); // needs to be calibrated
+		document.penFinalFront.lineTo(0, ((document.fullLength - document.centerFront) - (0.375 * document.scale)));
 
 
 		// apply stroke to lines
@@ -174,11 +174,6 @@ $(document).ready(function() {
 	};
 
 
-	// document.clearCanvas = function(context) {
- //    context.clearRect(0, 0, 461, 461);
-	// };
-
-	// document.draftFrontCanvas();
 
 	$(".update-button").blur(function() {
 		clearCanvas(document.gridPenFront);
