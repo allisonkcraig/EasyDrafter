@@ -4,16 +4,16 @@ In traditional clothing patternmaking, drafting blocks can take a lot of time an
 
 # Table of Contents
 * [Author](#author)
-* [Installation](#installation)
+* [Technologies Used](#technologiesused)
 
 # <a name="author"></a>Author
 Allison Craig is a software engineer from San Francisco, CA.
 
 
-# <a name="installation"></a>Installation
+# <a name="technologiesused"></a>Technologies Used
 * "Flask" <http://flask.pocoo.org/>
 * "Flask - SQLAlchemy" <http://flask.pocoo.org/>
-* "jQuery" <http://flask.pocoo.org/>
+* "jQuery" <https://jquery.com//>
 * "Jinja2" <http://flask.pocoo.org/>
 * "Bootstrap" <http://flask.pocoo.org/>
 * "jsPDF" <https://parall.ax/products/jspdf>
