@@ -11,11 +11,11 @@ Allison Craig is a software engineer from San Francisco, CA.
 
 
 # <a name="technologiesused"></a>Technologies Used
-* "Flask" <http://flask.pocoo.org/>
-* "Flask - SQLAlchemy" <http://flask.pocoo.org/>
-* "jQuery" <https://jquery.com//>
-* "Jinja2" <http://flask.pocoo.org/>
-* "Bootstrap" <http://flask.pocoo.org/>
+* [Flask](http://flask.pocoo.org/)
+* [Flask - SQLAlchemy](http://flask.pocoo.org/)
+* "jQuery" <https://jquery.com/>
+* "Jinja2" <http://jinja.pocoo.org/docs/dev/>
+* "Bootstrap" <http://getbootstrap.com/2.3.2//>
 * "jsPDF" <https://parall.ax/products/jspdf>
 
 # <a name="contact"></a>Contact
