@@ -1,4 +1,4 @@
-![EasyDrafter Logo](/logo.png)
+![EasyDrafter Logo](/static/img/logo.png)
 
 EasyDrafter is a web app created by Allison Craig which is used to create clothing pattern blocks for DIY enthusiasts.
 In traditional clothing patternmaking, drafting blocks can take a lot of time and have human error. My app makes it quick and easy to make a block so the pattern drafter can get to making more complex patterns quicker. 
