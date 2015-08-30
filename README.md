@@ -4,10 +4,10 @@ EasyDrafter is a web app created by Allison Craig which is used to create clothi
 In traditional clothing patternmaking, drafting blocks can take a lot of time and have human error. My app makes it quick and easy to make a block so the pattern drafter can get to making more complex patterns quicker. 
 
 ## Table of Contents
-* [About The Project](#about)
 * [Terminology](#terms)
 * [Technologies Used](#technologiesused)
 * [Drafting with Canvas](#drafting)
+* [Behind The User Drafting Expirience](#drafting)
 * [Author](#author)
 
 ## <a name="terms"></a>Terminology
@@ -56,6 +56,8 @@ The main component of this app is the pattern drafting algorithms which were cre
 I created many functions to specialy help me calculate the axis of a specific coordinate. Many of my functions are based on the geometry of right triangles.
 
 ## <a name="v2"></a>Version 2.0
+The next step for this app would be a smarter way to select template blocks.
+There is a process in pattern drafting called "grading" which is taking a pattern and scaling up or down for the specific user. It would be neat to take this process and apply it to base templates so the user can both get a block the size they want but also the proportions they want.
 
 ## <a name="author"></a>Author
 Allison Craig is a software engineer from San Francisco, CA.
