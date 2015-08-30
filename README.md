@@ -8,6 +8,8 @@ In traditional clothing patternmaking, drafting blocks can take a lot of time an
 * [Technologies Used](#technologiesused)
 * [Drafting with Canvas](#drafting)
 * [Behind The User Drafting Expirience](#drafting)
+* [Calculating the Block](#math)
+* [Version 2.0](#v2)
 * [Author](#author)
 
 ## <a name="terms"></a>Terminology
