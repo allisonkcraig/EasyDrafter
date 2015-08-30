@@ -38,14 +38,18 @@ When they hit "next", the server looks for these measurements and determines a t
 The Flask Server determines these measruements by looking at the ratio of the two measurements, determines which is the more dominant measurement. It then queries the database for the block that will fit that dominant measurement.
 These measurements are stored in the session for use in drafting. The template measurements are passed onto the drafting pages via Jinja templating, which selected by my Javascript drafting algorithms using jQuery.
 
-
 ####Making Drafts React to Input
-While in the drafting screens, the user can change measurements in the inputs with triggers and event with jQuery to clear the previous draft and draft a new block with the new measurements. 
-
+While in the drafting screens, the user can change measurements in the inputs which triggers an event handler on blur with jQuery to clear the previous draft and draft a new block with the new measurements. 
 
 ####Storing Measurements
-After the user hits next on any drafting page, the Flask server 
+After the user hits next on any drafting page, the Flask server requests the measurements and overrides the template measurements in the session with the user input.
 
+####Saving Blocks to Desktop in PDF
+After all the drafting is complete the user is brought to a final page which allows the user to save the block to thier desktop in PDF form. The PDF is rendered using jsPDF, a library by Parallax. This utilizes Canvas2Image, a tool for coverting the HTML5 Canvas into an image. 
+There is hidden on the final page the pattern blocks scaled up with the specific goal of making them print so each square is an inch. jsPDF is able to select certain parts of the image and save to a PDF object which is then saved to the desktop.
+
+####Saving Blocks to App
+The user is able to save the block measurements to their account with a block nickname. The user can then go back and edit, reprint, or delete the block from thier profile page. 
 
 ## <a name="math"></a>Calculating The Block
 The main component of this app is the pattern drafting algorithms which were created to mimic traditional pattern drafting techniques using HTML5 Canvas and Javascript.
