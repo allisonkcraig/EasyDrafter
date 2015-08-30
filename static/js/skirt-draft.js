@@ -3,8 +3,8 @@ draftSkirtCanvas = function(skirtTableName, scale){
 	var scale = scale;
 	document.processSkirtForm(scale); // processes skirt measurments from form
 
-	var canvasHeight = 2001;
-	var canvasWidth = 1546;
+	var canvasHeight = 5001;
+	var canvasWidth = 5001;
 
 		// take in an object that that will be the way you store the data
 		// establish drafting table and pen

@@ -141,14 +141,15 @@
 		document.centerBackHipDepth = (parseFloat($('form input[name="center-back-hip-depth"]').val()) * document.scale) + document.hipArcEase;
 		document.frontHipArc = parseFloat($('form input[name="front-hip-arc"]').val()) * document.scale;
 		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val()) * document.scale;
-		
+
 		//calculations
 		determineDartIntakeSkirt(document.waist, document.hip, document.scale);
 		document.addToFrontWaistArc = ((document.frontDartIntake * document.frontNumOfDarts) + document.waistArcEase)
 		document.addToBackWaistArc = ((document.backDartIntake * document.backNumOfDarts) + document.waistArcEase) 
 		document.pointOfHipCurve = ((document.centerFrontHipDepth / 3) * 2) + document.offsetFromTop
-		document.frontWaistArc = (6.75 * document.scale) + document.addToFrontWaistArc;
-		document.backWaistArc = (6.25 * document.scale) + document.addToBackWaistArc;
+		document.frontWaistArc = (document.waist / 4) + document.addToFrontWaistArc;
+		document.backWaistArc = (document.waist / 4)  + document.addToBackWaistArc;
+		
 	}
 
 
