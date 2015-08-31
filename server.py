@@ -3,17 +3,12 @@ import os
 # from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
 import json
-import model
-
-from flask_oauth import OAuth
-
 
 from model import User, Size_Chart_Top, Size_Chart_Skirt, Measurement_Chart_Top, Measurement_Chart_Skirt, connect_to_db, db
 
-
 app = Flask(__name__)
 
-oauth = OAuth()
+
 app.secret_key = os.environ['SECRET_KEY'] 
 #much sure to source secrets.sh each time you enter virtual env, will go away after each session
 
@@ -410,7 +405,7 @@ def delete_block_top():
     """Deletes top block via AJAX call"""
 
     chart_id_input = request.form.get("chart-id")
-    test = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==6).first()
+    test = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_input).first()
     chart_in_db = Measurement_Chart_Top.query.filter(Measurement_Chart_Top.chart_id==chart_id_input).first()
     db.session.delete(chart_in_db)
     db.session.commit()
@@ -421,6 +416,7 @@ def delete_block_skirt():
     """Deletes skirt block via AJAX call"""
 
     chart_id_input = request.form.get("chart-id")
+    print chart_id_input
     chart_in_db = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_input).first()
     db.session.delete(chart_in_db)
     db.session.commit()

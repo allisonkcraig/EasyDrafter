@@ -19,6 +19,7 @@ $('.delete-btn-top').on('click', deleteBlockTop);
 
 function deleteBlockSkirt (evt) {
 	evt.preventDefault();
+	
 	console.log("DELETE SKIRT")
 
 	$.ajax({
@@ -35,4 +36,4 @@ function deleteBlockSkirt (evt) {
 	$(this).closest('.saved-block').remove();
 }
 
-$('.delete-btn-skirt').on('click', function() { console.log("pressed")})
+$('.delete-btn-skirt').on('click', deleteBlockSkirt);
