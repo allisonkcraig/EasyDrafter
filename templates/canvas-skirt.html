@@ -26,12 +26,14 @@
 				<form action="/save">			
 					<div class="form-group nickname raleway">
 						<h1 class="heading-titles block-title">Your Skirt Block!</h1>
-						<label for="nickname" class="col-sm-4 control-label">Nickname</label>
-						<div class="col-md-6">
+						<label for="nickname" class="col-sm-2 col-md-offset-2 control-label">Nickname</label>
+						<div class="col-md-4">
 							<input type="text" class="form-control" name="nickname" placeholder="nickname" required>
-							<input type="hidden" name="block-type" value="skirt">
-							<button class="btn btn-default">SAVE</button>
 						</div>
+						<div class="col-md-2">
+							<button class="btn btn-default">SAVE</button>
+							</div>
+							<input type="hidden" name="block-type" value="skirt">
 					</div>
 				</form>
 			</center>
@@ -40,6 +42,7 @@
 
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
+			<br>
 			<center><h1 class="raleway">Skirt</h1><button id="save-skirt" type="submit" class="btn btn-default download-button">DOWNLOAD SKIRT PDF</button></center>
 			<div class="table">
 				<canvas id="drafting-table-skirt" class="drafting-table" width="346" height="346"></canvas>

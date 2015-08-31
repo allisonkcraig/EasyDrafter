@@ -37,6 +37,9 @@ body {
 	display: inline;
 }
 
+.vert-offset-top{
+    margin-top: 500px;
+}
 
 #video-page {
 	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
@@ -46,6 +49,7 @@ body {
 
 #measurement-table {
 	font-family: "Raleway";
+	position: relative;
 }
 
 

@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block head %}
-	<script src='/static/js/functions.js'></script>
-	<script src='/static/js/skirt-draft.js'></script>
-	<script src='/static/js/measurements.js'></script>
-	<script>
-		$(document).ready(function(){
-			draftSkirtCanvas("drafting-table-skirt", 20);
-			console.log("DRAFTING SKIRT")
-		});
-	</script>
+<script src='/static/js/functions.js'></script>
+<script src='/static/js/skirt-draft.js'></script>
+<script src='/static/js/measurements.js'></script>
+<script>
+$(document).ready(function(){
+	draftSkirtCanvas("drafting-table-skirt", 20);
+	console.log("DRAFTING SKIRT")
+});
+</script>
 {% endblock %}
 
 
@@ -17,16 +17,17 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-md-6">
+		<div class="col-xs-6 col-md-6 col-md-offset-1">
 			<h1 class="heading-titles table-name">Skirt</h1>
 			<div class="table">
 				<canvas id="drafting-table-skirt" class="drafting-table working-table" width="501" height="461"></canvas>
 			</div>
 		</div>
 
-		<div class="col-xs-12 col-md-4">
+		<div class="col-xs-6 col-md-4">
 			<div id="measurement-table">
 				<center><h3 class="heading-titles instructions">Change Measurements Below in Inches</h3></center>
+				<br>
 				<form  action="/pattern" class="form-horizontal" id="front-measurement-form">
 
 					<div class="form-group">
@@ -78,6 +79,7 @@
 			</div>
 		</form>
 	</div>
+
 </div>
 </div>
 

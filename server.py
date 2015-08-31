@@ -102,8 +102,8 @@ def skirt_draft_page():
 def front_draft_page():
     """Use template measurements to draft a front block that closest fits user and allow users to change block to fit them using inputs """
     
-    bust_input = int(request.args.get("bust"))
-    waist_input = int(request.args.get("waist"))
+    bust_input = float(request.args.get("bust"))
+    waist_input = float(request.args.get("waist"))
 
     if bust_input < 34:
         bust_input = 34
@@ -415,7 +415,7 @@ def delete_block_top():
 def delete_block_skirt():
     """Deletes skirt block via AJAX call"""
 
-    chart_id_input = request.form.get("chart-id")
+    chart_id_input = request.form.get("skirt-id")
     print chart_id_input
     chart_in_db = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_input).first()
     db.session.delete(chart_in_db)
