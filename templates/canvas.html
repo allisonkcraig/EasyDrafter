@@ -31,14 +31,14 @@
 				<form action="/save">			
 					<div class="form-group nickname raleway">
 						<h1 class="heading-titles block-title">Your Top Block!</h1>
-					<label for="nickname" class="col-sm-2 col-md-offset-2 control-label">Nickname</label>
+					<label for="nickname" class="col-sm-3 col-md-offset-1 control-label">Enter Nickname</label>
 						<div class="col-md-4">
 							<input type="text" class="form-control" name="nickname" placeholder="nickname" required>
 						</div>
 						<div class="col-md-2">
-							<button class="btn btn-default">SAVE</button>
+							<button class="btn btn-default">SAVE BLOCK</button>
 							</div>
-							<input type="hidden" name="block-type" value="skirt">
+							<input type="hidden" name="block-type" value="top">
 					</div>
 				</form>
 			</center>
@@ -46,9 +46,9 @@
 	</div>
 
 	<div class="row">
-		<br>
 		<div class="col-md-4 col-md-offset-1">
 			<center><h1 class="raleway">Front</h1><button id="save-front" type="submit" class="btn btn-default download-button">DOWNLOAD FRONT PDF</button></center>
+			<br>
 			<div class="table">
 				<canvas id="drafting-table-front" class="drafting-table" width="346" height="346"></canvas>
 			</div>
@@ -56,6 +56,7 @@
 
 		<div class="col-md-4 col-md-offset-2">
 			<center><h1 class="raleway">Back</h1><button id="save-back" type="submit" class="btn btn-default download-button">DOWNLOAD BACK PDF</button></center>
+			<br>
 			<div class="table">
 				<canvas id="drafting-table-back" class="drafting-table" width="346" height="346"></canvas>
 			</div>

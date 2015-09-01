@@ -9,7 +9,7 @@
 		<div class="col-md-4 col-md-offset-2">
 			<a href="/start-top">
 				<center>
-					<img class="type-icon" src="/static/img/top.png">
+					<img class="type-icon" id="top" src="/static/img/top.png">
 				</center>
 			</a>
 
@@ -17,10 +17,30 @@
 		<div class="col-md-4">
 			<a href="/start-skirt">
 				<center>
-					<img class="type-icon" src="/static/img/Skirt.png">
+					<img class="type-icon" id="skirt" src="/static/img/Skirt.png">
 				</center>
 			</a>
 		</div>
 </div>
+
+<script>
+$('#top').mouseover(function(){
+        $('#top').attr('src','/static/img/top-p.png');
+    });
+
+$('#top').mouseout(function(){
+        $('#top').attr('src','/static/img/top.png');
+    });
+
+$('#skirt').mouseover(function(){
+        $('#skirt').attr('src','/static/img/skirt-p.png');
+    });
+
+$('#skirt').mouseout(function(){
+        $('#skirt').attr('src','/static/img/skirt.png');
+    });
+
+$('#skirt').hover()
+</script>
 
 {% endblock %}

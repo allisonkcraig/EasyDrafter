@@ -1,9 +1,3 @@
-body {
-	padding-top: 70px;
-	margin-bottom: 2em;
-	padding-bottom: 4em;
-}
-
 
 .nickname{
 	padding-top: 1em;
@@ -16,12 +10,14 @@ body {
 
 
 .drafting-table {
-	margin-top: 0.5em;
     position: fixed;
     display: inline-block;
-    border: 1px black
 }
 
+
+canvas {
+	border: 1px solid #D2D8A9;
+}
 
 #first-page {
 	margin-top: 5em;
@@ -41,11 +37,6 @@ body {
     margin-top: 500px;
 }
 
-#video-page {
-	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
-	background-size: cover;
-}
-
 
 #measurement-table {
 	font-family: "Raleway";
@@ -54,7 +45,7 @@ body {
 
 
 .working-table {
-	padding-top: 5em;
+	margin-top: 6em;
 }
 
 
@@ -70,6 +61,36 @@ body {
 }
 
 
+.start-btn {
+	font-family: 'Pacifico', cursive;
+	color: #EA8C86;
+	font-size: 3em;
+}
+
+.start-btn:hover, .start-btn:focus, .start-btn:active, .start-btn.active, .open > .dropdown-toggle.start-btn {
+    background: #F2BAB6;
+    color: white;
+}
+
+
+.log-btn{
+    background: #EA8C86;
+    color: white;
+}
+
+
+.log-btn:hover, .log-btn:focus, .log-btn:active, .log-btn.active, .open > .dropdown-toggle.log-btn {
+    background: #F2BAB6;
+    color: white;
+}
+
+
+.form-control:focus {
+  border-color: #F2BAB6;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+
 .heading-titles {
 	font-family: 'Pacifico', cursive;
 	color: #EA8C86;
@@ -78,6 +99,7 @@ body {
 
 .table-name {
 	position: fixed;
+	margin-top: 1em;
 }
 
 
@@ -113,16 +135,18 @@ body {
 
 
 .splash-body {
-	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
+	background-image: url('/static/img/dreamstime_xl_55906489_2.jpg');
 	background-size: 100%;
 	background-position: 0px 50%;
 	color:white;
+	overflow: hidden;
 }
 
 .video-body {
-	background-image: url('/static/img/dreamstime_xl_55906489.jpg');
+	background-image: url('/static/img/dreamstime_xl_55906489_2.jpg');
 	background-size: cover;
 	color:white;
+	overflow: hidden;
 }
 
 
@@ -186,6 +210,7 @@ footer {
 
 .instructions {
 	font-size: 1.5em;
+	margin-top: 2em;
 }
 
 
@@ -200,4 +225,11 @@ footer {
 
 .type-icon {
 	height: 275px;
+}
+
+body {
+	padding-top: 70px;
+	margin-bottom: 2em;
+	padding-bottom: 4em;
+	background-color: #FCFFFB;
 }
