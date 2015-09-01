@@ -25,7 +25,7 @@ Drafting is the process of creating your patterns. This can include creating pat
 * [Flask - SQLAlchemy](http://flask.pocoo.org/)
 * [jQuery](https://jquery.com/)
 * [Jinja2](http://jinja.pocoo.org/docs/dev/)
-* [Bootstrap"](http://getbootstrap.com/2.3.2/)
+* [Bootstrap](http://getbootstrap.com/2.3.2/)
 * [jsPDF](https://parall.ax/products/jspdf)
 
 ## <a name="drafting"></a>Drafting with Canvas
