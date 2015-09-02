@@ -33,7 +33,7 @@ Drafting is the process of creating your patterns. This can include creating pat
 HTML5 Canvas was used to draft my pattern blocks. Canvas uses a system of (x,y) axis on a grid that starts at (0,0) at the top left corner. This was counter intuitive to how blocks are drafted by hand but it was a fun challenge. 
 
 ## <a name="drafting"></a>Behind The User Drafting Expirience
-
+![Selecting Base Measurements](/static/img/screen-shot-decide.png)
 ####Selecting Base Measurements
 On the first page of inputs a user sees when drafting with this app, the user must input 2 basic measurements which vary depending on the type of block.
 When they hit "next", the server looks for these measurements and determines a template block that fits the user the best from the database.
@@ -41,12 +41,14 @@ The Flask Server determines these measruements by looking at the ratio of the tw
 These measurements are stored in the session for use in drafting. The template measurements are passed onto the drafting pages via Jinja templating, which selected by my Javascript drafting algorithms using jQuery.
 
 ####Making Drafts React to Input
+![Selecting Base Measurements](/static/img/screen-shot-draft.png)
 While in the drafting screens, the user can change measurements in the inputs which triggers an event handler on blur with jQuery to clear the previous draft and draft a new block with the new measurements. 
 
 ####Storing Measurements
 After the user hits next on any drafting page, the Flask server requests the measurements and overrides the template measurements in the session with the user input.
 
 ####Saving Blocks to Desktop in PDF
+![Selecting Base Measurements](/static/img/pdfprint.png)
 After all the drafting is complete the user is brought to a final page which allows the user to save the block to thier desktop in PDF form. The PDF is rendered using jsPDF, a library by Parallax. This utilizes Canvas2Image, a tool for coverting the HTML5 Canvas into an image. 
 There is hidden on the final page the pattern blocks scaled up with the specific goal of making them print so each square is an inch. jsPDF is able to select certain parts of the image and save to a PDF object which is then saved to the desktop.
 
