@@ -46,7 +46,7 @@ The Flask Server determines these measruements by looking at the ratio of the tw
 These measurements are stored in the session for use in drafting. The template measurements are passed onto the drafting pages via Jinja templating, which selected by my Javascript drafting algorithms using jQuery.
 
 ####Making Drafts React to Input
-![drafting](/static/img/screen-shot-draft.png)
+![drafting](/static/img/change-state.gif)
 While in the drafting screens, the user can change measurements in the inputs which triggers an event handler on blur with jQuery to clear the previous draft and draft a new block with the new measurements. 
 
 ####Storing Measurements
@@ -60,7 +60,7 @@ There is hidden on the final page the pattern blocks scaled up with the specific
 ####Saving Blocks to App
 ![drafting](/static/img/screen-shot-canvas.png)
 The user is able to save the block measurements to their account with a block nickname. The user can then go back and edit, reprint, or delete the block from thier profile page. 
-![save2app](/static/img/profile.png)
+![save2app](/static/img/screen-shot-profile.png)
 
 ## <a name="math"></a>Calculating The Block
 The main component of this app is the pattern drafting algorithms which were created to mimic traditional pattern drafting techniques using HTML5 Canvas and Javascript.
