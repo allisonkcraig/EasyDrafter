@@ -53,7 +53,7 @@ While in the drafting screens, the user can change measurements in the inputs wh
 After the user hits next on any drafting page, the Flask server requests the measurements and overrides the template measurements in the session with the user input.
 
 ####Saving Blocks to Desktop in PDF
-![save2desktop](/static/img/pdfprint.png)
+![save2desktop](/static/img/printtiled.png)
 After all the drafting is complete the user is brought to a final page which allows the user to save the block to thier desktop in PDF form. The PDF is rendered using jsPDF, a library by Parallax. This utilizes Canvas2Image, a tool for coverting the HTML5 Canvas into an image. 
 There is hidden on the final page the pattern blocks scaled up with the specific goal of making them print so each square is an inch. jsPDF is able to select certain parts of the image and save to a PDF object which is then saved to the desktop.
 
