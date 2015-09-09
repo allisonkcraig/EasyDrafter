@@ -3,12 +3,12 @@
 
 <center><h1 class='heading-titles'>Hey, {{ user.fname }} !</h1></center>
 <br>
-<center><i><h4 class="raleway">email: {{ user.email }}</h4></i></center>
+<center><i><h4 class="raleway">{{ user.email }}</h4></i></center>
 
 {% if savedblockstops == [] and savedblocksskirts == [] %}
 <br>
 <br>
-<center><h2 class="raleway">You have no saved blocks.</h2></center>
+<center><h1 class="raleway">You have no saved blocks.</h1></center>
 <center><h2 class="raleway">It is super easy to get started!</h2></center>
 <br>
 <center><form action="/choose-block">
