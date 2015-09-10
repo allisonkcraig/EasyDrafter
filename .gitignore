@@ -4,3 +4,4 @@ secrets.sh
 *secrets.*
 *.pyc
 *beta-keys*
+beta-keys.py
