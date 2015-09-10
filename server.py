@@ -4,7 +4,7 @@ import os
 import jinja2
 import json
 
-from model import User, Size_Chart_Top, Size_Chart_Skirt, Measurement_Chart_Top, Measurement_Chart_Skirt, connect_to_db, db
+from model import User, Beta_Key, Size_Chart_Top, Size_Chart_Skirt, Measurement_Chart_Top, Measurement_Chart_Skirt, connect_to_db, db
 
 app = Flask(__name__)
 
@@ -354,13 +354,23 @@ def process_registration():
 
     email_input = request.form.get("email")
 
+
     user = User.query.filter(User.email == email_input).first()
     if user != None:
         flash("There is already a user with that email address!")
         return redirect("/register")
 
+    beta_input = request.form.get("beta")
+
+    beta = Beta_Key.query.filter(Beta_Key.beta_key == beta_input).first()
+
+    if beta == None:
+        flash('That is not a correct Beta Key')
+        return redirect("/register")
+
     pword_input = request.form.get("password")
     fname_input = request.form.get("fname")
+    
 
     user_to_add = User(
         email=email_input,
@@ -368,6 +378,7 @@ def process_registration():
         fname=fname_input
         )
 
+    db.session.delete(beta)
     db.session.add(user_to_add)
     db.session.commit() 
 
@@ -377,11 +388,20 @@ def process_registration():
 
     flash("Thanks for registering!")
 
+
+
     user = User.query.filter(User.email == email_input).first()
 
     session['current_user_id'] = user.user_id
 
-    return redirect("/profile")
+    return redirect("/hello")
+
+
+@app.route('/hello')
+def hello_page():
+    """Render page with instructions on how to use the app"""
+
+    return render_template('/hello.html')
 
 
 @app.route('/profile')

@@ -9,6 +9,26 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+class Beta_Key(db.Model):
+    """User of ratings website."""
+
+    __tablename__ = "Beta_Keys"
+
+    beta_key = db.Column(db.String, primary_key=True)
+
+    # @classmethod
+    # def add_user(cls, email, fname,  password=None, fb_id=None):
+    #     """Insert a new user into the users table"""
+    #     user = cls(email=email, password=password, fname=fname, fb_id=fb_id)
+    #     db.session.add(user)
+    #     db.session.commit()
+
+
+    # def __repr__(self):
+    #     """Provide helpful representation when printed."""
+
+    #     return "<user_id= %s email= %s fname = %s>" % (self.user_id, self.email, self.fname)
+
 
 class User(db.Model):
     """User of ratings website."""

@@ -6,3 +6,4 @@ secrets.sh
 *beta-keys*
 beta-keys.py
 *.db
+drafter.db

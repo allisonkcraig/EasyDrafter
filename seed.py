@@ -1,7 +1,23 @@
 """Utility file to seed ratings database from MovieLens data in seed_data/"""
 
-from model import Size_Chart_Top, Size_Chart_Skirt, connect_to_db, db
+from model import Size_Chart_Top, Size_Chart_Skirt, Beta_Key, connect_to_db, db
 from server import app
+
+def load_beta_keys():
+    """Load beta keys into database."""
+    with open('seed_data/u.beta-keys.py', 'r') as beta_keys:
+        for line in beta_keys:
+            line.rstrip()
+            row = line.split('|')
+    
+            beta_key = row[0]
+
+            beta = Beta_Key(beta_key=beta_key)
+
+            db.session.add(beta)
+
+        db.session.commit()
+
 
 def load_size_charts_top():
     """Load size charts from template-charts-tops into database."""
@@ -107,6 +123,6 @@ def load_size_charts_skirt():
 
 if __name__ == "__main__":
     connect_to_db(app)
-
-    load_size_charts_top()
-    load_size_charts_skirt()
+    load_beta_keys()
+    # load_size_charts_top()
+    # load_size_charts_skirt()
