@@ -124,5 +124,5 @@ def load_size_charts_skirt():
 if __name__ == "__main__":
     connect_to_db(app)
     load_beta_keys()
-    # load_size_charts_top()
-    # load_size_charts_skirt()
+    load_size_charts_top()
+    load_size_charts_skirt()

@@ -4,6 +4,7 @@ import os
 import jinja2
 import json
 
+
 from model import User, Beta_Key, Size_Chart_Top, Size_Chart_Skirt, Measurement_Chart_Top, Measurement_Chart_Skirt, connect_to_db, db
 
 app = Flask(__name__)
@@ -354,8 +355,9 @@ def process_registration():
 
     email_input = request.form.get("email")
 
-
+    
     user = User.query.filter(User.email == email_input).first()
+
     if user != None:
         flash("There is already a user with that email address!")
         return redirect("/register")
