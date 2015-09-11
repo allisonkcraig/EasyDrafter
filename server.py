@@ -398,6 +398,11 @@ def process_registration():
 
     return redirect("/hello")
 
+@app.route('/request-beta')
+def request_beta_page():
+    """Render page with instructions on how to use the app"""
+
+    return render_template('/request-beta-key.html')
 
 @app.route('/hello')
 def hello_page():
