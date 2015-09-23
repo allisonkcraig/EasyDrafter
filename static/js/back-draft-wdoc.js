@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	document.canvasHeight = 2001
-	document.canvasWidth = 1546
+	document.canvasHeight = 2001;
+	document.canvasWidth = 1546;
 
 	document.draftBackCanvas = function(backTableName, scale){
 
@@ -11,9 +11,9 @@ $(document).ready(function() {
 
 		document.pen = document.draftingTableBack.getContext("2d");
 		document.pen.fillStyle="white";
-		document.pen.beginPath()
+		document.pen.beginPath();
 		document.pen.moveTo(0, 0);
-		document.pen.fillRect(0,0, document.canvasHeight * 20, document.canvasWidth * 20)
+		document.pen.fillRect(0,0, document.canvasHeight * 20, document.canvasWidth * 20);
 		document.pen.stroke();
 
 		document.gridPenBack = document.draftingTableBack.getContext("2d");

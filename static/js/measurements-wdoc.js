@@ -16,7 +16,7 @@
 		document.waistArc = parseFloat($('form input[name="waist-arc"]').val());
 		document.dartPlacement = parseFloat($('form input[name="dart-placement"]').val());
 		document.sideLength = parseFloat($('form input[name="side-length"]').val());
-		document.bustEase = 0.25 // constant variable 	
+		document.bustEase = 0.25; // constant variable 	
 
 
 		// calculating rises and runs for right angle formulas
@@ -32,12 +32,12 @@
 
 
 		// Calculate distance and rise and run of second dart leg
-		document.waistRemaining = document.waistArc - document.dartPlacement // find the remaining waist needed
-		document.dartLegRise = document.fullLength - (document.strapRise  + document.sideLengthRise)
-		document.dartLegRun = (document.bustArc + 1.25 + 0.25) - document.dartPlacement
-		document.dartLegC = pythagoreanAAndB(document.dartLegRun, document.dartLegRise) // length of f to k
-		document.dartY = document.fullLength - locatePointOnC(document.waistRemaining, document.dartLegRise, document.dartLegC)
-		document.dartX = (document.bustArc + 1.25) - locatePointOnC(document.waistRemaining, document.dartLegRun, document.dartLegC)
+		document.waistRemaining = document.waistArc - document.dartPlacement; // find the remaining waist needed
+		document.dartLegRise = document.fullLength - (document.strapRise  + document.sideLengthRise);
+		document.dartLegRun = (document.bustArc + 1.25 + 0.25) - document.dartPlacement;
+		document.dartLegC = pythagoreanAAndB(document.dartLegRun, document.dartLegRise); // length of f to k
+		document.dartY = document.fullLength - locatePointOnC(document.waistRemaining, document.dartLegRise, document.dartLegC);
+		document.dartX = (document.bustArc + 1.25) - locatePointOnC(document.waistRemaining, document.dartLegRun, document.dartLegC);
 
 
 		// Scaled Measurements
@@ -84,7 +84,7 @@
 
 		
 		// Find slope offset o fron the top of the axis. -- point g's y axis 
-		document.backShoulderSlopeRise = pythagoreanCAndA( document.backShoulderSlope, document.backAcrossShoulder)
+		document.backShoulderSlopeRise = pythagoreanCAndA( document.backShoulderSlope, document.backAcrossShoulder);
 		document.scaledOffset = (document.fullLengthBack - document.backShoulderSlopeRise) * document.scale; // for finding how far from the top to start finding h point
 
 
@@ -95,8 +95,8 @@
 	
 		//Find shoulder coordinates through right triangle geometry
 		document.lengthOfFToGScaled = pythagoreanAAndB((document.scaledBackAcrossShoulder - document.scaledBackNeck), document.scaledOffset);
-		document.pointHXScaled = findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, (document.scaledBackAcrossShoulder - document.scaledBackNeck), document.backShoulderLength * document.scale) + (document.scaledBackNeck)
-		document.pointHYScaled = findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, document.scaledOffset, document.backShoulderLength * document.scale) 
+		document.pointHXScaled = findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, (document.scaledBackAcrossShoulder - document.scaledBackNeck), document.backShoulderLength * document.scale) + (document.scaledBackNeck);
+		document.pointHYScaled = findLengthOfBiggerTriangleSide(document.lengthOfFToGScaled, document.scaledOffset, document.backShoulderLength * document.scale) ;
 
 	
 		// Calculate coordinates of shoulder dart along shoulder seam 
@@ -112,12 +112,12 @@
 
 		//Calculate point for shoulder dart along line
 			//Set up function as follows: (axisWanted1, axisWanted2, secondAxis1, secondAxis2, distance to travel)
-		document.shoulderDartApexX = findAxisForPointOnLine(document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)), 3 * document.scale)
+		document.shoulderDartApexX = findAxisForPointOnLine(document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)), 3 * document.scale);
 			// Offset my axis point by the point at which the line starts on my grid at the shoulder
-		document.offsetShoulderDartApexX = (document.shoulderDartXScaled + document.scaledBackNeck) + document.shoulderDartApexX 
-		document.shoulderDartApexY = Math.abs(findAxisForPointOnLine(document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)),document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), 3 * document.scale))
+		document.offsetShoulderDartApexX = (document.shoulderDartXScaled + document.scaledBackNeck) + document.shoulderDartApexX ;
+		document.shoulderDartApexY = Math.abs(findAxisForPointOnLine(document.shoulderDartYScaled , (document.scaledfullLengthBack - (document.sideLength * document.scale)),document.shoulderDartXScaled,((document.dartPlacement + (document.backDartIntake / 2))  * document.scale), 3 * document.scale));
 			// Offset my axis point by the point at which the line starts on my grid at the shoulder
-		document.offsetShoulderDartApexY = document.shoulderDartYScaled  + document.shoulderDartApexY 
+		document.offsetShoulderDartApexY = document.shoulderDartYScaled  + document.shoulderDartApexY ;
 
 
 	}
@@ -145,9 +145,9 @@
 		
 		//calculations
 		determineDartIntakeSkirt(document.waist, document.hip, document.scale);
-		document.addToFrontWaistArc = ((document.frontDartIntake * document.frontNumOfDarts) + document.waistArcEase)
-		document.addToBackWaistArc = ((document.backDartIntake * document.backNumOfDarts) + document.waistArcEase) 
-		document.pointOfHipCurve = ((document.centerFrontHipDepth / 3) * 2) + document.offsetFromTop
+		document.addToFrontWaistArc = ((document.frontDartIntake * document.frontNumOfDarts) + document.waistArcEase);
+		document.addToBackWaistArc = ((document.backDartIntake * document.backNumOfDarts) + document.waistArcEase) ;
+		document.pointOfHipCurve = ((document.centerFrontHipDepth / 3) * 2) + document.offsetFromTop;
 		document.frontWaistArc = (6.75 * document.scale) + document.addToFrontWaistArc;
 		document.backWaistArc = (6.25 * document.scale) + document.addToBackWaistArc;
 	}

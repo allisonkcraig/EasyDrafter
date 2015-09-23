@@ -29,7 +29,7 @@ function deleteBlockSkirt (evt) {
 			console.log(response)
 		},
 		error: function(error) {
-			console.log('error')
+			console.log('error');
 		}
 	});
 	$(this).closest('.saved-block').remove();
@@ -44,7 +44,7 @@ function deleteBlockTop (evt) {
 		data: {'chart-id':$(this).val()},
 		type: "POST",
 		success: function(response) {
-			console.log(response)
+			console.log(response);
 		},
 		error: function(error) {
 			console.log('error')

@@ -1,17 +1,16 @@
 $(document).ready(function() {
-	document.canvasHeight = 2001
-	document.canvasWidth = 1546
+	document.canvasHeight = 2001;
+	document.canvasWidth = 1546;
 
 	document.draftFrontCanvas = function(frontTableName, scale){
-		console.log("draftFrontCanvas")
-		document.processFrontForm(scale)
+		document.processFrontForm(scale);
 		// take in an object that that will be the way you store the data
 		// establish drafting table and document.pen
 		document.draftingTableFront = document.getElementById(frontTableName);
 
 		document.pen = document.draftingTableFront.getContext("2d");
 		document.pen.fillStyle="white";
-		document.pen.beginPath()
+		document.pen.beginPath();
 		document.pen.moveTo(0, 0);
 		document.pen.fillRect(0,0, document.canvasHeight * 20, document.canvasWidth * 20)
 		document.pen.stroke();
