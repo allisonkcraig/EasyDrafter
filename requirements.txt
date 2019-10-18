@@ -1,6 +1,6 @@
 CherryPy==3.8.0
 coverage==3.7.1
-Flask==0.10.1
+Flask==1.0
 Flask-SQLAlchemy==2.0
 glob2==0.4.1
 httplib2==0.9.1
