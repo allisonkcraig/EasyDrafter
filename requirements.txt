@@ -7,7 +7,7 @@ httplib2==0.9.1
 itsdangerous==0.24
 jasmine==2.3.0
 jasmine-core==2.3.4
-Jinja2==2.7.3
+Jinja2==2.11.3
 MarkupSafe==0.23
 ordereddict==1.1
 PyYAML==3.10
