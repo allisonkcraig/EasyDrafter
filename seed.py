@@ -5,7 +5,7 @@ from server import app
 
 def load_beta_keys():
     """Load beta keys into database."""
-    with open('seed_data/u.beta-keys.py', 'r') as beta_keys:
+    with open('seed_data/u.beta-keys.py') as beta_keys:
         for line in beta_keys:
             line.rstrip()
             row = line.split('|')
@@ -21,7 +21,7 @@ def load_beta_keys():
 
 def load_size_charts_top():
     """Load size charts from template-charts-tops into database."""
-    with open('seed_data/template-charts', 'r') as size_chart_data:
+    with open('seed_data/template-charts') as size_chart_data:
         for line in size_chart_data:
             line.rstrip()
             row = line.split('|')
@@ -91,7 +91,7 @@ def load_size_charts_top():
 
 def load_size_charts_skirt():
     """Load size charts from template-charts-tops into database."""
-    with open('seed_data/template-charts-skirt', 'r') as size_chart_data:
+    with open('seed_data/template-charts-skirt') as size_chart_data:
         for line in size_chart_data:
             line.rstrip()
             row = line.split('|')
