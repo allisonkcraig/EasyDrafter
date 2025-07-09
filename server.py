@@ -467,7 +467,7 @@ def add_tests():
 
 if __name__ == "__main__":
     _external=True
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     import sys
     if sys.argv[-1] == "jstest":
         JS_TESTING_MODE = True
