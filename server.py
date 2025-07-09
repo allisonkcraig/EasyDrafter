@@ -5,7 +5,13 @@ import jinja2
 import json
 
 
-from model import User, Beta_Key, Size_Chart_Top, Size_Chart_Skirt, Measurement_Chart_Top, Measurement_Chart_Skirt, connect_to_db, db
+from model import (
+    User,
+    BetaKey,
+    SizeChartTop,
+    connect_to_db,
+    db
+)
 
 app = Flask(__name__)
 
@@ -19,11 +25,12 @@ app.jinja_env.undefined = jinja2.StrictUndefined
 def home_page():
     """Render Homepage, adding name if user is logged in."""
     if 'logged_in_customer_email' in session:
-        user_email = session['logged_in_customer_email']
-        user = User.query.filter(User.email==user_email).one()
-        return render_template('/splash-page.html', user=user)
+        user_email = session.get('user_email')  # or however you're tracking
+        user = User.query.filter(User.email == user_email).first()
+        return render_template('splash-page.html', user=user)
     else:
         return render_template('/splash-page.html')
+
 
 @app.route('/videos')
 def video_page():
@@ -118,12 +125,12 @@ def front_draft_page():
         waist_input = 32.5
       
     if float(bust_input) / float(waist_input) > 1.30: # the largest ratio of waist to bust in my standard sizes
-        size_chart = Size_Chart_Top.query.filter(Size_Chart_Top.bust >= float(bust_input), Size_Chart_Top.bust > float(bust_input) -1 ).first()
+        size_chart =  SizeChartTop.query.filter(SizeChartTop.bust >= float(bust_input), SizeChartTop.bust > float(bust_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary  
     else:
-        size_chart = Size_Chart_Top.query.filter(Size_Chart_Top.waist >= float(waist_input), Size_Chart_Top.waist > float(waist_input) -1 ).first()
+        size_chart = SizeChartTop.query.filter(SizeChartTop.waist >= float(waist_input), SizeChartTop.waist > float(waist_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
@@ -364,7 +371,7 @@ def process_registration():
 
     beta_input = request.form.get("beta")
 
-    beta = Beta_Key.query.filter(Beta_Key.beta_key == beta_input).first()
+    beta = BetaKey.query.filter(BetaKey.beta_key == beta_input).first()
 
     if beta == None:
         flash('That is not a correct Beta Key')

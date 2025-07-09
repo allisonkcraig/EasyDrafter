@@ -23,7 +23,11 @@
 				<form action="/choose-block">
 					<button class="btn btn-default">Draft A Block</button>
 				</form>
-				<h2>Welcome Back, {{ user.fname }}!</h2>
+				{% if user %}
+					<h2>Welcome Back, {{ user.fname }}!</h2>
+				{% else %}
+  					<h2>Welcome to EasyDrafter!</h2>
+				{% endif %}
 			{% else %}   
 				<form action="/login">
 					<button class="btn btn-default">Log In</button>
