@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     __tablename__ = 'Users'
 
@@ -44,32 +45,31 @@ class SizeChartTop(db.Model):
     chart_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
     style_name = db.Column(db.String(255), nullable=False)
-    bust=db.Column(db.Float)
-    waist=db.Column(db.Float)
+    bust = db.Column(db.Float)
+    waist = db.Column(db.Float)
 
-    full_length=db.Column(db.Float) 
-    center_front=db.Column(db.Float)
-    front_shoulder_slope=db.Column(db.Float)
-    strap=db.Column(db.Float)
-    front_across_shoulder=db.Column(db.Float)
-    across_chest=db.Column(db.Float)
-    bust_depth=db.Column(db.Float)
-    shoulder_length=db.Column(db.Float)
-    bust_arc=db.Column(db.Float)
-    bust_span=db.Column(db.Float)
-    waist_arc=db.Column(db.Float)
-    dart_placement=db.Column(db.Float)
-    side_length=db.Column(db.Float)
-
-    full_length_back=db.Column(db.Float)
-    center_back=db.Column(db.Float)
-    back_shoulder_slope=db.Column(db.Float)
-    across_back=db.Column(db.Float)
-    back_arc=db.Column(db.Float)
-    waist_arc_back=db.Column(db.Float)
-    back_neck=db.Column(db.Float)
-    back_across_shoulder=db.Column(db.Float)
-    back_dart_intake=db.Column(db.Float)
+    full_length = db.Column(db.Float)
+    center_front = db.Column(db.Float)
+    front_shoulder_slope = db.Column(db.Float)
+    strap = db.Column(db.Float)
+    front_across_shoulder = db.Column(db.Float)
+    across_chest = db.Column(db.Float)
+    bust_depth = db.Column(db.Float)
+    shoulder_length = db.Column(db.Float)
+    bust_arc = db.Column(db.Float)
+    bust_span = db.Column(db.Float)
+    waist_arc = db.Column(db.Float)
+    dart_placement = db.Column(db.Float)
+    side_length = db.Column(db.Float)
+    full_length_back = db.Column(db.Float)
+    center_back = db.Column(db.Float)
+    back_shoulder_slope = db.Column(db.Float)
+    across_back = db.Column(db.Float)
+    back_arc = db.Column(db.Float)
+    waist_arc_back = db.Column(db.Float)
+    back_neck = db.Column(db.Float)
+    back_across_shoulder = db.Column(db.Float)
+    back_dart_intake = db.Column(db.Float)
 
     def __repr__(self):
         return f"<SizeChartTop id={self.chart_id} style={self.style_name}>"

@@ -16,6 +16,11 @@ from server import app
 
 #         db.session.commit()
 
+db.init_app(app)
+
+with app.app_context():
+    db.drop_all()
+    db.create_all()
 
 def load_size_charts_top():
     """Load size charts from template-charts-tops into database."""
@@ -122,7 +127,8 @@ def load_size_charts_skirt():
             db.session.commit()
 
 if __name__ == "__main__":
-    connect_to_db(app)
-    # load_beta_keys()
-    load_size_charts_top()
-    load_size_charts_skirt()
+    with app.app_context():
+        connect_to_db(app)
+        # load_beta_keys()
+        load_size_charts_top()
+        load_size_charts_skirt()

@@ -110,8 +110,8 @@ def skirt_draft_page():
 def front_draft_page():
     """Use template measurements to draft a front block that closest fits user and allow users to change block to fit them using inputs """
     
-    bust_input = float(request.args.get("bust"))
-    waist_input = float(request.args.get("waist"))
+    bust_input = float(request.args.get("bust", 37.5))
+    waist_input = float(request.args.get("waist", 37.5))
 
     if bust_input < 34:
         bust_input = 34
