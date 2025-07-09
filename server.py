@@ -95,7 +95,7 @@ def skirt_draft_page():
     session['measurements']['hip'] = hip_input
     session['measurements']['waist'] = waist_input
 
-    print session['measurements']
+    print(session['measurements'])
     return render_template("skirt-draft.html", size_chart=session['measurements'])
 
 
@@ -163,7 +163,7 @@ def pattern_page():
     Shows drafts and allows you to imput a nickname to save and buttons to save to PDF"""
 
     block_type = request.args.get("block-type")
-    print block_type
+    print(block_type)
 
     if block_type == "top":
         session['measurements']['full_length_back'] = request.args.get("full-length-back")
@@ -193,7 +193,7 @@ def save_pattern():
 
     session['measurements']['nickname'] = request.args.get("nickname")
     block_type = request.args.get("block-type")
-    print block_type
+    print(block_type)
     if block_type == "top":
         
         measurements_to_add = Measurement_Chart_Top(
@@ -331,7 +331,7 @@ def process_login():
             current_user = User.query.filter_by(email=email_input).first()
             current_user_dict = current_user.__dict__
             session['current_user_id'] = current_user_dict['user_id']
-            print session['current_user_id']
+            print(session['current_user_id'])
             session['logged_in_customer_email'] = email_input
             return redirect("/profile")
         
@@ -443,7 +443,7 @@ def delete_block_skirt():
     """Deletes skirt block via AJAX call"""
 
     chart_id_input = request.form.get("skirt-id")
-    print chart_id_input
+    print(chart_id_input)
     chart_in_db = Measurement_Chart_Skirt.query.filter(Measurement_Chart_Skirt.chart_id==chart_id_input).first()
     db.session.delete(chart_in_db)
     db.session.commit()
