@@ -1,282 +1,124 @@
-"""Models and database functions for Ratings project."""
-
 from flask_sqlalchemy import SQLAlchemy
-
-# This is the connection to the SQLite database; we're getting this through
-# the Flask-SQLAlchemy helper library. On this, we can find the `session`
-# object, where we do most of our interactions (like committing, etc.)
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
-class Beta_Key(db.Model):
-    """User of ratings website."""
-
-    __tablename__ = "Beta_Keys"
-
-    beta_key = db.Column(db.String, primary_key=True)
-
-    # @classmethod
-    # def add_user(cls, email, fname,  password=None, fb_id=None):
-    #     """Insert a new user into the users table"""
-    #     user = cls(email=email, password=password, fname=fname, fb_id=fb_id)
-    #     db.session.add(user)
-    #     db.session.commit()
-
-
-    # def __repr__(self):
-    #     """Provide helpful representation when printed."""
-
-    #     return "<user_id= %s email= %s fname = %s>" % (self.user_id, self.email, self.fname)
-
 
 class User(db.Model):
-    """User of ratings website."""
+    __tablename__ = 'Users'
 
-    __tablename__ = "Users"
+    user_id = db.Column(db.Integer, primary_key=True)
+    fb_id = db.Column(db.String(255))
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    fname = db.Column(db.String(255))
 
-    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fb_id = db.Column(db.String(64), unique=True, nullable=True)
-    email = db.Column(db.String(64), unique=True, nullable=False)
-    password = db.Column(db.String(64), nullable=True)
-    fname = db.Column(db.String(15), nullable=False)
-
-    @classmethod
-    def add_user(cls, email, fname,  password=None, fb_id=None):
-        """Insert a new user into the users table"""
-        user = cls(email=email, password=password, fname=fname, fb_id=fb_id)
-        db.session.add(user)
-        db.session.commit()
-
+    # Relationships
+    size_chart_top = db.relationship('SizeChartTop', backref='user', cascade='all, delete-orphan')
+    size_chart_skirt = db.relationship('SizeChartSkirt', backref='user', cascade='all, delete-orphan')
+    measurement_chart_top = db.relationship('MeasurementChartTop', backref='user', cascade='all, delete-orphan')
+    measurement_chart_skirt = db.relationship('MeasurementChartSkirt', backref='user', cascade='all, delete-orphan')
 
     def __repr__(self):
-        """Provide helpful representation when printed."""
+        return f"<User id={self.user_id} email={self.email}>"
 
-        return "<user_id= %s email= %s fname = %s>" % (self.user_id, self.email, self.fname)
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-
-class Measurement_Chart_Top(db.Model):
-    """Measurement Charts for specific users."""
-    
-    __tablename__ = "Measurement_Chart_Tops"
-
-    chart_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    nickname = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.String(100), db.ForeignKey('Users.user_id'))
-    bust = db.Column(db.Integer, nullable=False)
-    waist = db.Column(db.Integer, nullable=False)
-
-    full_length = db.Column(db.Integer, nullable=False) 
-    center_front = db.Column(db.Integer, nullable=False)
-    front_shoulder_slope = db.Column(db.Integer, nullable=False)
-    strap = db.Column(db.Integer, nullable=False)
-    front_across_shoulder = db.Column(db.Integer, nullable=False)
-    across_chest = db.Column(db.Integer, nullable=False)
-    bust_depth = db.Column(db.Integer, nullable=False)
-    shoulder_length = db.Column(db.Integer, nullable=False)
-    bust_arc = db.Column(db.Integer, nullable=False)
-    bust_span = db.Column(db.Integer, nullable=False)
-    waist_arc = db.Column(db.Integer, nullable=False)
-    dart_placement = db.Column(db.Integer, nullable=False)
-    side_length = db.Column(db.Integer, nullable=False)
-
-    full_length_back = db.Column(db.Integer, nullable=False)
-    center_back = db.Column(db.Integer, nullable=False)
-    back_shoulder_slope = db.Column(db.Integer, nullable=False)
-    across_back = db.Column(db.Integer, nullable=False)
-    back_arc = db.Column(db.Integer, nullable=False)
-    waist_arc_back = db.Column(db.Integer, nullable=False)
-    back_neck = db.Column(db.Integer, nullable=False)
-    back_across_shoulder = db.Column(db.Integer, nullable=False)
-    back_dart_intake = db.Column(db.Integer, nullable=False)
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
-    # Define relationship to user
-    user = db.relationship("User",
-                           backref=db.backref("Measurement_Chart_Tops"))
+class BetaKey(db.Model):
+    __tablename__ = 'Beta_Keys'
+
+    beta_id = db.Column(db.Integer, primary_key=True)
+    beta_key = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return "<Chart Id= %s User Id= %s>" % (self.chart_id, self.user_id)
+        return f"<BetaKey id={self.beta_id}>"
 
 
-    # TODO EXPAND THIS FUNCTION TO ADD MORE MEASUREMENTS
-    @classmethod
-    def add_chart_to_db_top(cls, 
-                        chart_id,
-                        nickname,
-                        user_id,
-                        bust,
-                        waist,
+class SizeChartTop(db.Model):
+    __tablename__ = 'Size_Chart_Top'
 
-                        full_length,
-                        center_front,
-                        front_shoulder_slope,
-                        strap,
-                        front_across_shoulder,
-                        across_chest,
-                        bust_depth,
-                        shoulder_length,
-                        bust_arc,
-                        bust_span,
-                        waist_arc,
-                        dart_placement,
-                        side_length,
+    chart_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
+    style_name = db.Column(db.String(255), nullable=False)
+    bust = db.Column(db.Float)
+    waist = db.Column(db.Float)
 
-                        full_length_back,
-                        center_back,
-                        back_shoulder_slope,
-                        across_back,
-                        back_shoulder_length,
-                        back_arc,
-                        waist_arc_back,
-                        back_neck,
-                        back_across_shoulder,
-                        back_dart_intake):
-        chart_to_add = cls(
-            chart_id, nickname, user_id, bust, waist, 
-            full_length, center_front, front_shoulder_slope, strap, front_across_shoulder, across_chest, bust_depth, shoulder_length, bust_arc, bust_span, waist_arc, dart_placement, side_length,
-            full_length_back, center_back, back_shoulder_slope, across_back, back_shoulder_length, back_arc, waist_arc_back, back_neck, back_across_shoulder, back_dart_intake)
-        db.session.add(chart_to_add)
-        db.session.commit()
-
-
-class Measurement_Chart_Skirt(db.Model):
-    """Measurement Charts for specific users."""
-    
-    __tablename__ = "Measurement_Chart_Skirts"
-
-    chart_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    nickname = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.String(100), db.ForeignKey('Users.user_id'))
-    waist = db.Column(db.Integer, nullable=False)
-    hip = db.Column(db.Integer, nullable=False)
-
-    center_front_hip_depth = db.Column(db.Integer, nullable=False) 
-    back_hip_arc = db.Column(db.Integer, nullable=False)
-    center_back_hip_depth = db.Column(db.Integer, nullable=False)
-    front_hip_arc = db.Column(db.Integer, nullable=False)
-    dart_placement = db.Column(db.Integer, nullable=False)
-    
-
-    # Define relationship to user
-    user = db.relationship("User",
-                           backref=db.backref("Measurement_Chart_Skirts"))
+    full_length = db.Column(db.Float)
+    center_front = db.Column(db.Float)
+    front_shoulder_slope = db.Column(db.Float)
+    strap = db.Column(db.Float)
+    front_across_shoulder = db.Column(db.Float)
+    across_chest = db.Column(db.Float)
+    bust_depth = db.Column(db.Float)
+    shoulder_length = db.Column(db.Float)
+    bust_arc = db.Column(db.Float)
+    bust_span = db.Column(db.Float)
+    waist_arc = db.Column(db.Float)
+    dart_placement = db.Column(db.Float)
+    side_length = db.Column(db.Float)
+    full_length_back = db.Column(db.Float)
+    center_back = db.Column(db.Float)
+    back_shoulder_slope = db.Column(db.Float)
+    across_back = db.Column(db.Float)
+    back_arc = db.Column(db.Float)
+    waist_arc_back = db.Column(db.Float)
+    back_neck = db.Column(db.Float)
+    back_across_shoulder = db.Column(db.Float)
+    back_dart_intake = db.Column(db.Float)
 
     def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return "<Chart Id= %s User Id= %s>" % (self.chart_id, self.user_id)
+        return f"<SizeChartTop id={self.chart_id} style={self.style_name}>"
 
 
-    # TODO EXPAND THIS FUNCTION TO ADD MORE MEASUREMENTS
-    @classmethod
-    def add_chart_to_db_skirt(cls, 
-                        chart_id,
-                        nickname,
-                        user_id,
-                        waist,
-                        hip,
-                        center_front_hip_depth,
-                        back_hip_arc,
-                        center_back_hip_depth,
-                        front_hip_arc,
-                        dart_placement):
+class SizeChartSkirt(db.Model):
+    __tablename__ = 'Size_Chart_Skirt'
 
-        chart_to_add = cls(
-                        chart_id,
-                        nickname,
-                        user_id,
-                        waist,
-                        hip,
-                        center_front_hip_depth,
-                        back_hip_arc,
-                        center_back_hip_depth,
-                        front_hip_arc,
-                        dart_placement)
-        db.session.add(chart_to_add)
-        db.session.commit()
-
-
-
-class Size_Chart_Top(db.Model):
-    """Measurement Charts for specific users."""
-    
-    __tablename__ = "Size_Chart_Tops"
-
-    size_id = db.Column(db.Integer, primary_key=True)
-    bust = db.Column(db.Integer, nullable=False)
-    waist = db.Column(db.Integer, nullable=False)
-
-    full_length = db.Column(db.Integer, nullable=False) 
-    center_front = db.Column(db.Integer, nullable=False)
-    front_shoulder_slope = db.Column(db.Integer, nullable=False)
-    strap = db.Column(db.Integer, nullable=False)
-    front_across_shoulder = db.Column(db.Integer, nullable=False)
-    across_chest = db.Column(db.Integer, nullable=False)
-    bust_depth = db.Column(db.Integer, nullable=False)
-    shoulder_length = db.Column(db.Integer, nullable=False)
-    bust_arc = db.Column(db.Integer, nullable=False)
-    bust_span = db.Column(db.Integer, nullable=False)
-    waist_arc = db.Column(db.Integer, nullable=False)
-    dart_placement = db.Column(db.Integer, nullable=False)
-    side_length = db.Column(db.Integer, nullable=False)
-
-    full_length_back = db.Column(db.Integer, nullable=False)
-    center_back = db.Column(db.Integer, nullable=False)
-    back_shoulder_slope = db.Column(db.Integer, nullable=False)
-    across_back = db.Column(db.Integer, nullable=False)
-    back_arc = db.Column(db.Integer, nullable=False)
-    waist_arc_back = db.Column(db.Integer, nullable=False)
-    back_neck = db.Column(db.Integer, nullable=False)
-    back_across_shoulder = db.Column(db.Integer, nullable=False)
-    back_dart_intake = db.Column(db.Integer, nullable=False)
-
+    chart_id = db.Column(db.Integer, primary_key=True)
+    style_name = db.Column(db.String(255), nullable=False)
+    waist = db.Column(db.Float)
+    hip = db.Column(db.Float)
+    length = db.Column(db.Float)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
 
     def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return "<Chart Size= %s>" % (self.size_id)
+        return f"<SizeChartSkirt id={self.chart_id} style={self.style_name}>"
 
 
-class Size_Chart_Skirt(db.Model):
-    """Measurement Charts for specific users."""
-    
-    __tablename__ = "Size_Chart_Skirts"
+class MeasurementChartTop(db.Model):
+    __tablename__ = 'Measurement_Chart_Top'
 
-    size_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    waist = db.Column(db.Integer, nullable=False)
-    hip = db.Column(db.Integer, nullable=False)
-
-    center_front_hip_depth = db.Column(db.Integer, nullable=False) 
-    back_hip_arc = db.Column(db.Integer, nullable=False)
-    center_back_hip_depth = db.Column(db.Integer, nullable=False)
-    front_hip_arc = db.Column(db.Integer, nullable=False)
-    dart_placement = db.Column(db.Integer, nullable=False)
-    
-
+    chart_id = db.Column(db.Integer, primary_key=True)
+    bust = db.Column(db.Float)
+    waist = db.Column(db.Float)
+    shoulder = db.Column(db.Float)
+    armhole = db.Column(db.Float)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
 
     def __repr__(self):
-        """Provide helpful representation when printed."""
+        return f"<MeasurementChartTop id={self.chart_id}>"
 
-        return "<Size Id= %s>" % (self.size_id)
 
-# Helper functions
+class MeasurementChartSkirt(db.Model):
+    __tablename__ = 'Measurement_Chart_Skirt'
+
+    chart_id = db.Column(db.Integer, primary_key=True)
+    waist = db.Column(db.Float)
+    hip = db.Column(db.Float)
+    length = db.Column(db.Float)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
+
+    def __repr__(self):
+        return f"<MeasurementChartSkirt id={self.chart_id}>"
+
 
 def connect_to_db(app):
-    """Connect the database to our Flask app."""
-
-    # Configure to use our SQLite database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///drafter.db'
-    db.app = app
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///easy_drafter.db'  # customize this if needed
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
-
-
-if __name__ == "__main__":
-    # As a convenience, if we run this module interactively, it will leave
-    # you in a state of being able to work with the database directly.
-
-    from server import app
-    connect_to_db(app)
-    print "Connected to DB."
+    with app.app_context():
+        db.create_all()
