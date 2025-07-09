@@ -131,7 +131,10 @@ def front_draft_page():
         session['measurements'] = size_chart_dictionary  
     else:
         size_chart = SizeChartTop.query.filter(SizeChartTop.waist >= float(waist_input), SizeChartTop.waist > float(waist_input) -1 ).first()
-        size_chart_dictionary = size_chart.__dict__
+        size_chart_dictionary = {
+            column.name: getattr(size_chart, column.name)
+            for column in size_chart.__table__.columns
+        }
         del size_chart_dictionary['_sa_instance_state']
         session['measurements'] = size_chart_dictionary
  

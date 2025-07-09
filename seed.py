@@ -1,22 +1,20 @@
-"""Utility file to seed ratings database from MovieLens data in seed_data/"""
-
-from model import Size_Chart_Top, Size_Chart_Skirt, Beta_Key, connect_to_db, db
+from model import SizeChartTop, SizeChartSkirt, BetaKey, connect_to_db, db
 from server import app
 
-def load_beta_keys():
-    """Load beta keys into database."""
-    with open('seed_data/u.beta-keys.py') as beta_keys:
-        for line in beta_keys:
-            line.rstrip()
-            row = line.split('|')
+# def load_beta_keys():
+#     """Load beta keys into database."""
+#     with open('seed_data/u.beta-keys.py') as beta_keys:
+#         for line in beta_keys:
+#             line.rstrip()
+#             row = line.split('|')
     
-            beta_key = row[0]
+#             beta_key = row[0]
 
-            beta = Beta_Key(beta_key=beta_key)
+#             beta = BetaKey(beta_key=beta_key)
 
-            db.session.add(beta)
+#             db.session.add(beta)
 
-        db.session.commit()
+#         db.session.commit()
 
 
 def load_size_charts_top():
@@ -56,34 +54,36 @@ def load_size_charts_top():
 
 
 
-            size_chart_inserted = Size_Chart_Top(
-                        size_id=size_id,
-                        bust=bust, 
-                        waist=waist, 
+            size_chart_inserted = SizeChartTop(
+                chart_id=size_id,
+                # size_id=size_id,
+                bust=bust, 
+                waist=waist, 
 
-                        full_length=full_length, 
-                        center_front=center_front,
-                        front_shoulder_slope=front_shoulder_slope,
-                        strap=strap,
-                        front_across_shoulder=front_across_shoulder,
-                        across_chest=across_chest,
-                        bust_depth=bust_depth,
-                        shoulder_length=shoulder_length,
-                        bust_arc=bust_arc,
-                        bust_span=bust_span,
-                        waist_arc=waist_arc,
-                        dart_placement=dart_placement,
-                        side_length=side_length,
+                full_length=full_length, 
+                center_front=center_front,
+                front_shoulder_slope=front_shoulder_slope,
+                strap=strap,
+                front_across_shoulder=front_across_shoulder,
+                across_chest=across_chest,
+                bust_depth=bust_depth,
+                shoulder_length=shoulder_length,
+                bust_arc=bust_arc,
+                bust_span=bust_span,
+                waist_arc=waist_arc,
+                dart_placement=dart_placement,
+                side_length=side_length,
 
-                        full_length_back=full_length_back,
-                        center_back=center_back,
-                        back_shoulder_slope=back_shoulder_slope,
-                        across_back=across_back,
-                        back_arc=back_arc,
-                        waist_arc_back=waist_arc_back,
-                        back_neck=back_neck,
-                        back_across_shoulder=back_across_shoulder,
-                        back_dart_intake=back_dart_intake)
+                full_length_back=full_length_back,
+                center_back=center_back,
+                back_shoulder_slope=back_shoulder_slope,
+                across_back=across_back,
+                back_arc=back_arc,
+                waist_arc_back=waist_arc_back,
+                back_neck=back_neck,
+                back_across_shoulder=back_across_shoulder,
+                back_dart_intake=back_dart_intake
+            )
 
             db.session.add(size_chart_inserted)
 
@@ -106,7 +106,7 @@ def load_size_charts_skirt():
             front_hip_arc = row[6]
             dart_placement = row[7]
       
-            size_chart_inserted = Size_Chart_Skirt(
+            size_chart_inserted = SizeChartSkirt(
                         size_id=size_id,
                         hip=hip, 
                         waist=waist, 
@@ -123,6 +123,6 @@ def load_size_charts_skirt():
 
 if __name__ == "__main__":
     connect_to_db(app)
-    load_beta_keys()
+    # load_beta_keys()
     load_size_charts_top()
     load_size_charts_skirt()
