@@ -44,7 +44,7 @@ class SizeChartTop(db.Model):
 
     chart_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
-    style_name = db.Column(db.String(255), nullable=False)
+    style_name = db.Column(db.String(255), nullable=True)
     bust = db.Column(db.Float)
     waist = db.Column(db.Float)
 
@@ -79,11 +79,16 @@ class SizeChartSkirt(db.Model):
     __tablename__ = 'Size_Chart_Skirt'
 
     chart_id = db.Column(db.Integer, primary_key=True)
-    style_name = db.Column(db.String(255), nullable=False)
+    style_name = db.Column(db.String(255), nullable=True)
     waist = db.Column(db.Float)
     hip = db.Column(db.Float)
     length = db.Column(db.Float)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'))
+    front_hip_arc = db.Column(db.Float)
+    dart_placement = db.Column(db.Float)
+    center_front_hip_depth = db.Column(db.Float) 
+    back_hip_arc = db.Column(db.Float)
+    center_back_hip_depth = db.Column(db.Float)
 
     def __repr__(self):
         return f"<SizeChartSkirt id={self.chart_id} style={self.style_name}>"

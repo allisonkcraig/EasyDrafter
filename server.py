@@ -21,6 +21,7 @@ app.secret_key = os.environ['SECRET_KEY']
 
 app.jinja_env.undefined = jinja2.StrictUndefined
 
+
 @app.route('/')
 def home_page():
     """Render Homepage, adding name if user is logged in."""
@@ -475,11 +476,13 @@ def add_tests():
     g.jasmine_tests = JS_TESTING_MODE
 
 
+
 if __name__ == "__main__":
     _external=True
     port = int(os.environ.get("PORT", 5001))
     import sys
     if sys.argv[-1] == "jstest":
         JS_TESTING_MODE = True
-    connect_to_db(app)
     app.run(debug=True, host="0.0.0.0", port=port)
+
+connect_to_db(app)
