@@ -15,11 +15,14 @@ from model import (
 
 app = Flask(__name__)
 
+connect_to_db(app) 
+
 
 app.secret_key = os.environ['SECRET_KEY'] 
 #much sure to source secrets.sh each time you enter virtual env, will go away after each session
 
 app.jinja_env.undefined = jinja2.StrictUndefined
+
 
 @app.route('/')
 def home_page():
@@ -90,12 +93,12 @@ def skirt_draft_page():
     if float(hip_input) / float(waist_input) > 1.30: # the largest ratio of waist to hip in my standard sizes
         size_chart = Size_Chart_Skirt.query.filter(Size_Chart_Skirt.hip >= float(hip_input), Size_Chart_Skirt.hip > float(hip_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
-        del size_chart_dictionary['_sa_instance_state']
+        size_chart_dictionary.pop('_sa_instance_state', None)
         session['measurements'] = size_chart_dictionary    
     else:
         size_chart = Size_Chart_Skirt.query.filter(Size_Chart_Skirt.waist >= float(waist_input), Size_Chart_Skirt.waist > float(waist_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
-        del size_chart_dictionary['_sa_instance_state']
+        size_chart_dictionary.pop('_sa_instance_state', None)
         session['measurements'] = size_chart_dictionary
  
     # session['measurements']['nickname'] = request.args.get("nickname")
@@ -127,7 +130,7 @@ def front_draft_page():
     if float(bust_input) / float(waist_input) > 1.30: # the largest ratio of waist to bust in my standard sizes
         size_chart =  SizeChartTop.query.filter(SizeChartTop.bust >= float(bust_input), SizeChartTop.bust > float(bust_input) -1 ).first()
         size_chart_dictionary = size_chart.__dict__
-        del size_chart_dictionary['_sa_instance_state']
+        size_chart_dictionary.pop('_sa_instance_state', None)
         session['measurements'] = size_chart_dictionary  
     else:
         size_chart = SizeChartTop.query.filter(SizeChartTop.waist >= float(waist_input), SizeChartTop.waist > float(waist_input) -1 ).first()
@@ -135,7 +138,7 @@ def front_draft_page():
             column.name: getattr(size_chart, column.name)
             for column in size_chart.__table__.columns
         }
-        del size_chart_dictionary['_sa_instance_state']
+        size_chart_dictionary.pop('_sa_instance_state', None)
         session['measurements'] = size_chart_dictionary
  
     # session['measurements']['nickname'] = request.args.get("nickname")
@@ -475,11 +478,12 @@ def add_tests():
     g.jasmine_tests = JS_TESTING_MODE
 
 
+
 if __name__ == "__main__":
     _external=True
     port = int(os.environ.get("PORT", 5001))
     import sys
     if sys.argv[-1] == "jstest":
         JS_TESTING_MODE = True
-    connect_to_db(app)
     app.run(debug=True, host="0.0.0.0", port=port)
+
