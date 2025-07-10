@@ -41,11 +41,13 @@ def video_page():
 
     return render_template('/video-page.html')
 
+
 @app.route('/about-drafting')
 def about_page():
     """Renders page which explains pattern drafting."""
 
     return render_template('/about-drafting.html')
+
 
 @app.route('/testing')
 def testing_page():
@@ -53,11 +55,13 @@ def testing_page():
 
     return render_template('/testing.html')
 
+
 @app.route('/choose-block')
 def choose_block_page():
     """User decides which block to draft"""
 
     return render_template("block-choice.html")
+
 
 @app.route('/start-top')
 def measure_top_page():
@@ -71,6 +75,7 @@ def measure_skirt_page():
     """Allow input of measurements to find size of template pattern from DB"""
     
     return render_template("/basic-measure-page-skirt.html")
+
 
 @app.route('/skirt-draft')
 def skirt_draft_page():
@@ -199,6 +204,7 @@ def pattern_page():
         session['measurements']['dart_placement'] = request.args.get("dart-placement")
 
         return render_template("canvas-skirt.html", size_chart=session['measurements'])
+
 
 @app.route('/save')
 def save_pattern():

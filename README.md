@@ -37,27 +37,26 @@ HTML5 Canvas was used to draft my pattern blocks. Canvas uses a system of (x,y) 
 ![Selecting Base Measurements](/static/img/screen-shot-decide.png)
 The user can decide between drafting a top or a skirt
 
-
-### Selecting Base Measurements
+#### Selecting Base Measurements
 ![Selecting Base Measurements](/static/img/screen-shot-base.png)
 On the first page of inputs a user sees when drafting with this app, the user must input 2 basic measurements which vary depending on the type of block.
 When they hit "next", the server looks for these measurements and determines a template block that fits the user the best from the database.
 The Flask Server determines these measruements by looking at the ratio of the two measurements, determines which is the more dominant measurement. It then queries the database for the block that will fit that dominant measurement.
 These measurements are stored in the session for use in drafting. The template measurements are passed onto the drafting pages via Jinja templating, which selected by my Javascript drafting algorithms using jQuery.
 
-### Making Drafts React to Input
+#### Making Drafts React to Input
 ![drafting](/static/img/change-state.gif)
 While in the drafting screens, the user can change measurements in the inputs which triggers an event handler on blur with jQuery to clear the previous draft and draft a new block with the new measurements. 
 
-### Storing Measurements
+#### Storing Measurements
 After the user hits next on any drafting page, the Flask server requests the measurements and overrides the template measurements in the session with the user input.
 
-### Saving Blocks to Desktop in PDF
+#### Saving Blocks to Desktop in PDF
 ![save2desktop](/static/img/printtiled.png)
 After all the drafting is complete the user is brought to a final page which allows the user to save the block to thier desktop in PDF form. The PDF is rendered using jsPDF, a library by Parallax. This utilizes Canvas2Image, a tool for coverting the HTML5 Canvas into an image. 
 There is hidden on the final page the pattern blocks scaled up with the specific goal of making them print so each square is an inch. jsPDF is able to select certain parts of the image and save to a PDF object which is then saved to the desktop.
 
-### Saving Blocks to App
+#### Saving Blocks to App
 ![drafting](/static/img/screen-shot-canvas.png)
 The user is able to save the block measurements to their account with a block nickname. The user can then go back and edit, reprint, or delete the block from thier profile page. 
 ![save2app](/static/img/screen-shot-profile.png)

@@ -92,6 +92,7 @@ with app.app_context():
 
                 db.session.commit()
 
+
     def load_size_charts_skirt():
         """Load size charts from template-charts-tops into database."""
         with open('seed_data/template-charts-skirt') as size_chart_data:
@@ -124,6 +125,7 @@ with app.app_context():
                 db.session.add(size_chart_inserted)
 
                 db.session.commit()
+
 
     if __name__ == "__main__":
         with app.app_context():
