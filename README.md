@@ -29,11 +29,11 @@ Drafting is the process of creating your patterns. This can include creating pat
 * [jsPDF](https://parall.ax/products/jspdf)
 
 ## <a name="drafting"></a>Drafting with Canvas
-####Using HTML5
+#### Using HTML5
 HTML5 Canvas was used to draft my pattern blocks. Canvas uses a system of (x,y) axis on a grid that starts at (0,0) at the top left corner. This was counter intuitive to how blocks are drafted by hand but it was a fun challenge. 
 
 ## <a name="drafting"></a>Behind The User Drafting Expirience
-####Selecting Base Block
+#### Selecting Base Block
 ![Selecting Base Measurements](/static/img/screen-shot-decide.png)
 The user can decide between drafting a top or a skirt
 
