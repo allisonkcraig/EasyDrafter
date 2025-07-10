@@ -13,9 +13,9 @@ In traditional clothing patternmaking, drafting blocks can take a lot of time an
 * [Author](#author)
 
 ## <a name="terms"></a>Terminology
-#### Pattern Block
+### Pattern Block
 A pattern block is a template pattern used in creating clothing patterns. This base pattern is the basic shape of a garnment with which you manipulate to create a specific style. This block does not include seam allowance needed to sew it into an actual garnment. This needs to be added by the pattern maker.
-#### Drafting
+### Drafting
 Drafting is the process of creating your patterns. This can include creating pattern blocks or creating the final patterns with style and seam allowance added.
 
 ## <a name="technologiesused"></a>Technologies Used
@@ -36,7 +36,6 @@ HTML5 Canvas was used to draft my pattern blocks. Canvas uses a system of (x,y) 
 ####Selecting Base Block
 ![Selecting Base Measurements](/static/img/screen-shot-decide.png)
 The user can decide between drafting a top or a skirt
-
 
 #### Selecting Base Measurements
 ![Selecting Base Measurements](/static/img/screen-shot-base.png)
